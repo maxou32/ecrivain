@@ -1,4 +1,4 @@
-/* view of one chapter with comments
+<!-- view of one chapter with comments
 
 affichage titre du blog
 
@@ -23,6 +23,7 @@ stockage variable (ob_get_clean)
 
 appel templateOneChapter
 
+-->
 
 		
 		

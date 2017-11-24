@@ -1,4 +1,4 @@
-/* controler pour actions User connecté
+<!-- controler pour actions User connecté
 call of classes 
 		Chapters
 		Comments
@@ -74,3 +74,7 @@ updateUser (id, name, email)				//Modification compte Un utilisateur
 		instance classe utilisateur
 		modif  l'Utilisateur (id, update, name, email)
 		appel vue information et message résultat
+		
+errorProcessing(error)						//traitement des erreurs
+		appel vue information et message résultat (error)
+-->

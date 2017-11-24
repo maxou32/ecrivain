@@ -1,4 +1,4 @@
-/* view of user
+<!-- view of user
 
 affichage titre du blog
 
@@ -19,3 +19,4 @@ formulaire
 stockage variable (ob_get_clean)
 
 appel templateUser
+-->

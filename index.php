@@ -1,5 +1,5 @@
-/* general router
- call controler
+<!-- general router
+call controler
 require privateFrontEnd
 require freeFrontEnd
 
@@ -135,18 +135,41 @@ capsule try
 						si user.email et user.name ne sont pas vides et user.id  saisi et > 0
 							appel updateUser (id, name, email)
 						sinon
-							déclenchement erreur compte utilisateur inconnu"
+							déclenchement erreur "compte utilisateur inconnu"
 						finsi
 					sinon	
 						déclenchement erreur "Vous ne pouvez administrer les comptes utilisateurs"
 					finsi
 					breack;
-					
-
-
+			finChoix		
+		finsi -- user connected
+	finsi	-- action demandée
+		sinon
+			déclenchement erreur "aucune action demandée"
+		finsi	
+capsule catch	
+	appel errorProcessing (error)
+fin catch
+-->
+<?php
+ 
+	require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\freeFrontEnd.php');
+	require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\privateFrontEnd.php');
+	try{
+		if(isset($_GET['action'])){
+			if ($_GET['action']=='listValidChapter') {
+				listChapter('valide');		
+			}else{
+				throw new Exception (' choix non assumé !!! Héhééé',1);
+			}
+			
+		}else{
+			hello();
+			//throw new Exception (' Aucune action demandée !!! Héhééé',2);
+		}
+	}
+	catch (Exception $e){
+		//echo 'erreur : ' . $e;				//en attendant mieux
+		printError($e->getmessage());
+	}
 	
-	
-	
-	
-	
-traitement catch

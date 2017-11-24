@@ -1,2 +1,0 @@
-/* vue liste des articles
-
