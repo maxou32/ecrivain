@@ -1,3 +1,6 @@
+<?php
+	//namespace web_max\ecrivain;
+?>	
 <!-- controler for free actions
 
 call of classes 
@@ -8,7 +11,7 @@ call of classes
 listChapters 										//liste des chapitres
 		instance classe chapters
 		retour liste des titres de chapitres + résumés
-		appel vue listChaptersView
+		appel vue listChaptersView	
 		
 showOneChapter 										//presentation UN chapitre et ses commentaires
 		instance classe chapitres
@@ -22,23 +25,33 @@ addUser (name, email)							//creation compte utilisateur)
 		addUser (name, email,now(), none)	
 		appel userView information et message résultat
 -->
-<?php
+
+<?php	
+	
 	require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\ChaptersManager.php');
 	//require_once ('model/Comments.php');
 	//require_once ('model/UsersManager.php');
 	
-	function hello(){
+class FreeFrontEnd{
+	private $_db; // Instance de PDO.
+
+	public function __construct(){
+		//$this->setDb($db);
+	}
+	
+	public  function  hello(){
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		$captionError ="";
 		$error="";
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
 		$contentView="";
 		require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');
+	
 	}
 	
-	function listChapter($status){
-		$chapterManager=new web_max\ecrivain\model\ChaptersManager();
-		$chapters=$chapterManager->listChapters($status);
+	function listChapter($db){
+		$chapterManager=new ChaptersManager($db);
+		$chapters=$chapterManager->getList();
 		
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
@@ -60,3 +73,4 @@ addUser (name, email)							//creation compte utilisateur)
 		require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');
 				
 	}
+}

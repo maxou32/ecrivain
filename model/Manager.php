@@ -1,15 +1,14 @@
 <?php
 
 namespace web_max\ecrivain\model;
-?>
-
-<!-- class manager : able to connect to the database -->
 
 
-<?php
+// class manager : able to connect to the database 
 
-class Manager
-{
+
+
+
+class Manager{
 	private $host='';
     protected function dbConnect()
     {

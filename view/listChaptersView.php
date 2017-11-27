@@ -23,8 +23,6 @@ appel templateListChapters
 <?php 
 	$title="Voyage en Alaska"; 
 	ob_start(); 
-	
-	
 ?>
 	
 	<!-- affichage menu   -->
@@ -32,22 +30,26 @@ appel templateListChapters
 
 <?php
 
-while ($chapter = $chapters->fetch())
+for($i=0;$i<count($chapters);$i++)
 {
+	
 	?>
 	<div class ="chapter">	
+
+		<h2 id="title"> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
+		<h2 id="title"> <?= $chapters[$i]->getTitle() ?> </h2>
 		
-		<p id="title"> <?= htmlspecialchars($chapter['title']) ?> </p>
-		<p id="dateCreation">rédigé le : <?= htmlspecialchars($chapter['date_fr']) ?></p>
-		<p id="resume"><?= htmlspecialchars($chapter['resume']) ?> 
-			<a href='#'>lire la suite...</a>
+		<p><em id="dateCreation">rédigé le : <?= htmlspecialchars($chapters[$i]->getDateFr()) ?></em></p>
+		<p id="resume"><?= htmlspecialchars($chapters[$i]->getResume()) ?> 
+			<a href='#'>  (lire la suite...)</a>
 		</p>
+		
 	</div>
 	
 <?php 
 
 }
-$chapters->closeCursor();
+//$chapters->closeCursor();
 $captionError ="";
 $error="";
 require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
