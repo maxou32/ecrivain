@@ -20,6 +20,7 @@ stockage variable (ob_get_clean)
 
 appel templateListChapters
 -->
+HEAD
 <?php 
 	$title="Voyage en Alaska"; 
 	ob_start(); 
@@ -34,7 +35,9 @@ for($i=0;$i<count($chapters);$i++)
 	
 	?>
 	<div class ="chapter">	
+
 		<!-- A voir avec SANDY pour traiter le cas des caractères accentués  -->
+
 		<h2 id="title"> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
 		<h2 id="title"> <?= $chapters[$i]->getTitle() ?> </h2>
 		
@@ -48,7 +51,6 @@ for($i=0;$i<count($chapters);$i++)
 <?php 
 
 }
-//$chapters->closeCursor();
 $captionError ="";
 $error="";
 require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
