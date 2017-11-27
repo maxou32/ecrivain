@@ -79,29 +79,3 @@ class Chapter{
     }
   }
 }
-
-/*
-class ChaptersManager extends Manager{
-*/
-	/*
-	public function listChapters($status){
-		$this->setHost('localhost');
-		
-		$db= $this->dbConnect();
-		$listChapters= $db->prepare('SELECT idchapters, title, resume, content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr FROM chapters ORDER BY chapter_date ASC');
-		$listChapters->execute(array());
-		
-		return $listChapters;
-	}*/
-	/*$db= $this->dbConnect();
-	$listChapters = $db->query('SELECT idchapters, title, resume, content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr FROM chapters ORDER BY chapter_date ASC');
-
-	while ($data = $listChapters->fetch(PDO::FETCH_ASSOC)) // Chaque entrée sera récupérée et placée dans un array.
-	{
-		// On passe les données (stockées dans un tableau) concernant le personnage au constructeur de la classe.
-		// On admet que le constructeur de la classe appelle chaque setter pour assigner les valeurs qu'on lui a données aux attributs correspondants.
-		$chapter = new Chapter($data);
-			
-		//echo $perso->nom(), ' a ', $perso->forcePerso(), ' de force, ', $perso->degats(), ' de dégâts, ', $perso->experience(), ' d\'expérience et est au niveau ', $perso->niveau();
-	}
-	*/	

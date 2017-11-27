@@ -1,27 +1,28 @@
 <?php
 
-namespace web_max\ecrivain\model;
+//namespace web_max\ecrivain\model;
 
 
 // class manager : able to connect to the database 
 
-
+require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\config.php');
 
 
 class Manager{
-	private $host='';
+	
     protected function dbConnect()
     {
-        //$db = new \PDO('mysql:host='. $this->$host . ';dbname=ecrivain;charset=utf8', 'root', '');
-        $db = new \PDO('mysql:host=localhost;dbname=ecrivain;charset=utf8', 'root', '');
-        return $db;
-    }
-	public function setHost($host)
-	{
-		if (is_string($host))
+		try
 		{
-		  $this->host = $host;
+			
+			$db = new \PDO(DB_DSN, DB_LOGIN, DB_PASSWORD);
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			return $db;
 		}
-
-	}
+		catch (PDOException $e)
+		{
+			die('Une erreur interne est survenue');
+		}
+    }
+	
 }

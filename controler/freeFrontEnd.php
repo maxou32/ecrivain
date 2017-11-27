@@ -33,10 +33,10 @@ addUser (name, email)							//creation compte utilisateur)
 	//require_once ('model/UsersManager.php');
 	
 class FreeFrontEnd{
-	private $_db; // Instance de PDO.
+
 
 	public function __construct(){
-		//$this->setDb($db);
+		
 	}
 	
 	public  function  hello(){
@@ -49,8 +49,10 @@ class FreeFrontEnd{
 	
 	}
 	
-	function listChapter($db){
-		$chapterManager=new ChaptersManager($db);
+
+	function listChapter(){
+
+		$chapterManager=new ChaptersManager();
 		$chapters=$chapterManager->getList();
 		
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');

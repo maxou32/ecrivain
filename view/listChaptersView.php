@@ -35,7 +35,7 @@ for($i=0;$i<count($chapters);$i++)
 	
 	?>
 	<div class ="chapter">	
-
+		<!-- A voir avec SANDY pour traiter le cas des caractères accentués  ->
 		<h2 id="title"> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
 		<h2 id="title"> <?= $chapters[$i]->getTitle() ?> </h2>
 		

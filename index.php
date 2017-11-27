@@ -158,32 +158,7 @@ fin catch
 <?php
 
 
-// Adresse du serveur de base de données
-	define('DB_SERVEUR', 'localhost');
 
-	// Login
-	define('DB_LOGIN','root');
-
-	// Mot de passe
-	define('DB_PASSWORD','');
-
-	// Nom de la base de données
-	define('DB_NOM','ecrivain');
-
-	// Nom de la table du livre d'or
-	define('DB_GUESTBOOK_TABLE','guestbook');
-
-	// Driver correspondant à la BDD utilisée
-	define('DB_DSN','mysql:host='. DB_SERVEUR .';dbname='. DB_NOM);
-
-	// Nombre de messages à afficher par page
-	define('MAX_MESSAGES_PAR_PAGE', 5);
-
-	// URL du livre d'or
-	define('URL_GUESTBOOK', 'http:\\127.0.0.1:8000\edsa-test_php\TP_XX\ecrivain');
-
-	// chemin absolu
-	define('DIR_ECRIVAIN', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain');
 /*
  function chargerClasse($classe)
 {
@@ -191,33 +166,12 @@ fin catch
   //require(__DIR__ . "\" . $classe . ".php");
 }
 */
+require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\config.php');
 require(DIR_ECRIVAIN . '\controler\FreeFrontEnd.php');
 //require('..\controler\privateFrontEnd.php');
 
 //spl_autoload_register('chargerClasse');
 
-//$db = new \PDO('mysql:host=localhost;dbname=ecrivain;charset=utf8', 'root', '');
-function PDOConnect($sDbDsn, $sDbLogin, $sDbPassword) 
-{
-  try
-  {
-    $db = new PDO($sDbDsn, $sDbLogin, $sDbPassword);
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
- 
-  return $db;
-  }
-  catch (PDOException $e)
-  {
-    die('Une erreur interne est survenue');
-  }
- 
-  
-}
-
-/** ----
- * Initialisation de la connexion avec la base de données
- **/
-$db = PDOConnect(DB_DSN, DB_LOGIN, DB_PASSWORD);
 
 try{
 	
@@ -226,7 +180,7 @@ try{
 		
 		if ($_GET['action']=='listValidChapter') {
 			//$monControler=new web_max\ecrivain\controler\FreeFrontEnd();
-			$monControler->listChapter($db);		
+			$monControler->listChapter();
 		}else{
 			throw new Exception (' choix non assumé !!! Héhééé',1);
 		}
