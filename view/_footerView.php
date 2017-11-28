@@ -2,7 +2,7 @@
 ob_start(); 
 ?>
 	<footer>
-			<p id="messError"> <?= $captionError . $error   ?></p>
+			<p id="message"> <?= $captionMessage . $message   ?></p>
 	</footer>
 <?php
 

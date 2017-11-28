@@ -14,6 +14,7 @@ ob_start();
 			<li><a href="#" class="item_menu">Derniers chapitres</a></li>
 			<li><a href="#" class="item_menu">Contact</a></li>
 			<li><a href="#" class="item_menu">Accès réservé</a></li>
+			<li><a href="index.php?action=askAddOneChapter" class="item_menu">Création article</a></li>
 		</ul>
 	</nav>
 	<p id="souslogoflottant"></p>												<!-- fin "flottage" du menu -->

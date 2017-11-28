@@ -182,27 +182,44 @@ function chargerClasse($classe)
 spl_autoload_register('chargerClasse');
 
 try{
-	chargerClasse("FreeFrontEnd");
-	chargerClasse("ChaptersManager");
-
 	
-	$monControler=new FreeFrontEnd();
+	$monFreeControler=new FreeFrontEnd();
 	if(isset($_GET['action'])){
 		
 		if ($_GET['action']=='listValidChapter') {
 			//$monControler=new web_max\ecrivain\FreeFrontEnd();
-			$monControler->listChapter();
+			$monFreeControler->listChapter();
+		}elseif ($_GET['action']=='askAddOneChapter') {
+			//$monControler=new web_max\ecrivain\FreeFrontEnd();
+			$monFreeControler->askAddOneChapter();
+		}elseif ($_GET['action']=='addOneChapter') {
+			//$monControler=new web_max\ecrivain\FreeFrontEnd();
+			$monFreeControler->addOneChapter();
+		}elseif ($_GET['action']=='oneChapter') {
+			if(isset($_GET['Idchapters']) && $_GET['Idchapters']>0) {
+				//$monControler=new web_max\ecrivain\FreeFrontEnd();
+				$monFreeControler->oneChapter($_GET['Idchapters']);
+			}else{
+				throw new Exception ('chapitre inconnu.',3);
+			}
+		}elseif ($_GET['action']=='deleteChapter') {
+			if(isset($_GET['Idchapters']) && $_GET['Idchapters']>0) {
+				//$monControler=new web_max\ecrivain\FreeFrontEnd();
+				$monFreeControler->deleteChapter($_GET['Idchapters']);
+			}else{
+				throw new Exception ('Suppression impossible : chapitre inconnu.',3);
+			}
 		}else{
 			throw new Exception (' choix non assumé !!! Héhééé',1);
 		}
+		
 	}else{
 		
-		$monControler->hello();
+		$monFreeControler->hello();
 		//throw new Exception (' Aucune action demandée !!! Héhééé',2);
 	}
 }
 catch (Exception $e){
-	//echo 'erreur : ' . $e;				//en attendant mieux
-	$monControler->printError($e->getmessage());
+	$monFreeControler->printError($e->getmessage());
 }
 	

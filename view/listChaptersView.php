@@ -38,12 +38,12 @@ for($i=0;$i<count($chapters);$i++)
 
 		<!-- A voir avec SANDY pour traiter le cas des caractères accentués  -->
 
-		<h2 id="title"> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
+		<h2> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
 		<h2 id="title"> <?= $chapters[$i]->getTitle() ?> </h2>
 		
 		<p><em id="dateCreation">rédigé le : <?= htmlspecialchars($chapters[$i]->getDateFr()) ?></em></p>
 		<p id="resume"><?= htmlspecialchars($chapters[$i]->getResume()) ?> 
-			<a href='#'>  (lire la suite...)</a>
+			<a href='index.php?action=oneChapter&amp;Idchapters=<?= $chapters[$i]->getIdchapters() ?>'>  (lire la suite...)</a>
 		</p>
 		
 	</div>
@@ -51,8 +51,10 @@ for($i=0;$i<count($chapters);$i++)
 <?php 
 
 }
-$captionError ="";
-$error="";
+if (!isset($captionMessage)){ 
+	$captionMessage="";
+	$message="";
+}
 require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
 $contentView=ob_get_clean(); 
 
