@@ -28,7 +28,7 @@ addUser (name, email)							//creation compte utilisateur)
 
 <?php	
 	
-	require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\ChaptersManager.php');
+	//require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\ChaptersManager.php');
 	//require_once ('model/Comments.php');
 	//require_once ('model/UsersManager.php');
 	
@@ -45,6 +45,7 @@ class FreeFrontEnd{
 		$error="";
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
 		$contentView="";
+		$asideView="";
 		require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');
 	
 	}
@@ -52,8 +53,9 @@ class FreeFrontEnd{
 
 	function listChapter(){
 
-		$chapterManager=new ChaptersManager();
-		$chapters=$chapterManager->getList();
+		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
+		$chapterManager= new ChaptersManager();
+		$chapters=$chapterManager->getList(); 
 		
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');

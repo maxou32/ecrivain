@@ -20,7 +20,7 @@ stockage variable (ob_get_clean)
 
 appel templateListChapters
 -->
-HEAD
+
 <?php 
 	$title="Voyage en Alaska"; 
 	ob_start(); 

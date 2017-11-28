@@ -26,3 +26,5 @@
 
 	// chemin absolu
 	define('DIR_ECRIVAIN', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain');
+	
+	

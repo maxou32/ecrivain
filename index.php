@@ -159,27 +159,38 @@ fin catch
 
 
 
-/*
- function chargerClasse($classe)
+
+function chargerClasse($classe)
 {
-  require $classe . '.php';
-  //require(__DIR__ . "\" . $classe . ".php");
+	$chemin = array(
+		"dirEcrivain"=>'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain',
+		"ChaptersManager" =>'\model\ChaptersManager.php',
+		"FreeFrontEnd"=>'\controler\FreeFrontEnd.php',
+		"Chapter"=>'\model\Chapters.php'
+	);
+	
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\config.php');
+	
+	if (isset($classe) && $chemin[$classe]!==Null){
+		require ($chemin["dirEcrivain"].$chemin[$classe]);
+	}else{
+		echo "la classe est vide = " .$classe . " et " . $chemin[$classe];
+	}
 }
-*/
-require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\config.php');
-require(DIR_ECRIVAIN . '\controler\FreeFrontEnd.php');
-//require('..\controler\privateFrontEnd.php');
 
-//spl_autoload_register('chargerClasse');
 
+spl_autoload_register('chargerClasse');
 
 try{
+	chargerClasse("FreeFrontEnd");
+	chargerClasse("ChaptersManager");
+
 	
 	$monControler=new FreeFrontEnd();
 	if(isset($_GET['action'])){
 		
 		if ($_GET['action']=='listValidChapter') {
-			//$monControler=new web_max\ecrivain\controler\FreeFrontEnd();
+			//$monControler=new web_max\ecrivain\FreeFrontEnd();
 			$monControler->listChapter();
 		}else{
 			throw new Exception (' choix non assumé !!! Héhééé',1);
