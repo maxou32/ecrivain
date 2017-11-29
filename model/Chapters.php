@@ -39,63 +39,61 @@ class Chapter{
 	// Liste des setters
 
 	public function setIdchapters($idchapters){
-    // On convertit l'argument en nombre entier.
-    $idchapters = (int) $idchapters;
-    // On vérifie ensuite si ce nombre est bien strictement positif.
-    if ($idchapters > 0){
-      // Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
-      $this->_idchapters = $idchapters;
-    }
-  }
-  
-  public function setTitle($title){
-    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    if (is_string($title))
-    {
-      $this->_title= $title;
-    }
-  }
-  
-  public function setResume($resume){
-   // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    if (is_string($resume))
-    {
-      $this->_resume= $resume;
-    }
-  }
-  
-  public function setContent($content){
-	// On vérifie qu'il s'agit bien d'une chaîne de caractères.
-    if (is_string($content))
-    {
-      $this->_content= $content;
-    }
-  }
-  
-  public function setDate_fr($date_fr)
-  {
-    
-    if ($date_fr >= 0 )
-    {
-      $this->_date_fr= $date_fr;
-    }
-  }
-  public function setUsers_IdUsers($users_idusers){
-    // On convertit l'argument en nombre entier.
-    $users_idusers = (int) $users_idusers;
-    // On vérifie ensuite si ce nombre est bien strictement positif.
-    if ($users_idusers > 0){
-      // Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
-      $this->_users_idusers = $users_idusers;
-    }
-  }
-    public function setStatus_IdStatus($status_idstatus){
-    // On convertit l'argument en nombre entier.
-    $status_idstatus = (int) $status_idstatus;
-    // On vérifie ensuite si ce nombre est bien strictement positif.
-    if ($status_idstatus > 0){
-      // Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
-      $this->_status_idstatus = $status_idstatus;
-    }
+		// On convertit l'argument en nombre entier.
+		$idchapters = (int) $idchapters;
+		// On vérifie ensuite si ce nombre est bien strictement positif.
+		if ($idchapters > 0){
+			// Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
+			$this->_idchapters = $idchapters;
+		}
+	}
+	  
+	public function setTitle($title){
+		// On vérifie qu'il s'agit bien d'une chaîne de caractères.
+		if (is_string($title))
+		{
+			$this->_title= $title;
+		}
+	}
+	  
+	public function setResume($resume){
+	   // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+		if (is_string($resume))
+		{
+			$this->_resume= $resume;
+		}
+	}
+	  
+	public function setContent($content){
+		// On vérifie qu'il s'agit bien d'une chaîne de caractères.
+		if (is_string($content))
+		{
+			$this->_content= $content;
+		}
+	}
+	  
+	public function setDate_fr($date_fr){
+		if ($date_fr >= 0 )
+		{
+			$this->_date_fr= $date_fr;
+		}
+	}
+	public function setUsers_IdUsers($users_idusers){
+		// On convertit l'argument en nombre entier.
+		$users_idusers = (int) $users_idusers;
+		// On vérifie ensuite si ce nombre est bien strictement positif.
+		if ($users_idusers > 0){
+			// Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
+			$this->_users_idusers = $users_idusers;
+		}
+	}
+	public function setStatus_IdStatus($status_idstatus){
+		// On convertit l'argument en nombre entier.
+		$status_idstatus = (int) $status_idstatus;
+		// On vérifie ensuite si ce nombre est bien strictement positif.
+		if ($status_idstatus > 0){
+		  // Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
+			$this->_status_idstatus = $status_idstatus;
+		}
   }
 }

@@ -13,8 +13,8 @@ ob_start();
 			<li><a href="index.php?action=listValidChapter" class="item_menu">Accueil</a></li>
 			<li><a href="#" class="item_menu">Derniers chapitres</a></li>
 			<li><a href="#" class="item_menu">Contact</a></li>
-			<li><a href="#" class="item_menu">Accès réservé</a></li>
-			<li><a href="index.php?action=askAddOneChapter" class="item_menu">Création article</a></li>
+			<li><a href="index.php?action=reservedAccess" class="item_menu">Accès réservé</a></li>
+			<!-- <li><a href="index.php?action=askAddOneChapter" class="item_menu">Enregistrement d'un chapitre</a></li>  -->
 		</ul>
 	</nav>
 	<p id="souslogoflottant"></p>												<!-- fin "flottage" du menu -->

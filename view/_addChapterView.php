@@ -9,7 +9,7 @@ ob_start();
               placeholder="Le résumé du chapitre" required></textarea><br />
 	<textarea id="content" name="content" rows="20" 
               placeholder="Le chapitre" required></textarea><br />
-	 <input id="auteur" name="auteur" type="text" placeholder="L'auteur" 
+	<input id="auteur" name="auteur" type="text" placeholder="L'auteur" 
            required /><br />
     
     <input type="submit" value="Insérer dans le livre" />

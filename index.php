@@ -156,7 +156,9 @@ capsule catch
 fin catch
 -->
 <?php
-
+function startSession(){
+	session_start();
+}
 
 
 
@@ -166,7 +168,9 @@ function chargerClasse($classe)
 		"dirEcrivain"=>'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain',
 		"ChaptersManager" =>'\model\ChaptersManager.php',
 		"FreeFrontEnd"=>'\controler\FreeFrontEnd.php',
-		"Chapter"=>'\model\Chapters.php'
+		"PrivateFrontEnd"=>'\controler\PrivateFrontEnd.php',
+		"Chapter"=>'\model\Chapters.php',
+		"MenuControler"=>'\view\menuControler.php'
 	);
 	
 	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\config.php');
@@ -177,38 +181,65 @@ function chargerClasse($classe)
 		echo "la classe est vide = " .$classe . " et " . $chemin[$classe];
 	}
 }
-
+$Idchapters;
 
 spl_autoload_register('chargerClasse');
 
-try{
+try{   
 	
 	$monFreeControler=new FreeFrontEnd();
+	$monPrivateControler=new PrivateFrontEnd();
+	
 	if(isset($_GET['action'])){
 		
 		if ($_GET['action']=='listValidChapter') {
 			//$monControler=new web_max\ecrivain\FreeFrontEnd();
 			$monFreeControler->listChapter();
+		}elseif ($_GET['action']=='reservedAccess') {
+			//$monControler=new web_max\ecrivain\FreeFrontEnd();
+			$monFreeControler->askReservedAccess();
+		}elseif ($_GET['action']=='validAccessReserved') {
+			if(isset($_POST['userName']) && isset($_POST['userPwd'])) {
+				//$monControler=new web_max\ecrivain\FreeFrontEnd();
+				$monFreeControler->validAccessReserved();
+			}else{
+				throw new Exception ('Nom ou mot de passe incorrect.',6);
+			}
+		}elseif ($_GET['action']=='abortAccess') {
+			//$monControler=new web_max\ecrivain\FreeFrontEnd();
+			$monPrivateControler->abortAccess();
 		}elseif ($_GET['action']=='askAddOneChapter') {
 			//$monControler=new web_max\ecrivain\FreeFrontEnd();
-			$monFreeControler->askAddOneChapter();
+			$monPrivateControler->askAddOneChapter();
 		}elseif ($_GET['action']=='addOneChapter') {
 			//$monControler=new web_max\ecrivain\FreeFrontEnd();
-			$monFreeControler->addOneChapter();
+			$monPrivateControler->addOneChapter();
 		}elseif ($_GET['action']=='oneChapter') {
 			if(isset($_GET['Idchapters']) && $_GET['Idchapters']>0) {
 				//$monControler=new web_max\ecrivain\FreeFrontEnd();
 				$monFreeControler->oneChapter($_GET['Idchapters']);
 			}else{
-				throw new Exception ('chapitre inconnu.',3);
+				throw new Exception ('chapitre inconnu.',5);
 			}
 		}elseif ($_GET['action']=='deleteChapter') {
 			if(isset($_GET['Idchapters']) && $_GET['Idchapters']>0) {
 				//$monControler=new web_max\ecrivain\FreeFrontEnd();
 				$monFreeControler->deleteChapter($_GET['Idchapters']);
 			}else{
-				throw new Exception ('Suppression impossible : chapitre inconnu.',3);
+				throw new Exception ('Suppression impossible : chapitre inconnu.',4);
 			}
+		}elseif ($_GET['action']=='askUpdateChapter') {
+			if(isset($_GET['Idchapters']) && $_GET['Idchapters']>0) {
+				//$monControler=new web_max\ecrivain\FreeFrontEnd();
+				$Idchapters=$_GET['Idchapters'];
+				$monFreeControler->askUpdateChapter($_GET['Idchapters']);
+			}else{
+				throw new Exception ('Mise à jour impossible : chapitre inconnu.',3);
+			}
+		}elseif ($_GET['action']=='updateOneChapter') {
+			echo 'arrivée updateOneChapter '; $_GET['Idchapters'];
+			//$monControler=new web_max\ecrivain\FreeFrontEnd();
+				$monFreeControler->updateChapter($_GET['Idchapters']);
 		}else{
 			throw new Exception (' choix non assumé !!! Héhééé',1);
 		}

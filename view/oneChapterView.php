@@ -36,13 +36,15 @@ appel templateOneChapter
 
 	<h2> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
 	<h2 id="title"> <?= $chapter->getTitle() ?> </h2>
-	
 	<p><em id="dateCreation">rédigé le : <?= htmlspecialchars($chapter->getDateFr()) ?></em></p>
 	<p id="resume"><?= htmlspecialchars($chapter->getContent()) ?> </p>
 	<form method="post" action="index.php?action=deleteChapter&amp;Idchapters=<?= $chapter->getIdchapters()?>" class="formChapitre">
 		<input type="submit" value="Supprimer le chapitre en cours">
 	</form>
-	
+	<form method="post" action="index.php?action=askUpdateChapter&amp;Idchapters=<?= $chapter->getIdchapters()?>" class="formChapitre">
+		
+		<input type="submit" value="Modifier le contenu du chapitre">
+	</form>	
 </div>
 
 
@@ -50,8 +52,8 @@ appel templateOneChapter
 <?php 
 
 
-$captionError ="";
-$error="";
+$captionMessage ="";
+$message="";
 require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
 $contentView=ob_get_clean(); 
 

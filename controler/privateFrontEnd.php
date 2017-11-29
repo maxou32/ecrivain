@@ -1,3 +1,6 @@
+<?php
+	//namespace web_max\ecrivain;
+?>	
 <!-- controler pour actions User connecté
 call of classes 
 		Chapters
@@ -78,3 +81,53 @@ updateUser (id, name, email)				//Modification compte Un utilisateur
 errorProcessing(error)						//traitement des erreurs
 		appel vue information et message résultat (error)
 -->
+<?php	
+
+class PrivateFrontEnd{
+	public function __construct(){
+			
+	}
+	function abortAccess(){
+		// On le vide intégralement
+		$_SESSION = array();
+		// Destruction de la session
+		session_destroy();
+		// Destruction du tableau de session
+		unset($_SESSION);
+		
+		$monControlerMenu= MenuControler::getInstance();
+		$menuView=$monControlerMenu->sendMenu();
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
+		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');	
+		$chapterManager= new ChaptersManager();
+		$chapters=$chapterManager->getList();
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');	
+		
+	}
+	function askAddOneChapter(){
+		$menuView=$monControlerMenu->sendMenu();
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
+		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
+
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_addChapterView.php');
+	
+	}
+	function addOneChapter(){
+
+		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
+		
+		$donnees=array('Title' => $_POST['title'],'Resume' => $_POST['resume'], 'Content'=> $_POST['content'], 'date_fr'=>'', 'Users_IdUsers'=>1, 'Status_IdStatus'=>1);
+		$newChapter = new Chapter($donnees);
+		
+		$chapterManager= new ChaptersManager();
+		$chapters=$chapterManager->add($newChapter); 
+		
+		$monControlerMenu= MenuControler::getInstance();
+		$menuView=$monControlerMenu->sendMenu();
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
+		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
+		$chapters=$chapterManager->getList(); 
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
+	
+	}
+}

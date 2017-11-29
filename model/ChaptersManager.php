@@ -52,14 +52,13 @@ class ChaptersManager extends Manager{
 	}
 
 	public function update(Chapter $chapter)  {
-		$q = $this->dbConnect()->prepare('UPDATE chapters SET title = :title, resume = :resume, content = :content, date_fr = :date_fr, users_idusers= :users_idusers WHERE idchapters = :idchapters');
+		$q = $this->dbConnect()->prepare('UPDATE chapters SET title = :title, resume = :resume, content = :content,  users_idusers= :users_idusers WHERE idchapters = :idchapters');
 
-		$q->bindValue(':title', $chapter->title(), PDO::PARAM_INT);
-		$q->bindValue(':resume', $chapter->resume(), PDO::PARAM_INT);
-		$q->bindValue(':content', $chapter->content(), PDO::PARAM_INT);
-		$q->bindValue(':date_fr', $chapter->date_fr(), PDO::PARAM_INT);
-		$q->bindValue(':idchapters', $chapter->idchapters(), PDO::PARAM_INT);
-		$q->bindValue(':users_idusers', $chapter->users_idusers(), PDO::PARAM_INT);
+		$q->bindValue(':idchapters', $chapter->getIdchapters(), PDO::PARAM_INT);
+		$q->bindValue(':title', $chapter->getTitle(), PDO::PARAM_STR);
+		$q->bindValue(':resume', $chapter->getResume(), PDO::PARAM_STR);
+		$q->bindValue(':content', $chapter->getContent(), PDO::PARAM_STR);
+		$q->bindValue(':users_idusers', $chapter->getUser_IdUsers(), PDO::PARAM_INT);
 		
 		$q->execute();
 	}
