@@ -105,6 +105,8 @@ class PrivateFrontEnd{
 		
 	}
 	function askAddOneChapter(){
+
+		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
 		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
@@ -130,4 +132,43 @@ class PrivateFrontEnd{
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
 	
 	}
+	function deleteChapter($idChapter){
+
+		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
+		$chapterManager= new ChaptersManager();
+		$chapterManager->delete($idChapter); 
+		
+		$captionMessage ="Chapitre bien supprimé.";
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
+		$this->listChapter();
+	}
+
+	function askUpdateChapter($idChapter){
+		$monFreeFrontEnd= new FreeFrontEnd;
+		$monFreeFrontEnd->oneChapter($idChapter);
+		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
+		$captionMessage ="";
+		$menuView="";
+		$asideView="";
+		$chapterManager= new ChaptersManager();
+		$chapter=$chapterManager->get($idChapter); 
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_updateChapterView.php');
+	}
+	
+	function updateChapter($Idchapters){
+		
+		$donnees=array('idchapters'=>$_GET['Idchapters'], 'Title' => $_POST['title'],'Resume' => $_POST['resume'], 'Content'=> $_POST['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_POST['author'], 'Status_IdStatus'=>1);
+		$newChapter = new Chapter($donnees);
+
+		$chapterManager= new ChaptersManager();
+		$chapters=$chapterManager->update($newChapter); 
+
+		$monFreeFrontEnd= new FreeFrontEnd;
+		$monFreeFrontEnd->oneChapter($_GET['Idchapters']);
+		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
+		$captionMessage ="";
+		$message="";
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
+	}	
+	
 }

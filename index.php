@@ -1,5 +1,6 @@
 <?php
 	//namespace web_max\ecrivain;
+	session_start();
 ?>
 
 <!-- general router
@@ -156,11 +157,6 @@ capsule catch
 fin catch
 -->
 <?php
-function startSession(){
-	session_start();
-}
-
-
 
 function chargerClasse($classe)
 {
@@ -224,7 +220,7 @@ try{
 		}elseif ($_GET['action']=='deleteChapter') {
 			if(isset($_GET['Idchapters']) && $_GET['Idchapters']>0) {
 				//$monControler=new web_max\ecrivain\FreeFrontEnd();
-				$monFreeControler->deleteChapter($_GET['Idchapters']);
+				$monPrivateControler->deleteChapter($_GET['Idchapters']);
 			}else{
 				throw new Exception ('Suppression impossible : chapitre inconnu.',4);
 			}
@@ -232,14 +228,14 @@ try{
 			if(isset($_GET['Idchapters']) && $_GET['Idchapters']>0) {
 				//$monControler=new web_max\ecrivain\FreeFrontEnd();
 				$Idchapters=$_GET['Idchapters'];
-				$monFreeControler->askUpdateChapter($_GET['Idchapters']);
+				$monPrivateControler->askUpdateChapter($_GET['Idchapters']);
 			}else{
 				throw new Exception ('Mise à jour impossible : chapitre inconnu.',3);
 			}
 		}elseif ($_GET['action']=='updateOneChapter') {
 			echo 'arrivée updateOneChapter '; $_GET['Idchapters'];
 			//$monControler=new web_max\ecrivain\FreeFrontEnd();
-				$monFreeControler->updateChapter($_GET['Idchapters']);
+			$monPrivateControler->updateChapter($_GET['Idchapters']);
 		}else{
 			throw new Exception (' choix non assumé !!! Héhééé',1);
 		}
