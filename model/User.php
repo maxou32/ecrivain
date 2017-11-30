@@ -4,6 +4,7 @@
 class User{
 	private $_idusers;
 	private $_name;
+	private $_password;
 	private $_email;
 	private $_status_idstatus;
 	private $_grade_idgrade;
@@ -28,6 +29,7 @@ class User{
 	// Liste des getters  
 	public function getIdUsers()  { return $this->_idusers;}  
 	public function getName()  {return $this->_name;}  
+	public function getPassword()  {return $this->_password;} 
 	public function getEmail()  {return $this->_email; }  
 	public function getStatus_IdStatus()  {  return $this->_status_idstatus;  }  
 	public function getGrade_IdGrade()  {    return $this->_grade_idgrade;  }
@@ -48,6 +50,13 @@ class User{
     // On vérifie qu'il s'agit bien d'une chaîne de caractères.
     if (is_string($name))    {
       $this->_name= $name;
+    }
+  }
+ 
+  public function setPassword($password){
+    // On vérifie qu'il s'agit bien d'une chaîne de caractères.
+    if (is_string($password))    {
+      $this->_password= $password;
     }
   }
   

@@ -1,5 +1,6 @@
 <?php
 	//namespace web_max\ecrivain;
+	//session_start();
 ?>	
 <!-- controler for free actions
 
@@ -83,6 +84,13 @@ class FreeFrontEnd{
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
+		
+		$monAccessControl= new AccessControl();
+		if ($monAccessControl->verifAccessRight(99)){
+			$styleBtn="<div style='display:block;'>";
+		}else{
+			$styleBtn="<div style='display:none;'>";
+		}
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\oneChapterView.php');
 	
 	}
@@ -109,16 +117,15 @@ class FreeFrontEnd{
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');		
 	}
 	function printError($error){
+		$menuView="";
 		$monControlerMenu= MenuControler::getInstance();
 		$monControlerMenu->sendMenu();
-		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		$asideView ="";
+		$message="";
 		if (!isset($error)) {
-			$captionMessage ="error undefined";
-			$message="";
+			$captionMessage ="error undefined";	
 		}else{
 			$captionMessage ="message d'erreur	: ";
-
 		}
 		
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');

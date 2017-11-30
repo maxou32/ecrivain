@@ -1,5 +1,6 @@
 <?php
 	//namespace web_max\ecrivain;
+	//session_start();
 ?>	
 <!-- controler pour actions User connecté
 call of classes 
@@ -88,12 +89,8 @@ class PrivateFrontEnd{
 			
 	}
 	function abortAccess(){
-		// On le vide intégralement
-		$_SESSION = array();
-		// Destruction de la session
-		session_destroy();
-		// Destruction du tableau de session
-		unset($_SESSION);
+		$monControlAcces= new AccessControl();
+		$monControlAcces->Disconnect();
 		
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();

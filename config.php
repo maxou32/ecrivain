@@ -27,4 +27,6 @@
 	// chemin absolu
 	define('DIR_ECRIVAIN', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain');
 	
-	
+	// habilitations
+	define ('Admin',1);
+	define ('Contributeur',2);

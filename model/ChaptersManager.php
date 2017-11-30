@@ -33,8 +33,12 @@ class ChaptersManager extends Manager{
 
 		$q = $this->dbConnect()->query('SELECT idchapters, title, resume, content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers FROM chapters WHERE idchapters = '.$idchapter);
 		$donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-		return new Chapter($donnees);
+		if($donnees) {
+			return new Chapter($donnees);
+		}else{
+			return false;
+		}
+	
 	}
 
 

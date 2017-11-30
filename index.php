@@ -166,7 +166,10 @@ function chargerClasse($classe)
 		"FreeFrontEnd"=>'\controler\FreeFrontEnd.php',
 		"PrivateFrontEnd"=>'\controler\PrivateFrontEnd.php',
 		"Chapter"=>'\model\Chapters.php',
-		"MenuControler"=>'\view\menuControler.php'
+		"MenuControler"=>'\view\menuControler.php',
+		"UserManager"=>'\model\UserManager.php',
+		"User"=>'\model\User.php',
+		"AccessControl"=>'\controler\accessControl.php'
 	);
 	
 	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\config.php');
@@ -196,8 +199,19 @@ try{
 			$monFreeControler->askReservedAccess();
 		}elseif ($_GET['action']=='validAccessReserved') {
 			if(isset($_POST['userName']) && isset($_POST['userPwd'])) {
-				//$monControler=new web_max\ecrivain\FreeFrontEnd();
-				$monFreeControler->validAccessReserved();
+				//$donnees=array('idusers'=>0, 'name' => $_POST['userName'],);
+				//$newUser = new User($donnees);
+				$monControlAcces= new AccessControl();
+				$monControlAcces->getAutorized($_POST['userName'],$_POST['userPwd']);
+				if($monControlAcces){
+					$monFreeControler->validAccessReserved();
+				}else{
+					if($monControlAcces=7){
+						throw new Exception ('Mot de passe incorrect.',7);
+					}else{
+						throw new Exception ('Vous n\'êtes pas habilité à administrer ce roman.',8);
+					}
+				}
 			}else{
 				throw new Exception ('Nom ou mot de passe incorrect.',6);
 			}
@@ -247,6 +261,7 @@ try{
 	}
 }
 catch (Exception $e){
+	echo 'erreur : '.$e->getmessage();
 	$monFreeControler->printError($e->getmessage());
 }
 	

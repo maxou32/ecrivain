@@ -13,9 +13,10 @@ class UserManager extends Manager{
 	}
 
 	public function add(user $user)  {
-		$q = $this->dbConnect()->prepare('INSERT INTO users(name, email, status_idstatus,grade_idgrade) VALUES(:name, :email, :status_idstatus, :grade_idgrade)');
+		$q = $this->dbConnect()->prepare('INSERT INTO users(name, password, email, status_idstatus,grade_idgrade) VALUES(:name, :password, :email, :status_idstatus, :grade_idgrade)');
 
-		$q->bindValue(':name', $user->name());
+		$q->bindValue(':name', $user->name(), PDO::PARAM_INT);
+		$q->bindValue(':password', $user->password(), PDO::PARAM_INT);
 		$q->bindValue(':email', $user->email(), PDO::PARAM_INT);
 		$q->bindValue(':status_idstatus', $user->status_idstatus(), PDO::PARAM_INT);
 		$q->bindValue(':grade_idgrade', $user->grade_idgrade(), PDO::PARAM_INT);
@@ -27,13 +28,15 @@ class UserManager extends Manager{
 		$this->dbConnect()->exec('DELETE FROM users WHERE idusers = '.$user->idusers());
 	}
 
-	private function get($user)  {
-		$idchapters = (int) $idchapters;
-
-		$q = $this->dbConnect()->query('SELECT idcusers, name, email, status_idstatus, grade_idgrade FROM chapters WHERE idusers = '.$idusers);
+	public function get($userName)  {
+		
+		$q = $this->dbConnect()->query('SELECT idusers, name, password, email, status_idstatus, grade_idgrade FROM users WHERE name = "'.$userName.'"');
 		$donnees = $q->fetch(PDO::FETCH_ASSOC);
-
-		return new user($donnees);
+		if($donnees) {
+			return new User($donnees);
+		}else{
+			return false;
+		}
 	}
 
 
@@ -44,20 +47,21 @@ class UserManager extends Manager{
 		
 		while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
 		{
-			$users[] = new user($donnees);
+			$users[] = new User($donnees);
 		}
 
 		return $users;
 	}
 
 	public function update(user $user)  {
-		$q = $this->dbConnect()->prepare('UPDATE users SET name = :name, email = :email, status_idstatus = :status_idstatus,grade_idgrade = :grade_idgrade WHERE idusers = :idusers');
+		$q = $this->dbConnect()->prepare('UPDATE users SET name = :name, password = :password, email = :email, status_idstatus = :status_idstatus,grade_idgrade = :grade_idgrade WHERE idusers = :idusers');
 
-		$q->bindValue(':name', $user->name(), PDO::PARAM_INT);
-		$q->bindValue(':email', $user->email(), PDO::PARAM_INT);
+		$q->bindValue(':name', $user->name(), PDO::PARAM_STR);
+		$q->bindValue(':password', $user->password(), PDO::PARAM_STR);
+		$q->bindValue(':email', $user->email(), PDO::PARAM_STR);
 		$q->bindValue(':status_idstatus', $user->status_idstatus(), PDO::PARAM_INT);
 		$q->bindValue(':grade_idgrade', $user->grade_idgrade(), PDO::PARAM_INT);
-		$q->bindValue(':idusters', $user->idusers(), PDO::PARAM_INT);
+		$q->bindValue(':idusers', $user->idusers(), PDO::PARAM_INT);
 
 		$q->execute();
 	}

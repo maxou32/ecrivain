@@ -37,16 +37,8 @@ appel templateOneChapter
 	<h2> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
 	<h2 id="title"> <?= $chapter->getTitle() ?> </h2>
 	<p><em id="dateCreation">rédigé le : <?= htmlspecialchars($chapter->getDateFr()) ?></em></p>
-	<p id="resume"><?= htmlspecialchars($chapter->getContent()) ?> </p>
-	<div	
-		<?php
-		if(!isset($_SESSION['user'])){
-			?>style="display:none;"<?php
-		}else{
-			?>style="display:block;"<?php
-		}
-		?>
-		>
+	<p id="resume"><?= htmlspecialchars($chapter->getContent()) ?> </p>	
+		<?= $styleBtn?>
 		<form method="post" action="index.php?action=deleteChapter&amp;Idchapters=<?= $chapter->getIdchapters()?>" class="formChapitre">
 			<input type="submit" value="Supprimer le chapitre en cours">
 		</form>
