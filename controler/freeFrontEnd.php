@@ -57,8 +57,7 @@ class FreeFrontEnd{
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
 		$contentView="";
 		$asideView="";
-		require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');
-	
+		require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');	
 	}
 	
 
@@ -73,7 +72,6 @@ class FreeFrontEnd{
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
 		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
-	
 	}
 	function oneChapter($idChapter){
 
@@ -92,7 +90,6 @@ class FreeFrontEnd{
 			$styleBtn="<div style='display:none;'>";
 		}
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\oneChapterView.php');
-	
 	}
 		
 	function askReservedAccess(){
@@ -100,9 +97,9 @@ class FreeFrontEnd{
 		$menuView=$monControlerMenu->sendMenu();
 		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		$asideView="";
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_reservedAccess.php');
-		
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_reservedAccess.php');	
 	}
+	
 	function validAccessReserved(){
 
 		$_SESSION['user']=$_POST['userName'];

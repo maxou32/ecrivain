@@ -1,6 +1,6 @@
 <?php
 
-//namespace web_max\ecrivain\model;
+namespace web_max\ecrivain\model;
 
 
 // class manager : able to connect to the database 
@@ -15,7 +15,7 @@ class Manager{
 		try
 		{
 			
-			$db = new PDO(DB_DSN, DB_LOGIN, DB_PASSWORD);
+			$db = new \PDO(DB_DSN, DB_LOGIN, DB_PASSWORD);
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return $db;
 		}
