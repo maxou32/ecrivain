@@ -38,8 +38,8 @@ for($i=0;$i<count($chapters);$i++)
 
 		<!-- A voir avec SANDY pour traiter le cas des caractères accentués  -->
 
-		<h2> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
-		<h2 id="title"> <?= $chapters[$i]->getTitle() ?> </h2>
+		<h2 id="title"> <?= htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
+		<h2> <?php //$chapters[$i]->getTitle() ?> </h2>
 		
 		<p><em id="dateCreation">rédigé le : <?= htmlspecialchars($chapters[$i]->getDateFr()) ?></em></p>
 		<p id="resume"><?= htmlspecialchars($chapters[$i]->getResume()) ?> 

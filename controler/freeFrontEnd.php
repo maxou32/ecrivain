@@ -1,6 +1,7 @@
 <?php
-	//namespace web_max\ecrivain;
+	namespace web_max\ecrivain;
 	//session_start();
+	//use web_max\ecrivain\model;
 ?>	
 <!-- controler for free actions
 
@@ -37,9 +38,10 @@ addOneChapter 	(title, resume, content)						//Ajout UN chapitre
 
 <?php	
 	
-	//require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\ChaptersManager.php');
-	//require_once ('model/Comments.php');
-	//require_once ('model/UsersManager.php');
+	
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\MenuControler.php');
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\UserManager.php');
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\AccessControl.php');
 	
 class FreeFrontEnd{
 	
@@ -48,7 +50,6 @@ class FreeFrontEnd{
 	}
 	
 	public  function  hello(){
-		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
 		
@@ -60,22 +61,36 @@ class FreeFrontEnd{
 		require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');	
 	}
 	
-
+	function askRegistration(){
+		$monControlerMenu= MenuControler::getInstance();
+		$menuView=$monControlerMenu->sendMenu();
+		$asideView="";
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_fieldsUser.php');			
+	}
+	
+	function registration($userName, $userPassword, $email){
+		$monAccessControl= new AccessControl();
+		$userPassword=$monAccessControl->hashPassword($userPassword);	
+	
+		$donnees=array('name' => $userName,'password' => $userPassword, 'email'=> $email, 'Grade_IdGrade'=>2, 'Status_IdStatus'=>1);
+		$newUser = new User($donnees);	
+				
+		$userManager= new UserManager();
+		$users=$userManager->add($newUser);	
+	}
+	
 	function listChapter(){
 
-		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
-		$chapterManager= new ChaptersManager();
+		$chapterManager=new  ChaptersManager();
 		$chapters=$chapterManager->getList(); 
 		
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
 	}
 	function oneChapter($idChapter){
 
-		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
 		$chapterManager= new ChaptersManager();
 		$chapter=$chapterManager->get($idChapter); 
 
@@ -95,7 +110,6 @@ class FreeFrontEnd{
 	function askReservedAccess(){
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
-		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		$asideView="";
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_reservedAccess.php');	
 	}
@@ -108,7 +122,6 @@ class FreeFrontEnd{
 		$menuView=$monControlerMenu->sendMenu();
 		$asideView="";
 		
-		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
 		$chapterManager= new ChaptersManager();
 		$chapters=$chapterManager->getList();
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');		

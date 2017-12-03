@@ -1,6 +1,8 @@
-<!-- contrôleur de menu  -->
-
 <?php
+	namespace web_max\ecrivain;
+	//session_start();
+	//use web_max\ecrivain\view;
+
 class MenuControler{
 	protected static $instance;
 	

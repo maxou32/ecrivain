@@ -2,14 +2,21 @@
 $title="Voyage en Alaska"; 
 ob_start(); 
 ?>
-<form method="post" action="index.php?action=validAccessReserved" class="formChapitre">
+<form method="post" action="index.php?action=validAccessReserved" class="formUser">
     <input id="userName" name="userName" type="text" placeholder="Saisissez votre nom" 
            required /><br />
-    <input id="userPwd" name="userPwd" type="password"  required><br />
+    <input id="userPwd" name="userPwd" type="password" pattern=".{5,}" title="5 caractères minimum" required><br />
 	    
     <input type="submit" value="Accéder à l'espace réservé" />
 
 	
+</form>
+
+<form method="post" action="index.php?action=askRegistration" class="formUser">
+	<br /><input type="submit" value="Demander à être inscrit" />
+</form>
+<form method="post" action="index.php?action=askUpdateProfil" class="formUser">
+	<br /><input type="submit" value="Modifier votre profil" />
 </form>
 
 <?php

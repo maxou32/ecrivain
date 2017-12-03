@@ -1,6 +1,7 @@
 <?php
-	//namespace web_max\ecrivain;
+	namespace web_max\ecrivain;
 	//session_start();
+	//use web_max\ecrivain\model;
 ?>	
 <!-- controler pour actions User connecté
 call of classes 
@@ -95,18 +96,23 @@ class PrivateFrontEnd{
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');	
 		$chapterManager= new ChaptersManager();
 		$chapters=$chapterManager->getList();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');	
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');		
+	}
+	
+	function askUpdateProfil(){
+		$monControlerMenu= MenuControler::getInstance();
+		$menuView=$monControlerMenu->sendMenu();
 		
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_fieldsUser.php');
+	
 	}
 	function askAddOneChapter(){
 
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_addChapterView.php');
 	
@@ -124,7 +130,6 @@ class PrivateFrontEnd{
 		$monControlerMenu= MenuControler::getInstance();
 		$menuView=$monControlerMenu->sendMenu();
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		//require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_menuView.php');
 		$chapters=$chapterManager->getList(); 
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
 	
@@ -136,8 +141,14 @@ class PrivateFrontEnd{
 		$chapterManager->delete($idChapter); 
 		
 		$captionMessage ="Chapitre bien supprimé.";
+		$message="";
+		$chapters=$chapterManager->getList(); 
+		
+		$monControlerMenu= MenuControler::getInstance();
+		$menuView=$monControlerMenu->sendMenu();
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
-		$this->listChapter();
 	}
 
 	function askUpdateChapter($idChapter){

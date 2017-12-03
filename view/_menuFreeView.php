@@ -11,7 +11,7 @@ ob_start();
 	<nav id="menu">
 		<ul id="menu">
 			<li><a href="index.php?action=listValidChapter" class="item_menu">Accueil</a></li>
-			<li><a href="#" class="item_menu">Derniers chapitres</a></li>
+			<li><a href="index.php?action=testYaml" class="item_menu">test YAML</a></li>
 			<li><a href="#" class="item_menu">Contact</a></li>
 			<li><a href="index.php?action=reservedAccess" class="item_menu">Accès réservé</a></li>
 			<!-- <li><a href="index.php?action=askAddOneChapter" class="item_menu">Enregistrement d'un chapitre</a></li>  -->

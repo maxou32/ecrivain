@@ -1,0 +1,12 @@
+data:
+	serveur: localhost 
+	login: root 
+	password: maxou*32
+	nom: ecrivain
+way:
+	url: http://127.0.0.1:8000/edsatest_php/TP_XX/ecrivain"
+	dir_ecrivain: D:/perso/maxou/oPENCLASSROOM04_Php_MySQL/TP_XX/ecrivain
+rules:
+	admin: 99 
+	contributor: 2
+	
