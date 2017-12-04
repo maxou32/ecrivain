@@ -8,9 +8,11 @@ class FieldsUser extends View
 		$this->template ='template.php';
 		$this->avecParam=$avecParam;
 	}
-	public function show(){
+	public function show($params,$datas){
 		$title="Voyage en Alaska"; 
 		ob_start(); 
+		$menuView=$this->renderTop();
+		$asideView=$this->renderAside()
 
 		?>
 		<form method="post" action="index.php?action=registration" class="formUser">
@@ -28,7 +30,7 @@ class FieldsUser extends View
 		$message=$this->message;
 		$asideView=$this->asideView;		
 		
-		$this->contentView=ob_get_clean(); 
+		$contentView=ob_get_clean(); 
 		include_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');
 	
 	}

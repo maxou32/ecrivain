@@ -1,68 +1,59 @@
-<!-- vue d'un chapitre
-
-affichage titre du blog
-
-affichage menu
-
-transformation écran en variable (ob_start)
-
-titre de la page : liste des chapitre déjà parus
-
-affichage du chapitre
-
-boucle sur les commentaires
+<?php 
+	namespace web_max\ecrivain;
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\View.php');
 	
-		affichage contenu du commentaire (p et protégé)
-		affichage auteur
-		affichage date de création
+class OneChaptersView extends View
+{	
+
+	public function __construct($avecParam){
+		$this->template ='template.php';
+		$this->avecParam=$avecParam;
+	}
+	
+	public function show($params,$datas){
+		if ($this->avecParam){
+			$this->params=$params;
+			$resultControl=$this->renderOption();
+					}
+		$title="Voyage en Alaska"; 
+		ob_start();  
+		$menuView=$this->renderTop();
+		$asideView=$this->renderAside()
+		?>
 		
-fin boucle (close cursor)
+		<h1> Mon voyage en Alaska </h1>
+		<div class ="chapter">	
 
-stockage variable (ob_get_clean)
+			<h2> <?= htmlspecialchars($datas->getTitle()) ?> </h2> 
+			<p><em id="dateCreation">rédigé le : <?= htmlspecialchars($datas->getDateFr()) ?></em></p>
+			<p id="resume"><?= htmlspecialchars($datas	->getContent()) ?> </p>	
+			<div>
+				<?php 
+					if($resultControl){	
+				?>
+					<form method="post" action="index.php?action=deleteChapter&amp;Idchapters=<?= $datas->getIdchapters()?>" class="formChapitre">
+						<input type="submit" value="Supprimer le chapitre en cours">
+					</form>
+					<form method="post" action="index.php?action=askUpdateChapter&amp;Idchapters=<?= $datas->getIdchapters()?>" class="formChapitre">
+						<input type="submit" value="Modifier le contenu du chapitre">
+					</form>
+				
+				<?php } ?>
+			</div>	
+		</div>
+		<?php 
 
-appel templateOneChapter
--->
+		$asideView=$this->asideView;		
+		$captionMessage = $this->captionMessage;
+		$message=$this->message;
+		$footerView=$this->renderBottom();	
+		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
+		$contentView=ob_get_clean();  
 
-<?php 
-	$title="Voyage en Alaska"; 
-	ob_start(); 
-?>
-	
-	<!-- affichage menu   -->
-<h1> Mon voyage en Alaska </h1>
-<div class ="chapter">	
-
-	<!-- A voir avec SANDY pour traiter le cas des caractères accentués  -->
-
-	<h2> <?php //htmlspecialchars($chapters[$i]->getTitle()) ?> </h2> 
-	<h2 id="title"> <?= $chapter->getTitle() ?> </h2>
-	<p><em id="dateCreation">rédigé le : <?= htmlspecialchars($chapter->getDateFr()) ?></em></p>
-	<p id="resume"><?= htmlspecialchars($chapter->getContent()) ?> </p>	
-		<?= $styleBtn?>
-		<form method="post" action="index.php?action=deleteChapter&amp;Idchapters=<?= $chapter->getIdchapters()?>" class="formChapitre">
-			<input type="submit" value="Supprimer le chapitre en cours">
-		</form>
-		<form method="post" action="index.php?action=askUpdateChapter&amp;Idchapters=<?= $chapter->getIdchapters()?>" class="formChapitre">
+		include_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');
 			
-			<input type="submit" value="Modifier le contenu du chapitre">
-		</form>
-	</div>
-</div>
-
-
-	
-<?php 
-
-
-$captionMessage ="";
-$message="";
-require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
-$contentView=ob_get_clean(); 
-
-require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php'); 
-	
-	
-
+	}
+}
 
 		
 		

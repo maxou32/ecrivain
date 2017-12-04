@@ -2,16 +2,16 @@
 	namespace web_max\ecrivain;
 	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\View.php');
 	
-class FieldsUser extends View
+class AskRegistration extends View
 {
 	public function __construct($avecParam){
 		$this->template ='template.php';
 		$this->avecParam=$avecParam;
 	}
-	public function show(){
+	public function show($params,$datas){
 		$title="Voyage en Alaska"; 
 		ob_start(); 
-
+		$menuView=$this->renderTop();
 		?>
 		<form method="post" action="index.php?action=registration" class="formUser">
 			<input id="userName" name="userName" type="text" placeholder="Indiquez votre nom" required /><br />
@@ -21,7 +21,6 @@ class FieldsUser extends View
 			<br /><input type="submit" value="Soumettre votre demande" />
 		</form>
 
-	
 		<?php
 		$footerView=$this->renderBottom();
 		$captionMessage = $this->captionMessage;

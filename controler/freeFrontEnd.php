@@ -1,7 +1,5 @@
 <?php
 	namespace web_max\ecrivain;
-	//session_start();
-	//use web_max\ecrivain\model;
 ?>	
 <!-- controler for free actions
 
@@ -42,6 +40,12 @@ addOneChapter 	(title, resume, content)						//Ajout UN chapitre
 	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\MenuControler.php');
 	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\UserManager.php');
 	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\AccessControl.php');
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_askRegistration.php');
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\ListChaptersView.php');
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\OneChapterView.php');
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_reservedAccess.php');
+	
+	
 	
 class FreeFrontEnd{
 	
@@ -50,22 +54,15 @@ class FreeFrontEnd{
 	}
 	
 	public  function  hello(){
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		
-		$captionMessage ="";
-		$message="";
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
-		$contentView="";
-		$asideView="";
-		require ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');	
+		$maView = new View(false);
+		$maView->show(NULL,NULL);
+		//$maView->render(NULL);
 	}
 	
 	function askRegistration(){
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		$asideView="";
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_fieldsUser.php');			
+		$maView = new AskRegistration(false);
+		$maView->show(NULL,NULL);
+		//$maView->render(NULL);
 	}
 	
 	function registration($userName, $userPassword, $email){
@@ -77,54 +74,46 @@ class FreeFrontEnd{
 				
 		$userManager= new UserManager();
 		$users=$userManager->add($newUser);	
+		
+		$maView = new View('template.php');
+		$maView->show();
+		//$maView->render(NULL,NULL);
 	}
 	
 	function listChapter(){
-
-		$chapterManager=new  ChaptersManager();
+		$chapterManager = new ChaptersManager();
 		$chapters=$chapterManager->getList(); 
-		
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
+		$maView = new ListChaptersView(false);
+		$maView->show(NULL,$chapters);
 	}
+	
 	function oneChapter($idChapter){
 
 		$chapterManager= new ChaptersManager();
 		$chapter=$chapterManager->get($idChapter); 
 
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
+		$params=array(
+			'neededAccessRight'=>99,
+			'verifAccess'=>true,
+		);
 		
-		$monAccessControl= new AccessControl();
-		if ($monAccessControl->verifAccessRight(99)){
-			$styleBtn="<div style='display:block;'>";
-		}else{
-			$styleBtn="<div style='display:none;'>";
-		}
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\oneChapterView.php');
+		$maView = new OneChaptersView(true);
+		$maView->show($params,$chapter);
+		
 	}
 		
 	function askReservedAccess(){
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		$asideView="";
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_reservedAccess.php');	
+		$maView = new ReservedAccess(false);
+		$maView->show(NULL,NULL);
 	}
 	
 	function validAccessReserved(){
 
 		$_SESSION['user']=$_POST['userName'];
-	
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		$asideView="";
-		
-		$chapterManager= new ChaptersManager();
-		$chapters=$chapterManager->getList();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');		
+		$chapterManager = new ChaptersManager();
+		$chapters=$chapterManager->getList(); 
+		$maView = new ListChaptersView(false);
+		$maView->show(NULL,$chapters);		
 	}
 	function printError($error){
 		$menuView="";

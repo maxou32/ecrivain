@@ -4,6 +4,7 @@
 	//use web_max\ecrivain\model;
 
 	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\UserManager.php');
+	
 class AccessControl {
 	public function __construct(){
     

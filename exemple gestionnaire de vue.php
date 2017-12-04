@@ -1,5 +1,5 @@
 <?php
-
+	namespace web_max\ecrivain;
 
 class View
 {
@@ -10,18 +10,19 @@ class View
 
     public function __construct($template)
     {
-        $this->template = $template;
+        echo 'construct';
+		$this->template = $template;
     }
 
     public function renderTemplate()
     {
-
+		$maConfig=new Config();
         foreach ($this->params as $name => $value)
         {
             ${$name} = $value; //extract($params) array('message' => 'hello world'); => $message = "hello word';
         };
         ob_start();
-        include_once (VIEW.$this->template.'.php');
+        include_once ($maconfig->getDirView().$this->template.'.php');
         $html = ob_get_clean();
         return $html;
     }

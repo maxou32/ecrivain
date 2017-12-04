@@ -83,7 +83,12 @@ updateUser (id, name, email)				//Modification compte Un utilisateur
 errorProcessing(error)						//traitement des erreurs
 		appel vue information et message résultat (error)
 -->
-<?php	
+<?php
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\freeFrontEnd.php');	
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_addChapterView.php');	
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_fieldsUserView.php');	
+	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_updateChapterView.php');	
+	
 
 class PrivateFrontEnd{
 	public function __construct(){
@@ -93,50 +98,33 @@ class PrivateFrontEnd{
 		$monControlAcces= new AccessControl();
 		$monControlAcces->Disconnect();
 		
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		$chapterManager= new ChaptersManager();
-		$chapters=$chapterManager->getList();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');		
+		$monFreeFrontEnd= new FreeFrontEnd;
+		$monFreeFrontEnd->listChapter();
 	}
 	
 	function askUpdateProfil(){
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
+		$maView = new FieldsUser(false);
+		$maView->show(NULL, NULL);
 		
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_fieldsUser.php');
-	
 	}
 	function askAddOneChapter(){
-
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_addChapterView.php');
-	
-	}
-	function addOneChapter(){
-
-		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
+		$maView = new AddChapterView(false);
+		$maView->show(NULL, NULL);
 		
+	}
+	
+	function addOneChapter(){
 		$donnees=array('Title' => $_POST['title'],'Resume' => $_POST['resume'], 'Content'=> $_POST['content'], 'date_fr'=>'', 'Users_IdUsers'=>1, 'Status_IdStatus'=>1);
 		$newChapter = new Chapter($donnees);
-		
 		$chapterManager= new ChaptersManager();
 		$chapters=$chapterManager->add($newChapter); 
 		
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		$chapters=$chapterManager->getList(); 
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
-	
+		$monFreeFrontEnd= new FreeFrontEnd;
+		$monFreeFrontEnd->listChapter();
 	}
+	
 	function deleteChapter($idChapter){
 
-		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
 		$chapterManager= new ChaptersManager();
 		$chapterManager->delete($idChapter); 
 		
@@ -144,23 +132,29 @@ class PrivateFrontEnd{
 		$message="";
 		$chapters=$chapterManager->getList(); 
 		
-		$monControlerMenu= MenuControler::getInstance();
-		$menuView=$monControlerMenu->sendMenu();
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_asideView.php');
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\listChaptersView.php');
-		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_footerView.php');
+		$monFreeFrontEnd= new FreeFrontEnd;
+		$monFreeFrontEnd->listChapter();
 	}
 
 	function askUpdateChapter($idChapter){
+		$chapterManager= new ChaptersManager();
+		$chapter=$chapterManager->get($idChapter); 
+		
 		$monFreeFrontEnd= new FreeFrontEnd;
 		$monFreeFrontEnd->oneChapter($idChapter);
+		
+		$this->askAddOneChapter();
+		
+		$maView = new UpdateChapterView(false);
+		$maView->show(NULL, NULL);
 		//$chapterManager=new  web_max\ecrivain\model\ChaptersManager();
-		$captionMessage ="";
+		/*$captionMessage ="";
 		$menuView="";
 		$asideView="";
 		$chapterManager= new ChaptersManager();
 		$chapter=$chapterManager->get($idChapter); 
 		require('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\_updateChapterView.php');
+		*/
 	}
 	
 	function updateChapter($Idchapters){
