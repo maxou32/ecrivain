@@ -1,0 +1,128 @@
+***************************************
+*	parametrage du site de l'écrivain
+***************************************
+* accès aux données
+data:
+ serveur: localhost 
+ login: root 
+ password: maxou*32
+ nom: ecrivain
+***************************************
+* chemins d'accès
+***************************************
+way:
+ url: http://127.0.0.1:8000/edsatest_php/TP_XX/ecrivain"
+ dir_view: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\
+ dir_controler: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\
+ dir_model: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\
+ dir_ecrivain: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain
+***************************************
+* règles de gestion
+***************************************
+rules:
+ admin:99 
+ contributor:2
+ nbArticles:5
+ nbCaracters:200
+***************************************
+*routes à suivre
+***************************************
+* l'appel donne le nom de la fonction
+* puis les paramètres éventuels
+***************************************
+simpleRoads:
+ _messageView:_BienvenueView
+  P01:action
+ _listChaptersView:_ListChaptersView
+  P01:action
+ askRegistration:askRegistration
+  P01:action
+ abortAccess:abortAccess
+  P01:action
+ askUpdateProfil:askUpdateProfil
+  P01:action
+ reservedAccess:_askReservedAccess
+  P01:action
+ askAddOneChapter:askAddOneChapter
+  P01:action
+  P02:sousAction
+ addOneChapter:addOneChapter
+  P01:action
+  P02:sousAction
+  P03:title
+  P04:dateFr
+  P05:resume
+  P06:content
+ oneChapter:readOneChapter
+  P01:action
+  P02:Idchapters
+* deleteChapter:deleteOneChapter
+*  P01:Idchapters
+ askUpdateChapter:askCUDOneChapter
+  P01:Idchapters
+ updateDeleteOneChapter:updateDeleteOneChapter
+  P01:action
+  P02:sousAction
+  P03:Idchapters
+  P04:title
+  P05:resume
+  P06:content
+ updateOneChapter:updateOneChapter
+  P01:action
+  P02:Idchapters
+  P03:title
+  P04:date_fr
+  P05:number
+  P06:content
+  P07:sousAction
+ adminChapter:adminChapter
+  P01:action
+ _validStatusChapters:_validStatusChapters
+  P00:brut
+  P01:action
+  P03:sousAction
+ registration:registration
+  P01:action
+  P02:sousAction
+  P03:userName
+  P04:userPwd
+  P05:mail
+ validAccessReserved:validAccessReserved
+  P01:userName
+  P02:userPwd
+ askCRUDMessage:askCRUDMessage
+  P01:action
+  P02:sousAction
+ CRUDMessage:CRUDMessage
+  P01:action
+  P02:sousAction
+  P03:id
+  P04:texte
+  P05:contexte
+  P06:idtypemessage
+***************************************
+* routes réservées
+***************************************
+ReservedAccess:
+ _BienvenueView:0
+ _alertView:0
+ _ListChaptersView:0
+ _askReservedAccess:0
+ askRegistration:0
+ oneChapter:0
+ readOneChapter:0
+ addOneChapter:99
+ updateOneChapter:99
+ updateDeleteOneChapter:99
+ askAddOneChapter:99
+ adminChapter:99
+ _validStatusChapters:99
+ askUpdateProfil:2
+ askValidUser:99
+ askCRUDMessage:99
+ CRUDMessage:99
+***************************************
+* media 
+***************************************
+media:
+ background:D:/perso/maxou/oPENCLASSROOM/04_Php_MySQL/TP_XX/ecrivain/public/media/alaska.jpg

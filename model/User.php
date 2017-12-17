@@ -1,12 +1,43 @@
 <?php
-	namespace web_max\ecrivain;
-    require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\PersonManager.php');
+	//namespace web_max\ecrivain;
+    
+class User {
+	private $_idusers;
+	private $_name;
+	private $_password;
+	private $_email;
+	private $_status_idstatus;
+	private $_grade_idgrade;
+	
+	// Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
+	public function __construct(array $donnees)   {
+		$this->hydrate($donnees);   
+	} 
+  
+	public function hydrate(array $donnees){
+		foreach ($donnees as $key => $value){
+			// On récupère le nom du setter correspondant à l'attribut.
+			$method = 'set'.ucfirst($key);
+				
+			// Si le setter correspondant existe.
+			if (method_exists($this, $method)){
+			  // On appelle le setter.
+			  $this->$method($value);
+			}
+		}
+	}
 
-class User extends PersonManager{
-
+	// Liste des getters  
+	public function getIdusers()  { return $this->_idusers;}  
+	public function getName()  {return $this->_name;}  
+	public function getPassword()  {return $this->_password; }  
+	public function getEmail()  {  return $this->_email;  }  
+	public function getStatus_IdStatus() { return $this->_status_idstatus;}
+	public function getGrade_IdGrade(){ return $this->_grade_idgrade;}
+	
 	// Liste des setters
 
-	public function setIdUsers($idusers){
+	public function setIdusers($idusers){
 		// On convertit l'argument en nombre entier.
 		$idusers = (int) $idusers;
 		// On vérifie ensuite si ce nombre est bien strictement positif.

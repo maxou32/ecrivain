@@ -1,37 +1,44 @@
 <?php
-	namespace web_max\ecrivain;
-	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\View.php');
+	//namespace web_max\ecrivain;
+	//require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\View.php');
 	
-class FieldsUser extends View
+class _FieldsUserView extends View
 {
-	public function __construct($avecParam){
-		$this->template ='template.php';
-		$this->avecParam=$avecParam;
+	public function __construct($template){
+		$this->template =$template;
 	}
 	public function show($params,$datas){
-		$title="Voyage en Alaska"; 
 		ob_start(); 
-		$menuView=$this->renderTop();
-		$asideView=$this->renderAside()
-
+		if ($params["action"]=="update"){
+			?><form method="post" action="index.php?action=registration" class="formUser">
+				<input id="sousActionUpdate" name="sousAction" type="hidden" value ="update" >
+			<?php	
+		}else{
+			?><form method="post" action="index.php?action=registration" class="formUser">
+				<input id="sousActionAdd" name="sousAction" type="text" value ="add" ><?php
+		}
 		?>
-		<form method="post" action="index.php?action=registration" class="formUser">
-			<input id="userName" name="userName" type="text" placeholder="Indiquez votre nom" required /><br />
-			<input id="userPwd" name="userPwd" type="password"  placeholder="Saisissez votre mot de passe" pattern=".{5,}" title="5 caractères minimum" required><br />
-			<input id="mail" name="mail" placeholder="Votre adresse mail" required><br />
-			
-			<br /><input type="submit" value="Soumettre votre demande" />
-		</form>
+				<label>votre nom</label><input id="userName" name="userName" type="text"  value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
+				<label>votre mot de passe</label><input id="userPwd" name="userPwd" type="password" pattern=".{5,}" title="5 caractères minimum" required /><br />
+				<label>votre adresse mail</label><input id="mail" name="mail" type="text"  value ="<?= htmlspecialchars($params["email"])?>" required /><br />
+				
+				<br />
+				<input type="submit" value="Soumettre votre demande"class="button" />
+				<input type="submit" name="sousAction" value="Fermer"  class="button"/>
+			</form>
 
 	
 		<?php
+		$contentView=ob_get_clean();
+		
+		$menuView=$this->renderTop();
+		$asideView=$this->renderAside();
 		$footerView=$this->renderBottom();
 		$captionMessage = $this->captionMessage;
-		$message=$this->message;
-		$asideView=$this->asideView;		
+		$message=$this->message;		
 		
-		$contentView=ob_get_clean(); 
-		include_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\template.php');
+		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
+		$monTemplate->show();
 	
 	}
 }

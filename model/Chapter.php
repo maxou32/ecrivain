@@ -1,12 +1,12 @@
 <?php
-	namespace web_max\ecrivain;
+	//namespace web_max\ecrivain;
 	//session_start();
 	//use web_max\ecrivain\model;
 
 class Chapter{
 	private $_idchapters;
 	private $_title;
-	private $_resume;
+	private $_number;
 	private $_content;
 	private $_date_fr;
 	private $_users_idusers;
@@ -32,7 +32,7 @@ class Chapter{
 	// Liste des getters  
 	public function getIdchapters()  { return $this->_idchapters;}  
 	public function getTitle()  {return $this->_title;}  
-	public function getResume()  {return $this->_resume; }  
+	public function getNumber()  {return $this->_number; }  
 	public function getContent()  {  return $this->_content;  }  
 	public function getDateFr()  {    return $this->_date_fr;  }
 	public function getUser_IdUsers() { return $this->_users_idusers;}
@@ -58,11 +58,11 @@ class Chapter{
 		}
 	}
 	  
-	public function setResume($resume){
-	   // On vérifie qu'il s'agit bien d'une chaîne de caractères.
-		if (is_string($resume))
-		{
-			$this->_resume= $resume;
+	public function setNumber($number){
+	   
+	   $number = (int) $number;
+		if ($number >0)		{
+			$this->_number= $number;
 		}
 	}
 	  

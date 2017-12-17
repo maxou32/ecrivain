@@ -4265,11 +4265,12 @@ nav .button-collapse i {
   line-height: 56px;
 }
 
-nav .brand-logo {
+nav .brand-logo{
   position: absolute;
   color: #fff;
   display: inline-block;
   font-size: 2.1rem;
+  z-index:10002;
   padding: 0;
 }
 
@@ -5626,11 +5627,12 @@ button.btn-floating {
 }
 
 .modal {
-  display: none;
+  display: inline-block;
   position: fixed;
-  left: 0;
-  right: 0;
-  background-color: #fafafa;
+  left :0;
+  right:0;
+  top:30%;
+  background-color: red; /*#fafafa;*/
   padding: 0;
   max-height: 70%;
   width: 55%;
