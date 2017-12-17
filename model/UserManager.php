@@ -1,10 +1,6 @@
 <?php
-	//namespace web_max\ecrivain;
-	//session_start();
-	//use web_max\ecrivain\model;
-
-//require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\Manager.php');
-//require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\User.php');
+namespace web_max\ecrivain\model;
+use web_max\ecrivain\model\Manager;
 
 
 class UserManager extends Manager{

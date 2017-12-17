@@ -1,6 +1,6 @@
 <?php
-	//namespace web_max\ecrivain;
-
+	namespace web_max\ecrivain\view;
+	use web_max\ecrivain\view\MenuControler;
 class View
 {
 
@@ -70,7 +70,7 @@ class View
 		$footerView=$this->renderBottom();
 		$contentView="";
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView,$this->imageBackGround);
-		$monTemplate->show();
+		$monTemplate->show(null,null);
 	}
 	
 }

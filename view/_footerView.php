@@ -1,5 +1,6 @@
 <?php 
-	//namespace web_max\ecrivain;
+namespace web_max\ecrivain\View;
+use web_max\ecrivain\view\View;
 	
 class _FooterView extends View
 {	

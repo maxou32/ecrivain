@@ -1,6 +1,7 @@
 <?php 
-	//namespace web_max\ecrivain;
-	//require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\View.php');
+namespace web_max\ecrivain\view;
+use web_max\ecrivain\view\View;
+use web_max\ecrivain\view\Template;
 	
 class _CRUDMessage extends View
 {	
@@ -82,7 +83,7 @@ class _CRUDMessage extends View
 		$footerView=$this->renderBottom();	
 
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
-		$monTemplate->show();
+		$monTemplate->show(null,null);
 	}
 }	
 

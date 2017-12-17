@@ -1,12 +1,14 @@
 <?php
-	//namespace web_max\ecrivain;
+	namespace web_max\ecrivain\lib;
 	session_start();
-	//use web_max\ecrivain\Config; 
-	//use web_max\ecrivain\Router;
+	use web_max\ecrivain\lib\Router;
 
-	include_once ('Config.php');
-
-	Config::start();
+	require_once("SplClassLoader.php");
+	
+	$OCFramLoader = new \SplClassLoader('web_max\ecrivain\lib', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\lib');
+	$OCFramLoader->register();
+		
+	//Config::start();
 	
 	$monRouter = new Router($_REQUEST);
 	$monRouter->Router();

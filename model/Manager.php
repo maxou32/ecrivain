@@ -1,10 +1,9 @@
 <?php
 
-//namespace web_max\ecrivain;
-
+namespace web_max\ecrivain\model;
+use web_max\ecrivain\lib\Config;
 // class manager : able to connect to the database 
 
-//require_once ('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\config.php');
 
 
 class Manager{

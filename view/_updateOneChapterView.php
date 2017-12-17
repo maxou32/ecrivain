@@ -1,6 +1,7 @@
 <?php 
-	//namespace web_max\ecrivain;
-	//require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\View.php');
+namespace web_max\ecrivain\View;
+use web_max\ecrivain\view\View;
+use web_max\ecrivain\view\Template;
 	
 class _updateOneChapterView extends View
 {	
@@ -59,7 +60,7 @@ class _updateOneChapterView extends View
 		$footerView=$this->renderBottom();	
 		//echo "<br / >content view ".$contentView;
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
-		$monTemplate->show();
+		$monTemplate->show(null,null);
 			
 	}
 }

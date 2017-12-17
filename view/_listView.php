@@ -1,5 +1,6 @@
 <?php 
-	//namespace web_max\ecrivain;
+namespace web_max\ecrivain\view;
+use web_max\ecrivain\view\View;
 	
 class _ListView extends View
 {	
@@ -15,7 +16,6 @@ class _ListView extends View
 
 
 		ob_start();
-		//echo "<PRE>";print_r($datas);echo"</PRE>";
 		?>
 		<?= $params["listCaption"] ?>
 		<select name='<?= $params["listName"] ?>' id="<?= $params["listId"] ?>">

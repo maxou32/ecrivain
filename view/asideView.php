@@ -1,4 +1,6 @@
 <?php
+namespace web_max\ecrivain\view;
+use web_max\ecrivain\view\View;
 ob_start(); 
 ?>
 

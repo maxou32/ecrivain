@@ -1,6 +1,24 @@
 <?php
-	//namespace web_max\ecrivain;
-	
+namespace web_max\ecrivain\controler;
+use web_max\ecrivain\model\ChaptersManager;
+use web_max\ecrivain\lib\Config;
+use web_max\ecrivain\model\StatusManager;
+use web_max\ecrivain\view\_AdminChaptersView;
+use web_max\ecrivain\model\MessageManager;
+use web_max\ecrivain\view\_messageView;
+use web_max\ecrivain\view\_ListChaptersView;
+use web_max\ecrivain\view\_readOneChapterView;
+use web_max\ecrivain\view\_updateOneChapterView;
+use web_max\ecrivain\model\Chapter;
+use web_max\ecrivain\view\_createOneChapterView;
+use web_max\ecrivain\model\UserManager;
+use web_max\ecrivain\view\_FieldsUserView;
+use web_max\ecrivain\model\User;
+use web_max\ecrivain\model\TypeMessageManager;
+use web_max\ecrivain\model\Message;
+use web_max\ecrivain\view\_CRUDMessage;
+use web_max\ecrivain\view\_askReservedAccess;
+
 class Controller{
 	
 	public function __construct(){

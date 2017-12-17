@@ -1,7 +1,5 @@
 <?php
-	//namespace web_max\ecrivain;
-	//session_start();
-	//use web_max\ecrivain\model;
+namespace web_max\ecrivain\model;
 
 class Chapter{
 	private $_idchapters;

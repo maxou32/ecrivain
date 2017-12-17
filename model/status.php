@@ -1,5 +1,5 @@
 <?php
-	//namespace web_max\ecrivain;
+	namespace web_max\ecrivain\model;
     
 class Status {
 	private $_idstatus;

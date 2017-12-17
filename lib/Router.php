@@ -1,5 +1,8 @@
 <?php
-//namespace web_max\ecrivain;
+namespace web_max\ecrivain\lib;
+use web_max\ecrivain\controler\Controller;
+use web_max\ecrivain\controler\AccesControl;
+use web_max\ecrivain\lib\Config;
 
 class Router{
 	protected $request;
@@ -7,6 +10,14 @@ class Router{
 	
 	public function __construct($request){
 		$this->request = $request;
+		$OCFramLoader = new \SplClassLoader('web_max\ecrivain\controler', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler');
+		$OCFramLoader->register();
+		$OCFramLoader1 = new \SplClassLoader('web_max\ecrivain\view', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view');
+		$OCFramLoader1->register();	
+		$OCFramLoader2 = new \SplClassLoader('web_max\ecrivain\model', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model');
+		$OCFramLoader2->register();
+		$OCFramLoader3 = new \SplClassLoader('web_max\ecrivain\lib', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\lib');
+		$OCFramLoader3->register();
 	}
 	
 
@@ -52,7 +63,7 @@ class Router{
 			//echo"<PRE> Début ROUTER ";print_r($this->request);echo"</PRE>";
 			if(count($_REQUEST)!==0){
 				if(null!==$this->request['action']){
-					$myConfig= new Config; 
+					$myConfig= new \web_max\ecrivain\lib\Config; 
 					if(YAML) {
 						//echo"ma fonction : ".$this->getAction()." fin getaction<br/>";
 						$myFonction=$myConfig->getRoad($this->getAction());
@@ -63,7 +74,8 @@ class Router{
 						if($myFonction){
 							
 							if(null !==$myFonction){
-								$myAccessControl = new AccessControl();
+								//echo"ma fonction : ".$myFonction." fin getaction<br/>";
+								$myAccessControl = new \web_max\ecrivain\controler\AccessControl();
 								//echo"<PRE>";print_r($theParam);echo"</PRE>";
 								//regarde si accès réservé
 								extract($isProtected=$myAccessControl->getIsProtected($myFonction));

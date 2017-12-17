@@ -1,8 +1,7 @@
 <?php
-	//namespace web_max\ecrivain;
-	//use web_max\ecrivain\model;
-
-//	require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\UserManager.php');
+namespace web_max\ecrivain\controler;
+use web_max\ecrivain\lib\Config;
+use web_max\ecrivain\model\ChaptersManager;
 	
 class AccessControl {
 	public function __construct(){

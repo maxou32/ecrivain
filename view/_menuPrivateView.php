@@ -1,5 +1,5 @@
 <?php 
-	//namespace web_max\ecrivain;
+namespace web_max\ecrivain\view;
 	
 class _MenuPrivateView extends View
 {	

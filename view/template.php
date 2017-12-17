@@ -1,5 +1,7 @@
 <?php
-
+namespace web_max\ecrivain\View;
+use web_max\ecrivain\view\View;
+use web_max\ecrivain\lib\Config;
 
 class template extends view{
 	private $title;

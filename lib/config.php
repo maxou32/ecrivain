@@ -1,8 +1,8 @@
 <?php
 
-//namespace web_max\ecrivain;
-//use web_max\ecrivain\Router;
-//use web_max\ecrivain\FreeFrontEnd;
+namespace web_max\ecrivain\lib;
+use web_max\ecrivain\lib\router;
+use web_max\ecrivain\controler\accesControl;
  
 // show errors if not in php.ini
 ini_set('display_errors','on');
@@ -15,7 +15,7 @@ class Config{
 	
 	public function __construct()   {
 		//echo "debut construct <br />";
-		$filename='config.yaml';
+		$filename='lib/config.yaml';
 		$handle =fopen($filename,"r");
 		if ($handle) {
 			while (!feof($handle)) 				
@@ -110,7 +110,6 @@ class Config{
 	}
 */
 	public function getRoad($theRoad){
-		//echo "GetRoad :".$theRoad."<br />";
 		try{
 			if(null !==$this->_data["simpleRoads"][$theRoad]){
 				return $this->_data["simpleRoads"][$theRoad];
@@ -122,7 +121,7 @@ class Config{
 
     public static function start()
     {
-        spl_autoload_register(array(__CLASS__, 'autoload'));
+        /*
 		
         $host = 'http://'.$_SERVER['HTTP_HOST'].'/';  // 127.0.0.1:8080
 		$root =  $_SERVER['CONTEXT_DOCUMENT_ROOT'].'/';
@@ -146,32 +145,6 @@ class Config{
 		}else{
 			//echo "la classe est vide = " .$classe . " et " . $chemin[$classe];
 		}
+		*/
     }
-	/*
-  public static function autoload($class)
-    { 
-		echo"classe ". $class;
-		include_once($class.'.php');
-		
-    }
-*/
-    public static function autoload($class)
-    { 
-		
-		if(file_exists(MODEL.$class.'.php')) {
-			        
-            include_once(MODEL.$class.'.php');
-        } else if(file_exists(CONTROLER.$class.'.php')) {
-           
-			include_once(CONTROLER.$class.'.php');
-        } else if(file_exists(VIEW.$class.'.php')) {
-            
-			include_once(VIEW.$class.'.php');
-        }else {
-			
-            include_once(CLASSE.$class.'.php');
-        }
-    }
-
-
 }			

@@ -1,8 +1,7 @@
 <?php
-	//namespace web_max\ecrivain;
-	//session_start();
-	//use web_max\ecrivain\view;
-
+namespace web_max\ecrivain\view;
+use web_max\ecrivain\view\_MenuPrivateView;
+ 
 class MenuControler{
 	
 	public function __construct()   {

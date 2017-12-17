@@ -1,6 +1,6 @@
 <?php
-	//namespace web_max\ecrivain;
-	//use web_max\ecrivain\model;
+namespace web_max\ecrivain\model;
+use web_max\ecrivain\model\Manager;
 
 class MessageManager extends Manager{
 

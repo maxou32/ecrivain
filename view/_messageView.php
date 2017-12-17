@@ -1,7 +1,9 @@
 <?php 
-	//namespace web_max\ecrivain;
-	//require_once('D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\View.php');
-	
+namespace web_max\ecrivain\View;
+use web_max\ecrivain\view\View;
+use web_max\ecrivain\view\Template;
+
+
 class _messageView extends View
 {	
 	

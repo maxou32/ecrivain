@@ -1,6 +1,7 @@
 <?php 
-	//namespace web_max\ecrivain;
-	
+namespace web_max\ecrivain\view;
+use web_max\ecrivain\view\View;
+
 class _MenuFreeView extends View
 {	
 
