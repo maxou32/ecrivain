@@ -1,25 +1,27 @@
 <?php
 namespace web_max\ecrivain\controler;
-use web_max\ecrivain\model\ChaptersManager;
 use web_max\ecrivain\lib\Config;
-use web_max\ecrivain\model\StatusManager;
-use web_max\ecrivain\view\_AdminChaptersView;
+use web_max\ecrivain\model\UserManager;
+use web_max\ecrivain\model\User;
+use web_max\ecrivain\model\ChaptersManager;
+use web_max\ecrivain\model\Chapter;
+use web_max\ecrivain\view\_readOneChapterView;
+use web_max\ecrivain\model\TypeMessageManager;
+use web_max\ecrivain\model\Message;
 use web_max\ecrivain\model\MessageManager;
+use web_max\ecrivain\model\StatusManager;
+	/*
+
+use web_max\ecrivain\view\_AdminChaptersView;
 use web_max\ecrivain\view\_messageView;
 use web_max\ecrivain\view\_ListChaptersView;
 use web_max\ecrivain\view\_TheBookView;
-use web_max\ecrivain\view\_readOneChapterView;
 use web_max\ecrivain\view\_updateOneChapterView;
-use web_max\ecrivain\model\Chapter;
 use web_max\ecrivain\view\_createOneChapterView;
-use web_max\ecrivain\model\UserManager;
 use web_max\ecrivain\view\_FieldsUserView;
-use web_max\ecrivain\model\User;
-use web_max\ecrivain\model\TypeMessageManager;
-use web_max\ecrivain\model\Message;
 use web_max\ecrivain\view\_CRUDMessage;
 use web_max\ecrivain\view\_askReservedAccess;
-
+*/
 class Controller{
 	private $myRoad;
 	private $myConfig;
@@ -38,6 +40,15 @@ class Controller{
 		$_SESSION['Grade_IdGrade']=$user->getGrade_IdGrade();
 		$_SESSION['Status_IdStatus']=$user->getStatus_IdStatus();
 	}	
+	
+	private function askUpdateProfil(){
+		$monUserManager= new UserManager();
+		$monUserManager->get($_SESSION['user']);
+		$array["userName"]=$_SESSION['user'];
+		$array["email"]=$_SESSION['email'];
+		$array["action"]="update";
+		return $array;
+	}
 	
 	private function validAccessReserved($params){
 		//echo"<PRE> COntroller : debut validAccessReserved";print_r($params);echo"</PRE>";
@@ -94,7 +105,7 @@ class Controller{
 	
 	private function updateOneChapter($post){
 		//echo "<pre> Controler : update :";print_r($post);echo"</pre>";
-		$donnees=array('idchapters'=>$post['idchapters'], 'Title' => $post['title'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'Number'=> $post['number']);
+		$donnees=array('idchapters'=>$post['idchapter'], 'Title' => $post['title'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'Number'=> $post['number']);
 		return $newChapter = new Chapter($donnees);
 	}
 	
@@ -190,6 +201,7 @@ class Controller{
 		//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
 		//echo"<PRE><br>CONTROLLER 1.1: nbPram = ";print_r($params);echo"</PRE>"."<br />";
 		
+		/*
 		if($this->myRoad["security"]["niveauRequis"]>0){
 			$monAccessControl=new $this->myRoad["security"]["className"];
 			$CRUDAutorized=$monAccessControl->verifAccessRight($this->myRoad["security"]["niveauRequis"]);
@@ -198,11 +210,9 @@ class Controller{
 					$this->myRoad["security"]["nom"]=>true
 				);
 				//echo"<br>CONTROLLER 1.2 : dat ";print_r($globalParams);echo"</PRE>";
-			
-			}else{
-				//echo "erreur à traiter niveau insuffisant";
 			}
 		}
+		*/
 		if(null!==($this->myRoad["appelFonctionAvantData"]["nombrefonction"])){
 			//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
 			//foreach($this->myRoad["appelFonctionAvantData"] as $element){
@@ -233,7 +243,10 @@ class Controller{
 							}
 						}
 					}else{
-						isset($this->myRoad["appelFonctionAvantData"]["nom"]) ? $return= $this->$element["nom"]($post) :false;
+						if(isset($this->myRoad["appelFonctionAvantData"]["nom"])) {
+							$fonction=$this->myRoad["appelFonctionAvantData"]["nom"];
+						    $return= $this->$fonction($post);
+						}
 					}
 					//echo "<br /><pre>CONTROLLER 1.5: Return valide access = ";print_r($return);echo"</pre>";
 				}
@@ -310,18 +323,22 @@ class Controller{
 					//echo "<br />CONTROLLER 8.5: Return valide access = ";print_r($return);echo"</pre>";
 				}else{
 					//echo"<PRE><br />CONTROLLER 8.3: dat ";print_r($element["nom"]);echo"</PRE>";
-					isset($element["nom"]) ? $return= $this->$element["nom"]($post) :false;
-					
-					//echo "<br /><pre>CONTROLLER 8.5: Return valide access = ";print_r($return);echo"</pre>";
+					if(isset($element["nomTableau"])){ 
+						if(isset($element["nom"])){ 
+							$globalParams [$element["nomTableau"]]=$this->$element["nom"]($post);
+						}
+					}else{
+						if(isset($element["nom"])){ 
+							$globalParams= $this->$element["nom"]($post);
+						}
+					}
+					//echo "<br /><pre>CONTROLLER 8.5: Return globalParams = ";print_r($globalParams);echo"</pre>";
 				}
 				$nomParam=$element["lesParams"]["nomParam"];
-				//echo "<br />CONTROLLER 8.5: Return valide access = ";print_r($nomParam);echo"</pre>";
+				//echo "<br />CONTROLLER 8.6: Return valide access = ";print_r($nomParam);echo"</pre>";
 				
 			}
-			if(isset($this->myRoad["appelFonctionAPresData"][0]["nomTableau"])){
-				$globalParams[$this->myRoad["appelFonctionAPresData"][0]["nomTableau"]]=$return;
-				//echo "<br /><pre>CONTROLLER 8.55: nomTableau= ";print_r($globalParams);echo"</pre>";	
-			}
+
 			
 		}
 
@@ -330,9 +347,11 @@ class Controller{
 			foreach($this->myRoad["view"] as $element){
 				//echo " <br />déclenchement vue";
 				if($element["nom"]!==Null){
-					//echo"<PRE> controle déclenchement vue 9: data ";print_r($element);echo"</PRE>";
+					//echo"<PRE> controle déclenchement vue 9: data ";print_r( $element);echo"</PRE>";
 					if($element["nombreParam"]>0){
+						//echo "<br /><pre>CONTROLLER 9.3: Return globalParams = ";print_r($globalParams);echo"</pre>";
 						foreach ($element["lesParams"] as $elementParam){
+							
 							if($elementParam["origine"]!=="dur"){
 								$action="get".$elementParam["nomParam"];
 								$globalParams[$elementParam["nomParam"]]=$this->myConfig->$action();
@@ -368,261 +387,6 @@ class Controller{
 			header('Location: '.$this->myRoad["wantHeaderLocation"]["target"].$critere);
 		}
 	}
-
-	
-	function _BienvenueView(){
-		/*
-		$monMessage= new MessageManager;
-		$donnees=$monMessage->get("_MessageView");	
-		//echo "<br /> View readOneChapter id=<PRE>";print_r($donnees->getTexte());echo "</PRE>";
-		$array["message"]=$donnees->getTexte();
-		$monMessageView = new _messageView('template.php');
-		$monMessageView->show($array,NULL);	
-		*/
-	}
-	
-	/*
-		$array["message"]=$donnees->getTexte();
-		$monMessageView = new _alertView();
-		$monMessageView->show($array);		
-	
-	
-	function askCRUDMessage($params){
-		$monTypeMessageManager= new TypeMessageManager;
-		//préparation de la litse déroulante
-		/* ---------------------------------
-
-			$typeMessage=$monTypeMessageManager->getList();
-			$datas=[];
-			foreach ($typeMessage as $key => $value){
-				//echo "clef : ".$typeMessage[$key]->getIdtypemessage();
-				$id=$typeMessage[$key]->getIdtypemessage();
-				$datas[$id]=$value->getText();	
-			}
-			
-			$array["listName"]="MessageType";
-			$array["listId"]="MessageType";	
-			$array["listCaption"]="Type de message";	
-			$monMessageView = new _listView('template.php');
-			$listView=$monMessageView->show($array,$datas);
-			$array["MessageTypeList"]=$listView;
-		//---------------------------------- 
-		$monMessage= new MessageManager;
-		$donnees=$monMessage->get("askCRUDMessage");	
-		$array["message"]=$donnees->getTexte();
-		
-		$monTypemessage=$monTypeMessageManager->get($params['sousAction']);
-		$monMessageManager= new MessageManager;
-		$messages=$monMessageManager->getListByType($monTypemessage->getIdtypemessage());
-		
-		$monMessageView = new _CRUDMessage('template.php');
-		$monMessageView->show($array,$messages);
-	}
-	*/
-	function OLD_CRUDMessage($params){
-		$monMessage= new MessageManager;
-		//echo "<br /> View CRUDMessage id=<PRE>";print_r($params);echo "</PRE>";
-		switch ($params['sousAction']){
-			case "Mettre à jour":
-				$donnees=array('id'=> $params['id'],'texte' =>$params['texte'],'contexte' => $params['contexte']);
-				$newMessage = new Message($donnees);	
-				$messageManager= new MessageManager();
-				$message=$messageManager->update($newMessage);		
-				break;
-			case "Supprimer":
-				$messageManager= new MessageManager();
-				//echo '<br /> id à détruire = '. $params['id'].'<br />';
-				$messageManager->delete($params['id']); 
-				break;
-			case "Ajouter":
-				$donnees=array('texte' => $params['texte'],'contexte' => $params['contexte'], 'message_idtypemessage'=> $params['idtypemessage']);
-				$newMessage = new Message($donnees);	
-				$messageManager= new MessageManager();
-				$message=$messageManager->add($newMessage);	
-				break;
-		}
-		$monTypeMessageManager= new TypeMessageManager;
-		$monTypemessage=$monTypeMessageManager->getFromId($params['idtypemessage']);
-		$libErreur=$monTypemessage->getText();
-		header('Location: index.php?action=askCRUDMessage&sousAction='.$libErreur);
-	}
-/*	
-	function askRegistration(){
-		//$maView = new _askRegistration('template.php');
-		//$maView->show(NULL,NULL);
-	
-		$array["userName"]="";	
-		$array["email"]="";
-		$array["action"]="add";
-		$monFieldsUserView = new _FieldsUserView(false);
-		$monFieldsUserView->show($array, NULL);
-	}
-*/	
-
-	
-	/*
-	function _ListChaptersView(){
-		$monConfig= new Config();
-		
-		$chapterManager = new ChaptersManager();
-		$chapters=$chapterManager->getListValid();
-		$monConfig=new Config;
-		$nbCaracters=$monConfig->getNbCaracters();
-		$params=array(
-			'nbCaracters'=>$nbCaracters
-		);
-		$maView = new _ListChaptersView('template.php');
-		$maView->show($params,$chapters);
-	}
-
-	function _TheBookView($params){
-		$chapterManager= new ChaptersManager();
-		$chapter=$chapterManager->get($params["chap"]); //$params['Idchapters']
-		$params=array(
-			'nbChapter'=>5
-		);
-		$maView = new _TheBookView('template.php');
-		$maView->show($params,$chapter);
-		//echo "fin the book";
-	}
-	
-	function adminChapter(){
-		
-		$chapterManager = new ChaptersManager();
-		$chapters=$chapterManager->getListALL();
-		$monConfig=new Config;
-		
-		
-		$statusManager = new StatusManager();
-		$status=$statusManager->getList();
-		$datas=[];
-		foreach ($status as $key => $value){
-			$id=$status[$key]->getIdstatus();
-			$datas[$id]=$value->getLibelle();	
-		}
-		$nbCaracters=$monConfig->getNbCaracters();
-		$params=array(
-			'nbCaracters'=>$nbCaracters,
-			'status'=>$datas
-		);
-		//echo"<PRE>";print_r($params);echo"</PRE>";
-
-		$maView = new _AdminChaptersView('template.php');
-		$maView->show($params,$chapters);
-	}
-	*/	
-	function _validStatusChapters($params){	
-		//echo"<PRE>";print_r($params);echo"</PRE>";
-		
-		$chapterManager= new ChaptersManager();
-		foreach($params as $key=> $value){
-			if(is_numeric($value)){
-				$donnees=[];
-				if(is_numeric($key)){
-					$donnees=array('Idchapters'=>$key,'Status_IdStatus'=>$value);
-					//echo"Statuts <PRE>";print_r($donnees);echo"</PRE>";
-					$newChapter = new Chapter($donnees);
-					$return=$chapterManager->updateStatus($newChapter);
-				}else{
-					$donnees=array('Idchapters'=>preg_replace('#number#','',$key),'number'=>$value);
-					//echo"NUMBER <PRE>";print_r($donnees);echo"</PRE>";
-					$newChapter = new Chapter($donnees);
-					$return=$chapterManager->updateNumber($newChapter);
-				}
-			}
-		}
-	//	header('Location: index.php');
-	}
-	
-	
-/*
-	function readOneChapter($params){		
-		 $chapterManager= new ChaptersManager();
-		 $chapter=$chapterManager->get($params['Idchapters']); 
-			$function='updateOneChapter';
-			$monAccessControl=new accessControl;
-			$updateDeleteAreAutorized=$monAccessControl->verifAccessRight($monAccessControl->getIsProtected($function));
-		$params=array(
-			'updateDeleteAreAutorized'=>$updateDeleteAreAutorized
-		);
-		$maView = new _readOneChapterView('template.php');
-		$maView->show($params,$chapter);
-		
-	}
-		
-	function _askReservedAccess(){
-		$maView = new _askReservedAccess('template.php');
-		$maView->show(NULL,NULL);
-	}
-
-	function abortAccess(){
-		$monControlAcces= new AccessControl();
-		$monControlAcces->Disconnect();
-		header('Location: index.php');
-	}
-	*/
-	function askUpdateProfil(){
-		$monUserManager= new UserManager();
-		$monUserManager->get($_SESSION['user']);
-		$array["userName"]=$_SESSION['user'];
-		
-		$array["email"]=$_SESSION['email'];
-		$array["action"]="update";
-		$monFieldsUserView = new _FieldsUserView(false);
-		$monFieldsUserView->show($array, NULL);
-	}
-/*	
-	function askAddOneChapter(){
-		//echo" debut askAddOneChapter  ";
-			
-		$maView = new _createOneChapterView('template.php');
-		$maView->show(NULL, NULL);
-		
-		
-	}
-
-	function addOneChapter($params){
-		if( $params['sousAction']!=="fermer"){
-			$donnees=array('Title' => $params['title'], 'Content'=> $params['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'number'=>$params['number']);
-			$newChapter = new Chapter($donnees);
-			$chapterManager= new ChaptersManager();
-			$chapters=$chapterManager->add($newChapter); 
-		}
-		header('Location:index.php?action=_listChaptersView');	
-
-	}
-*/		
-	function DeleteOneChapter($params){
-		if ($params['sousAction']=='Mettre à jour'){
-			
-			//$monController= new Controller;
-			//$monController->_updateOneChapterView($chapter);
-			$chapterManager= new ChaptersManager();
-			$chapter=$chapterManager->get($params['Idchapters']); 
-			
-			$params=array(
-				'action'=>'update',		
-				'neededAccessRight'=>99,
-				'verifAccess'=>true
-			);
-			$maView = new _updateOneChapterView('template.php');
-			$maView->show($params,$chapter);
-		}
-		header('Location:index.php?action=_listChaptersView');
-	}
- 
-	function EnCoursUpdateOneChapter($params){
-		//echo"<PRE> debut updateOneChapter  ";print_r($params);echo"</PRE>";
-		$donnees=array('idchapters'=>$params['Idchapters'], 'Title' => $params['title'], 'Content'=> $params['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'Number'=> $params['number']);
-		$newChapter = new Chapter($donnees);
-		
-		$chapterManager= new ChaptersManager();
-		$chapters=$chapterManager->update($newChapter); 
-
-		header('Location:index.php?action=oneChapter&Idchapters='.$params['Idchapters']);	
-	}
-	
-
 	
 	function printError($error){
 		if (!isset($error)) {

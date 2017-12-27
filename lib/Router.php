@@ -5,25 +5,25 @@ use web_max\ecrivain\controler\AccesControl;
 use web_max\ecrivain\lib\Config;
 
 class Router{
+	private $myRoad='';
 	protected $request;
 	protected $myParam;
 	
 	public function __construct($request){
 
 		$this->request = $request;
-		$Loader = new \SplClassLoader('web_max\ecrivain\controler', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler');
+		$Loader = new \SplClassLoader('web_max\ecrivain\controler', 'controler');
 		$Loader->register();
-		$Loader1 = new \SplClassLoader('web_max\ecrivain\view', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view');
+		$Loader1 = new \SplClassLoader('web_max\ecrivain\view', 'view');
 		$Loader1->register();	
-		$Loader2 = new \SplClassLoader('web_max\ecrivain\model', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model');
+		$Loader2 = new \SplClassLoader('web_max\ecrivain\model', 'model');
 		$Loader2->register();
-		$Loader3 = new \SplClassLoader('web_max\ecrivain\lib', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\lib');
+		$Loader3 = new \SplClassLoader('web_max\ecrivain\lib', 'lib');
 		$Loader3->register();
 
 	}
 
-	private function getAction($request,$cheminSeul)
-    {
+	private function getAction($request,$cheminSeul){
         $element = explode('/', key($request));
 		//echo"<br />ROUTER : getAction <PRE>= ";print_r($element['0']);echo"</PRE>"."fin getaction de ROUTER";
 		
@@ -42,8 +42,7 @@ class Router{
 		}
     }
 
-    private function getParams($request)
-    {
+    private function getParams($request){
         $requestTested="";
 		$toTransform=false;
 		//echo"<PRE><br />ROUTER : debut getParam avec ou sans / <br />";print_r( $request);echo"</PRE>"."debut getParam";
@@ -82,10 +81,24 @@ class Router{
 		return $theRoad;
 	}
 	
+	private function autorizedAccess(){
+		if($this->myRoad["security"]["niveauRequis"]>0){
+			$monAccessControl=new $this->myRoad["security"]["className"];
+			return $monAccessControl->verifAccessRight($this->myRoad["security"]["niveauRequis"]);
+			/*if($CRUDAutorized){
+				$globalParams=array(
+					$this->myRoad["security"]["nom"]=>true
+				);
+				//echo"<br>CONTROLLER 1.2 : dat ";print_r($globalParams);echo"</PRE>";
+			}*/
+		}else{
+			return true;
+		}
+	}
+	
 	public function Router(){
 
 		$Idchapters;
-		$myRoad='';
 		try{   
 			//echo "ROUTER : _POST ? <pre> ";print_r($_POST);echo"</pre>";
 			//echo "ROUTER : _GET ? <pre> ";print_r($_GET);echo"</pre>";
@@ -101,14 +114,18 @@ class Router{
 				$varPost=$this->getParams($_POST);
 				//echo"<PRE><br />ROUTER verif POST et GET ";print_r($varAction);print_r($varParam);print_r($varPost);echo"<br /> fin construct </PRE>";
 								
-				$myRoad=$myConfig->getRoad($varAction);
+				$this->myRoad=$myConfig->getRoad($varAction);
 				//echo"<PRE><br />ROUTER retour route from config ";print_r($myRoad);echo"<br /> fin construct </PRE>";
 				
-				if (isset($myRoad)){
-					//echo "<br />ROUTER : appel controller avec myRoad <br />";
-					$monController=new Controller($myRoad);
-					//echo"<PRE><br />ROUTER parametre avant appel PrepareAction ";print_r($varPost);echo"<br /> fin construct </PRE>";
-					$monController->prepareAction($varParam, $varPost);
+				if (isset($this->myRoad)){
+					//echo"<PRE><br />ROUTER parametre avant appel PrepareAction ";print_r($this->myRoad);echo"<br /> fin construct </PRE>";
+					if( $this->autorizedAccess()){
+						
+						$monController=new Controller($this->myRoad);
+						$monController->prepareAction($varParam, $varPost);
+					}else{
+						echo" non habilité";
+					}
 				}else{
 					//echo" erreur 404";
 				}

@@ -16,6 +16,8 @@ class _ListChaptersView extends View
 		<div id="center">
 			<ul class="collapsible popout" data-collapsible="accordion">
 			<?php
+			$nbCaracters=$params['nbCaracters'];
+			//echo "nbCaracters =" .$nbCaracters;
 			for($i=0;$i<count($datas);$i++)
 			{
 				?>
@@ -26,8 +28,8 @@ class _ListChaptersView extends View
 						</div>
 						<div class="collapsible-body "><em id="dateCreation">rédigé le : <?= $datas[$i]->getDateFr() ?></em>
 							<?php 
-							if(strlen($datas[$i]->getContent())>$params['nbCaracters']){
-								$begin=substr($datas[$i]->getContent(),0,$params['nbCaracters']).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
+							if(strlen($datas[$i]->getContent())>$nbCaracters){
+								$begin=substr($datas[$i]->getContent(),0,$nbCaracters).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
 							}else{
 								$begin='<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
 							}
