@@ -28,31 +28,45 @@ body
 {
 	margin:auto;
 	margin-top:10px;
-	margin-bottom:10px;
 }	
- .collapsible-body, .collapsible-row
+.collapsible-row
+{
+	margin-bottom:10px;
+	border-radius : 5px;
+}
+ .collapsible-body
 {
 	background-color:white;
 	opacity:0.9;
 	border-radius : 5px;
+	overflow:hidden;
 }
-
+.miniImage
+{
+	width:50px;
+	height:50px;
+	margin-right:20px;
+}
 .formChapitre, .formUser
 {
 	width:60%;
 	margin:auto;
+	margin-top:10px;
 	background-color:white;
 	opacity:0.9;
 	padding:20px;
 	border-radius:5px;
 }
 
-#demiHauteur
+.demiHauteur
 {
 	line-height:32px;
 	text-align:center;
 }
-
+.row_footer
+{
+	margin-bottom:0PX !important;
+}
 #barreAside
 {
 	position:absolute;

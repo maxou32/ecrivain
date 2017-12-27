@@ -17,7 +17,7 @@ class _readOneChapterView extends View
 		ob_start(); 
 		?>
 		<div class="formChapitre">
-			<input id="idChapter" name="idChapter" type="hidden"  value ="<?= htmlspecialchars($datas->getIdchapters()) ?>" /><br />
+			
 			<div class="row">
 				<div class="col s8">
 					<h4><?= htmlspecialchars($datas->getTitle()) ?></h4><br />
@@ -31,17 +31,20 @@ class _readOneChapterView extends View
 				</div>
 			</div>
 			<?= $datas->getContent() ?><br />
-			
-			
+								
 			<?php 
 			if ($params['updateDeleteAreAutorized']){
 				?>
-				<form method="post" action="index.php?action=updateDeleteOneChapter&amp;Idchapters=<?= $datas->getIdchapters()?>" class="formChapitre">
-
-					<input type="submit" name="sousAction" value="Mettre à jour" class="button">
-					<input type="submit" name="sousAction" value="Supprimer" class="button">
-					<input type="submit" name="sousAction" value="Fermer"  class="button"/>
-				</form>
+				<div class="row">
+					<form method="post" action="index.php?askUpdateOneChapter/idchapter/<?= $datas->getIdchapters()?>" class="formChapitre">
+						<input type="submit" name="sousAction" value="Mettre à jour" class="button">
+						<input id="idChapter" name="idchapter" type="hidden"  value ="<?= htmlspecialchars($datas->getIdchapters()) ?>" />
+					</form>
+					<form method="post" action="index.php?deleteOneChapter/idchapter/<?= $datas->getIdchapters()?>" class="formChapitre">
+					   <input id="idChapter" name="idchapter" type="hidden"  value ="<?= htmlspecialchars($datas->getIdchapters()) ?>" />
+						<input type="submit" name="sousAction" value="Supprimer" class="button">
+					</form>
+				</div>
 				<?php 
 			}
 			?>
@@ -57,7 +60,7 @@ class _readOneChapterView extends View
 		$captionMessage = $this->captionMessage;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	
-		echo "fin chargement ";
+		//echo "fin chargement ";
 		//echo "<br / >content view ".$contentView;
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
 		$monTemplate->show(null,null);

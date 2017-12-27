@@ -20,12 +20,12 @@ class _MenuFreeView extends View
 				</div>
 				<div class="nav-wrapper">
 					<ul id="menuGeneral" class="right hide-on-med-and-down">
-						<li><a href="index.php?action=_messageView" class="item_menu">Accueil</a></li>
-						<li><a href="index.php?action=_listChaptersView" class="item_menu">Derniers chapitres</a></li>
+						<li><a href="index.php" class="item_menu">Accueil</a></li>
+						<li><a href="index.php?_TheBookView/chap/1" class="item_menu">Mon livre</a></li>
 						<li><a href="#" class="item_menu">Contact</a></li>
 						<li><a href="#" class="item_menu">Qui suis-je ?</a></li>
-						<li><a href="index.php?action=reservedAccess" class="item_menu">Accès réservé</a></li>
-						<li id="demiHauteur"><a href="index.php?action=askRegistration"> Bonjour,<br />inscrivez-vous.</a></li>
+						<li><a href="index.php?reservedAccess" class="item_menu">Accès réservé</a></li>
+						<li class="demiHauteur"><a href="index.php?askRegistration"> Bonjour,<br />inscrivez-vous.</a></li>
 					</ul>
 				</div>
 			</nav>

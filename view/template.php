@@ -63,7 +63,16 @@ class template extends view{
 				<!-- Let browser know website is optimized for mobile -->
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<script src="public\js\tinymce\tinymce.min.js"></script>
-				<script>tinymce.init({ selector:'textarea' });</script>
+				<script>tinymce.init({
+					selector:'textarea',
+					language:"fr_FR",	
+					theme: "modern",
+					plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak,searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table contextmenu directionality emoticons template paste textcolor colorpicker textpattern imagetools codesample toc noneditable autosave',
+					toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+					toolbar2: 'print preview media | forecolor backcolor emoticons '
+					
+					});
+				</script>
 
 			</head>
 			<body style="background-image: url('<?= $this->imageBackGround ?>');">	 

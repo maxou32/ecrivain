@@ -31,10 +31,23 @@ rules:
 * puis les paramètres éventuels
 ***************************************
 simpleRoads:
+*	Action : fonction
  _messageView:_BienvenueView
-  P01:action
+  data0:MessageManager
+  Function0:get
+  Option0:_MessageView
+  key_array0:message
+  val_array0:getTexte
+  view0:_messageView
+* 
  _listChaptersView:_ListChaptersView
-  P01:action
+  data0:MessageManager
+  Function0:get
+  Option0:askCRUDMessage
+  data1:TypeMessageManager
+  key_array0:message
+  val_array0:getTexte
+  view0:_messageView
  askRegistration:askRegistration
   P01:action
  abortAccess:abortAccess

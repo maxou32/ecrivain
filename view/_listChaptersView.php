@@ -20,14 +20,16 @@ class _ListChaptersView extends View
 			{
 				?>
 					<li class="collapsible-row">
-						<div class="collapsible-header"><?= $datas[$i]->getTitle() ?>
+						<div class="collapsible-header">
+							<img src="public/media/baleine.jpg" alt="baleine" class="circle miniImage">
+							<?= $datas[$i]->getTitle() ?>
 						</div>
 						<div class="collapsible-body "><em id="dateCreation">rédigé le : <?= $datas[$i]->getDateFr() ?></em>
 							<?php 
 							if(strlen($datas[$i]->getContent())>$params['nbCaracters']){
-								$begin=substr($datas[$i]->getContent(),0,$params['nbCaracters']).'<a href="index.php?action=oneChapter&amp;Idchapters='.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
+								$begin=substr($datas[$i]->getContent(),0,$params['nbCaracters']).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
 							}else{
-								$begin=$datas[$i]->getContent();
+								$begin='<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
 							}
 							?>
 							<p id="content"><?=$begin ?> </p>

@@ -11,7 +11,7 @@ class _messageView extends View
 		$this->template =$template;
 	}
 	public function show($params,$datas){
-		$message=$params['message'];
+		isset($params['message']) ? $message=$params['message'] :true;
 		
 		ob_start(); 
 		?>
@@ -19,7 +19,7 @@ class _messageView extends View
 		<article id="barreMessage">
 			
 			<div>
-				 <p><?= $message ?></p>
+				 <p><?= $datas->getTexte() ?></p>
 			</div>
 													<!-- fin "flottage" du menu -->
 		</article>

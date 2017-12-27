@@ -13,7 +13,7 @@ class _askReservedAccess extends View
 		ob_start();  
 		?>
 
-			<form method="post" action="index.php?action=validAccessReserved" class="formUser">
+			<form method="post" action="index.php?validAccessReserved" class="formUser">
 				<i class="material-icons prefix">account_circle</i>
 				<label for ="userName"> Nom :</label>
 				<input id="userName" name="userName" type="text" required class="validate"/><br />

@@ -19,7 +19,7 @@ class _FooterView extends View
 		?>
 			<footer id="footer" class="page-footer">
 				
-					<div class="row">
+					<div class="row row_footer">
 						<div class="col l6 s12">
 							<p class="grey-text text-lighten-2"><?= $this->message ?></p>
 						</div>

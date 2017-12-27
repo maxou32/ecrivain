@@ -56,9 +56,9 @@ class _CRUDMessage extends View
 			</script>
 			
 			<div id="CRUD">
-				<form method="post" name="messageUpdated" action="index.php?action=CRUDMessage" >
+				<form method="post" name="messageUpdated" action="index.php?CRUDMessage" >
 					<input type="hidden" name="id" id="Id"/>
-					<input type="hidden" name="idtypemessage" id="idtypemessage"/>
+					<input type="text" name="idtypemessage" id="idtypemessage" />
 					<!-- <textarea name="texte" id="texte" ></textarea>  -->
 					<label for="texte" class="active">Texte du message</label>
 					<input name="texte" id="texte" type="text" onfocus='javascript:chargeTypeMessage()' required/>

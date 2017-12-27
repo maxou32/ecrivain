@@ -15,7 +15,7 @@ class _AdminChaptersView extends View{
 		?>
 		
 		<div id="center">
-			<form method="post" action="index.php?action=_validStatusChapters"  >
+			<form method="post" action="index.php?_validStatusChapters"  >
 				<script language="javascript" type="text/javascript">
 					function changeStatus($chapter,$status) {
 						document.getElementById($chapter).value=$status;
@@ -33,9 +33,9 @@ class _AdminChaptersView extends View{
 							<div class="col s9">
 								<?php 
 								if(strlen($datas[$i]->getContent())>$params['nbCaracters']){
-									$begin=substr($datas[$i]->getContent(),0,$params['nbCaracters']).'<a href="index.php?action=oneChapter&amp;Idchapters='.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
+									$begin=substr($datas[$i]->getContent(),0,$params['nbCaracters']).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
 								}else{
-									$begin='<a href="index.php?action=oneChapter&amp;Idchapters='.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
+									$begin='<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
 								}
 								?>
 								<p id="content"><?=$begin ?> </p>
@@ -53,7 +53,9 @@ class _AdminChaptersView extends View{
 									}
 									
 								?>
-								
+								<br />
+								<label for="<?= "number".$datas[$i]->getIdchapters() ?>">Numéro d'ordre du chapitre</label>
+								<input name="<?=  "number".$datas[$i]->getIdchapters()  ?>" type="text" id="<?= "number".$datas[$i]->getIdchapters() ?>" value="<?=  $datas[$i]->getNumber()  ?>" />
 							</div>
 						
 						</div>

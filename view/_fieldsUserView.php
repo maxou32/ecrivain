@@ -11,11 +11,11 @@ class _FieldsUserView extends View
 	public function show($params,$datas){
 		ob_start(); 
 		if ($params["action"]=="update"){
-			?><form method="post" action="index.php?action=registration" class="formUser">
+			?><form method="post" action="index.php?registration" class="formUser">
 				<input id="sousActionUpdate" name="sousAction" type="hidden" value ="update" >
 			<?php	
 		}else{
-			?><form method="post" action="index.php?action=registration" class="formUser">
+			?><form method="post" action="index.php?registration" class="formUser">
 				<input id="sousActionAdd" name="sousAction" type="text" value ="add" ><?php
 		}
 		?>

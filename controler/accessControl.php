@@ -66,27 +66,33 @@ class AccessControl {
 	}
 	
 	public function verifAccessRight($requiredLevel){
-		//echo "niveau requis : " . $requiredLevel . " niveau utilisateur = " .$_SESSION['autorizedAccess'];
+		
 		$requiredLevel=(INT) $requiredLevel;
 		if(!isset($_SESSION['autorizedAccess'])){
 			return false;
 		}else{
 			$userLevel=(INT) $_SESSION['autorizedAccess'];
-			if ($userLevel>=$requiredLevel){
+			$requiredLevel=(INT) $requiredLevel;
+			//echo "<br />niveau requis : " . $requiredLevel . " niveau utilisateur = " .$userLevel;
+			if ($userLevel >= $requiredLevel){
+				//echo "<br />niveau OK : " ;
 				return true;
 			}else{
+				//echo "<br />niveau KO : " ;
 				return false;
 			}
 		}
 	}
 	
 	public function disconnect(){
+		//echo "accessCONTROL : disconnect";
 		// On le vide intégralement
 		$_SESSION = array();
 		// Destruction de la session
 		session_destroy();
 		// Destruction du tableau de session
 		unset($_SESSION);
+		return "Disconnect OK";
 	}
 	
 	public function makeParam ($param){

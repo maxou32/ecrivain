@@ -9,39 +9,69 @@ class Router{
 	protected $myParam;
 	
 	public function __construct($request){
-		$this->request = $request;
-		$OCFramLoader = new \SplClassLoader('web_max\ecrivain\controler', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler');
-		$OCFramLoader->register();
-		$OCFramLoader1 = new \SplClassLoader('web_max\ecrivain\view', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view');
-		$OCFramLoader1->register();	
-		$OCFramLoader2 = new \SplClassLoader('web_max\ecrivain\model', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model');
-		$OCFramLoader2->register();
-		$OCFramLoader3 = new \SplClassLoader('web_max\ecrivain\lib', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\lib');
-		$OCFramLoader3->register();
-	}
-	
 
-	private function getAction()
+		$this->request = $request;
+		$Loader = new \SplClassLoader('web_max\ecrivain\controler', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler');
+		$Loader->register();
+		$Loader1 = new \SplClassLoader('web_max\ecrivain\view', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view');
+		$Loader1->register();	
+		$Loader2 = new \SplClassLoader('web_max\ecrivain\model', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model');
+		$Loader2->register();
+		$Loader3 = new \SplClassLoader('web_max\ecrivain\lib', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\lib');
+		$Loader3->register();
+
+	}
+
+	private function getAction($request,$cheminSeul)
     {
-        $element = explode('/', $this->request['action']);
-		//echo"<PRE>";print_r($element);echo"</PRE>"."fin getaction";
-        return $element['0'];
+        $element = explode('/', key($request));
+		//echo"<br />ROUTER : getAction <PRE>= ";print_r($element['0']);echo"</PRE>"."fin getaction de ROUTER";
+		
+		//echo"<PRE><br />ROUTER : get Params AVEC /  <br />";print_r( $element );echo"</PRE>"."<br />";
+		if($cheminSeul){
+			return $element['0'];
+		}else{
+			unset($element[0]);
+			for($i = 1; $i < count($element); $i++)
+			{
+				//echo "elt ".$element[$i]."<br />";
+				$this->myParam[$element[$i]] = $element[$i+1];
+				$i++;
+			}
+			return	$this->myParam;		
+		}
     }
 
-    private function getParams()
+    private function getParams($request)
     {
-        //echo"<PRE>debut getParam / <br />";print_r( $this->request);echo"</PRE>"."debut getParam";
-		$elements = explode('/', $this->request['action']);
-		//echo"<PRE>debut elements / <br />";print_r( $elements );echo"</PRE>"."debut getParam";
-        /*
-		unset($elements[0]);
-        for($i = 0; $i < count($elements); $i++)
-        {
-			echo "elt ".$elements[$i]."<br />";
-		   $params[$elements[$i]] = $elements[$i+1];
-            $i++;
-        }
-		*/
+        $requestTested="";
+		$toTransform=false;
+		//echo"<PRE><br />ROUTER : debut getParam avec ou sans / <br />";print_r( $request);echo"</PRE>"."debut getParam";
+		if(count($request)<1){
+			foreach ($request as $key =>$value){
+				empty($value) ? $requestTested=$key : true  ;
+				$toTransform=true;
+			}
+		}
+		
+        //echo"<PRE><br />ROUTER : debut getParam 2 <br />";print_r( $requestTested);echo"</PRE>";
+		
+		
+		if($toTransform){
+	
+			//echo"<PRE><br />ROUTER : get Params SANS /   <br />";print_r( $request );echo"</PRE>";
+			
+			foreach ($request as $key => $value)
+			{
+				//echo "<br /> Request : ".$key;
+				empty($value) ? null : $this->myParam[$key] = $value;
+			}	
+		}else{
+			$this->myParam=$request;
+		}
+		
+		//echo"<PRE><br />ROUTER :fin  elements param  <br />";print_r( $this->myParam );echo"</PRE>"."fin getParam";
+        
 		return $this->myParam;
 		// --------------------------------------------------------
 		
@@ -53,55 +83,42 @@ class Router{
 	}
 	
 	public function Router(){
-		
+
 		$Idchapters;
-		
+		$myRoad='';
 		try{   
-			define("YAML", true );
-			$monController=new Controller();
+			//echo "ROUTER : _POST ? <pre> ";print_r($_POST);echo"</pre>";
+			//echo "ROUTER : _GET ? <pre> ";print_r($_GET);echo"</pre>";
 			
-			//echo"<PRE> Début ROUTER ";print_r($this->request);echo"</PRE>";
-			if(count($_REQUEST)!==0){
-				if(null!==$this->request['action']){
-					$myConfig= new \web_max\ecrivain\lib\Config; 
-					if(YAML) {
-						//echo"ma fonction : ".$this->getAction()." fin getaction<br/>";
-						$myFonction=$myConfig->getRoad($this->getAction());
-						//echo"<br /> ma garde valide <br/>".$myFonction."<br />".$myConfig->isBrut($myFonction)."<br />";
-						$this->myParam=$this->request;
-						//echo"<PRE>parametres BRUTS ou NON ";print_r($this->myParam);echo"</PRE>";
-						//echo"ma fonction : ".$myFonction." fin getaction<br/>";
-						if($myFonction){
-							
-							if(null !==$myFonction){
-								//echo"ma fonction : ".$myFonction." fin getaction<br/>";
-								$myAccessControl = new \web_max\ecrivain\controler\AccessControl();
-								//echo"<PRE>";print_r($theParam);echo"</PRE>";
-								//regarde si accès réservé
-								extract($isProtected=$myAccessControl->getIsProtected($myFonction));
-								//echo "result :" . $result." pour grade = ". $_SESSION['Grade_IdGrade'];
-								if($result){										// la zone st protégée
-									if ($_SESSION['Grade_IdGrade']>=$result){
-										//echo" ??? request ????<PRE>";print_r($this->request);echo"</PRE> fin PRE";
-										//$Id=$this->getParams()[Idchapters];
-										$monController->$myFonction($this->request);
-									}else{
-										//echo"<br /> ma garde est invalide <br/>";
-										throw new Exception ('Vous n\'êtes pas habilité à utiliser cette fonction.');	
-									}
-								}else{
-									//echo "accès autorisé à tous";
-									//echo" ??? request ????<PRE>";print_r($this->getParams());echo"</PRE>";
-									$monController->$myFonction( $this->getParams());	
-								}
-							}
-						}
-						exit;
-					}	
+			//on réceptionne  quelquechose
+			$myConfig= new Config; 	
+			//echo "retour config OK";
+			if(isset($_GET)){
+				//une action est demandée
+				//echo "<br />ROUTER :action demandée OK <br />";
+				$varAction=$this->getAction($_GET, true);
+				$varParam=$this->getAction($_GET, false);
+				$varPost=$this->getParams($_POST);
+				//echo"<PRE><br />ROUTER verif POST et GET ";print_r($varAction);print_r($varParam);print_r($varPost);echo"<br /> fin construct </PRE>";
+								
+				$myRoad=$myConfig->getRoad($varAction);
+				//echo"<PRE><br />ROUTER retour route from config ";print_r($myRoad);echo"<br /> fin construct </PRE>";
+				
+				if (isset($myRoad)){
+					//echo "<br />ROUTER : appel controller avec myRoad <br />";
+					$monController=new Controller($myRoad);
+					//echo"<PRE><br />ROUTER parametre avant appel PrepareAction ";print_r($varPost);echo"<br /> fin construct </PRE>";
+					$monController->prepareAction($varParam, $varPost);
+				}else{
+					//echo" erreur 404";
 				}
+				
+			}else{
+				//echo "<br /> Router : direction bienvenue...";
+				$myRoad=$myConfig->getRoad("_messageView");	
+				//echo"<PRE>ma route est inconnue ";print_r($myRoad);echo"<br /> fin construct </PRE>";
 			}
-			$monController->_BienvenueView();
-			//throw new Exception (' Aucune action demandée !!! Héhééé',2);
+			
 		}
 		catch (Exception $e){
 			//echo 'erreur : '.$e->getmessage();

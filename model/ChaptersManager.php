@@ -59,7 +59,16 @@ class ChaptersManager extends Manager{
 		return $chapters;
 	}
 
-	
+	public function getByNumber($number)  {
+		$number = (int) $number;
+		$q = $this->dbConnect()->query('SELECT idchapters, title,  content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, number FROM chapters WHERE number = '.$number);
+		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+		if($donnees) {
+			return new Chapter($donnees);
+		}else{
+			return false;
+		}
+	}
 	
 	public function update(Chapter $chapter)  {
 		$q = $this->dbConnect()->prepare('UPDATE chapters SET title = :title, content = :content,  users_idusers= :users_idusers, number = :number WHERE idchapters = :idchapters');
@@ -84,7 +93,24 @@ class ChaptersManager extends Manager{
 			$q->execute();
 			return true;
 			
-		}		catch (PDOException  $e){ return 'Erreur : '.$e->getMessage();
-};
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
+	}
+	
+	public function updateNumber(Chapter $chapter)  {
+		try {
+			$q = $this->dbConnect()->prepare("UPDATE chapters SET number  = :number WHERE idchapters = :idchapters");
+			$q->bindValue(':idchapters', $chapter->getIdchapters(), \PDO::PARAM_INT);
+			echo  "chapite  ".$chapter->getIdchapters();
+			echo  "number   ".$chapter->getNumber();
+			$q->bindValue(':number', $chapter->getNumber(), \PDO::PARAM_INT);
+			
+			$q->execute();
+			return true;
+			
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 }

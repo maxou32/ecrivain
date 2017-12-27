@@ -3,7 +3,7 @@
 	session_start();
 	use web_max\ecrivain\lib\Router;
 
-	require_once("SplClassLoader.php");
+	require_once("lib\SplClassLoader.php");
 	
 	$OCFramLoader = new \SplClassLoader('web_max\ecrivain\lib', 'D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\lib');
 	$OCFramLoader->register();
