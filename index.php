@@ -3,6 +3,7 @@
 	session_start();
 	use web_max\ecrivain\lib\Router;
 
+
 	require_once("lib\SplClassLoader.php");
 	
 	$Loader = new \SplClassLoader('web_max\ecrivain\lib', 'lib');

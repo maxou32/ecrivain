@@ -40,7 +40,18 @@ class ChaptersManager extends Manager{
 
 	public function getListValid()  {
 		$chapters = [];
-		$q = $this->dbConnect()->query('SELECT idchapters, title, content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, status_idstatus, number FROM chapters WHERE status_idstatus=1 ORDER BY number ASC ');
+		$q = $this->dbConnect()->query('SELECT idchapters, title, content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, status_idstatus, number FROM chapters WHERE status_idstatus=1 ORDER BY number ASC');
+		
+		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
+			$chapters[] = new Chapter($donnees);
+		}
+
+		return $chapters;
+	}
+	
+	public function getListValidDesc()  {
+		$chapters = [];
+		$q = $this->dbConnect()->query('SELECT idchapters, title, content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, status_idstatus, number FROM chapters WHERE status_idstatus=1 ORDER BY date_fr DESC');
 		
 		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
 			$chapters[] = new Chapter($donnees);

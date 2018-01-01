@@ -30,7 +30,6 @@ class MessageManager extends Manager{
 		//echo " <br />message manager ".$contexte."<br />";
 		$q = $this->dbConnect()->query('SELECT * FROM message WHERE contexte = "'.$contexte.'"');
 		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
-		//echo " <br /><PRE>message manager ".print_r($donnees)."<PRE><br />";
 		
 		if($donnees) {
 			return new Message($donnees);

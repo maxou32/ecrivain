@@ -8,7 +8,7 @@ class View
     protected $params;
 	protected $userName;
 	protected $menuView;
-	protected $asideView;
+	//protected $asideView;
 	protected $contentView;
 	protected $footerView;
 	protected $avecParam;
@@ -20,33 +20,13 @@ class View
         $this->template = $template;
 		$this->userName="";
 		$this->menuView="";
-		$this->asideView="";
+		//$this->asideView="";
 		$this->footerView="";
 		$monConfig= new Config;
 		echo $monConfig->getBackground();
 		$this->imageBackGround=$monConfig->getBackground();
     }
-	/*
-	protected function verifAccess($levelAsk){
-		echo 'verifAccess mère :' .  $levelAsk;
-		$monAccessControl= new AccessControl();
-		return $monAccessControl->verifAccessRight($levelAsk);
-	}
 	
-    protected function renderOption(){
-		//if ($this->avecParam){
-			foreach ($this->params as $action => $values)
-			{
-				extract($this->params);
-			};
-		//}
-		if($verifAccess){ 
-			return $this->verifAccess($neededAccessRight);
-		}else{
-			return false;
-		}	
-    }
-	*/
     protected function renderTop(){
 		//$userName=$_SESSION['user'];
 		$monControlerMenu= new MenuControler;
@@ -58,11 +38,6 @@ class View
 		return $monFooterView->show(NULL,NULL);
     }
 	
-	protected function renderAside(){	
-		$this->asideView="";
-		return $this->asideView;
-	}
-
 	public function show($params,$datas){
 		
 		$menuView=$this->renderTop();

@@ -33,7 +33,7 @@ class _FieldsUserView extends View
 		$contentView=ob_get_clean();
 		
 		$menuView=$this->renderTop();
-		$asideView=$this->renderAside();
+		$asideView=Null;
 		$footerView=$this->renderBottom();
 		$captionMessage = $this->captionMessage;
 		$message=$this->message;		

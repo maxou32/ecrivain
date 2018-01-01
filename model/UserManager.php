@@ -50,6 +50,44 @@ class UserManager extends Manager{
 		return $users;
 	}
 	
+	public function getListAll()  {
+		$chapters = [];
+		$q = $this->dbConnect()->query('SELECT * FROM users ORDER BY name ASC');
+		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC))
+		{
+			$users[] = new User($donnees);
+		}
+		return $users;
+	}
+	
+	public function updateStatus(User $user)  {
+		try {
+			$q = $this->dbConnect()->prepare("UPDATE users SET status_idstatus  = :status_idstatus WHERE idusers = :idusers");
+			$q->bindValue(':idusers', $user->getIdusers(), \PDO::PARAM_INT);
+			$q->bindValue(':status_idstatus', $user->getStatus_IdStatus(), \PDO::PARAM_INT);
+			
+			$q->execute();
+			return true;
+			
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
+	}
+	
+	public function updateGrade(User $user)  {
+		try {
+			$q = $this->dbConnect()->prepare("UPDATE users SET grade_idgrade  = :grade_idgrade WHERE idusers = :idusers");
+			$q->bindValue(':idusers', $user->getIdusers(), \PDO::PARAM_INT);
+			$q->bindValue(':grade_idgrade', $user->getGrade_IdGrade(), \PDO::PARAM_INT);
+			
+			$q->execute();
+			return true;
+			
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
+	}
+	
 	public function update(user $user)  {
 		
 		$q = $this->dbConnect()->prepare('UPDATE users SET name = :name, password = :password, email = :email, status_idstatus = :status_idstatus,grade_idgrade = :grade_idgrade WHERE idusers = :idusers');

@@ -29,7 +29,7 @@ class _askReservedAccess extends View
 		$contentView=ob_get_clean(); 
 
 		$menuView=$this->renderTop();
-		$asideView=$this->asideView;		
+		$asideView=null;		
 		$captionMessage = $this->captionMessage;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	

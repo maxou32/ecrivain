@@ -10,11 +10,12 @@ dir_ecrivain: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain
 #	parametrage du site de l'écrivain
 #**************************************
 # accès aux données
- 
 serveur: localhost 
 login: root 
 password: 'maxou*32'
 nom: ecrivain
+# boite aux lettres
+mail: max.public32@gmail.com
 #**************************************
 # règles de gestion
 #**************************************
@@ -22,14 +23,52 @@ admin: 99
 contributor: 2
 nbChapters: 5
 nbCaracters: 600
-
+#*************************************
+#  Parametre aside
+#*************************************
+aside :
+ _TheBookView :
+  title : Derniers commentaires
+  ref1 : getChapter_idchapter
+  ref2 : getName
+  content : getContent
+  detail : getCommentDate
+ _messageView :
+  title : Derniers articles
+  ref1 : getIdchapters
+  ref2 : getTitle
+  content : getContent
+  detail : getDateFr
+ oneChapter :
+  title : Derniers articles
+  ref1 : getIdchapters
+  ref2 : getTitle
+  content : getContent
+  detail : getDateFr 
+ validAccessReserved :
+  title : Derniers articles
+  ref1 : getIdchapters
+  ref2 : getTitle
+  content : getContent
+  detail : getDateFr
+ abortAccess :
+  title : Derniers articles
+  ref1 : getIdchapters
+  ref2 : getTitle
+  content : getContent
+  detail : getDateFr
+#**************************************
+# media 
+#**************************************
+media :
+ background : public/media/alaska.jpg
 #**************************************
 #routes à suivre
 #**************************************
 # l'appel donne le nom de la fonction
 # puis les paramètres éventuels
 #**************************************
-#-------Route Valide
+
 simpleRoads:
  index:
   seConnecte : param inutile
@@ -39,11 +78,14 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_messageView
-      avecParam : non			#non
-      nombreParam : 0
+      avecParam : oui			#non
+      levelUpdate : 0
+      nombreParam : 2
       lesParams:
-        - nomParam : null
-          origine : menu							
+        - nomParam : nbCaracters
+          origine : param inutile								#action ou dur
+        - nomParam : nbChapters
+          origine : param inutile								#action ou dur
   manager : 
    nombreManager : 1  
    managers
@@ -66,21 +108,22 @@ simpleRoads:
    lesParams:
    nomParam : null
    origine : menu							#action ou dur
-  appelFonctionAPresData :
-   nombrefonction : 0
+  appelFonctionApresData :
+   nombrefonction : 1
    - fonction
      className : Null
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : X
+     nom : chargeAside
+     tableau : aside
+     avecParam : oui									#non
+     nombreParam : 1
      lesParams:
-      nomParam : Null
-       origine : menu							#action ou dur
-  wantHeaderLocation :
+      nomParam : web_max\ecrivain\model\chaptersManager
+      origine : getListValidDesc						#action ou dur
+ wantHeaderLocation :
    action : non
    target : 
 #**************************************
-# ----route VALIDE
+
  abortAccess:
   seConnecte : param inutile
   security :
@@ -90,10 +133,13 @@ simpleRoads:
   view:
    - nom : web_max\ecrivain\view\_messageView
       avecParam : oui			#non
-      nombreParam : 0
+      levelUpdate : 0
+      nombreParam : 2
       lesParams:
-        - nomParam : null
-          origine : menu							#action ou dur
+        - nomParam : nbCaracters
+          origine : param inutile								#action ou dur
+        - nomParam : nbChapters
+          origine : param inutile								#action ou dur
   manager : 
    nombreManager : 1  
    managers
@@ -115,23 +161,24 @@ simpleRoads:
    lesParams:
    nomParam : null
    origine : menu						#action ou dur
-  appelFonctionAPresData :
-   nombrefonction : Null
+  appelFonctionApresData :
+   nombrefonction : 1
    - fonction
-     className :
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : 0
+     className : Null
+     nom : chargeAside
+     tableau : aside
+     avecParam : oui									#non
+     nombreParam : 1
      lesParams:
-      nomParam : null
-       origine : menu							#action ou dur
+      nomParam : web_max\ecrivain\model\chaptersManager
+      origine : getListValidDesc						#action ou dur
   wantHeaderLocation :
    action : non
    target : 
      	 
 
 #**************************************   
-# ----route VALIDE
+
  reservedAccess:
   seConnecte : param inutile
   security :
@@ -140,6 +187,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_askReservedAccess
+      levelUpdate : 0
       avecParam : non			#non
       nombreParam : 0
       lesParams:
@@ -167,7 +215,7 @@ simpleRoads:
    lesParams:
    nomParam : Null
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : Null
    - fonction
      className : Null
@@ -176,13 +224,13 @@ simpleRoads:
      nombreParam : 0
      lesParams:
       nomParam : nom
-       origine : param inutile							#action ou dur
+      origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : non
    target : 
 
 #**************************************   
-# ----route VALIDE
+
  validAccessReserved:
   seConnecte : param inutile
   security :
@@ -191,11 +239,14 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_messageView
-      avecParam : non			#non
-      nombreParam : 0
+      levelUpdate : 99
+      avecParam : oui			#non
+      nombreParam : 2
       lesParams:
-        - nomParam : nom
-          origine : menu							#action ou dur
+        - nomParam : nbCaracters
+          origine : param inutile								#action ou dur
+        - nomParam : nbChapters
+          origine : param inutile								#action ou dur
   manager : 
    nombreManager : 1  
    managers
@@ -218,21 +269,22 @@ simpleRoads:
    lesParams:
    nomParam : userName
    origine : post							#action ou dur
-  appelFonctionAPresData :
-   nombrefonction : Null
-   fonction
-   className : Null
-   nom : Null
-   avecParam : oui			#non
-   nombreParam : 0
-   lesParams:
-   nomParam : Null
-   origine : param inutile							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 1
+   - fonction
+     className : Null
+     nom : chargeAside
+     tableau : aside
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : web_max\ecrivain\model\chaptersManager
+      origine : getListValidDesc						#action ou dur
   wantHeaderLocation :
    action : non
    target : 
 #**************************************  
-# ----route VALIDE
+
  _listChaptersView:
   seConnecte : param inutile
   security :
@@ -242,6 +294,7 @@ simpleRoads:
   view:
    - nom : web_max\ecrivain\view\_listChaptersView
       avecParam : oui			#non
+      levelUpdate : 99
       nombreParam : 2
       lesParams:
         - nomParam : nbCaracters
@@ -270,7 +323,7 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 0
    - fonction
      className : Null
@@ -279,13 +332,13 @@ simpleRoads:
      nombreParam : 0
      lesParams:
       nomParam : nom
-       origine : param inutile							#action ou dur
+      origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : non
    target : 	
   
 #**************************************  
-# ----route VALIDE
+
  _TheBookView:
   seConnecte : param inutile
   security :
@@ -294,6 +347,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_TheBookView
+      levelUpdate : 99
       avecParam : oui									#non
       nombreParam : 2
       lesParams:
@@ -318,34 +372,37 @@ simpleRoads:
    fonction
    className : Null
    nom : Null
+   tableau : Null
    avecParam : oui									#non
    nombreParam : 0
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
-   nombrefonction : Null
+  appelFonctionApresData :
+   nombrefonction : 1
    - fonction
      className : Null
-     nom : Null
+     nom : chargeAside
+     tableau : aside
      avecParam : oui									#non
-     nombreParam : 0
+     nombreParam : 1
      lesParams:
-      nomParam : nom
-       origine : param inutile							#action ou dur
+      nomParam : web_max\ecrivain\model\CommentManager
+      origine : getListValid							#action ou dur
   wantHeaderLocation :
    action : non
-   target : 	
+   target : Null	
 #**************************************  
-# ----route VALIDE
+
  askAddOneChapter:
   seConnecte : non
   security :
-   niveauRequis : 0    			#1 ou 99
+   niveauRequis : 99    			#1 ou 99
    className : web_max\ecrivain\controler\AccessControl
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_createOneChapterView
+      levelUpdate : 99
       avecParam : non			#non
       nombreParam : 0
       lesParams:
@@ -372,7 +429,7 @@ simpleRoads:
      lesParams:
       nomParam : nom
        origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 0
    - fonction
      className : Null
@@ -386,7 +443,7 @@ simpleRoads:
    action : non
    target : 
 #**************************************  
-# ----route VALIDE
+
  addOneChapter:
   seConnecte : non
   security :
@@ -395,6 +452,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_createOneChapterView
+      levelUpdate : 99
       avecParam : non			#non
       nombreParam : 0
       lesParams:
@@ -422,7 +480,7 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : Null
    - fonction
      className : Null
@@ -438,21 +496,24 @@ simpleRoads:
    origine : Null										#post ou get
    nom : idChapter
    target : Location:index.php?action/_listChaptersView  	 
-#************************************** 
-# ----route VALIDE
+#************************************** 	
+
  oneChapter:
   seConnecte : non
   security :
-   niveauRequis : 98    			#1 ou 99
+   niveauRequis : 0    			#1 ou 99
    className : web_max\ecrivain\controler\AccessControl
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_readOneChapterView
+      levelUpdate : 99
       avecParam : oui			#non
-      nombreParam : 0
+      nombreParam : 2
       lesParams:
-        - nomParam: null
-          origine : menu							#action ou dur
+        - nomParam : nbCaracters
+          origine : Null								#action ou dur
+        - nomParam : nbChapters
+          origine : Null							#action ou dur
   manager : 
    nombreManager : 1  
    managers
@@ -475,22 +536,23 @@ simpleRoads:
    lesParams : 
    nomParam : Null
    origine : post							#post ou dur     lesParams:
-  appelFonctionAPresData :
-   nombrefonction : 0
+  appelFonctionApresData :
+   nombrefonction : 1
    - fonction
      className : Null
-     nom : Null
-     avecParam : Null			#non
-     nombreParam : 0
+     nom : chargeAside
+     tableau : aside
+     avecParam : oui									#non
+     nombreParam : 1
      lesParams:
-      nomParam : Null
-       origine : param inutile							#action ou dur
+      nomParam : web_max\ecrivain\model\ChaptersManager
+      origine : getListValid							#action ou dur
   wantHeaderLocation :
    action : non
    target : 
      	 
 #**************************************
-# ----route VALIDE
+
  askUpdateOneChapter:
   seConnecte : non
   security :
@@ -499,6 +561,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_updateOneChapterView
+      levelUpdate : 99
       avecParam : oui			#non
       nombreParam : 0
       lesParams:
@@ -526,7 +589,7 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : Null
    - fonction
      className : Null
@@ -541,7 +604,7 @@ simpleRoads:
    target : 
      	 
 #************************************** 
-# ----route VALIDE
+
  updateOneChapter:
   seConnecte : non
   security :
@@ -550,6 +613,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : Null
+      levelUpdate : 99
       avecParam : oui			#non
       nombreParam : 0
       lesParams:
@@ -577,7 +641,7 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 0
    - fonction
      className : Null
@@ -594,7 +658,7 @@ simpleRoads:
    nom : idchapter
    target : index.php?oneChapter/			   #.$params['idchapter']
 #************************************** 
-# ----route VALIDE
+
  deleteOneChapter:
   seConnecte : non
   security :
@@ -603,6 +667,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : Null
+      levelUpdate : 99
       avecParam : non			#non
       nombreParam : 0
       lesParams:
@@ -630,7 +695,7 @@ simpleRoads:
      lesParams:
       nomParam : nom
        origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : Null
    fonction
    className : Null
@@ -647,7 +712,7 @@ simpleRoads:
    nom : null
    target : index.php?_listChaptersView	   #.$params['idchapter']     	 
 #************************************** 
-# ----route VALIDE
+
  adminChapter:
   seConnecte : non
   security :
@@ -656,6 +721,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_AdminChaptersView
+      levelUpdate : 99
       avecParam : oui			#non
       nombreParam : 1
       lesParams:
@@ -683,11 +749,11 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 1
    - fonction
      className : Null
-     nom : prepareAdminChapter
+     nom : prepareAdminStatus
      nomTableau : status			######
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
@@ -695,13 +761,13 @@ simpleRoads:
       nomParam : status
       origine : Null							#action ou dur
   wantHeaderLocation :
-   action : oui
+   action : non
    param : non
    origine : post										#post ou get
    nom : Null
    target : Null			   #.$params['idchapter']
 #************************************** 
-# ----route VALIDE
+
  _validStatusChapters:
   seConnecte : non
   security :
@@ -710,6 +776,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : Null
+      levelUpdate : 99
       avecParam : non			#non
       nombreParam : 0
       lesParams:
@@ -737,11 +804,11 @@ simpleRoads:
    lesParams:
    nomParam : params
    origine : post							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 1
    - fonction
      className : Null
-     nom : prepareAdminChapter
+     nom : prepareAdminStatus
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
      lesParams:
@@ -754,7 +821,7 @@ simpleRoads:
    nom : Null
    target : index.php?			   #.$params['idchapter']
 #************************************** 
-# ----route Valide
+
  askCRUDMessage:
   seConnecte : non
   security :
@@ -763,6 +830,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_CRUDMessage
+      levelUpdate : 99
       avecParam : oui			#non
       nombreParam : 0
       lesParams:
@@ -790,7 +858,7 @@ simpleRoads:
    lesParams:
    nomParam : params
    origine : params							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 1
    - fonction
      className : Null
@@ -816,6 +884,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : Null
+      levelUpdate : 99
       avecParam : oui			#non
       nombreParam : 0
       lesParams:
@@ -843,11 +912,11 @@ simpleRoads:
    lesParams:
    nomParam : params
    origine : post							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 1
    - fonction
      className : Null
-     nom : prepareAdminChapter
+     nom : prepareAdminStatus
      nomTableau : Null
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
@@ -869,6 +938,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_FieldsUserView
+      levelUpdate : 0
       avecParam : non			#non
       nombreParam : 3
       lesParams:
@@ -903,7 +973,7 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : Null
    - fonction
      className : Null
@@ -929,6 +999,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : Null
+      levelUpdate : 0
       avecParam : oui			#non
       nombreParam : 0
       lesParams:
@@ -956,7 +1027,7 @@ simpleRoads:
    lesParams:
    nomParam : sousAction
    origine : post							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : Null
    - fonction
      className : Null
@@ -982,6 +1053,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\_FieldsUserView
+      levelUpdate : 0
       avecParam : oui			#non
       nombreParam : 0
       lesParams:
@@ -1010,7 +1082,7 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : 1
    - fonction
      className : Null
@@ -1026,9 +1098,410 @@ simpleRoads:
    param : non
    origine : post										#post ou get
    nom : Null
-   target : index.php			   
-     	      	      	      	 
-     	      	 
+   target : index.php		
+#*********************************************   
+ adminUser:
+  seConnecte : non
+  security :
+   niveauRequis : 99    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : web_max\ecrivain\view\_AdminUsersView
+      levelUpdate : 99
+      avecParam : oui			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : Null
+          origine : Null					#action ou dur
+  manager : 
+   nombreManager : 1  
+   managers
+     nom : web_max\ecrivain\model\UserManager
+     action : getListALL
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : non								#non
+     nombreParam : 0
+     lesParams : 
+       - nomParam : Null
+         origine : post							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   avecParam : non			#non
+   nombreParam : 0
+   lesParams:
+   nomParam : nom
+   origine : param inutile							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 2
+   - fonction
+     className : Null
+     nom : prepareAdminStatus
+     nomTableau : status			######
+     avecParam : parametre inutile			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : status
+      origine : Null							#action ou dur
+   - fonction
+     className : Null
+     nom : prepareAdminGrade
+     nomTableau : grade			######
+     avecParam : parametre inutile			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : status
+      origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : non
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php			   #.$params['idchapter']
+#************************************** 
+ _validUsers:
+  seConnecte : non
+  security :
+   niveauRequis : 99    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : Null
+      levelUpdate : 99
+      avecParam : non			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : Null
+          origine : param inutile					#action ou dur
+  manager : 
+   nombreManager : 1  
+   managers
+     nom : Null
+     action : Null
+     utiliseResultatFunctionAvant : oui				#oui
+     excluResultatManager : oui   ####
+     avecParam : non								#non
+     nombreParam : 0
+     lesParams : 
+       - nomParam : Null
+         origine : post							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 1
+   fonction
+   className : Null
+   nom : validParamUsers
+   avecParam : oui			#non
+   nombreParam : 1
+   lesParams:
+   nomParam : params
+   origine : post							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 1
+   - fonction
+     className : Null
+     nom : prepareAdminStatus
+     avecParam : parametre inutile			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : status
+      origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : oui
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php?adminUser			   #.$params['idchapter']
+#************************************** 
+ adminComment:
+  seConnecte : non
+  security :
+   niveauRequis : 99    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : web_max\ecrivain\view\_AdminCommentsView
+      levelUpdate : 99
+      avecParam : oui			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : Null
+          origine : Null					#action ou dur
+  manager : 
+   nombreManager : 1  
+   managers
+     nom : web_max\ecrivain\model\CommentManager
+     action : getListNotValid
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : non								#non
+     nombreParam : 0
+     lesParams : 
+       - nomParam : Null
+         origine : post							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   avecParam : non			#non
+   nombreParam : 0
+   lesParams:
+   nomParam : nom
+   origine : param inutile							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 2
+   - fonction
+     className : Null
+     nom : prepareAdminStatus
+     nomTableau : status			######
+     avecParam : parametre inutile			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : status
+      origine : Null							#action ou dur
+   - fonction
+     className : Null
+     nom : Null
+     nomTableau : Null			######
+     avecParam : parametre inutile			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : Null
+      origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : non
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php			   #.$params['idchapter']
+#************************************** 
+ _validComments:
+  seConnecte : non
+  security :
+   niveauRequis : 99    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : Null
+      levelUpdate : 99
+      avecParam : non			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : Null
+          origine : param inutile					#action ou dur
+  manager : 
+   nombreManager : 1  
+   managers
+     nom : Null
+     action : Null
+     utiliseResultatFunctionAvant : oui				#oui
+     excluResultatManager : oui   ####
+     avecParam : non								#non
+     nombreParam : 0
+     lesParams : 
+       - nomParam : Null
+         origine : post							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 1
+   fonction
+   className : Null
+   nom : validParamComments
+   avecParam : oui			#non
+   nombreParam : 1
+   lesParams:
+   nomParam : params
+   origine : post							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 1
+   - fonction
+     className : Null
+     nom : prepareAdminStatus
+     avecParam : parametre inutile			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : status
+      origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : non
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php?adminComment			   #.$params['idchapter']
+#**************************************
+ askSendMail:
+  seConnecte : non
+  security :
+   niveauRequis : 0    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : web_max\ecrivain\view\_askSendMailView
+      levelUpdate : 0
+      avecParam : non			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : Nll
+          origine : dur							#action ou dur
+          value : Null
+  manager : 
+   nombreManager : 0  
+   managers
+     nom : Null
+     action : null
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : oui								#non
+     nombreParam : 1
+     lesParams : 
+       - nomParam : Null
+         origine : post							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   avecParam : oui			#non
+   nombreParam : 0
+   lesParams:
+   nomParam : nom
+   origine : param inutile							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : Null
+   - fonction
+     className : Null
+     nom : Null
+     nomTableau : Null
+     avecParam : Null 			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : status
+      origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : non
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php?	
+#**************************************
+ sendMail:
+  seConnecte : non
+  security :
+   niveauRequis : 0    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : Null
+      levelUpdate : 0
+      avecParam : non			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : Null
+          origine : dur							#action ou dur
+          value : Null
+  manager : 
+   nombreManager : 0  
+   managers
+     nom : Null
+     action : null
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : oui								#non
+     nombreParam : 1
+     lesParams : 
+       - nomParam : Null
+         origine : post							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   avecParam : non			#non
+   nombreParam : 0
+   lesParams:
+   nomParam : nom
+   origine : param inutile							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 1
+   - fonction
+     className : Null
+     nom : senderMail
+     nomTableau : Null
+     avecParam : Null 			#non
+     nombreParam : 3
+     lesParams:
+      nomParam : email
+      origine : post							#action ou dur
+      nomParam : name
+      origine : post							#action ou dur
+      nomParam : message
+      origine : post							#action ou dur
+  wantHeaderLocation :
+   action : non
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php?	   
+#************************************** 
+ addComment :
+  seConnecte : non
+  security :
+   niveauRequis : 0    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : Null
+      levelUpdate : 0
+      avecParam : oui			#non
+      nombreParam : 2
+      lesParams:
+        - nomParam : nbCaracters
+          origine : Null								#action ou dur
+        - nomParam : nbChapters
+          origine : Null							#action ou dur
+  manager : 
+   nombreManager : 1  
+   managers
+     nom : web_max\ecrivain\model\ChaptersManager
+     action : getByNumber
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : oui								#non
+     nombreParam : 1
+     lesParams : 
+       - nomParam : chap
+         origine : get							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 1
+   fonction
+   className : Null
+   nom : addComment
+   avecParam : oui			#non
+   nombreParam : 1
+   lesParams:
+   nomParam : params
+   origine : post 							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 1
+   - fonction
+     className : Null
+     nom : chargeAside
+     tableau : aside
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : web_max\ecrivain\model\CommentManager
+      origine : getListValid							#action ou dur
+  wantHeaderLocation :
+   action : oui
+   param : Null
+   origine : params										#post ou get
+   nom : chap
+   target :  index.php?_TheBookView/chap/		   
+
 #************************************** 
  structure:
   seConnecte : non
@@ -1038,6 +1511,7 @@ simpleRoads:
    nom : updateDeleteAreAutorized
   view:
    - nom : web_max\ecrivain\view\chemin de la vue
+      levelUpdate : 0
       avecParam : oui			#non
       nombreParam : 0
       lesParams:
@@ -1066,7 +1540,7 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionAPresData :
+  appelFonctionApresData :
    nombrefonction : Null
    - fonction
      className : Null
@@ -1084,8 +1558,3 @@ simpleRoads:
    nom : Null
    target : index.php?			   
      	      	 
-#**************************************
-# media 
-#**************************************
-media:
-  background: D:/perso/maxou/oPENCLASSROOM/04_Php_MySQL/TP_XX/ecrivain/public/media/alaska.jpg

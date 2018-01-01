@@ -72,7 +72,7 @@ class _AdminChaptersView extends View{
 		//$title="Voyage en Alaska"; 
 		$contentView=ob_get_clean(); 		
 		$menuView=$this->renderTop();
-		$asideView=$this->asideView;		
+		$asideView=Null;		
 		$captionMessage = $this->captionMessage;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	

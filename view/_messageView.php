@@ -2,7 +2,7 @@
 namespace web_max\ecrivain\View;
 use web_max\ecrivain\view\View;
 use web_max\ecrivain\view\Template;
-
+use web_max\ecrivain\view\_AsideView;
 
 class _messageView extends View
 {	
@@ -15,15 +15,22 @@ class _messageView extends View
 		
 		ob_start(); 
 		?>
-
-		<article id="barreMessage">
-			
-			<div>
-				 <p><?= $datas->getTexte() ?></p>
+		<div class ="row">
+			<div class="col s1"></div>
+			<article id="barreMessage" class="col s7">
+				<div>
+					 <p><?= $datas->getTexte() ?></p>
+				</div>									<!-- fin "flottage" du menu -->
+			</article>
+		
+			<div class="col s1"></div>
+			<div class="col s2">
+				<?php
+					$monAsideView=new _AsideView($params);	
+					$asideView=$monAsideView->show();	
+				?>
 			</div>
-													<!-- fin "flottage" du menu -->
-		</article>
-			
+		</div>	
 		<?php
 		//$title="Voyage en Alaska"; 
 		$messageView=ob_get_clean();
