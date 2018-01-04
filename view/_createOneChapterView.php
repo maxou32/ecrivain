@@ -48,7 +48,7 @@ class _createOneChapterView extends View
 		$contentView=ob_get_clean(); 	
 		
 		$menuView=$this->renderTop();
-		$asideView=$this->renderAside();
+		$asideView=Null;
  
 				
 		$captionMessage = $this->captionMessage;

@@ -11,24 +11,17 @@ class _AdminCommentsView extends View{
 	public function show($params,$datas){		
 		ob_start(); 
 		
-		//echo"<PRE>";print_r($datas);echo"</PRE>";
+		//echo"<PRE>";print_r($params);echo"</PRE>";
 		?>
 		
 		<div id="center">
 			<form method="post" action="index.php?_validComments"  >
-				<script language="javascript" type="text/javascript">
-					function changeStatus($comment,$status) {
-						document.getElementById($comment).value=$status;
-					}
-					function changeStatus($comment,$grade) {
-						document.getElementById($comment).value=$grade;
-					}
-				</script>	
 				<ul class="collection">
 				<?php
 				for($i=0;$i<count($datas);$i++)
 				{
 					?>
+					
 					<li class="collection-item">
 						<div class="row">
 							<div class="col s6">
@@ -43,33 +36,36 @@ class _AdminCommentsView extends View{
 								<?php
 									foreach ($params['status'] as $key => $value){										
 										if($datas[$i]->getStatus_IdStatus()==$key){echo "<p>Statut du commentaire :</p> <i>".$value."</i>";} 
-										
 									}
-									?>
+								?>
 							</div>
 							<div class="col s3">
-								
-								<input type="radio" class="filled-in" name="valide[]" id="<?= "valide".$datas[$i]->getIdcomments().$key ?>" value="<?= "C".$datas[$i]->getIdcomments() ?>" />
-								<label for="<?="valide".$datas[$i]->getIdcomments().$key ?>">Valide</label>
-								
-								<input type="radio" class="filled-in" name="aValider[]" id="<?= "aValider".$datas[$i]->getIdcomments().$key ?>" value="<?= "C".$datas[$i]->getIdcomments() ?>" />
-								<label for="<?="aValider".$datas[$i]->getIdcomments().$key ?>">A valider</label>
-								
-								<input type="radio" class="filled-in" name="invalide[]" id="<?= "invalide".$datas[$i]->getIdcomments().$key ?>" value="<?= "C".$datas[$i]->getIdcomments() ?>" />
-								<label for="<?="invalide".$datas[$i]->getIdcomments().$key ?>">Invalide</label>				
-								
-								<input type="radio" class="filled-in" name="detruire[]" id="<?= "detruire".$datas[$i]->getIdcomments().$key ?>" value="<?= "C".$datas[$i]->getIdcomments() ?>"/>
-								<label for="<?="detruire".$datas[$i]->getIdcomments().$key ?>">A détruire</label>
-								
+								<p></p>&nbsp;<p></p>
+								<input type="checkbox" class="filled-in" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
+								<label for="<?="action".$datas[$i]->getIdcomments() ?>">A modifier</label>
 							</div>
 						</div>
 					</li>
 					<?php 
 				}
+				
 				?>
 				</ul>
-				<div class="center">
-					<p><input type="submit" name="sousAction" value="Appliquer les changements" class="button center"></p>
+				<div class="row">
+					<select class="browser-default" name="choix" >
+						<option value="" disabled selected>Choisissez l'opération à réaliser</option>
+						<?php
+							foreach ($params['status'] as $key => $value){
+								?>
+								<option  id="<?="status".$key  ?>" value="<?= $key ?>" /> 
+								<label for="<?="status".$key ?>"  ><?= $value ?></label>
+								<?php
+							}
+						?>
+						<option value="D">Détruire</option>
+					</select>								
+					<input type="submit"value="Appliquer les changements" class=" button center">
+				
 				</div>
 			</form>
 			

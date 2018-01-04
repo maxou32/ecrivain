@@ -352,9 +352,9 @@ simpleRoads:
       nombreParam : 2
       lesParams:
         - nomParam : nbCaracters
-          origine : param inutile								#action ou dur
+          origine : Null							#action ou dur
         - nomParam : nbChapters
-          origine : param inutile								#action ou dur
+          origine : Null								#action ou dur
   manager : 
    nombreManager : 1  
    managers
@@ -379,7 +379,7 @@ simpleRoads:
    nomParam : nom
    origine : param inutile							#action ou dur
   appelFonctionApresData :
-   nombrefonction : 1
+   nombrefonction : 2
    - fonction
      className : Null
      nom : chargeAside
@@ -389,6 +389,15 @@ simpleRoads:
      lesParams:
       nomParam : web_max\ecrivain\model\CommentManager
       origine : getListValid							#action ou dur
+   - fonction
+     className : web_max\ecrivain\controler\CommentController
+     nom : chargeComment
+     tableau : comment
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : Null
+      origine : params						#post ou dur
   wantHeaderLocation :
    action : non
    target : Null	
@@ -420,15 +429,16 @@ simpleRoads:
      lesParams : 
        - nomParam : null
          origine : post							#post ou dur  appelFonctionAvantData :
+  appelFonctionAvantData :
    nombrefonction : 0
-   - fonction
-     className : Null
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : nom
-       origine : param inutile							#action ou dur
+   fonction
+   className : Null
+   nom : Null
+   avecParam : oui			#non
+   nombreParam : 0
+   lesParams:
+   nomParam : nom
+   origine : param inutile							#action ou dur
   appelFonctionApresData :
    nombrefonction : 0
    - fonction
@@ -754,7 +764,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : prepareAdminStatus
-     nomTableau : status			######
+     tableau : status			######
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
      lesParams:
@@ -851,7 +861,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\messageController
    nom : prepareMessage
    avecParam : oui			#non
    nombreParam : 1
@@ -861,13 +871,13 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\messageController
      nom : prepareTypeMessage
-     nomTableau : message			######
-     avecParam : non			#non
-     nombreParam : 0
+     tableau : message			######
+     avecParam : oui			#non
+     nombreParam : 1
      lesParams:
-      nomParam : Null
+      nomParam : params
       origine : get							#action ou dur
   wantHeaderLocation :
    action : non
@@ -905,7 +915,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\messageController
    nom : CRUDMessage
    avecParam : oui			#non
    nombreParam : 1
@@ -917,7 +927,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : prepareAdminStatus
-     nomTableau : Null
+     tableau : Null
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
      lesParams:
@@ -927,8 +937,8 @@ simpleRoads:
    action : oui
    param : non
    origine : post										#post ou get
-   nom : information
-   target : index.php			#?askCRUDMessage/sousAction/	   
+   nom : Null
+   target : index.php?askCRUDMessage/sousAction/information/cible/askCRUDMessage	   
 #************************************** 
  askRegistration:
   seConnecte : non
@@ -978,7 +988,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : 0
-     nomTableau : Null
+     tableau : Null
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
      lesParams:
@@ -1032,7 +1042,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : Null
-     nomTableau : Null
+     tableau : Null
      avecParam : Null 			#non
      nombreParam : parametre inutile
      lesParams:
@@ -1087,7 +1097,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : askUpdateProfil
-     nomTableau : Null
+     tableau : Null
      avecParam : Nu	ll 			#non
      nombreParam : parametre inutile
      lesParams:
@@ -1141,7 +1151,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : prepareAdminStatus
-     nomTableau : status			######
+     tableau : status			######
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
      lesParams:
@@ -1150,7 +1160,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : prepareAdminGrade
-     nomTableau : grade			######
+     tableau : grade			######
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
      lesParams:
@@ -1257,18 +1267,18 @@ simpleRoads:
    - fonction
      className : Null
      nom : prepareAdminStatus
-     nomTableau : status			######
-     avecParam : parametre inutile			#non
-     nombreParam : parametre inutile
+     tableau : status			######
+     avecParam : Null			#non
+     nombreParam : Null
      lesParams:
-      nomParam : status
+      nomParam : Null
       origine : Null							#action ou dur
    - fonction
      className : Null
-     nom : Null
-     nomTableau : Null			######
-     avecParam : parametre inutile			#non
-     nombreParam : parametre inutile
+     nom : prepareAdminGrade
+     tableau : grade			######
+     avecParam : Null			#non
+     nombreParam : Null
      lesParams:
       nomParam : Null
       origine : Null							#action ou dur
@@ -1308,7 +1318,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\CommentController
    nom : validParamComments
    avecParam : oui			#non
    nombreParam : 1
@@ -1326,7 +1336,7 @@ simpleRoads:
       nomParam : status
       origine : Null							#action ou dur
   wantHeaderLocation :
-   action : non
+   action : oui
    param : non
    origine : post										#post ou get
    nom : Null
@@ -1374,7 +1384,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : Null
-     nomTableau : Null
+     tableau : Null
      avecParam : Null 			#non
      nombreParam : parametre inutile
      lesParams:
@@ -1429,7 +1439,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : senderMail
-     nomTableau : Null
+     tableau : Null
      avecParam : Null 			#non
      nombreParam : 3
      lesParams:
@@ -1446,7 +1456,7 @@ simpleRoads:
    nom : Null
    target : index.php?	   
 #************************************** 
- addComment :
+ addComment:
   seConnecte : non
   security :
    niveauRequis : 0    			#1 ou 99
@@ -1477,7 +1487,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\CommentController
    nom : addComment
    avecParam : oui			#non
    nombreParam : 1
@@ -1485,16 +1495,16 @@ simpleRoads:
    nomParam : params
    origine : post 							#action ou dur
   appelFonctionApresData :
-   nombrefonction : 1
+   nombrefonction : 0
    - fonction
      className : Null
-     nom : chargeAside
-     tableau : aside
+     nom : Null
+     tableau : Null
      avecParam : oui									#non
      nombreParam : 1
      lesParams:
-      nomParam : web_max\ecrivain\model\CommentManager
-      origine : getListValid							#action ou dur
+      nomParam : Null
+      origine : Null							#action ou dur
   wantHeaderLocation :
    action : oui
    param : Null
@@ -1545,7 +1555,7 @@ simpleRoads:
    - fonction
      className : Null
      nom : Null
-     nomTableau : Null
+     tableau : Null
      avecParam : Null 			#non
      nombreParam : parametre inutile
      lesParams:

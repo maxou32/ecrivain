@@ -11,7 +11,7 @@ class _AdminUsersView extends View{
 	public function show($params,$datas){		
 		ob_start(); 
 		
-		//echo"<PRE>";print_r($datas);echo"</PRE>";
+		//echo"<PRE>";print_r($params);echo"</PRE>";
 		?>
 		
 		<div id="center">

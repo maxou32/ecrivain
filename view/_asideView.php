@@ -16,23 +16,23 @@ class _AsideView {
 
 		<aside id="barreAside" class ="formBook ">
 			<div>
-				<h5><?= $this->aside["title"]?></h5>
+				<h5><?= $this->aside["aside"]["title"]?></h5>
 			<?php
-				for($i=0;$i<count($this->aside["value"]);$i++)
+				for($i=0;$i<count($this->aside["aside"]["value"]);$i++)
 				{
 					?>
-					<p class="hide"><?= $this->aside["value"][$i]["ref1"] ; ?> </p>
-					<h6  class="left-align"><?= $this->aside["value"][$i]["ref2"]; ?></h6>
+					<p class="hide"><?= $this->aside["aside"]["value"][$i]["ref1"] ; ?> </p>
+					<h6  class="left-align"><?= $this->aside["aside"]["value"][$i]["ref2"]; ?></h6>
 					<?php
-					if(strlen($this->aside["value"][$i]["content"])>$this->aside["nbCaracters"]/3){
-						$begin=substr($this->aside["value"][$i]["content"],0,$this->aside["nbCaracters"]/3).'<a href="index.php?oneChapter/idchapter/'.$this->aside["value"][$i]["ref1"].'">  (lire la suite...)</a>';
+					if(strlen($this->aside["aside"]["value"][$i]["content"])>$this->aside["nbCaracters"]/3){
+						$begin=substr($this->aside["aside"]["value"][$i]["content"],0,$this->aside["nbCaracters"]/3).'<a href="index.php?oneChapter/idchapter/'.$this->aside["aside"]["value"][$i]["ref1"].'">  (lire la suite...)</a>';
 					}else{
-						$begin='<a href="index.php?oneChapter/idchapter/'.$this->aside["value"][$i]["ref1"].'">'.$this->aside["value"][$i]["content"].'</a>';
+						$begin='<a href="index.php?oneChapter/idchapter/'.$this->aside["aside"]["value"][$i]["ref1"].'">'.$this->aside["aside"]["value"][$i]["content"].'</a>';
 					}
-					echo $begin."<br />"; 
+					echo  $begin."<br />"; 
+					
 					?>
-
-					<p  class="right-align"><i><?= $this->aside["value"][$i]["detail1"] ;?></i></p><br />
+					<p  class="right-align"><i><?= $this->aside["aside"]["value"][$i]["detail1"] ;?></i></p><br />
 					<div class="divider"></div>
 					<?php
 				}

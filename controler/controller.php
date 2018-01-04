@@ -14,6 +14,8 @@ use web_max\ecrivain\model\StatusManager;
 use web_max\ecrivain\model\GradeManager;
 use web_max\ecrivain\model\Comment;
 use web_max\ecrivain\model\CommentManager;
+use web_max\ecrivain\controler\messageController;
+use web_max\ecrivain\controler\commentController;
 	/*
 
 use web_max\ecrivain\view\_AdminChaptersView;
@@ -160,6 +162,7 @@ class Controller{
 			$id=$status[$key]->getIdstatus();
 			$datas[$id]=$value->getLibelle();	
 		}
+		//echo "<pre> Controler : prepareAdminStatus :";print_r($datas);echo"</pre>";
 		return $datas;
 	}
    /**
@@ -174,6 +177,7 @@ class Controller{
 			$id=$grade[$key]->getIdgrade();
 			$datas[$id]=$value->getLibelle();	
 		}
+		//echo "<pre> Controler : prepareAdminGrade :";print_r($datas);echo"</pre>";
 		return $datas;
 	}
     /**
@@ -238,80 +242,9 @@ class Controller{
 		$resultat["result"]=true;
 		return $resultat;
 	}	
+
 	
-	/**
-     * pour chaque couple (Commentaire, status) modifie les commentaires
-     * 
-     * @param  array $params couples à modifier
-     * @return boolean resultat de la modification
-     */
-    private function validParamComments($params){	
-		echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
-		$resultat["result"]=false;		
-		$commentManager= new CommentManager();
-		/*foreach($params as $key=> $value){
-			if(!is_numeric($key)){
-				$donnees=[];
-				//echo "clef ".$key." initiale ".substr($key,0,1);
-				if(substr($key,0,1)=="S"){
-					echo "<BR />comment manager clef : ".$key." donne ".substr($key,1);
-					$donnees=array('Idcomments'=>substr($key,1),'Status_IdStatus'=>$value);
-					//echo" <PRE>";print_r($donnees);echo"</PRE>";
-					$newComment = new Comment($donnees);
-					$resultat["result"]=$commentManager->updateStatus($newComment);
-				}
-			}
-		}*/
-		$valide= array();
-		$invalide= array();
-		$aValider= array();
-		$detruire= array();
-		if(count($params["valide"])>0){
-			foreach ($params["valide"] as $element){
-				$valide[]=substr($element,1);
-			}
-			$commentManager->updateStatus(1,implode( "', '", $valide));
-		}
-		
-		if(count($params["invalide"])>0){
-			foreach ($params["invalide"] as $element){
-				$invalide[]=substr($element,1);
-			}
-			$commentManager->updateStatus(3,implode( "', '", $invalide));
-		}
-		
-		if(count($params["aValider"])>0){
-			foreach ($params["aValider"] as $element){
-				$aValider[]=substr($element,1);
-			}
-			$commentManager->updateStatus(2,implode( "', '", $aValider)	);
-		}
-		
-		if(count($params["detruire"])>0){
-			foreach ($params["detruire"] as $element){
-				$detruire[]=substr($element,1);
-			}	
-			$commentManager->deleteComments(implode( "', '", $detruire)	);
-		}
-		return $resultat;
-	}	
-	
-    /**
-     * recherche les messages d'un type particulier
-     * @param  array    $params infos reçues
-     *        sousAction permettant de trouver le type de message                 
-     * @return object Message
-     */
-    private function prepareMessage($params){
-		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
-		$monTypeMessageManager= new TypeMessageManager;
-		$monTypemessage=$monTypeMessageManager->get($params['sousAction']);
-		$monMessageManager= new MessageManager;
-		$messages=$monMessageManager->getListByType($monTypemessage->getIdtypemessage());
-		//echo"CONTROLLEUR : 0.5 prepareMessage<br /> <PRE>";print_r($messages);echo"</PRE>";
-		return $messages;
-	}
-	
+
 	/**
      * Crée un mail de contact et l'envoi .
      * @param  params    contient les informations du courriel
@@ -324,55 +257,7 @@ class Controller{
 		mail($this->myConfig->getMail(), $subject, $message, $from);
 		echo "Email transmis !";
 	}
-    
-    /**
-     * Enregistre un commentaire .
-     * @param  params    contient les informations du recues de l'écran
-     */
-	private function addComment($post){
-		if( $post['sousAction']!=="fermer"){
-			$donnees=array('name' => $post['name'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>Null, 'Status_IdStatus'=>2,'Chapter_IdChapter'=>$post['chapter'], 'email'=>$post['email']);
-			$newComment = new Comment($donnees);
-			$monCommentManager= new CommentManager;
-			$monCommentManager->add($newComment);
-		}
-	}
-	
-	/**
-     * Crée, modifie et supprime els emssages en fonction du choix de l'utilsiateur.
-     * recharge la page
-     * @param  array    $params infos reçues
-     *        sousAction Mettre à jour, Supprimer ou Ajouter                 
-     * 
-     */
-    private	function CRUDMessage($params){
-		$monMessage= new MessageManager;
-		//echo "<br /> View CRUDMessage id=<PRE>";print_r($params);echo "</PRE>";
-		switch ($params['sousAction']){
-			case "Mettre à jour":
-				$donnees=array('id'=> $params['id'],'texte' =>$params['texte'],'contexte' => $params['contexte']);
-				$newMessage = new Message($donnees);	
-				$messageManager= new MessageManager();
-				$message=$messageManager->update($newMessage);		
-				break;
-			case "Supprimer":
-				$messageManager= new MessageManager();
-				//echo '<br /> id à détruire = '. $params['id'].'<br />';
-				$messageManager->delete($params['id']); 
-				break;
-			case "Ajouter":
-				$donnees=array('texte' => $params['texte'],'contexte' => $params['contexte'], 'message_idtypemessage'=> $params['idtypemessage']);
-				$newMessage = new Message($donnees);	
-				$messageManager= new MessageManager();
-				$message=$messageManager->add($newMessage);	
-				break;
-		}
-		$monTypeMessageManager= new TypeMessageManager;
-		$monTypemessage=$monTypeMessageManager->getFromId($params['idtypemessage']);
-		$libelle=$monTypemessage->getText();
-		header('Location: index.php?askCRUDMessage/sousAction/'.$libelle);
-	}
-	
+		
 	
     /**
      * Recherche l'objet à afficher dans la barre aside
@@ -384,23 +269,26 @@ class Controller{
 		$donnees=[];
 		$aside=[];
 		$monManager="";
-		//	echo"<br /><pre> charge ASIDE ";print_r($this->myAction);echo"</pre>";
+		//echo"<br /><pre> charge ASIDE ";print_r($post);echo"</pre>";
 		$asideParam=$this->myConfig->getAsideParam($this->myAction);
 
 		//echo"<br /><pre> charge ASIDE PARAM ";print_r($asideParam);echo"</pre>";
 
 		foreach($this->myRoad["appelFonctionApresData"] as $element){
 			if(is_array($element)){
-				$monAction= $element["lesParams"]["origine"];
-				$monManager = new $element["lesParams"]["nomParam"];
-				$donnees=$monManager->$monAction();
-				//echo"<br /><pre> charge les params ";print_r($donnees);echo"</pre>";
-				$aside["title"]=$asideParam["title"];
-				for($i=0;$i<count($donnees);$i++){
-					$aside["value"][$i]["ref1"]=$donnees[$i]->$asideParam["ref1"]();     
-					$aside["value"][$i]["content"]=$donnees[$i]->$asideParam["content"]();;
-					$aside["value"][$i]["ref2"]=$donnees[$i]->$asideParam["ref2"]();
-					$aside["value"][$i]["detail1"]=$donnees[$i]->$asideParam["detail"]();
+				if($element["nom"]=="chargeAside"){
+					$monAction= $element["lesParams"]["origine"];
+					$monManager = new $element["lesParams"]["nomParam"];
+					$donnees=$monManager->$monAction();
+					//echo"<br /><pre> charge les params ";print_r($asideParam);echo"</pre>";
+					//echo"<br /><pre> présente les données ";print_r($donnees);echo"</pre>";
+					$aside["title"]=$asideParam["title"];
+					for($i=0;$i<count($donnees);$i++){
+						$aside["value"][$i]["ref1"]=$donnees[$i]->$asideParam["ref1"]();     
+						$aside["value"][$i]["content"]=$donnees[$i]->$asideParam["content"]();;
+						$aside["value"][$i]["ref2"]=$donnees[$i]->$asideParam["ref2"]();
+						$aside["value"][$i]["detail1"]=$donnees[$i]->$asideParam["detail"]();
+					}
 				}
 			}
 		}
@@ -422,6 +310,7 @@ class Controller{
 		//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
 		//echo"<PRE><br>CONTROLLER 1.1: nbPram = ";print_r($params);echo"</PRE>"."<br />";
 		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad);echo"</pre>";
+		
 		/** *****************************************************************
         * déclanchement de la fonction a exécuter avant lectures des données
         */
@@ -429,15 +318,22 @@ class Controller{
 			//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
             $return=[];
             if(!empty($this->myRoad["appelFonctionAvantData"]["className"])){
-                $maClasse=new $this->myRoad["appelFonctionAvantData"]["className"];					
-                if(isset($this->myRoad["appelFonctionAvantData"]["nom"])){
-                    $function=$this->myRoad["appelFonctionAvantData"]["nom"];
-                    if($this->myRoad["appelFonctionAvantData"]["avecParam"]="oui"){
-                        $return=$maClasse->$function($post);
-                    }else{
-                        //echo"<PRE><br />CONTROLLER 1.31: dat ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</PRE>";
-                        $return=$maClasse->$function();
-                    }						
+                $maClasse=new $this->myRoad["appelFonctionAvantData"]["className"];		
+				if($this->myRoad["appelFonctionAvantData"]["avecParam"]=="oui"){
+					if(isset($this->myRoad["appelFonctionAvantData"]["nom"])){
+						$function=$this->myRoad["appelFonctionAvantData"]["nom"];
+						if($this->myRoad["appelFonctionAvantData"]["origine"]=="params"){
+							$return=$maClasse->$function($params);
+						}else{
+							//echo"<PRE><br />CONTROLLER 1.31: dat ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</PRE>";
+							$return=$maClasse->$function($post);
+						}						
+					}
+				}else{
+                    if(isset($this->myRoad["appelFonctionAvantData"]["nom"])) {
+                        $fonction=$this->myRoad["appelFonctionAvantData"]["nom"];
+                        $return= $maClasse->$fonction($post);
+                    }
                 }
                 //echo "<br />CONTROLLER 1.5: Return valide access = ";print_r($return);echo"</pre>";
             }else{
@@ -519,30 +415,63 @@ class Controller{
         * déclanchement de la fonction a exécuter après lectures des données
         */
 		if(null!==($this->myRoad["appelFonctionApresData"]["nombrefonction"])){
-			//echo "<br />CONTROLLER params generique 8.2 <PRE>";print_r($this->myRoad["appelFonctionApresData"]);echo "</PRE>";
+			//echo "<br />CONTROLLER post generique 8.2 <PRE>";print_r($post);echo "</PRE>";
+			//echo "<br />CONTROLLER params generique 8.2 <PRE>";print_r($params);echo "</PRE>";
 			foreach($this->myRoad["appelFonctionApresData"] as $element){
-				$return=[];
-				if(!empty($element["className"])){
+				//echo"<PRE><br />CONTROLLER 8.21: dat ";print_r($element);echo"</PRE>";
+				
+				if(isset($element["className"])){
 					$maClasse=new $element["className"];
-					//echo"<PRE><br />CONTROLLER 8.3: dat ";print_r($this->myRoad["appelFonctionApresData"]);echo"</PRE>";
-					
-					isset($element["nom"]) ? $return=$maClasse->$element["nom"]($post) :false;
-					//echo "<br />CONTROLLER 8.5: Return valide access = ";print_r($return);echo"</pre>";
-				}else{
-					//echo"<PRE><br />CONTROLLER 8.3: dat ";print_r($element["nom"]);echo"</PRE>";
-					if(isset($element["nomTableau"])){ 
+					if(isset($element["tableau"])){ 
 						if(isset($element["nom"])){ 
-							$globalParams [$element["nomTableau"]]=$this->$element["nom"]($post);
+							$function=$element["nom"];
+							if($element["lesParams"]["origine"]=="post"){
+								//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
+								$globalParams [$element["tableau"]]=$maClasse->$function($post);
+							}else{
+								//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
+								$globalParams [$element["tableau"]]=$maClasse->$function($params);
+								//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($globalParams);echo"</pre>";
+							}
 						}
 					}else{
 						if(isset($element["nom"])){ 
-							$globalParams= $this->$element["nom"]($post);
+							$function=$element["nom"];
+							if($element["lesParams"]["origine"]=="post"){
+								//echo "<br /><pre>CONTROLLER 8.23: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
+								$globalParams =$maClasse->$function($post);
+							}else{
+								//echo "<br /><pre>CONTROLLER 8.24: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
+								$globalParams =$maClasse->$function($params);
+							}
+						}
+					}
+				}else{
+					//echo"<PRE><br />CONTROLLER 8.3: dat sans classe";print_r($element["nom"]);echo"</PRE>";
+					if(isset($element["tableau"])){ 
+						if(isset($element["nom"])){ 
+							if($element["lesParams"]["origine"]=="post"){
+								$globalParams [$element["tableau"]]=$this->$element["nom"]($post);
+							}else{
+								$globalParams [$element["tableau"]]=$this->$element["nom"]($element);
+							}
+						}
+					}else{
+						if(isset($element["nom"])){ 
+							if($element["lesParams"]["origine"]=="post"){
+								//echo "<br /><pre>CONTROLLER 8.4: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
+								$globalParams["init"] =$this->$element["nom"]($post);
+								//echo "<br /><pre>CONTROLLER 8.4: avec post = ";print_r($globalParams["init"]);echo"</pre>";
+							}else{
+								$globalParams["init"] =$this->$element["nom"]($element);
+								//echo "<br /><pre>CONTROLLER 8.4: sans post = ";print_r($globalParams["init"]);echo"</pre>";
+							}
 						}
 					}
 					//echo "<br /><pre>CONTROLLER 8.5: Return globalParams = ";print_r($globalParams);echo"</pre>";
 				}
 				$nomParam=$element["lesParams"]["nomParam"];
-				//echo "<br />CONTROLLER 8.6: Return valide access = ";print_r($nomParam);echo"</pre>";
+				//echo "<br /><pre>CONTROLLER 8.6: Return valide access = ";print_r($globalParams);echo"</pre>";
 			}
 		}
 
@@ -561,6 +490,7 @@ class Controller{
 							if($elementParam["origine"]!=="dur"){
 								$action="get".$elementParam["nomParam"];
 								$globalParams[$elementParam["nomParam"]]=$this->myConfig->$action();
+								//echo"<PRE> controle déclenchement vue 9.4: data ";print_r($globalParams);echo"</PRE>";
 							}else{
 								$globalParams[$elementParam["nomParam"]]=$elementParam["value"];
 								//echo"<PRE> controle déclenchement vue 9.5: data ";print_r($globalParams);echo"</PRE>";

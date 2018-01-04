@@ -25,19 +25,18 @@ class _MenuPrivateView extends View
 						<li><a href="index.php" class="item_menu">Accueil</a></li>
 						
 						<li><a href="index.php?_listChaptersView" class="item_menu">Les chapitres</a></li>
-						<li><a href="index.php?askAddOneChapter" class="item_menu">Enregistrement d'un chapitre</a></li>
-						<li><a class="dropdown-button" class="item_menu" href="!#"  data-activates="admin">Administration<i class="material-icons  right">arrow_drop_down</i></a>
+						<li><a href="index.php?askAddOneChapter" class="item_menu">Ajouter un chapitre</a></li>
+						<li><a class="dropdown-button" class="item_menu" href="#!"  data-activates="admin">Administration<i class="material-icons  right">arrow_drop_down</i></a>
 							<ul id="admin" class="dropdown-content">
 								<li><a href="index.php?adminChapter" class="item_menu">Chapitres</a></li>
 								<li><a href="index.php?adminComment" class="item_menu">Commentaires</a></li>
 								<li><a href="index.php?adminUser" class="item_menu">Utilisateurs</a></li>
 							</ul>
 						</li>
-						<li><a class="dropdown-button" href="#!" data-activates="admin">Gestion<i class="material-icons  right">arrow_drop_down</i></a>
-							<!-- <li class="dropdown-button">administration  -->
+						<li><a class="dropdown-button" href="#!" data-activates="gestion">Gestion<i class="material-icons  right">arrow_drop_down</i></a>
 							<ul id="gestion" class="dropdown-content">
-								<li><a href="index.php?askCRUDMessage/sousAction/Information" class="item_menu">Messages d'information</a></li>
-								<li><a href="index.php?askCRUDMessage/sousAction/Erreur" class="item_menu">Messages d'erreur</a></li>
+								<li><a href="index.php?askCRUDMessage/sousAction/Information/cible/askCRUDMessage" class="item_menu">Messages d'information</a></li>
+								<li><a href="index.php?askCRUDMessage/sousAction/Erreur/cible/askCRUDMessage" class="item_menu">Messages d'erreur</a></li>
 								<li><a href="index.php?adminUser" class="item_menu">Gestion des users</a></li>
 							</ul>
 						</li>

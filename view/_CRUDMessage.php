@@ -11,6 +11,11 @@ class _CRUDMessage extends View
 	}
 	public function show($params,$datas){
 		$message=$params['message'];
+		
+		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($datas);echo"</PRE>";
+		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
+		
+		
 		ob_start();  
 			
 		?>
@@ -28,9 +33,11 @@ class _CRUDMessage extends View
 						<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>
 						<input type="hidden" name="texte" value="<?= $datas[$i]->getTexte() ?>"/>
 						<input type="hidden" name="idtypemessage" value="<?= $datas[$i]->getMessage_idtypemessage() ?>"/>
-						<input class="with-gap"
-						type="radio" name="message" class ="listData" value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
-							<label for="<?= $datas[$i]->getId() ?>" id="messageLU" title="<?= $datas[$i]->getcontexte() ?>"  ><?= $datas[$i]->getTexte() ?>  </label><br />
+						<input class="with-gap"	type="radio" name="message" class ="listData" value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
+							<label for="<?= $datas[$i]->getId() ?>" id="messageLU" title="<?= $datas[$i]->getcontexte() ?>"  >
+								<?= $datas[$i]->getTexte() ?> <br /> 
+							</label>
+						<br /><br /><br /><br />
 						<?php 
 					}
 					?>
@@ -77,7 +84,7 @@ class _CRUDMessage extends View
 		$title="Voyage en Alaska"; 
 		$contentView=ob_get_clean(); 		
 		$menuView=$this->renderTop();
-		$asideView=$this->asideView;		
+		$asideView=Null;		
 		$captionMessage = $this->captionMessage;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	

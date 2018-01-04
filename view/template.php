@@ -23,7 +23,7 @@ class template extends view{
 		<!DOCTYPE html>
 		<html>
 			<head>
-				<meta charset="utf-8" />
+				<meta charset="utf8_general_ci" />
 				<!-- Ligne à ajouter si on veut un favicon		-->
 				<link rel="icon" type="image/jpeg" href="D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\public\media\icone.png">
 

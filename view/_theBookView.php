@@ -3,6 +3,7 @@ namespace web_max\ecrivain\View;
 use web_max\ecrivain\view\View;
 use web_max\ecrivain\view\Template;
 use web_max\ecrivain\view\_AsideView;
+use web_max\ecrivain\view\_CommentView;
 	
 class _TheBookView extends View
 {	
@@ -12,6 +13,7 @@ class _TheBookView extends View
 	}
 	public function show($params,$datas){
 		ob_start();  			
+		//echo "<br /><pre>THE BOOK VIEW 1 = ";print_r($params["aside"]);echo"</pre>";
 		
 		?>
 		<div class ="row">
@@ -51,6 +53,10 @@ class _TheBookView extends View
 					<label for="content" class="active">Texte du message</label><textarea name="content" id="content" type="text" /></textarea>
 					<input type="submit" name="sousAction" value="Soumettre" class="button"/>
 				</form>
+				<?php
+					$monCommentView=new _CommentView($params);	
+					$CommentView=$monCommentView->show();	
+				?>
 			</div>
 			<div class="col s1"></div>
 			<div class="col s2">

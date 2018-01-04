@@ -36,9 +36,9 @@ class Router{
 	 */
 	private function getAction($request,$cheminSeul){
         $element = explode('/', key($request));
-		echo"<br />ROUTER : getAction <PRE>= ";print_r($element['0']);echo"</PRE>"."fin getaction de ROUTER";
+		//echo"<br />ROUTER : getAction <PRE>= ";print_r($element['0']);echo"</PRE>"."fin getaction de ROUTER";
 		
-		echo"<PRE><br />ROUTER : get Params AVEC /  <br />";print_r( $element );echo"</PRE>"."<br />";
+		//echo"<PRE><br />ROUTER : get Params AVEC /  <br />";print_r( $element );echo"</PRE>"."<br />";
 		if($cheminSeul){
 			return $element['0'];
 		}else{

@@ -9,6 +9,7 @@ class Comment{
 	private $_status_idstatus;
 	private $_comment_Date;
 	private $_chapter_idchapter;
+	private $_signaled;
 	
 	// Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
 	public function __construct(array $donnees)   {
@@ -34,8 +35,8 @@ class Comment{
 	public function getCommentDate()  {    return $this->_comment_Date;  }
 	public function getUser_IdUser() { return $this->_user_iduser;}
 	public function getStatus_IdStatus(){ return $this->_status_idstatus;}
+	public function getSignaled() {return $this->_signaled;}  
 	public function getChapter_IdChapter() {return $this->_chapter_idchapter;}  
-	
 	// Liste des setters
 
 	public function setIdcomments($idcomments){
@@ -99,5 +100,12 @@ class Comment{
 			  // Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
 				$this->_chapter_idchapter = $chapter_idchapter;
 			}
-	  }
+	}
+	
+	public function setSignaled($signaled){
+		// On convertit l'argument en booleen.
+		$signaled = (bool) $signaled;
+		$this->_signaled = $signaled;
+		
+	}
   }
