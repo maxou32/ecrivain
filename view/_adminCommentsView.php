@@ -29,7 +29,13 @@ class _AdminCommentsView extends View{
 								<input name="<?=$datas[$i]->getIdcomments() ?>" type="hidden" id="<?= $datas[$i]->getIdcomments() ?>"  />
 								
 								<p id="content"><?=$datas[$i]->getContent() ?> </p>
-								
+								<?php
+									if($datas[$i]->getSignaled() ){
+										?>
+										<span class="chip orange center"><i class="material-icons left">report_problem</i>Commentaire signalé</span>
+										<?php
+									} 
+								?>
 							</div>
 							
 							<div class="col s3 center">

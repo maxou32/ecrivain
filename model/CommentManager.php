@@ -62,7 +62,7 @@ class CommentManager extends Manager{
 
 	public function getListValidFromChapter($chap)  {
 		$comments = [];
-		$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus, signaled FROM comments WHERE status_idstatus <>1 and chapter_idchapter = "' . $chap . '" ORDER BY comment_date ASC ');
+		$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus, signaled FROM comments WHERE status_idstatus = 1 and chapter_idchapter = "' . $chap . '" ORDER BY comment_date ASC ');
 		
 		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
 			$comments[] = new Comment($donnees);
@@ -84,9 +84,23 @@ class CommentManager extends Manager{
 	public function updateStatus($action, $cible)  {
 		try {
 			//echo "cible : ".$cible;
-			$q = $this->dbConnect()->prepare("UPDATE comments SET status_idstatus  = :status_idstatus WHERE idcomments IN ('" .  $cible.  "')");
+			$q = $this->dbConnect()->prepare("UPDATE comments SET status_idstatus  = :status_idstatus,signaled  = 0 WHERE idcomments IN ('" .  $cible.  "')");
 			$q->bindValue(':status_idstatus', $action, \PDO::PARAM_INT);
 			
+			$q->execute();
+			return true;
+			
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
+	}
+	public function updateSignaled($idcomment, $action)  {
+		try {
+			$idcomment = (int) $idcomment;
+			$q = $this->dbConnect()->prepare("UPDATE comments SET signaled  = :signaled, status_idstatus  = :status_idstatus WHERE idcomments = :idcomments");
+			$q->bindValue(':idcomments', $idcomment, \PDO::PARAM_INT);
+			$q->bindValue(':signaled', $action, \PDO::PARAM_BOOL);			
+			$q->bindValue(':status_idstatus', $action=="1" ? 2 : 1, \PDO::PARAM_INT);
 			$q->execute();
 			return true;
 			

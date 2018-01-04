@@ -36,7 +36,7 @@ class CommentController	{
 		
 		$commentManager= new CommentManager();
 		$comment=$commentManager->getListValidFromChapter($monChapter->getIdchapters());
-		echo"<PRE>CONTROLLER COMMENT  : Fin 3 ";print_r($comment);echo"</PRE>";
+		//echo"<PRE>CONTROLLER COMMENT  : Fin 3 ";print_r($comment);echo"</PRE>";
 		return $comment;
 	}
 	
@@ -59,6 +59,16 @@ class CommentController	{
 			$commentManager->deleteComments(implode( "', '", $params["actionAFaire"]));
 		}
 	
+		return $resultat;
+	}		
+	
+	public function signal($params){	
+		//echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
+		$resultat["result"]=false;		
+		$commentManager= new CommentManager();
+
+		$commentManager->updateSignaled($params["comment"],$params["val"]);
+
 		return $resultat;
 	}		
 }

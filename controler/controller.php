@@ -323,9 +323,9 @@ class Controller{
 					if(isset($this->myRoad["appelFonctionAvantData"]["nom"])){
 						$function=$this->myRoad["appelFonctionAvantData"]["nom"];
 						if($this->myRoad["appelFonctionAvantData"]["origine"]=="params"){
+							//echo"<PRE><br />CONTROLLER 1.31: dat ";print_r($params);echo"</PRE>";
 							$return=$maClasse->$function($params);
 						}else{
-							//echo"<PRE><br />CONTROLLER 1.31: dat ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</PRE>";
 							$return=$maClasse->$function($post);
 						}						
 					}
@@ -503,6 +503,7 @@ class Controller{
 							$globalParams["updateDeleteAreAutorized"]= $monAccessControl->verifAccessRight($element["levelUpdate"]);
 						}
 					}
+					$globalParams["params"]= $params;
 					//echo"<PRE> controle déclenchement vue 10: globalParams ";print_r($globalParams);echo"</PRE>";
 					//cho"<PRE> controle déclenchement vue 10: data ";print_r($data);echo"</PRE>";
 					//echo"<PRE> controle déclenchement vue 11: globalParams ";print_r($element["nom"]);echo"</PRE>";
@@ -517,19 +518,20 @@ class Controller{
 		/** *****************************************************************
         * déclanchement de la fonction a exécuter pour recharger une vue
         */
-		$monAction=isset($this->myRoad["wantHeaderLocation"]["action"]) ? $this->myRoad["wantHeaderLocation"]["action"] : NULL;
+		isset($this->myRoad["wantHeaderLocation"]["action"]) ? $monAction=$this->myRoad["wantHeaderLocation"]["action"] : NULL;
 		//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"];
+		//echo"<PRE> controle déclenchement vue 12: data ";print_r($post);echo"</PRE>";
 		if($monAction=="oui"){
 			if( $this->myRoad["wantHeaderLocation"]["action"]=="oui"){
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){
 					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$post[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}else{
-					$critere=$params[$this->myRoad["wantHeaderLocation"]["nom"]];
+					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$params[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}
 			}else{
 				$critere="";
 			}
-			echo"<PRE> controle déclenchement vue 13: data ";print_r($critere);echo"</PRE>";
+			//cho"<PRE> controle déclenchement vue 13: data ";print_r($critere);echo"</PRE>";
 			//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"].$critere;
 			header('Location: '.$this->myRoad["wantHeaderLocation"]["target"].$critere);
 		}

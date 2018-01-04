@@ -23,16 +23,18 @@ class _CommentView {
 					?>
 					<div class="row">
 						<p class="col s6 left-align"><?= $this->comment["comment"][$i]->getName() ; ?> </p>
-						<p  class="col s6 right-align"><i><?= $this->comment["comment"][$i]->getCommentDate(); ?></i></p>
+						<p class="col s6 right-align"><i><?= $this->comment["comment"][$i]->getCommentDate(); ?></i></p>
 					</div>
 					<?=$this->comment["comment"][$i]->getContent() ?><br />
+					<form method="post" action="index.php?signalComment/comment/<?=$this->comment["comment"][$i]->getIdcomments()?>" name="MessageSignale">
+						<a href="index.php?signalComment/comment/<?=$this->comment["comment"][$i]->getIdcomments()."/val/1/chap/".$this->comment["params"]["chap"]?>" class="waves-effect waves-light btn messageSignal orange"><i class="material-icons left">report_problem</i>Signaler</a>
+					</form>
 					<div class="divider"></div>
 					<?php
 				}
 			?>
 			</div>								
 		</div>
-			
 		<?php
 
 		//$commentView=ob_get_clean();

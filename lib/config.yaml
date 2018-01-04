@@ -1341,6 +1341,60 @@ simpleRoads:
    origine : post										#post ou get
    nom : Null
    target : index.php?adminComment			   #.$params['idchapter']
+#************************************** 
+ signalComment:
+  seConnecte : non
+  security :
+   niveauRequis : 0    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : Null
+      levelUpdate : 0
+      avecParam : non			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : Null
+          origine : Null					#action ou dur
+  manager : 
+   nombreManager : 0  
+   managers
+     nom : Null
+     action : Null
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : non								#non
+     nombreParam : 0
+     lesParams : 
+       - nomParam : Null
+         origine : NUull							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 1
+   fonction
+   className : web_max\ecrivain\controler\CommentController
+   nom : signal
+   avecParam : oui			#non
+   nombreParam : 1
+   lesParams:
+   nomParam : val
+   origine : params							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 0
+   - fonction
+     className : Null
+     nom : Null
+     tableau : Null			######
+     avecParam : Null			#non
+     nombreParam : Null
+     lesParams:
+      nomParam : Null
+      origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : oui
+   param : oui
+   origine : params									#post ou get
+   nom : chap
+   target : index.php?_TheBookView/			   #.$params['idchapter']
 #**************************************
  askSendMail:
   seConnecte : non
