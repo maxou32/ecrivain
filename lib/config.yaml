@@ -111,7 +111,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AsideController
      nom : chargeAside
      tableau : aside
      avecParam : oui									#non
@@ -164,7 +164,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AsideController
      nom : chargeAside
      tableau : aside
      avecParam : oui									#non
@@ -262,7 +262,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\AccessControl
    nom : validAccessReserved
    avecParam : oui			#non
    nombreParam : 2
@@ -272,7 +272,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AsideController
      nom : chargeAside
      tableau : aside
      avecParam : oui									#non
@@ -381,7 +381,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 2
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AsideController
      nom : chargeAside
      tableau : aside
      avecParam : oui									#non
@@ -483,7 +483,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : 
+   className : web_max\ecrivain\controler\ChapterController
    nom : addOneChapter
    avecParam : oui			#non
    nombreParam : 0
@@ -547,9 +547,9 @@ simpleRoads:
    nomParam : Null
    origine : post							#post ou dur     lesParams:
   appelFonctionApresData :
-   nombrefonction : 1
+   nombrefonction : 2
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AsideController
      nom : chargeAside
      tableau : aside
      avecParam : oui									#non
@@ -557,6 +557,15 @@ simpleRoads:
      lesParams:
       nomParam : web_max\ecrivain\model\ChaptersManager
       origine : getListValid							#action ou dur
+   - fonction
+     className : web_max\ecrivain\controler\CommentController
+     nom : chargeComment
+     tableau : comment
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : Null
+      origine : params						#post ou dur
   wantHeaderLocation :
    action : non
    target : 
@@ -644,7 +653,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\ChapterController
    nom : updateOneChapter
    avecParam : oui			#non
    nombreParam : 0
@@ -762,7 +771,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminStatus
      tableau : status			######
      avecParam : parametre inutile			#non
@@ -807,7 +816,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\AdminController
    nom : validStatusChapters
    avecParam : oui			#non
    nombreParam : 1
@@ -817,7 +826,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminStatus
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
@@ -925,7 +934,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminStatus
      tableau : Null
      avecParam : parametre inutile			#non
@@ -1030,7 +1039,7 @@ simpleRoads:
          origine : post							#post,get ou en dur
   appelFonctionAvantData :
    nombrefonction : 1
-   className : Null
+   className : web_max\ecrivain\controler\UserController
    nom : registration
    avecParam : oui			#non
    nombreParam : 1
@@ -1095,7 +1104,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AccessControl
      nom : askUpdateProfil
      tableau : Null
      avecParam : Nu	ll 			#non
@@ -1149,7 +1158,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 2
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminStatus
      tableau : status			######
      avecParam : parametre inutile			#non
@@ -1158,7 +1167,7 @@ simpleRoads:
       nomParam : status
       origine : Null							#action ou dur
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminGrade
      tableau : grade			######
      avecParam : parametre inutile			#non
@@ -1202,7 +1211,7 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : Null
+   className : web_max\ecrivain\controler\AdminController
    nom : validParamUsers
    avecParam : oui			#non
    nombreParam : 1
@@ -1212,7 +1221,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminStatus
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
@@ -1265,7 +1274,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 2
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminStatus
      tableau : status			######
      avecParam : Null			#non
@@ -1274,7 +1283,7 @@ simpleRoads:
       nomParam : Null
       origine : Null							#action ou dur
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminGrade
      tableau : grade			######
      avecParam : Null			#non
@@ -1328,7 +1337,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\AdminController
      nom : prepareAdminStatus
      avecParam : parametre inutile			#non
      nombreParam : parametre inutile
@@ -1491,7 +1500,7 @@ simpleRoads:
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
-     className : Null
+     className : web_max\ecrivain\controler\MailController
      nom : senderMail
      tableau : Null
      avecParam : Null 			#non

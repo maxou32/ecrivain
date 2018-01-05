@@ -1,15 +1,20 @@
 <?php
 namespace web_max\ecrivain\controler;
-use web_max\ecrivain\model\CommentManager;
-use web_max\ecrivain\model\Comment;
+use web_max\ecrivain\lib\Config;
 use web_max\ecrivain\model\ChaptersManager;
+use web_max\ecrivain\model\Chapter;
+use web_max\ecrivain\model\Comment;
+use web_max\ecrivain\model\CommentManager;
 
-class CommentController	{
-	
-	public function __construct(){
-		
-	}
+class CommentController	extends mainController	{
 	    
+public function __construct($myRoad, $action){
+		$this->myRoad=$myRoad;
+		$this->myAction=$action;
+		$this->myConfig= new Config;
+		//echo"<br /><pre> CONTROLLER CONSTRUCT ";print_r($this->myAction);echo"</pre>";
+	}
+
     /**
      * Enregistre un commentaire .
      * @param  params    contient les informations du recues de l'écran
@@ -29,14 +34,16 @@ class CommentController	{
      */
 	public function chargeComment($params){
 		//echo"<PRE>CONTROLLER COMMENT  : chargeComment 1 ";print_r($params);echo"</PRE>";
-		$chapterManager= new ChaptersManager;
-		$monChapter= $chapterManager->getByNumber($params["chap"]);
-		//echo"<PRE>CONTROLLER COMMENT  :  2 ";print_r($monChapter);echo"</PRE>";
-		
-		
 		$commentManager= new CommentManager();
-		$comment=$commentManager->getListValidFromChapter($monChapter->getIdchapters());
-		//echo"<PRE>CONTROLLER COMMENT  : Fin 3 ";print_r($comment);echo"</PRE>";
+		if(isset($params["chap"])){
+			$chapterManager= new ChaptersManager;
+			$monChapter= $chapterManager->getByNumber($params["chap"]);
+			//echo"<PRE>CONTROLLER COMMENT  CHAP:  2 ";print_r($monChapter);echo"</PRE>";
+			$comment=$commentManager->getListValidFromChapter($monChapter->getIdchapters());
+		}else{
+			$comment=$commentManager->getListValidFromChapter($params["idchapter"]);
+			//echo"<PRE>CONTROLLER COMMENT  IDCHAPTER: Fin 3 ";print_r($params["idchapter"]);echo"</PRE>";
+		}
 		return $comment;
 	}
 	

@@ -37,7 +37,6 @@ class _MenuPrivateView extends View
 							<ul id="gestion" class="dropdown-content">
 								<li><a href="index.php?askCRUDMessage/sousAction/Information/cible/askCRUDMessage" class="item_menu">Messages d'information</a></li>
 								<li><a href="index.php?askCRUDMessage/sousAction/Erreur/cible/askCRUDMessage" class="item_menu">Messages d'erreur</a></li>
-								<li><a href="index.php?adminUser" class="item_menu">Gestion des users</a></li>
 							</ul>
 						</li>
 					

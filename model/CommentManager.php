@@ -69,6 +69,8 @@ class CommentManager extends Manager{
 		}
 		return $comments;
 	}
+	
+	
 		
 	public function update(Comment $comment)  {
 		$q = $this->dbConnect()->prepare('UPDATE comments SET name = :name, content = :content, signaled = :signaled WHERE idcomments = :idcomments');

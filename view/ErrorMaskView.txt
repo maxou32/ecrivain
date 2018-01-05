@@ -1,0 +1,32 @@
+<?php
+namespace web_max\ecrivain\View;
+
+class MasqErrorView extends view{
+
+	
+	public function __construct(){
+		
+	}
+			
+	public function show($params){
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<meta charset="utf8_general_ci" />
+
+			</head>
+			<body style="background-color: 'red';">	 
+				
+				
+				<div id="contentError" >
+					
+					<div id="contenuDetailError" style="color: 'yellow';">
+						
+					</div>
+				</div>
+				
+	   		</body>
+		</html>
+	?>
+	}
+}

@@ -2,42 +2,60 @@
 namespace web_max\ecrivain\controler;
 use web_max\ecrivain\lib\Config;
 use web_max\ecrivain\model\ChaptersManager;
+use web_max\ecrivain\model\UserManager;
+use web_max\ecrivain\model\User;
 	
 class AccessControl {
 	public function __construct(){
     
 	}
-	
-	/*
-	 
-	public function getIsProtected($function){
-		$myConfig= new Config;
-		$paramConfig=$myConfig->getReservedFunction($function);
-		//echo"<PRE>";print_r($paramConfig);echo"</PRE>";
-		return array("result"=>$paramConfig);
+	    /**
+     * mise à jour des éléments de session
+     * @param object User $user user à stoker
+     */
+    public function updateSession(User $user){
+		$_SESSION['user']=$user->getName();
+		$_SESSION['userId']=$user->getIdusers();
+		$_SESSION['userPwd']=$user->getPassword();
+		$_SESSION['autorizedAccess']=$user->getGrade_IdGrade();
+		$_SESSION['email']=$user->getEmail();
+		$_SESSION['Grade_IdGrade']=$user->getGrade_IdGrade();
+		$_SESSION['Status_IdStatus']=$user->getStatus_IdStatus();
 	}
 	
-    */
-	/*
-	public function getAutorization( $userName, $userPwd){
-	
+     /**
+     * Vérification des données de l'utilisateur
+     * @param  array $params contient les infos de l'utilisateur à vérifier
+     * @return array contenant le résultat et un libellé éventuel d'erreur
+     */
+	public function validAccessReserved($params){
+		//echo"<PRE> COntroller : debut validAccessReserved";print_r($params);echo"</PRE>";
+			
+		if(isset($params['userName']) && isset($params['userPwd'])) {
+			//echo "<br />COntroller : name : ".$params['userName']." pwd ".$params['userPwd'];
 			$monUserManager=new UserManager;
-			//echo "<br /> getAutorization nom user :".$userName."<br />";
-			$user=$monUserManager->get($userName);
-			//echo "<br /> getAutorization apres userManager :".$userName."<br />";
+			
+			$user=$monUserManager->get($params['userName']);
 			if(!$user){
-				return array("result"=>false, "message"=>'Vous n\'êtes pas habilité à administrer ce roman.');			
+				$monError=new ErrorController();
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "raison"=>"habilitation insuffisante", "idMessage"=>9));
+				header ("Location:index.php?reservedAccess/");
+			}elseif(hash('sha256',$params['userPwd'])==$user->getPassword()){
+				//echo"<PRE> ACCESS CONTROL: data ";print_r($user);echo"</PRE>";
+				$this->updateSession($user);
+				return true;
 			}else{
-				//if(hash('sha256',$userPwd)==$user->getPassword()){
-					
-					return array("result"=>true);
-				//}else{
-				//	return array("result"=>false, "message"=>'Mot de passe incorrect.');	
-				//<}	
+				$monError=new ErrorController();
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "raison"=>"mot de passe incorrect", "idMessage"=>10));
+				echo "<pre>";print_r($params);echo"</pre>"; 
+				return false;	
 			}
-		
+		}else{
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "message"=>11));
+			return false;			}	
 	}
-	*/
+
     
     /**
      * Vérification de l'incription de l'utilisateur
@@ -56,6 +74,22 @@ class AccessControl {
 		}
 	}
 	
+	
+		
+    /**
+     * Récupération du profil de l'utilisateur dans la session
+     * @return array contenant les données de l'utilisateur
+     */
+    public function askUpdateProfil(){
+		$monUserManager= new UserManager();
+		$monUserManager->get($_SESSION['user']);
+		$array["userName"]=$_SESSION['user'];
+		$array["email"]=$_SESSION['email'];
+		$array["action"]="update";
+		return $array;
+	}
+	
+ 
     /**
      * Vérification du mot de passe
      * @param  string $password mot de passe saisi
@@ -113,11 +147,5 @@ class AccessControl {
 		unset($_SESSION);
 		return "Disconnect OK";
 	}
-	/*
-	public function makeParam ($param){
-		$myConfig= new Config;
-		$paramConfig=$myConfig->getParam($param);
-		return $paramConfig;
-	}
-	*/
+
 }				

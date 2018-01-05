@@ -1,13 +1,17 @@
 <?php
 namespace web_max\ecrivain\controler;
+use web_max\ecrivain\lib\Config;
 use web_max\ecrivain\model\TypeMessageManager;
 use web_max\ecrivain\model\Message;
 use web_max\ecrivain\model\MessageManager;
 
-class messageController	{
+class messageController	extends mainController	{
 	
-	public function __construct(){
-		
+	public function __construct($myRoad, $action){
+		$this->myRoad=$myRoad;
+		$this->myAction=$action;
+		$this->myConfig= new Config;
+		//echo"<br /><pre> CONTROLLER CONSTRUCT ";print_r($this->myAction);echo"</pre>";
 	}
 	
 	/**
@@ -17,7 +21,7 @@ class messageController	{
      * @return object Message
      */
     public function prepareMessage($params){
-		echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
+		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
 		$monTypeMessageManager= new TypeMessageManager;
 		$monTypemessage=$monTypeMessageManager->get($params['sousAction']);
 		$monMessageManager= new MessageManager;
@@ -33,7 +37,7 @@ class messageController	{
      * @return object typeMessage
      */
     public function prepareTypeMessage($params){
-		echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
+		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
 		$monMessageManager= new MessageManager;
 		$message=$monMessageManager->get($params['cible']);
 		return $message->getTexte();
@@ -49,7 +53,7 @@ class messageController	{
      */
     public	function CRUDMessage($params){
 		$monMessage= new MessageManager;
-		echo "<br /> View CRUDMessage id=<PRE>";print_r($params);echo "</PRE>";
+		//echo "<br /> View CRUDMessage id=<PRE>";print_r($params);echo "</PRE>";
 		switch ($params['sousAction']){
 			case "Mettre à jour":
 				$donnees=array('id'=> $params['id'],'texte' =>$params['texte'],'contexte' => $params['contexte']);

@@ -1,7 +1,10 @@
 <?php 
 namespace web_max\ecrivain\view;
 use web_max\ecrivain\view\View;
+use web_max\ecrivain\view\_ErrorView;
 use web_max\ecrivain\view\Template;
+use web_max\ecrivain\controler\ErrorController;
+use web_max\ecrivain\model\MessageManager;
 	
 class _askReservedAccess extends View
 {	
@@ -26,6 +29,15 @@ class _askReservedAccess extends View
 			</form>
 
 		<?php 
+		$monError=new ErrorController();
+		if ($monError->getExisteError()) {
+			$monMessageManager= new MessageManager();
+			$leMessage=$monMessageManager->getByNumber($monError->getIdError());
+			
+			$monErrorView=new _ErrorView();
+			//$monErrorView->show($leMessage->getTexte());
+			$monErrorView->show("toto le héros");
+		}
 		$contentView=ob_get_clean(); 
 
 		$menuView=$this->renderTop();

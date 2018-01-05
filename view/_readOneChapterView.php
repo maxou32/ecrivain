@@ -3,6 +3,7 @@ namespace web_max\ecrivain\View;
 use web_max\ecrivain\view\View;
 use web_max\ecrivain\view\Template;
 use web_max\ecrivain\view\_AsideView;	
+use web_max\ecrivain\view\_CommentView;
 
 class _readOneChapterView extends View
 {	
@@ -50,7 +51,9 @@ class _readOneChapterView extends View
 						<?php 
 					}
 				}
-			?>
+				$monCommentView=new _CommentView($params);	
+				$CommentView=$monCommentView->show();	
+				?>
 			</div>
 			<div class="col s1"></div>
 			<div class="col s2">
