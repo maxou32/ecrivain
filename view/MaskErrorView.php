@@ -1,32 +1,30 @@
-<?php
-namespace web_max\ecrivain\View;
-
-class MasqErrorView extends view{
-
+<?php 
+namespace web_max\ecrivain\view;
 	
-	public function __construct(){
-		
-	}
-			
-	public function show($params){
+class MaskErrorView {	
+	private $message;
+	
+	public function __construct($message){
+		$this->message=$message;
+	
+	?>
 		<!DOCTYPE html>
 		<html>
 			<head>
 				<meta charset="utf8_general_ci" />
-
 			</head>
-			<body style="background-color: 'red';">	 
+			<body class="red">	 
 				
 				
 				<div id="contentError" >
 					
 					<div id="contenuDetailError" style="color: 'yellow';">
-						
+						coucou <?= $this->message;  ?>
 					</div>
 				</div>
 				
 	   		</body>
 		</html>
-	?>
+	<?php
 	}
 }

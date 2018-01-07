@@ -48,7 +48,8 @@ class Controller{
 					if(isset($this->myRoad["appelFonctionAvantData"]["nom"])){
 						$function=$this->myRoad["appelFonctionAvantData"]["nom"];
 						if($this->myRoad["appelFonctionAvantData"]["origine"]=="params"){
-							//echo"<PRE><br />CONTROLLER 1.31: dat ";print_r($params);echo"</PRE>";
+							echo"<PRE><br />CONTROLLER 1.31: dat PARAm";print_r($params);echo"</PRE>";
+							echo"<PRE><br />CONTROLLER 1.31: dat POST";print_r($post);echo"</PRE>";
 							$return=$maClasse->$function($params);
 						}else{
 							$return=$maClasse->$function($post);
@@ -80,10 +81,10 @@ class Controller{
                         $return= $this->$fonction($post);
                     }
                 }
-                //echo "<br /><pre>CONTROLLER 1.5: Return valide access = ";print_r($return);echo"</pre>";
+               
             }
 		}
-        
+         //echo "<br /><pre>CONTROLLER 1.5: Return valide access = ";print_r($return);echo"</pre>";
 		/** *****************************************************************
         * déclanchement de la fonction a exécuter pour lire des données
         */	

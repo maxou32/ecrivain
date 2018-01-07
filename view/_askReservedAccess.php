@@ -16,30 +16,33 @@ class _askReservedAccess extends View
 		ob_start();  
 		?>
 
-			<form method="post" action="index.php?validAccessReserved" class="formUser">
+			<form  class="formUser" >  <!-- method="post" action="index.php?validAccessReserved"   -->
 				<i class="material-icons prefix">account_circle</i>
 				<label for ="userName"> Nom :</label>
 				<input id="userName" name="userName" type="text" required class="validate"/><br />
 				<label for ="userPwd"> Mot de passe :</label>	
-				<input id="userPwd" name="userPwd" type="password" pattern=".{5,}" title="5 caractères minimum" required><br />
+				<input id="userPwd" name="userPwd" type="password" pattern=".{5,}" title="5 caractères minimum" required/><br />
+				<input id="cible" name="cible" type="hidden" value="validAccessReserved"/><br />
 					
-				<input type="submit" value="Accéder à l'espace réservé"  class="button"/>
-
-				
+				<input type="submit" id="submit" value="Accéder à l'espace réservé"  class="button alert"/>
+				<div id="resultat">
+				</div>
+				<p>Content here. <a class="alert" href=#>Alert!</a></p>
 			</form>
+				<script>
+					$(".alert").click(function(e) {
+						bootbox.alert("Hello world!", function() {
+							console.log("Alert Callback");
+						});
+					});
+				</script>
+			
 
 		<?php 
-		$monError=new ErrorController();
-		if ($monError->getExisteError()) {
-			$monMessageManager= new MessageManager();
-			$leMessage=$monMessageManager->getByNumber($monError->getIdError());
-			
-			$monErrorView=new _ErrorView();
-			//$monErrorView->show($leMessage->getTexte());
-			$monErrorView->show("toto le héros");
-		}
-		$contentView=ob_get_clean(); 
 
+		$contentView=ob_get_clean(); 
+		//$monErrorView=new _ErrorView();
+		
 		$menuView=$this->renderTop();
 		$asideView=null;		
 		$captionMessage = $this->captionMessage;

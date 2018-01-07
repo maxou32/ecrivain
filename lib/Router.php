@@ -29,7 +29,7 @@ class Router{
 	}
 
 	/**
-	 * mise sous tableau dfes paramètres recus
+	 * mise sous tableau des paramètres recus
 	 * @param  array   $request    infos transmises par le navigateur          
 	 * @param  boolean $cheminSeul Reçit un chemin sans autres paramètres
 	 * @return array   qui présente les paramètres reçus
@@ -121,12 +121,18 @@ class Router{
 			//echo "retour config OK";
 			if(isset($_GET)){
 				//echo "<br />ROUTER :action demandée OK <br />";
-				$varAction="_messageView";
+				
+				$varAction="";
 				$varAction=$this->getAction($_GET, true);
+				//echo"<PRE><br />ROUTER verif vAR ACTION 0 ";print_r($this->getParams($_GET));echo"<br /> fin construct </PRE>";
 				$varParam=$this->getAction($_GET, false);
 				$varPost=$this->getParams($_POST);
+				//echo"<PRE><br />ROUTER verif vAR ACTION 1 ";print_r($varPost);echo"<br /> fin construct </PRE>";
+				if (isset($this->getParams($_GET)["cible"])){
+					$varAction=$this->getParams($_GET)["cible"];
+				}
 				empty($varAction) ? $varAction="_messageView": false ;
-				//echo"<PRE><br />ROUTER verif POST et GET ";print_r($varAction);echo"<br />" ;print_r($varParam);echo"<br />" ;print_r($varPost);echo"<br /> fin construct </PRE>";
+				//echo"<PRE><br />ROUTER verif POST et GET ";print_r($varAction);echo"<br /> fin construct </PRE>";
 				
 				$this->myRoad=$myConfig->getRoad($varAction);
 				//echo"<PRE><br />ROUTER retour route from config ";print_r($this->myRoad);echo"<br /> fin construct </PRE>";
