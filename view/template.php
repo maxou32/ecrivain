@@ -74,10 +74,9 @@ class template extends view{
 					});
 				</script>
 				<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-			    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
-				<script src="public\js\bootbox.min.js"></script>
+			   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
 				<script src="public\js\bootstrap.min.js"></script>
+				<script src="public\js\bootbox.min.js"></script>
 			</head>
 			<body style="background-image: url('<?= $this->imageBackGround ?>');">	 
 				<title><?= $this->title ?></title>

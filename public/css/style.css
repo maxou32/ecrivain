@@ -146,12 +146,22 @@ footer
 	border-radius : 5px ;
 	margin:5px ;
 }
+.modal
+{
+	background-color : #fafafa !important;
+	border-radius: 5px !important;	
+}
+.bootbox-close-button
+{
+	display:none  !important;
+}
 .badge
 {
 	padding:10px !important;
 	border-radius : 5px !important;
 	margin:5px !important;
 }
+
 #user
 {
 	color:white;	

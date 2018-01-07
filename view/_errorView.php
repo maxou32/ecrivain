@@ -3,50 +3,39 @@ namespace web_max\ecrivain\view;
 use web_max\ecrivain\View\MaskErrorView;
 use web_max\ecrivain\controler\ErrorController;
 use web_max\ecrivain\model\MessageManager;
+use web_max\ecrivain\model\Message;
 	
 class _ErrorView {	
 	private $leMessage;
 	
 	public function __construct(){
 		$monError=new ErrorController();
+		//ECHO "ERROR VIEW 0";
 		if ($monError->getExisteError()) {
 			$monMessageManager= new MessageManager();
 			$this->leMessage=$monMessageManager->getByNumber($monError->getIdError());
+			//ECHO "ERROR VIEW 1<pre>";print_r($this->leMessage->getTexte());echo"</pre>  ";
+			//$monError->deleteError();
 			$this->show();
 		}
 	}
 	
-	private function show(){
-		//ob_start(); 
+	public function show(){
+
+		ob_start(); 
 		//echo"<br /><pre> charge ASIDE ";print_r($this->aside);echo"</pre>";
 		?>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
 		<script type="text/javascript">
-		jQuery(document).ready(function($){
-			OpenAlert();
-		});
-		
-			function OpenAlert(){
-				"coucou";
-				width=300;
-				height=200;
-				if(window.InnerWidth){
-					var left=(window.InnerWidth-width)/2;
-					var top=(window.InnerHeight-height)/2;
-				}else{
-					var left=(document.body.ClientWidth-width)/2;
-					var top=(document.body.ClientHeight-height)/2;
-				} ;
-				window.open('view/MaskErrorView.php','Erreur','menubar=no, location=no, status=no, resizable=no, scrollbar=no , top='+top+',left='+left+' ,height='+height+', width='+width+''); 
-			};
+			console.log("je suis l alerte");
+			//jQuery(document).ready(function($){
+
+			bootbox.alert('<?php echo $this->leMessage->getTexte(); ?>'	);			
+				
 		
 		</script>
 		<?php
-		//echo ob_get_clean();
-
-		//return $asideView;
+		$errorView=ob_get_clean();
+		return $errorView;
 	}
 	
 

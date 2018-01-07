@@ -29,19 +29,14 @@ class _askReservedAccess extends View
 				</div>
 				<p>Content here. <a class="alert" href=#>Alert!</a></p>
 			</form>
-				<script>
-					$(".alert").click(function(e) {
-						bootbox.alert("Hello world!", function() {
-							console.log("Alert Callback");
-						});
-					});
-				</script>
+				
 			
 
 		<?php 
-
+		$monErrorView=new _ErrorView();
+		echo $monErrorView->show();
 		$contentView=ob_get_clean(); 
-		//$monErrorView=new _ErrorView();
+		
 		
 		$menuView=$this->renderTop();
 		$asideView=null;		
@@ -52,5 +47,6 @@ class _askReservedAccess extends View
 		
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
 		$monTemplate->show(null,null);
+		
 	}
 }

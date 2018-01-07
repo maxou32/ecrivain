@@ -46,7 +46,7 @@ class MessageManager extends Manager{
 		if($donnees) {
 			return new Message($donnees);
 		}else{
-			return false;
+			return "perdu";
 		}
 	}
 	

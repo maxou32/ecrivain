@@ -29,16 +29,31 @@ public function __construct(){
 	}
 	
 	public	function getIdError() {   
-		if(isset($_SESSION['error']["idMessage"])){
-			return $_SESSION['error']["idMessage"];
+		//echo"<PRE> ERROR COntroller : ";print_r($_SESSION['error']);echo"</PRE>";
+		if(isset($_SESSION['error']['message'])){
+			//echo "<br />yes";
+			return $_SESSION['error']['message'];
 		}else{
+			//echo "<br />oh no";
 			return Null;
 		}
 	}
 	
 	public	function getExisteError() {   
 		//echo"<PRE> ERROR COntroller : ";print_r($_SESSION);echo"</PRE>";
-		return ['error'] ? true : false;
+		if (isset($_SESSION['error'])){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
+	public	function deleteError() {   
+		//echo"<PRE> ERROR COntroller DELETE : ";print_r($_SESSION);echo"</PRE>";
+		if(isset($_SESSION['error'])){
+			unset ($_SESSION['error']);
+		}
+		//echo"<PRE> ERROR COntroller DELETE : ";print_r($_SESSION);echo"</PRE>";
+		
+	}
 }
