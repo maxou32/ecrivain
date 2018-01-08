@@ -29,33 +29,31 @@ class AccessControl {
      * @return array contenant le résultat et un libellé éventuel d'erreur
      */
 	public function validAccessReserved($params){
-		echo"<PRE> COntroller : debut validAccessReserved";print_r($params);echo"</PRE>";
+		//echo"<PRE> COntroller : debut validAccessReserved";print_r($params);echo"</PRE>";
 			
 		if(isset($params['userName']) && isset($params['userPwd'])) {
-			echo "<br />COntroller : name : ".$params['userName']." pwd ".$params['userPwd'];
+			//echo "<br />COntroller : name : ".$params['userName']." pwd ".$params['userPwd'];
 			$monUserManager=new UserManager;
-			console.log('coucou');
 			$user=$monUserManager->get($params['userName']);
 			if(!$user){
 				$monError=new ErrorController();
 				$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "raison"=>"habilitation insuffisante", "idMessage"=>9));
 				header ("Location:index.php?reservedAccess/");
 			}elseif(hash('sha256',$params['userPwd'])==$user->getPassword()){
-				echo"<PRE> ACCESS CONTROL: data ";print_r($user);echo"</PRE>";
+				//echo"<PRE> ACCESS CONTROL: data ";print_r($user);echo"</PRE>";
 				$this->updateSession($user);
-				echo "success";
-				//exit;
+				//echo "success";
 				return true;
 			}else{
 				$monError=new ErrorController();
 				$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "raison"=>"mot de passe incorrect", "idMessage"=>10));
-				echo "Failed  <pre>";print_r($params);echo"</pre>";
+				//echo "Failed  <pre>";print_r($params);echo"</pre>";
 				return false;	
 			}
 		}else{
 			$monError=new ErrorController();
-			$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "message"=>11));
-			echo "Failed";
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "idMessage"=>11));
+			//echo "Failed";
 			return false;			
 		}	
 	}

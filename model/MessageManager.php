@@ -39,14 +39,14 @@ class MessageManager extends Manager{
 	}
 	
 	public function getByNumber($id)  {
-		//echo " <br />message manager ".$contexte."<br />";
+		//echo " <br />message manager ".$id."<br />";
 		$q = $this->dbConnect()->query('SELECT * FROM message WHERE id = "'.$id.'"');
 		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 		
 		if($donnees) {
 			return new Message($donnees);
 		}else{
-			return "perdu";
+			return false;
 		}
 	}
 	

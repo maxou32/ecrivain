@@ -23,7 +23,8 @@ class template extends view{
 		<!DOCTYPE html>
 		<html>
 			<head>
-				<meta charset="utf8_general_ci" />
+				<meta charset="utf8" />
+				<!-- <meta charset="utf8_general_ci" />  -->
 				<!-- Ligne à ajouter si on veut un favicon		-->
 				<link rel="icon" type="image/jpeg" href="D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\public\media\icone.png">
 
@@ -52,16 +53,20 @@ class template extends view{
 				<!-- Twitter Summary card images must be at least 120x120px -->
 				<meta name="twitter:image" content="D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\public\media\icone.png">
 				
+				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<link href="public/css/style.css" rel="stylesheet" /> 
-				<!-- Compiled and minified CSS -->
-				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+				<!-- Compiled and minified CSS 
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">-->
 				<!--Import Google Icon Font-->
 				<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-				<!--Import materialize.css-->
+				<!--Import materialize.css
 				<link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
-
+				-->
 				<!-- Let browser know website is optimized for mobile -->
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<link href="public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+				 <!-- Custom styles for this template -->
+				<link href="public\bootstrap\css\starter-template.css" rel="stylesheet">
 				<script src="public\js\tinymce\tinymce.min.js"></script>
 				<script>tinymce.init({
 					selector:'textarea',
@@ -74,8 +79,9 @@ class template extends view{
 					});
 				</script>
 				<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-			   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
-				<script src="public\js\bootstrap.min.js"></script>
+			    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+				<script src="public\bootstrap\js\jquery.js"></script>
+				<script src="public\bootstrap\js\bootstrap.min.js"></script> 
 				<script src="public\js\bootbox.min.js"></script>
 			</head>
 			<body style="background-image: url('<?= $this->imageBackGround ?>');">	 

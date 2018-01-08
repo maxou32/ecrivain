@@ -19,31 +19,37 @@ class _readOneChapterView extends View
 		ob_start(); 
 		?>
 		<div class="row">
-			<div class="col s1"></div>
-			<div class="formChapitre  col s7">
-				<div>
-					<h4><?= htmlspecialchars($datas->getTitle()) ?></h4><br />
-				</div>
-				<div class="center">
-					<label>Date de création</label><br />
-					<?= htmlspecialchars($datas->getDateFr()) ?><br />
-					
-					<label>Numéro d'ordre du chapitre</label><br />
-					<?= $datas->getNumber() ?><br />
+			<div class="col-xs-1 col s1"></div>
+			<div class="col-xs-7 formChapitre  col s7">
 				
-			
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="row">
+							<div  class="col-xs-8">
+								<h4 class="panel-title"><?= htmlspecialchars($datas->getTitle()) ?></h4>
+							</div>
+							<div class="col-xs-4">
+								<label>Date de création</label><br />
+								<?= htmlspecialchars($datas->getDateFr()) ?><br />
+								
+								<label>Numéro d'ordre du chapitre</label><br />
+								<?= $datas->getNumber() ?><br />
+							</div>	
+						</div>
+					</div>
 					<?= $datas->getContent() ?>
-				</div>					
+						
+				</div>
 				<?php 
 				if(isset($params['updateDeleteAreAutorized'])){
 					if ($params['updateDeleteAreAutorized']){
 						?>
 						<div class="row">
-							<form class="col s6 center" method="post" action="index.php?askUpdateOneChapter/idchapter/<?= $datas->getIdchapters()?>" >
+							<form class="col-lg-6 col" method="post" action="index.php?askUpdateOneChapter/idchapter/<?= $datas->getIdchapters()?>" >
 								<input type="submit" name="sousAction" value="Mettre à jour" class="button">
 								<input id="idChapter" name="idchapter" type="hidden"  value ="<?= htmlspecialchars($datas->getIdchapters()) ?>" />
 							</form>
-							<form class="col s6 center" method="post" action="index.php?deleteOneChapter/idchapter/<?= $datas->getIdchapters()?>" >
+							<form class="col-lg-6 col" method="post" action="index.php?deleteOneChapter/idchapter/<?= $datas->getIdchapters()?>" >
 							   <input id="idChapter" name="idchapter" type="hidden"  value ="<?= htmlspecialchars($datas->getIdchapters()) ?>" />
 								<input type="submit" name="sousAction" value="Supprimer" class="button">
 							</form>
@@ -55,8 +61,8 @@ class _readOneChapterView extends View
 				$CommentView=$monCommentView->show();	
 				?>
 			</div>
-			<div class="col s1"></div>
-			<div class="col s2">
+			<div class="col-xs-1 col s1"></div>
+			<div class="col-xs-2 col s2">
 				<?php
 					$monAsideView=new _AsideView($params);	
 					$asideView=$monAsideView->show();	

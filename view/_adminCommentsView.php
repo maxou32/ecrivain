@@ -14,52 +14,56 @@ class _AdminCommentsView extends View{
 		//echo"<PRE>";print_r($params);echo"</PRE>";
 		?>
 		
-		<div id="center">
+		<div class="formChapitre center">
 			<form method="post" action="index.php?_validComments"  >
-				<ul class="collection">
+				<div class="collection">
 				<?php
 				for($i=0;$i<count($datas);$i++)
 				{
 					?>
 					
-					<li class="collection-item">
-						<div class="row">
-							<div class="col s6">
-								<p id="name"><?=$datas[$i]->getName() ?> </p>
-								<input name="<?=$datas[$i]->getIdcomments() ?>" type="hidden" id="<?= $datas[$i]->getIdcomments() ?>"  />
+					<div class="panel panel-default">
+						<div class="row ">
+							<div class="col-lg-6 panel-heading">
+								<div class=" panel-collapse collapse in">
+									<p id="name"><?=$datas[$i]->getName() ?> </p>
+									<input name="<?=$datas[$i]->getIdcomments() ?>" type="hidden" id="<?= $datas[$i]->getIdcomments() ?>"  />
+									
+									<p id="content"><?=$datas[$i]->getContent() ?> </p>
+									<?php
+										if($datas[$i]->getSignaled() ){
+											?>
+											<span class="chip orange center"><i class="material-icons left">report_problem</i>Commentaire signalé</span>
+											<?php
+										} 
+									?>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-control">
+									<?php
+										foreach ($params['status'] as $key => $value){										
+											if($datas[$i]->getStatus_IdStatus()==$key){echo "<p>Statut du commentaire : <i>".$value."</i></p> ";} 
+										}
+									?>
+								</div>
+								<div class=" form-control">
+									<label for="<?="action".$datas[$i]->getIdcomments() ?>">A modifier</label>
+									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
 								
-								<p id="content"><?=$datas[$i]->getContent() ?> </p>
-								<?php
-									if($datas[$i]->getSignaled() ){
-										?>
-										<span class="chip orange center"><i class="material-icons left">report_problem</i>Commentaire signalé</span>
-										<?php
-									} 
-								?>
+								</div>
 							</div>
 							
-							<div class="col s3 center">
-								<?php
-									foreach ($params['status'] as $key => $value){										
-										if($datas[$i]->getStatus_IdStatus()==$key){echo "<p>Statut du commentaire :</p> <i>".$value."</i>";} 
-									}
-								?>
-							</div>
-							<div class="col s3">
-								<p></p>&nbsp;<p></p>
-								<input type="checkbox" class="filled-in" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
-								<label for="<?="action".$datas[$i]->getIdcomments() ?>">A modifier</label>
-							</div>
 						</div>
-					</li>
+					</div>
 					<?php 
 				}
 				
 				?>
-				</ul>
+				</div>
 				<div class="row">
 					<select class="browser-default" name="choix" >
-						<option value="" disabled selected>Choisissez l'opération à réaliser</option>
+						<option value="" disabled selected class="form-control">Choisissez l'opération à réaliser</option>
 						<?php
 							foreach ($params['status'] as $key => $value){
 								?>
@@ -69,9 +73,10 @@ class _AdminCommentsView extends View{
 							}
 						?>
 						<option value="D">Détruire</option>
-					</select>								
-					<input type="submit"value="Appliquer les changements" class=" button center">
-				
+					</select>												
+					<span class="btn btn-success glyphicon glyphicon-ok-sign">
+					<input type="submit" value="Appliquer les changements" class="success">
+					</span> 				
 				</div>
 			</form>
 			

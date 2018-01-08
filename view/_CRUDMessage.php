@@ -29,15 +29,21 @@ class _CRUDMessage extends View
 					for($i=0;$i<count($datas);$i++)
 					{
 						?>
-						<input type="hidden" name="id" id="id" value="<?= $datas[$i]->getId() ?>"/>
-						<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>
-						<input type="hidden" name="texte" value="<?= $datas[$i]->getTexte() ?>"/>
-						<input type="hidden" name="idtypemessage" value="<?= $datas[$i]->getMessage_idtypemessage() ?>"/>
-						<input class="with-gap"	type="radio" name="message" class ="listData" value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
-							<label for="<?= $datas[$i]->getId() ?>" id="messageLU" title="<?= $datas[$i]->getcontexte() ?>"  >
-								<?= $datas[$i]->getTexte() ?> <br /> 
-							</label>
-						<br /><br /><br /><br />
+						<div class="row">
+							<div class="col-xs-2">
+								<input type="hidden" name="id" id="id" value="<?= $datas[$i]->getId() ?>"/>
+								<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>
+								<input type="hidden" name="texte" value="<?= $datas[$i]->getTexte() ?>"/>
+								<input type="hidden" name="idtypemessage" value="<?= $datas[$i]->getMessage_idtypemessage() ?>"/>
+								<input type="radio" name="message"  value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
+							</div >
+							<div class="col-xs-10">
+								<label for="<?= $datas[$i]->getId() ?>" id="messageLU" title="<?= $datas[$i]->getcontexte() ?>"  >
+										<?= $datas[$i]->getTexte() ?> <br /> 
+								</label>
+							
+							</div>
+						</div>
 						<?php 
 					}
 					?>
@@ -68,9 +74,9 @@ class _CRUDMessage extends View
 					<input type="text" name="idtypemessage" id="idtypemessage" />
 					
 					<label for="texte" class="active">Texte du message</label>
-					<input name="texte" id="texte" type="text" onfocus='javascript:chargeTypeMessage()' required/>
+					<input name="texte" id="texte" type="text" class="form-control" onfocus='javascript:chargeTypeMessage()' required/>
 					<label for="contexte" class="active">Contexte d'emploi du message</label>
-					<input name="contexte" id="contexte" type="text" required/>
+					<input name="contexte" id="contexte" type="text" class="form-control" required/>
 					<!-- mettre balise PHP //$params["MessageTypeList"] ?> -->
 					<input type="submit" name="sousAction" value="Mettre à jour" class="button"/>
 					<input type="submit" name="sousAction" value="Supprimer" class="button"/>

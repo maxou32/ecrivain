@@ -14,33 +14,39 @@ class _ListChaptersView extends View
 		
 		?>
 		<div id="center">
-			<ul class="collapsible popout" data-collapsible="accordion">
+			<div  id="monaccordeon" class="panel-group col-lg-12">
 			<?php
 			$nbCaracters=$params['nbCaracters'];
 			//echo "nbCaracters =" .$nbCaracters;
 			for($i=0;$i<count($datas);$i++)
 			{
 				?>
-					<li class="collapsible-row">
-						<div class="collapsible-header">
-							<img src="public/media/baleine.jpg" alt="baleine" class="circle miniImage">
-							<?= $datas[$i]->getTitle() ?>
-						</div>
-						<div class="collapsible-body "><em id="dateCreation">rédigé le : <?= $datas[$i]->getDateFr() ?></em>
-							<?php 
-							if(strlen($datas[$i]->getContent())>$nbCaracters){
-								$begin=substr($datas[$i]->getContent(),0,$nbCaracters).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
-							}else{
-								$begin='<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
-							}
-							?>
-							<p id="content"><?=$begin ?> </p>
-						</div>
-					</li>
+					<div class="panel panel-default">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<a href="#<?= $datas[$i]->getIdchapters() ?>" data-parent="#monaccordeon" data-toggle="collapse"><img src="public/media/baleine.jpg" alt="baleine" class="circle miniImage">
+									<?= $datas[$i]->getTitle() ?>
+									</a>
+								</h3>
+							</div>
+							<div id="<?= $datas[$i]->getIdchapters() ?>" class="panel-collapse collapse">
+								<em id="dateCreation">rédigé le : <?= $datas[$i]->getDateFr() ?></em>
+								<?php 
+								if(strlen($datas[$i]->getContent())>$nbCaracters){
+									$begin=substr($datas[$i]->getContent(),0,$nbCaracters).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
+								}else{
+									$begin='<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
+								}
+								?>
+								<p id="content"><?=$begin ?> </p>
+							</div>
+						</div
+					</div>
 				<?php 
 			}
 			?>
-			</ul>
+			</div>
 		</div>
 		<?php
 		//$title="Voyage en Alaska"; 

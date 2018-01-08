@@ -9,16 +9,21 @@ class _ErrorView {
 	private $leMessage;
 	
 	public function __construct(){
+	}
+	
+	public function hasError(){
 		$monError=new ErrorController();
 		//ECHO "ERROR VIEW 0";
 		if ($monError->getExisteError()) {
 			$monMessageManager= new MessageManager();
 			$this->leMessage=$monMessageManager->getByNumber($monError->getIdError());
-			//ECHO "ERROR VIEW 1<pre>";print_r($this->leMessage->getTexte());echo"</pre>  ";
-			//$monError->deleteError();
-			$this->show();
+			//ECHO "ERROR VIEW 1<pre>";print_r($this->leMessage);echo"</pre>  ";
+			$monError->deleteError();
+			//$this->show();
+			return true;
 		}
 	}
+	
 	
 	public function show(){
 
@@ -27,8 +32,7 @@ class _ErrorView {
 		?>
 		<script type="text/javascript">
 			console.log("je suis l alerte");
-			//jQuery(document).ready(function($){
-
+			
 			bootbox.alert('<?php echo $this->leMessage->getTexte(); ?>'	);			
 				
 		

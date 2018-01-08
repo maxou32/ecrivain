@@ -3,6 +3,7 @@ namespace web_max\ecrivain\View;
 use web_max\ecrivain\view\View;
 use web_max\ecrivain\view\Template;
 use web_max\ecrivain\view\_AsideView;
+use web_max\ecrivain\view\_ErrorView;
 
 class _messageView extends View
 {	
@@ -16,15 +17,15 @@ class _messageView extends View
 		ob_start(); 
 		?>
 		<div class ="row">
-			<div class="col s1"></div>
-			<article id="barreMessage" class="col s7">
+			<div class="col-xs-1 col s1"></div>
+			<article id="barreMessage" class="col-xs-7 col s7">
 				<div>
 					 <p><?= $datas->getTexte() ?></p>
 				</div>									<!-- fin "flottage" du menu -->
 			</article>
 		
-			<div class="col s1"></div>
-			<div class="col s2">
+			<div class="col-xs-1 col s1"></div>
+			<div class="col-xs-3 col s2">
 				<?php
 					$monAsideView=new _AsideView($params);	
 					$asideView=$monAsideView->show();	
@@ -33,6 +34,11 @@ class _messageView extends View
 		</div>	
 		<?php
 		//$title="Voyage en Alaska"; 
+		//echo "message view avant erreur";
+		$monErrorView=new _ErrorView();
+		if ($monErrorView->hasError()){
+			echo $monErrorView->show();
+		}
 		$messageView=ob_get_clean();
 		$contentView= $messageView;
 		$menuView=$this->renderTop();

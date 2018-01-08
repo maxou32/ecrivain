@@ -11,19 +11,23 @@ class _askSendMailView extends View{
 	public function show($params,$datas){		
 		ob_start(); 
 		?>
-		<form  action="index.php?sendMail"" method="POST" enctype="multipart/form-data" class="formUser row ">
+		<div class="row">
+		<form  action="index.php?sendMail"" method="POST" enctype="multipart/form-data" class="formUser center ">
 			<input type="hidden" name="action" value="submit">
-			<div class="col s6">
+			<div class="col-xs-6 col s6">
 				Votre nom:<br>
-				<input name="name" type="text" value="" size="30"/><br>
+				<input name="name" type="text" value="" size="30" class="form-control"/><br>
 			</div>
-			<div class="col s6">
+			<div class="col-xs-6 col s6">
 				Votre email:<br>
-				<input name="email" type="text" value="" size="30"/><br>
+				<input name="email" type="text" value="" size="30"class="form-control"/><br>
 			</div>
 			Votre message:<br>
 			<textarea name="message" rows="7" cols="30"></textarea><br>
-			<input type="submit" value="Transmettre" class="button center"/>
+			<button type="submit" name="sousAction" value="Transmettre" class="btn btn-primary">
+				<span class="glyphicon glyphicon-ok-sign"></span>
+				 transmettre
+			</button>
 		</form>
 
 		<?php

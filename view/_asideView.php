@@ -16,7 +16,7 @@ class _AsideView {
 
 		<aside id="barreAside" class ="formBook ">
 			<div>
-				<h5><?= $this->aside["aside"]["title"]?></h5>
+				<h4><?= $this->aside["aside"]["title"]?></h4>
 			<?php
 				for($i=0;$i<count($this->aside["aside"]["value"]);$i++)
 				{
@@ -29,7 +29,7 @@ class _AsideView {
 					}else{
 						$begin='<a href="index.php?oneChapter/idchapter/'.$this->aside["aside"]["value"][$i]["ref1"].'">'.$this->aside["aside"]["value"][$i]["content"].'</a>';
 					}
-					echo  $begin."<br />"; 
+					echo  "<bockquote>".$begin."</bockquote>"; 
 					
 					?>
 					<p  class="right-align"><i><?= $this->aside["aside"]["value"][$i]["detail1"] ;?></i></p><br />

@@ -17,8 +17,8 @@ class _TheBookView extends View
 		
 		?>
 		<div class ="row">
-			<div class="col s1"></div>
-			<div class="formBook col s7">
+			<div class="col-xs-1 col s1"></div>
+			<div class="formBook col-xs-7 col s7">
 				<div class="carousel-item " href="<?= $datas->getNumber() ?>">
 					<h3><?= $datas->getTitle() ?></h3>
 
@@ -26,7 +26,7 @@ class _TheBookView extends View
 					<p class="flow-text"><?= $datas->getContent() ?></p>
 				</div>
 				
-				<ul class="pagination center">
+				<ul class="pagination pagination-lg">
 				<?php 
 				for($i=0;$i<$params["nbChapters"];$i++)
 				{
@@ -38,28 +38,32 @@ class _TheBookView extends View
 				?>
 				</ul>
 
-				<p>Ajoutez un commentaire :</p>
+				<div class="jumbotron"><h4>Ajoutez un commentaire :</h4></div>
 				<form method="post" name="addComment" action="index.php?addComment/chap/<?= $datas->getNumber() ?>" >
 					<input type="hidden" name="chapter" id="chapter" value="<?= $datas->getIdchapters() ?>"/>
 					
-					<div class=" col s6">				
-						<input type="text" name="name" id="name" />
+					<div class="col-xs-6 col s6">				
 						<label for="name" class="active">Votre nom</label>
+						<input type="text" name="name" id="name"  class="form-control"/>						
 					</div>
-					<div class="col s6">
-						<input type="text" name="email" id="email" />
+					<div class="col-xs-6 col s6">
 						<label for="email" class="active">Votre email</label>
+						<input type="text" name="email" id="email" class="form-control" />
+						
 					</div>
 					<label for="content" class="active">Texte du message</label><textarea name="content" id="content" type="text" /></textarea>
-					<input type="submit" name="sousAction" value="Soumettre" class="button"/>
+					<button type="submit" name="sousAction" value="Soumettre" class="btn btn-primary">
+						<span class="glyphicon glyphicon-ok-sign"></span>
+						soumettre
+					</button>
 				</form>
 				<?php
 					$monCommentView=new _CommentView($params);	
 					$CommentView=$monCommentView->show();	
 				?>
 			</div>
-			<div class="col s1"></div>
-			<div class="col s2">
+			<div class="col-xs-1 col s1"></div>
+			<div class="col-xs-2 col s2">
 				<?php
 					$monAsideView=new _AsideView($params);	
 					$asideView=$monAsideView->show();	

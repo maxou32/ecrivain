@@ -15,32 +15,42 @@ class _MenuPrivateView extends View
 
 		<div id="barre_menu">
 
-			<nav id="menu">
-				<div id= "logo" class="brand-logo">
-					<img src="public/media/wm.png"	alt="web-max">
-					
+			<nav id="menu" class="navbar navbar-inverse  navbar-fixed-top">
+				<div class="navbar-header">   
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					</button>
 				</div>
-				<div class="nav-wrapper" >
-					<ul id="menuGeneral" class="right hide-on-med-and-down">
-						<li><a href="index.php" class="item_menu">Accueil</a></li>
+				<div id= "logo" class="navbar-brand brand-logo">	
+					<img src="public/media/wm.png"	alt="web-max">		
+				</div> 
+				<div class="collapse navbar-collapse">
+					<ul id="menuGeneral" class="nav navbar-nav navbar-right">
+						<li><a href="index.php" class="active item_menu">Accueil</a></li>
 						
 						<li><a href="index.php?_listChaptersView" class="item_menu">Les chapitres</a></li>
 						<li><a href="index.php?askAddOneChapter" class="item_menu">Ajouter un chapitre</a></li>
-						<li><a class="dropdown-button" class="item_menu" href="#!"  data-activates="admin">Administration<i class="material-icons  right">arrow_drop_down</i></a>
-							<ul id="admin" class="dropdown-content">
+						<li class="dropdown">
+							<a  data-toggle="dropdown"  href="#">Administration<b class="caret"></b></a>
+							<ul class="dropdown-menu">
 								<li><a href="index.php?adminChapter" class="item_menu">Chapitres</a></li>
 								<li><a href="index.php?adminComment" class="item_menu">Commentaires</a></li>
 								<li><a href="index.php?adminUser" class="item_menu">Utilisateurs</a></li>
-							</ul>
-						</li>
-						<li><a class="dropdown-button" href="#!" data-activates="gestion">Gestion<i class="material-icons  right">arrow_drop_down</i></a>
-							<ul id="gestion" class="dropdown-content">
+								<li class="divider"></li>
 								<li><a href="index.php?askCRUDMessage/sousAction/Information/cible/askCRUDMessage" class="item_menu">Messages d'information</a></li>
 								<li><a href="index.php?askCRUDMessage/sousAction/Erreur/cible/askCRUDMessage" class="item_menu">Messages d'erreur</a></li>
 							</ul>
-						</li>
-					
-						<li class="demiHauteur"><a href="index.php?askUpdateProfil"> Bonjour, <?= $params ?></a><a href="index.php?abortAccess" class="item_menu">Deconnexion</a></li>
+						</li>			
+						<li class="dropdown">
+							<a  data-toggle="dropdown"  href="#">Bonjour, <?= $params ?><b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="index.php?askUpdateProfil" class="item_menu">Mon profil</a></li>
+								<li class="divider"></li>
+								<li><a href="index.php?abortAccess" class="item_menu">Me déconnecter</a></li>
+							</ul>
+						</li>			
 						
 					</ul>
 				</div>

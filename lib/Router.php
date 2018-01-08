@@ -130,6 +130,7 @@ class Router{
 				//echo"<PRE><br />ROUTER verif vAR ACTION 1 ";print_r($varPost);echo"<br /> fin construct </PRE>";
 				if (isset($this->getParams($_GET)["cible"])){
 					$varAction=$this->getParams($_GET)["cible"];
+					$varParam=$this->getParams($_GET);
 				}
 				empty($varAction) ? $varAction="_messageView": false ;
 				//echo"<PRE><br />ROUTER verif POST et GET ";print_r($varAction);echo"<br /> fin construct </PRE>";
@@ -140,7 +141,9 @@ class Router{
 				if (isset($this->myRoad)){
 					//echo"<PRE><br />ROUTER parametre avant appel PrepareAction ";print_r($this->myRoad);echo"<br /> fin construct </PRE>";
 					if( $this->autorizedAccess()){
-						//echo"<PRE><br />ROUTER parametre avant appel CONTROLLER ";print_r($varAction);echo"<br /> </PRE>";
+						//echo"<PRE><br />ROUTER parametre avant appel CONTROLLER param ";print_r($varParam);echo"<br /> </PRE>";
+						//echo"<PRE><br />ROUTER parametre avant appel CONTROLLER post ";print_r($varPost);echo"<br /> </PRE>";
+						//echo"<PRE><br />ROUTER parametre avant appel CONTROLLER action ";print_r($varAction);echo"<br /> </PRE>";
 						$monController=new Controller($this->myRoad,$varAction);
 						$monController->prepareAction($varParam, $varPost);
 					}else{

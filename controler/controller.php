@@ -34,6 +34,8 @@ class Controller{
         */
 		
 		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
+		//echo "<br /><pre>CONTROLLER 1.30 maxou: params = ";print_r($params);echo"</pre>";
+		//echo "<br /><pre>CONTROLLER 1.30 maxou: post = ";print_r($post);echo"</pre>";
 		
 		if(!empty($this->myRoad["appelFonctionAvantData"]["className"])){
 			$maClasse=new $this->myRoad["appelFonctionAvantData"]["className"]($this->myRoad, $this->myAction);		
@@ -41,8 +43,8 @@ class Controller{
 				if(isset($this->myRoad["appelFonctionAvantData"]["nom"])){
 					$function=$this->myRoad["appelFonctionAvantData"]["nom"];
 					if($this->myRoad["appelFonctionAvantData"]["origine"]=="params"){
-						echo"<PRE><br />CONTROLLER 1.31: dat PARAm";print_r($params);echo"</PRE>";
-						echo"<PRE><br />CONTROLLER 1.31: dat POST";print_r($post);echo"</PRE>";
+						//echo"<PRE><br />CONTROLLER 1.31: dat PARAm";print_r($params);echo"</PRE>";
+						//echo"<PRE><br />CONTROLLER 1.31: dat POST";print_r($post);echo"</PRE>";
 						$this->return=$maClasse->$function($params);
 					}else{
 						$this->return=$maClasse->$function($post);
@@ -61,7 +63,7 @@ class Controller{
 				if(isset($this->myRoad["appelFonctionAvantData"]["nom"])) {
 					$fonction=$this->myRoad["appelFonctionAvantData"]["nom"];
 					if ($this->myRoad["appelFonctionAvantData"]["origine"]=="params"){
-						echo "<br /><pre>CONTROLLER 1.41: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
+						//echo "<br /><pre>CONTROLLER 1.41: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
 						$this->return= $this->$fonction($params);
 					}else{
 						//echo "<br /><pre>CONTROLLER 1.42: element = ";print_r($post);echo"</pre>";
@@ -75,7 +77,7 @@ class Controller{
 				}
 			}
 		   
-		}		
+		}	
 	}
 	
 	private function lireDonnees($params, $post){
@@ -275,7 +277,7 @@ class Controller{
 		//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
 		//echo"<PRE><br>CONTROLLER 1.1: nbPram = ";print_r($params);echo"</PRE>"."<br />";
 		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad);echo"</pre>";
-		if(null!==($this->myRoad["appelFonctionAvantData"]["nombrefonction"])){
+		if($this->myRoad["appelFonctionAvantData"]["nombrefonction"]>0){
 			$this->avantDonnees($params, $post);
 		}
 		

@@ -19,22 +19,28 @@ class _askReservedAccess extends View
 			<form  class="formUser" >  <!-- method="post" action="index.php?validAccessReserved"   -->
 				<i class="material-icons prefix">account_circle</i>
 				<label for ="userName"> Nom :</label>
-				<input id="userName" name="userName" type="text" required class="validate"/><br />
+				<input id="userName" name="userName" type="text"  class="form-control" required class="validate"/><br />
 				<label for ="userPwd"> Mot de passe :</label>	
-				<input id="userPwd" name="userPwd" type="password" pattern=".{5,}" title="5 caractères minimum" required/><br />
+				<input id="userPwd" name="userPwd" type="password"  class="form-control" pattern=".{5,}" title="5 caractères minimum" required/><br />
 				<input id="cible" name="cible" type="hidden" value="validAccessReserved"/><br />
 					
-				<input type="submit" id="submit" value="Accéder à l'espace réservé"  class="button alert"/>
+				
+				<button type="submit" name="sousAction" value="Soumettre" class="btn btn-primary">
+					<span class="glyphicon glyphicon-ok-sign"></span>
+					 Accéder à l'espace réservé
+				</button>
+				
 				<div id="resultat">
 				</div>
-				<p>Content here. <a class="alert" href=#>Alert!</a></p>
 			</form>
 				
 			
 
 		<?php 
 		$monErrorView=new _ErrorView();
-		echo $monErrorView->show();
+		if ($monErrorView->hasError()){
+			echo $monErrorView->show();
+		}
 		$contentView=ob_get_clean(); 
 		
 		

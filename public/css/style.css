@@ -9,6 +9,7 @@ body
 	min-height:100%;
 	margin:0;
 	padding:0;
+	padding-top:70px;
 	padding-bottom:43px;
 }
   
@@ -66,11 +67,20 @@ body
 	padding:20px;
 	border-radius:5px;
 }
-
-.demiHauteur
+.row
 {
-	line-height:32px;
-	text-align:center;
+	margin:5px !important;
+	padding:5px !important;
+}
+.warning
+{
+	background-color : #f0ad4e;
+	border:0px ;
+}
+.success
+{
+	background-color :#5cb85c;
+	border:0px ;
 }
 .row_footer
 {
@@ -146,15 +156,7 @@ footer
 	border-radius : 5px ;
 	margin:5px ;
 }
-.modal
-{
-	background-color : #fafafa !important;
-	border-radius: 5px !important;	
-}
-.bootbox-close-button
-{
-	display:none  !important;
-}
+
 .badge
 {
 	padding:10px !important;

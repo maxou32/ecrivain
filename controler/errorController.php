@@ -30,9 +30,9 @@ public function __construct(){
 	
 	public	function getIdError() {   
 		//echo"<PRE> ERROR COntroller : ";print_r($_SESSION['error']);echo"</PRE>";
-		if(isset($_SESSION['error']['message'])){
+		if(isset($_SESSION['error']['idMessage'])){
 			//echo "<br />yes";
-			return $_SESSION['error']['message'];
+			return $_SESSION['error']['idMessage'];
 		}else{
 			//echo "<br />oh no";
 			return Null;

@@ -16,16 +16,25 @@ class _FieldsUserView extends View
 			<?php	
 		}else{
 			?><form method="post" action="index.php?registration" class="formUser">
-				<input id="sousActionAdd" name="sousAction" type="text" value ="add" ><?php
+				<input id="sousActionAdd" name="sousAction" type="hidden" value ="add" ><?php
 		}
 		?>
-				<label>votre nom</label><input id="userName" name="userName" type="text"  value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
-				<label>votre mot de passe</label><input id="userPwd" name="userPwd" type="password" pattern=".{5,}" title="5 caractères minimum" required /><br />
-				<label>votre adresse mail</label><input id="mail" name="mail" type="text"  value ="<?= htmlspecialchars($params["email"])?>" required /><br />
+				<label>votre nom</label>
+				<input id="userName" name="userName" type="text"  class="form-control" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
+				<label>votre mot de passe</label>
+				<input id="userPwd" name="userPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required /><br />
+				<label>votre adresse mail</label>
+				<input id="mail" name="mail" type="text" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
 				
 				<br />
-				<input type="submit" value="Soumettre votre demande"class="button" />
-				<input type="submit" name="sousAction" value="Fermer"  class="button"/>
+					<button type="submit" name="sousAction" value="Soumettre" class="btn btn-primary">
+						<span class="glyphicon glyphicon-ok-sign"></span>
+						 Soumettre votre demande
+					</button>					
+					<button type="submit" name="sousAction" value="Fermer" class="btn btn-primary">
+						<span class="glyphicon glyphicon-remove-sign"></span>
+						 Fermer
+					</button>
 			</form>
 
 	

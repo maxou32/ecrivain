@@ -268,7 +268,7 @@ simpleRoads:
    nombreParam : 2
    lesParams:
    nomParam : userName
-   origine : post							#action ou dur
+   origine : params							#action ou dur
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
