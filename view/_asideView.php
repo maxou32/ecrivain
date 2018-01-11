@@ -16,13 +16,13 @@ class _AsideView {
 
 		<aside id="barreAside" class ="formBook ">
 			<div>
-				<h4><?= $this->aside["aside"]["title"]?></h4>
+				<h4><?= htmlspecialchars($this->aside["aside"]["title"])?></h4>
 			<?php
 				for($i=0;$i<count($this->aside["aside"]["value"]);$i++)
 				{
 					?>
-					<p class="hide"><?= $this->aside["aside"]["value"][$i]["ref1"] ; ?> </p>
-					<h6  class="left-align"><?= $this->aside["aside"]["value"][$i]["ref2"]; ?></h6>
+					<p class="hide"><?= htmlspecialchars($this->aside["aside"]["value"][$i]["ref1"]) ; ?> </p>
+					<h5  class="left-align"><?= htmlspecialchars($this->aside["aside"]["value"][$i]["ref2"]); ?></h5>
 					<?php
 					if(strlen($this->aside["aside"]["value"][$i]["content"])>$this->aside["nbCaracters"]/3){
 						$begin=substr($this->aside["aside"]["value"][$i]["content"],0,$this->aside["nbCaracters"]/3).'<a href="index.php?oneChapter/idchapter/'.$this->aside["aside"]["value"][$i]["ref1"].'">  (lire la suite...)</a>';
@@ -32,7 +32,7 @@ class _AsideView {
 					echo  "<bockquote>".$begin."</bockquote>"; 
 					
 					?>
-					<p  class="right-align"><i><?= $this->aside["aside"]["value"][$i]["detail1"] ;?></i></p><br />
+					<h5 class="right-align"><i><?= htmlspecialchars($this->aside["aside"]["value"][$i]["detail1"]) ;?></i></h5><br />
 					<div class="divider"></div>
 					<?php
 				}

@@ -15,11 +15,18 @@ class _MenuFreeView extends View
 
 		<div id="barre_menu">
 			<nav id="menu" class="navbar navbar-inverse  navbar-fixed-top">
-				<div id= "logo" class="navbar-brand brand-logo">	
-					<img src="public/media/wm.png"	alt="web-max">		
+				<div class="navbar-header">   
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					</button>
 				</div>
-				<div class="nav-wrapper">
-					<ul id="menuGeneral" class="nav navbar-nav navbar-right right hide-on-med-and-down">
+				<div id= "logo" class="navbar-brand brand-logo">	
+					<img src="public/media/wm.png"	alt="web-max" class="logo">		
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul id="menuGeneral" class="nav navbar-nav navbar-right">
 						<li><a href="index.php" class="active item_menu">Accueil</a></li>
 						<li><a href="index.php?_TheBookView/chap/1" class="item_menu">Mon livre</a></li>
 						<li><a href="index.php?askSendMail" class="item_menu">Contact</a></li>

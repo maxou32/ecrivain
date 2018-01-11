@@ -7,13 +7,12 @@ use web_max\ecrivain\view\_ErrorView;
 
 class _messageView extends View
 {	
-	
 	public function __construct($template){
 		$this->template =$template;
 	}
+
 	public function show($params,$datas){
 		isset($params['message']) ? $message=$params['message'] :true;
-		
 		ob_start(); 
 		?>
 		<div class ="row">
@@ -49,5 +48,7 @@ class _messageView extends View
 
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
 		$monTemplate->show(NULL,NULL);
+
 	}
+
 }

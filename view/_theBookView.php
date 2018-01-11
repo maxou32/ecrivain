@@ -19,10 +19,10 @@ class _TheBookView extends View
 		<div class ="row">
 			<div class="col-xs-1 col s1"></div>
 			<div class="formBook col-xs-7 col s7">
-				<div class="carousel-item " href="<?= $datas->getNumber() ?>">
+				<div class="carousel-item " href="<?= htmlspecialchars( $datas->getNumber()) ?>">
 					<h3><?= $datas->getTitle() ?></h3>
 
-					<em id="dateCreation">rédigé le : <?= $datas->getDateFr() ?></em>
+					<em id="dateCreation">rédigé le : <?= htmlspecialchars($datas->getDateFr()) ?></em>
 					<p class="flow-text"><?= $datas->getContent() ?></p>
 				</div>
 				
@@ -39,8 +39,8 @@ class _TheBookView extends View
 				</ul>
 
 				<div class="jumbotron"><h4>Ajoutez un commentaire :</h4></div>
-				<form method="post" name="addComment" action="index.php?addComment/chap/<?= $datas->getNumber() ?>" >
-					<input type="hidden" name="chapter" id="chapter" value="<?= $datas->getIdchapters() ?>"/>
+				<form method="post" name="addComment" action="index.php?addComment/chap/<?= htmlspecialchars($datas->getNumber()) ?>" >
+					<input type="hidden" name="chapter" id="chapter" value="<?= htmlspecialchars($datas->getIdchapters()) ?>"/>
 					
 					<div class="col-xs-6 col s6">				
 						<label for="name" class="active">Votre nom</label>

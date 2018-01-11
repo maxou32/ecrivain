@@ -4,6 +4,7 @@
 class Message {
 	private $_id;
 	private $_texte;
+	private $_number;
 	private $_contexte;
 	private $_message_idtypemessage;
 	
@@ -28,6 +29,7 @@ class Message {
 	// Liste des getters  
 	public function getId()  { return $this->_id;}  
 	public function getTexte()  {return $this->_texte;}  
+	public function getNumber()  {return $this->_number;}  
 	public function getContexte()  {return $this->_contexte; }  
 	public function getMessage_idtypemessage()  {return $this->_message_idtypemessage; }  
 	
@@ -43,6 +45,16 @@ class Message {
 		}
 	}
   
+	public function setNumber($number){
+		// On convertit l'argument en nombre entier.
+		$number = (int) $number;
+		// On vérifie ensuite si ce nombre est bien strictement positif.
+		if ($number > 0){
+		  // Si c'est le cas, c'est tout bon, on assigne la valeur à l'attribut correspondant.
+		  $this->_number = $number;
+		}
+	}
+
 	public function setTexte($texte){
 		// On vérifie qu'il s'agit bien d'une chaîne de caractères.
 		if (is_string($texte))    {

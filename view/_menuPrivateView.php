@@ -15,7 +15,7 @@ class _MenuPrivateView extends View
 
 		<div id="barre_menu">
 
-			<nav id="menu" class="navbar navbar-inverse  navbar-fixed-top">
+			<nav id="menu" class="navbar  navbar-fixed-top">
 				<div class="navbar-header">   
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					  <span class="icon-bar"></span>
@@ -24,7 +24,7 @@ class _MenuPrivateView extends View
 					</button>
 				</div>
 				<div id= "logo" class="navbar-brand brand-logo">	
-					<img src="public/media/wm.png"	alt="web-max">		
+					<img src="public/media/wm.png"	alt="web-max"  class="logo">		
 				</div> 
 				<div class="collapse navbar-collapse">
 					<ul id="menuGeneral" class="nav navbar-nav navbar-right">

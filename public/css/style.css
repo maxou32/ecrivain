@@ -18,6 +18,10 @@ body
 	width:60%;
 	margin:auto;
 }
+.logo 
+{
+	height:100%;
+}
 .collapsible 
 {
 	padding:10px;
@@ -72,19 +76,15 @@ body
 	margin:5px !important;
 	padding:5px !important;
 }
-.warning
-{
-	background-color : #f0ad4e;
-	border:0px ;
-}
-.success
-{
-	background-color :#5cb85c;
-	border:0px ;
-}
+
 .row_footer
 {
 	margin-bottom:0PX !important;
+}
+#menu
+{
+	background-color:white;
+	opacity:0.8;
 }
 #barreAside
 {

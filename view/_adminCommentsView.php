@@ -26,14 +26,16 @@ class _AdminCommentsView extends View{
 						<div class="row ">
 							<div class="col-lg-6 panel-heading">
 								<div class=" panel-collapse collapse in">
-									<p id="name"><?=$datas[$i]->getName() ?> </p>
-									<input name="<?=$datas[$i]->getIdcomments() ?>" type="hidden" id="<?= $datas[$i]->getIdcomments() ?>"  />
+									<p id="name"><?= htmlspecialchars($datas[$i]->getName()) ?> </p>
+									<input name="<?= htmlspecialchars($datas[$i]->getIdcomments()) ?>" type="hidden" id="<?= $datas[$i]->getIdcomments() ?>"  />
 									
-									<p id="content"><?=$datas[$i]->getContent() ?> </p>
+									<p id="content"><?= $datas[$i]->getContent() ?> </p>
 									<?php
 										if($datas[$i]->getSignaled() ){
 											?>
-											<span class="chip orange center"><i class="material-icons left">report_problem</i>Commentaire signalé</span>
+											<span class="btn btn-warning ">
+												<p class = " glyphicon glyphicon-exclamation-sign"> Commentaire signalé</p>
+											</span>
 											<?php
 										} 
 									?>
@@ -62,7 +64,7 @@ class _AdminCommentsView extends View{
 				?>
 				</div>
 				<div class="row">
-					<select class="browser-default" name="choix" >
+					<select class="browser-default col-lg-5 " name="choix" >
 						<option value="" disabled selected class="form-control">Choisissez l'opération à réaliser</option>
 						<?php
 							foreach ($params['status'] as $key => $value){
@@ -74,8 +76,8 @@ class _AdminCommentsView extends View{
 						?>
 						<option value="D">Détruire</option>
 					</select>												
-					<span class="btn btn-success glyphicon glyphicon-ok-sign">
-					<input type="submit" value="Appliquer les changements" class="success">
+					<span class=" col-offset-1 col-lg-5  ">
+						<input type="submit" class="glyphicon glyphicon-ok-sign btn btn-success " value="Appliquer les changements"/>
 					</span> 				
 				</div>
 			</form>

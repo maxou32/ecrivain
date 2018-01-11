@@ -178,7 +178,6 @@ simpleRoads:
      	 
 
 #**************************************   
-
  reservedAccess:
   seConnecte : param inutile
   security :
@@ -268,7 +267,7 @@ simpleRoads:
    nombreParam : 2
    lesParams:
    nomParam : userName
-   origine : params							#action ou dur
+   origine : post						#action ou dur
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
@@ -1378,26 +1377,26 @@ simpleRoads:
        - nomParam : Null
          origine : NUull							#post,get ou en dur
   appelFonctionAvantData :
-   nombrefonction : 1
-   fonction
-   className : web_max\ecrivain\controler\CommentController
-   nom : signal
-   avecParam : oui			#non
-   nombreParam : 1
-   lesParams:
-   nomParam : val
-   origine : params							#action ou dur
-  appelFonctionApresData :
    nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   avecParam : non			#non
+   nombreParam : 0
+   lesParams:
+   nomParam : null
+   origine : null						#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 1
    - fonction
-     className : Null
-     nom : Null
-     tableau : Null			######
-     avecParam : Null			#non
-     nombreParam : Null
+     className : web_max\ecrivain\controler\CommentController
+     nom : signal
+     tableau : chap			######
+     avecParam : oui			#non
+     nombreParam : 1
      lesParams:
-      nomParam : Null
-      origine : Null							#action ou dur
+      nomParam : chap
+      origine : params							#action ou dur
   wantHeaderLocation :
    action : oui
    param : oui
@@ -1449,7 +1448,7 @@ simpleRoads:
      nom : Null
      tableau : Null
      avecParam : Null 			#non
-     nombreParam : parametre inutile
+     nombreParam : 0
      lesParams:
       nomParam : status
       origine : Null							#action ou dur

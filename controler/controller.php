@@ -152,7 +152,7 @@ class Controller{
 						}else{
 							//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
 							$this->globalParams [$element["tableau"]]=$maClasse->$function($params);
-							//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($globalParams);echo"</pre>";
+							//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($this->globalParams);echo"</pre>";
 						}
 					}
 				}else{
@@ -176,6 +176,7 @@ class Controller{
 						}else{
 							$this->globalParams [$element["tableau"]]=$this->$element["nom"]($element);
 						}
+						//echo "<br /><pre>CONTROLLER 8.35: retour fonction apres data = ";print_r($this->globalParams);echo"</pre>";
 					}
 				}else{
 					if(isset($element["nom"])){ 
@@ -192,7 +193,7 @@ class Controller{
 				//echo "<br /><pre>CONTROLLER 8.5: Return globalParams = ";print_r($globalParams);echo"</pre>";
 			}
 			$nomParam=$element["lesParams"]["nomParam"];
-			//echo "<br /><pre>CONTROLLER 8.6: Return valide access = ";print_r($globalParams);echo"</pre>";
+			//echo "<br /><pre>CONTROLLER 8.6: Fin apres DATA = ";print_r($this->globalParams);echo"</pre>";
 		}
 	}
 	
@@ -227,7 +228,7 @@ class Controller{
 				}
 				$this->globalParams["params"]= $params;
 				//echo"<PRE> controle déclenchement vue 10: globalParams ";print_r($this->globalParams);echo"</PRE>";
-				//cho"<PRE> controle déclenchement vue 10: data ";print_r($this->data);echo"</PRE>";
+				//echo"<PRE> controle déclenchement vue 10: data ";print_r($this->data);echo"</PRE>";
 				//echo"<PRE> controle déclenchement vue 11: globalParams ";print_r($element["nom"]);echo"</PRE>";
 				$monMessageView = new $element["nom"]('template.php');  
 				$monMessageView->show($this->globalParams,$this->data);
@@ -242,18 +243,18 @@ class Controller{
         * déclanchement de la fonction a exécuter pour recharger une vue
         */
 		//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"];
-		//echo"<PRE> controle déclenchement vue 12: data ";print_r($post);echo"</PRE>";
+		//echo"<PRE> controle déclenchement vue 12: data ";print_r($params);echo"</PRE>";
 		if($this->myRoad["wantHeaderLocation"]["action"]=="oui"){
 			if( $this->myRoad["wantHeaderLocation"]["action"]=="oui"){
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){
 					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$post[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}else{
-					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$params[$this->myRoad["wantHeaderLocation"]["nom"]];
+					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$this->globalParams[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}
 			}else{
 				$critere="";
 			}
-			//cho"<PRE> controle déclenchement vue 13: data ";print_r($critere);echo"</PRE>";
+			//echo"<PRE> controle déclenchement vue 13: data ";print_r($critere);echo"</PRE>";
 			//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"].$critere;
 			header('Location: '.$this->myRoad["wantHeaderLocation"]["target"].$critere);
 		}

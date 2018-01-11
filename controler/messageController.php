@@ -56,7 +56,7 @@ class messageController	extends mainController	{
 		//echo "<br /> View CRUDMessage id=<PRE>";print_r($params);echo "</PRE>";
 		switch ($params['sousAction']){
 			case "Mettre à jour":
-				$donnees=array('id'=> $params['id'],'texte' =>$params['texte'],'contexte' => $params['contexte']);
+				$donnees=array('id'=> $params['id'], 'number' => $params['number'], 'texte' =>$params['texte'],'contexte' => $params['contexte']);
 				$newMessage = new Message($donnees);	
 				$messageManager= new MessageManager();
 				$message=$messageManager->update($newMessage);		
@@ -67,7 +67,7 @@ class messageController	extends mainController	{
 				$messageManager->delete($params['id']); 
 				break;
 			case "Ajouter":
-				$donnees=array('texte' => $params['texte'],'contexte' => $params['contexte'], 'message_idtypemessage'=> $params['idtypemessage']);
+				$donnees=array('texte' => $params['texte'], 'number' => $params['number'], 'contexte' => $params['contexte'], 'message_idtypemessage'=> $params['idtypemessage']);
 				$newMessage = new Message($donnees);	
 				$messageManager= new MessageManager();
 				$message=$messageManager->add($newMessage);	

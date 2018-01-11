@@ -38,7 +38,7 @@ public function __construct($myRoad, $action){
 		if(isset($params["chap"])){
 			$chapterManager= new ChaptersManager;
 			$monChapter= $chapterManager->getByNumber($params["chap"]);
-			//echo"<PRE>CONTROLLER COMMENT  CHAP:  2 ";print_r($monChapter);echo"</PRE>";
+			//echo"<PRE>CONTROLLER COMMENT  CHAP 2 ";print_r($monChapter);echo"</PRE>";
 			$comment=$commentManager->getListValidFromChapter($monChapter->getIdchapters());
 		}else{
 			$comment=$commentManager->getListValidFromChapter($params["idchapter"]);
@@ -69,13 +69,22 @@ public function __construct($myRoad, $action){
 		return $resultat;
 	}		
 	
-	public function signal($params){	
+	/**
+     * modifie le status d'un commentaire pour le passer à l'état signalé ou inverse
+     * 
+     * @param  array $params le'id du commenatire signalé
+     * @return l'id du chapitre concerné pour pouvoir le réafficher.
+     */
+	 public function signal($params){	
 		//echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
 		$resultat["result"]=false;		
 		$commentManager= new CommentManager();
+		$commentManager->updateSignaled($params["comment"],true);
+		$monComment=$commentManager->get($params["comment"]);
+		
+		$monChapter= new ChaptersManager();
+		$leChapitre=$monChapter->get($monComment->getChapter_IdChapter());
 
-		$commentManager->updateSignaled($params["comment"],$params["val"]);
-
-		return $resultat;
+		return $chapitre['chap']=$leChapitre->getNumber();
 	}		
 }

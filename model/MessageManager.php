@@ -10,8 +10,8 @@ class MessageManager extends Manager{
 	}
 
 	public function add(message $message)  {
-		$q = $this->dbConnect()->prepare('INSERT INTO message(texte, contexte,message_idtypemessage) VALUES(:texte, :contexte, :message_idtypemessage)');
-
+		$q = $this->dbConnect()->prepare('INSERT INTO message(texte, number, contexte, message_idtypemessage) VALUES(:texte, :number, :contexte, :message_idtypemessage)');
+		$q->bindValue(':number', $message->getNumber(), \PDO::PARAM_INT);
 		$q->bindValue(':texte', $message->getTexte(), \PDO::PARAM_STR);
 		$q->bindValue(':contexte', $message->getContexte(), \PDO::PARAM_STR);
 		$q->bindValue(':message_idtypemessage', $message->getMessage_idtypemessage(), \PDO::PARAM_INT);
@@ -79,9 +79,10 @@ class MessageManager extends Manager{
 	
 	public function update(message $message)  {
 		
-		$q = $this->dbConnect()->prepare('UPDATE message SET texte = :texte, contexte = :contexte WHERE id = :id');
+		$q = $this->dbConnect()->prepare('UPDATE message SET texte = :texte, number = :number, contexte = :contexte WHERE id = :id');
 	
 		$q->bindValue(':id', $message->getId(), \PDO::PARAM_INT);
+		$q->bindValue(':number', $message->getNumber(), \PDO::PARAM_INT);
 		$q->bindValue(':texte', $message->getTexte(), \PDO::PARAM_STR);
 		$q->bindValue(':contexte', $message->getContexte(), \PDO::PARAM_STR);
 		

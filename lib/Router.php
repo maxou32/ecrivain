@@ -130,7 +130,7 @@ class Router{
 				//echo"<PRE><br />ROUTER verif vAR ACTION 1 ";print_r($varPost);echo"<br /> fin construct </PRE>";
 				if (isset($this->getParams($_GET)["cible"])){
 					$varAction=$this->getParams($_GET)["cible"];
-					$varParam=$this->getParams($_GET);
+					//$varParam=$this->getParams($_GET);
 				}
 				empty($varAction) ? $varAction="_messageView": false ;
 				//echo"<PRE><br />ROUTER verif POST et GET ";print_r($varAction);echo"<br /> fin construct </PRE>";
@@ -147,10 +147,13 @@ class Router{
 						$monController=new Controller($this->myRoad,$varAction);
 						$monController->prepareAction($varParam, $varPost);
 					}else{
-						echo" non habilité";
+						//echo" non habilité";
+						$monError=new ErrorController();
+						$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"utilisateur inconnu", "idMessage"=>12));
+					
 					}
 				}else{
-					echo" erreur 404";
+					//echo" erreur 404";
 				}
 				
 			}else{

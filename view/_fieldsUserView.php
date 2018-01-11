@@ -2,6 +2,7 @@
 namespace web_max\ecrivain\view;
 use web_max\ecrivain\view\View;
 use web_max\ecrivain\view\Template;
+use web_max\ecrivain\view\_ErrorView;
 	
 class _FieldsUserView extends View
 {
@@ -27,18 +28,19 @@ class _FieldsUserView extends View
 				<input id="mail" name="mail" type="text" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
 				
 				<br />
-					<button type="submit" name="sousAction" value="Soumettre" class="btn btn-primary">
-						<span class="glyphicon glyphicon-ok-sign"></span>
-						 Soumettre votre demande
-					</button>					
-					<button type="submit" name="sousAction" value="Fermer" class="btn btn-primary">
-						<span class="glyphicon glyphicon-remove-sign"></span>
-						 Fermer
-					</button>
+					
+				<span class="btn btn-success glyphicon glyphicon-ok-sign">
+					<input type="submit"value="Soumettre votre demande" class="btn btn-success ">
+				</span> 	
+					
 			</form>
 
 	
 		<?php
+		$monErrorView=new _ErrorView();
+		if ($monErrorView->hasError()){
+			echo $monErrorView->show();
+		}
 		$contentView=ob_get_clean();
 		
 		$menuView=$this->renderTop();

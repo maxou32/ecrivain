@@ -57,6 +57,7 @@ class _readOneChapterView extends View
 						<?php 
 					}
 				}
+				//echo "<pre> READONECHPATER params ";print_r($params);echo"</pre>";
 				$monCommentView=new _CommentView($params);	
 				$CommentView=$monCommentView->show();	
 				?>

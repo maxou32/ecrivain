@@ -17,7 +17,6 @@ class _ErrorView {
 		if ($monError->getExisteError()) {
 			$monMessageManager= new MessageManager();
 			$this->leMessage=$monMessageManager->getByNumber($monError->getIdError());
-			//ECHO "ERROR VIEW 1<pre>";print_r($this->leMessage);echo"</pre>  ";
 			$monError->deleteError();
 			//$this->show();
 			return true;
@@ -28,16 +27,16 @@ class _ErrorView {
 	public function show(){
 
 		ob_start(); 
-		//echo"<br /><pre> charge ASIDE ";print_r($this->aside);echo"</pre>";
+		//echo"<br /><pre> charge le Message 1";print_r($this->leMessage);echo"</pre>";
 		?>
 		<script type="text/javascript">
-			console.log("je suis l alerte");
-			
-			bootbox.alert('<?php echo $this->leMessage->getTexte(); ?>'	);			
-				
-		
+			bootbox.alert('<?php echo ($this->leMessage->getTexte()) ?>'	);
 		</script>
+		
+			
+
 		<?php
+		//echo"<br /><pre> charge le Message 2 ";print_r($this->leMessage);echo"</pre>";
 		$errorView=ob_get_clean();
 		return $errorView;
 	}

@@ -14,7 +14,7 @@ class _ListChaptersView extends View
 		
 		?>
 		<div id="center">
-			<div  id="monaccordeon" class="panel-group col-lg-12">
+			<div  id="monAccordeon" class="panel-group col-lg-12">
 			<?php
 			$nbCaracters=$params['nbCaracters'];
 			//echo "nbCaracters =" .$nbCaracters;
@@ -22,24 +22,25 @@ class _ListChaptersView extends View
 			{
 				?>
 					<div class="panel panel-default">
-						<div class="panel panel-info">
-							<div class="panel-heading">
+							<div class="panel-heading" >
 								<h3 class="panel-title">
-									<a href="#<?= $datas[$i]->getIdchapters() ?>" data-parent="#monaccordeon" data-toggle="collapse"><img src="public/media/baleine.jpg" alt="baleine" class="circle miniImage">
-									<?= $datas[$i]->getTitle() ?>
+									<a href="#<?= htmlspecialchars($datas[$i]->getIdchapters()) ?>"  data-toggle="collapse"><img src="public/media/baleine.jpg" alt="baleine" class="circle miniImage">
+									<?= htmlspecialchars($datas[$i]->getTitle()) ?>
 									</a>
 								</h3>
 							</div>
-							<div id="<?= $datas[$i]->getIdchapters() ?>" class="panel-collapse collapse">
-								<em id="dateCreation">rédigé le : <?= $datas[$i]->getDateFr() ?></em>
-								<?php 
-								if(strlen($datas[$i]->getContent())>$nbCaracters){
-									$begin=substr($datas[$i]->getContent(),0,$nbCaracters).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
-								}else{
-									$begin='<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
-								}
-								?>
-								<p id="content"><?=$begin ?> </p>
+							<div id="<?= htmlspecialchars($datas[$i]->getIdchapters()) ?>" data-parent="#monAccordeon" class=" collapse">
+								<div class="panel-body">
+									<em id="dateCreation">rédigé le : <?= htmlspecialchars($datas[$i]->getDateFr()) ?></em>
+									<?php 
+									if(strlen(htmlspecialchars($datas[$i]->getContent()))>$nbCaracters){
+										$begin=substr($datas[$i]->getContent(),0,$nbCaracters).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
+									}else{
+										$begin='<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">'.$datas[$i]->getContent().'</a>';
+									}
+									?>
+									<p id="content"><?=$begin ?> </p>
+								</div>
 							</div>
 						</div
 					</div>

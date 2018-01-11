@@ -37,8 +37,11 @@ class AccessControl {
 			$user=$monUserManager->get($params['userName']);
 			if(!$user){
 				$monError=new ErrorController();
-				$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "raison"=>"habilitation insuffisante", "idMessage"=>9));
-				header ("Location:index.php?reservedAccess/");
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"habilitation insuffisante", "idMessage"=>11));
+				//echo "console.log('Nom inconnu')";
+				return false;
+				header ("Location:index.php?askRegistration");
+				exit;
 			}elseif(hash('sha256',$params['userPwd'])==$user->getPassword()){
 				//echo"<PRE> ACCESS CONTROL: data ";print_r($user);echo"</PRE>";
 				$this->updateSession($user);
@@ -46,13 +49,13 @@ class AccessControl {
 				return true;
 			}else{
 				$monError=new ErrorController();
-				$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "raison"=>"mot de passe incorrect", "idMessage"=>10));
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"mot de passe incorrect", "idMessage"=>10));
 				//echo "Failed  <pre>";print_r($params);echo"</pre>";
 				return false;	
 			}
 		}else{
 			$monError=new ErrorController();
-			$monError->setError(array("origine"=> "web_max\ecrivain\controler\updateSession", "idMessage"=>11));
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "idMessage"=>11));
 			//echo "Failed";
 			return false;			
 		}	

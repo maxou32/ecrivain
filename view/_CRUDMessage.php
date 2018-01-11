@@ -33,13 +33,14 @@ class _CRUDMessage extends View
 							<div class="col-xs-2">
 								<input type="hidden" name="id" id="id" value="<?= $datas[$i]->getId() ?>"/>
 								<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>
+								<input type="hidden" name="number" value="<?= $datas[$i]->getNumber() ?>"/>
 								<input type="hidden" name="texte" value="<?= $datas[$i]->getTexte() ?>"/>
 								<input type="hidden" name="idtypemessage" value="<?= $datas[$i]->getMessage_idtypemessage() ?>"/>
 								<input type="radio" name="message"  value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
 							</div >
 							<div class="col-xs-10">
-								<label for="<?= $datas[$i]->getId() ?>" id="messageLU" title="<?= $datas[$i]->getcontexte() ?>"  >
-										<?= $datas[$i]->getTexte() ?> <br /> 
+								<label for="<?= htmlspecialchars($datas[$i]->getId()) ?>" id="messageLU" title="<?= htmlspecialchars($datas[$i]->getcontexte()) ?>"  >
+										<?= htmlspecialchars($datas[$i]->getTexte()) ?> <br /> 
 								</label>
 							
 							</div>
@@ -59,6 +60,7 @@ class _CRUDMessage extends View
 						}
 					}
 					document.messageUpdated.contexte.value=document.listeMessage.contexte[valeur].value;
+					document.messageUpdated.number.value=document.listeMessage.number[valeur].value;
 					document.getElementById('texte').value=document.listeMessage.texte[valeur].value;
 					document.getElementById('idtypemessage').value=document.listeMessage.idtypemessage[valeur].value;
 					document.messageUpdated.id.value=document.listeMessage.id[valeur].value;
@@ -71,8 +73,9 @@ class _CRUDMessage extends View
 			<div id="CRUD">
 				<form method="post" name="messageUpdated" action="index.php?CRUDMessage" >
 					<input type="hidden" name="id" id="Id"/>
-					<input type="text" name="idtypemessage" id="idtypemessage" />
-					
+					<input type="hidden" name="idtypemessage" id="idtypemessage" />
+					<label for="number" class="active">Numéro du message</label>
+					<input type="text" name="number" class="form-control" id="number" required/>
 					<label for="texte" class="active">Texte du message</label>
 					<input name="texte" id="texte" type="text" class="form-control" onfocus='javascript:chargeTypeMessage()' required/>
 					<label for="contexte" class="active">Contexte d'emploi du message</label>

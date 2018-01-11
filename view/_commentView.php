@@ -28,7 +28,8 @@ class _CommentView {
 						</div>
 						<blockquote><?=$this->comment["comment"][$i]->getContent() ?></blockquote>
 						<form method="post" action="index.php?signalComment/comment/<?=$this->comment["comment"][$i]->getIdcomments()?>" name="MessageSignale">
-							<span class="btn btn-warning glyphicon glyphicon-exclamation-sign"><input type="submit"value="Signaler" class="warning ">
+							<span class="btn btn-warning glyphicon glyphicon-exclamation-sign">
+								<input type="submit"value="Signaler" class="btn btn-warning ">
 							</span> 	
 						</form>
 					</div>
