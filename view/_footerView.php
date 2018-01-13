@@ -17,7 +17,7 @@ class _FooterView extends View
 
 		ob_start(); 
 		?>
-			<footer id="footer" class="page-footer">
+			<footer id="footer" class="page-footer blue darken-1">
 				
 					<div class="row row_footer">
 						<div class="col l6 s12">
@@ -26,7 +26,7 @@ class _FooterView extends View
 						<div class="col l4 offset-l2 s12">
 							
 								
-								<a class="grey-text text-lighten-4 right" href="http://web-max.fr">© 2017 Copyright Web-Max</a>
+								<a class="grey-text text-lighten-1 right" href="http://web-max.fr">© 2017 Copyright Web-Max</a>
 							
 						</div>
 					

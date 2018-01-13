@@ -28,11 +28,18 @@ public function __construct(){
 		}
 	}
 	
-	public	function getIdError() {   
+		public	function getRaisonError() {   
+		if(isset($_SESSION['error']["raison"])){
+			return $_SESSION['error']["raison"];
+		}else{
+			return Null;
+		}
+	}
+	public	function getNumberError() {   
 		//echo"<PRE> ERROR COntroller : ";print_r($_SESSION['error']);echo"</PRE>";
-		if(isset($_SESSION['error']['idMessage'])){
+		if(isset($_SESSION['error']['numberMessage'])){
 			//echo "<br />yes";
-			return $_SESSION['error']['idMessage'];
+			return $_SESSION['error']['numberMessage'];
 		}else{
 			//echo "<br />oh no";
 			return Null;

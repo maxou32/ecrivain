@@ -37,7 +37,7 @@ class AccessControl {
 			$user=$monUserManager->get($params['userName']);
 			if(!$user){
 				$monError=new ErrorController();
-				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"habilitation insuffisante", "idMessage"=>11));
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"habilitation insuffisante", "numberMessage"=>12));
 				//echo "console.log('Nom inconnu')";
 				return false;
 				header ("Location:index.php?askRegistration");
@@ -49,13 +49,13 @@ class AccessControl {
 				return true;
 			}else{
 				$monError=new ErrorController();
-				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"mot de passe incorrect", "idMessage"=>10));
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"mot de passe incorrect", "numberMessage"=>10));
 				//echo "Failed  <pre>";print_r($params);echo"</pre>";
 				return false;	
 			}
 		}else{
 			$monError=new ErrorController();
-			$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "idMessage"=>11));
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "numberMessage"=>11));
 			//echo "Failed";
 			return false;			
 		}	

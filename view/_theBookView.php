@@ -14,7 +14,7 @@ class _TheBookView extends View
 	public function show($params,$datas){
 		ob_start();  			
 		//echo "<br /><pre>THE BOOK VIEW 1 = ";print_r($params["aside"]);echo"</pre>";
-		
+		$chapitre=$datas->getNumber();
 		?>
 		<div class ="row">
 			<div class="col-xs-1 col s1"></div>
@@ -26,17 +26,18 @@ class _TheBookView extends View
 					<p class="flow-text"><?= $datas->getContent() ?></p>
 				</div>
 				
-				<ul class="pagination pagination-lg">
-				<?php 
-				for($i=0;$i<$params["nbChapters"];$i++)
-				{
-					$j=$i+1;
-					?>
-					<li class="waves-effect"><a href="index.php?_TheBookView/chap/<?= $j?>"><?=  $j ?></a>
-				<?php 
-				}
-				?>
-				</ul>
+
+				<form method="post" name="changePage" action="index.php?_TheBookView/chap/<?= htmlspecialchars($chapitre-1) ?>">
+					<button type="submit" class=" btn btn-lg btn-primary  glyphicon glyphicon-chevron-left">
+						Précédent
+					</button>
+				</form>
+				<form method="post" name="changePage" action="index.php?_TheBookView/chap/<?= htmlspecialchars($chapitre+1) ?>">
+					<button type="submit" class=" btn btn-lg btn-primary  glyphicon glyphicon-chevron-right">
+						suivant	
+					</button>
+				</form>
+
 
 				<div class="jumbotron"><h4>Ajoutez un commentaire :</h4></div>
 				<form method="post" name="addComment" action="index.php?addComment/chap/<?= htmlspecialchars($datas->getNumber()) ?>" >

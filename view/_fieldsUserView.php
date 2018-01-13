@@ -31,7 +31,10 @@ class _FieldsUserView extends View
 					
 				<span class="btn btn-success glyphicon glyphicon-ok-sign">
 					<input type="submit"value="Soumettre votre demande" class="btn btn-success ">
-				</span> 	
+				</span> 
+				<button type="submit" class=" btn btn-success  glyphicon glyphicon-envelope">
+					Soumettre votre demande
+				</button>
 					
 			</form>
 

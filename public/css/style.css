@@ -9,7 +9,7 @@ body
 	min-height:100%;
 	margin:0;
 	padding:0;
-	padding-top:70px;
+	/*padding-top:70px;*/
 	padding-bottom:43px;
 }
   
@@ -81,10 +81,9 @@ body
 {
 	margin-bottom:0PX !important;
 }
-#menu
+#menuGeneral
 {
-	background-color:white;
-	opacity:0.8;
+	margin-top:-60px;
 }
 #barreAside
 {

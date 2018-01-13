@@ -29,36 +29,36 @@ class _AdminUsersView extends View{
 				for($i=0;$i<count($datas);$i++)
 				{
 					?>
-					<div  class="panel panel-default">
+					<div  class="collection-item">
 						<div class="row">
-							<div class="col-lg-6">
+							<div class="col s6">
 								<p id="content"><?=$datas[$i]->getName() ?> 
 								<input name="<?=$datas[$i]->getIdusers()  ?>" type="hidden" id="<?= $datas[$i]->getIdusers() ?>"  />
 								</p>
 							</div>
-							<div class="col-lg-3">
+							<div class="col s3">
 								
 								<?php
 									foreach ($params['grade'] as $key => $value){
 										?>
+										<input name="<?= "G".$datas[$i]->getIdusers() ?>"  type="radio" id="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getGrade_IdGrade()==$key){echo "checked";} ?> onClick='javascript:changeGrade("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value=" <?= $key ?>" />
 										<label for="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>"  ><?= $value ?></label>
-										<input name="<?= "G".$datas[$i]->getIdusers() ?>" class="form-control" type="radio" id="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getGrade_IdGrade()==$key){echo "checked";} ?> onClick='javascript:changeGrade("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value=" <?= $key ?>" />
-										
+										<br/>
 										<?php
 									}
 								?>
+								<br/>
 							</div>
-							<div class="col-lg-3">
+							<div class="col s3">
 								<?php
 									foreach ($params['status'] as $key => $value){
 										?>
+										<input name="<?= "S".$datas[$i]->getIdusers() ?>" type="radio" id="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> onClick='javascript:changeStatus("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value="<?= $key ?>" /> 
 										<label for="<?="statusUsers".$datas[$i]->getIdusers().$key ?>"  ><?= $value ?></label>
-										<input name="<?= "S".$datas[$i]->getIdusers() ?>" class="form-control"type="radio" id="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> onClick='javascript:changeStatus("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value="<?= $key ?>" /> 
-										
+										<br/>
 										<?php
 										
 									}
-									
 								?>
 								
 							</div>
@@ -69,9 +69,11 @@ class _AdminUsersView extends View{
 				}
 				?>
 				</div>
-					<span class="btn btn-success glyphicon glyphicon-ok-sign">
-						<input type="submit" name="sousAction" value="Mettre à jour" class="success">
-					</span> 
+
+					<button type="submit" class=" btn btn-success  glyphicon glyphicon-ok-sign">
+						 Mettre à jour
+					</button>
+				
 				
 			</form>
 			

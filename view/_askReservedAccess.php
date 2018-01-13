@@ -24,10 +24,9 @@ class _askReservedAccess extends View
 				<input id="userPwd" name="userPwd" type="password"  class="form-control" pattern=".{5,}" title="5 caractères minimum" required/><br />
 				<input id="cible" name="cible" type="hidden" value="validAccessReserved"/><br />
 
-				<span class="btn btn-success glyphicon glyphicon-ok-sign">
-					<input type="submit" name="sousAction" value="Accéder à l'espace réservé" class="success">
-				</span> 
-				
+				<button type="submit" class=" waves-effect waves-light btn-large blue"><i class="material-icons left">build</i>
+					Accéder à l'espace réservé
+				</button>
 				
 				
 				
