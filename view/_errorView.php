@@ -19,8 +19,7 @@ class _ErrorView {
 			$monMessageManager= new MessageManager();
 			$this->leMessage=$monMessageManager->getByNumber($monError->getNumberError());
 			$this->laRaison=$monError->getRaisonError();
-			//$monError->deleteError();
-			//$this->show();
+			$monError->deleteError();
 			return true;
 		}
 	}
@@ -48,6 +47,7 @@ class _ErrorView {
 		  <div id="modal1" class="modal card-panel hoverable">
 			<div class="modal-content ">
 			  <h5><i class="material-icons">info</i>  <?php echo ($this->laRaison) ?></h5>
+			  <div class="divider"></div>
 			  <p><?php echo ($this->leMessage->getTexte()) ?></p>
 			</div>
 			<div class="progress">

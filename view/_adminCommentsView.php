@@ -13,7 +13,12 @@ class _AdminCommentsView extends View{
 		
 		//echo"<PRE>";print_r($params);echo"</PRE>";
 		?>
-		
+		<script language="javascript" type="text/javascript">
+			function changeStatus($comment,$status) {
+				document.getElementById($comment).value=$status;
+				document.getElementById("action"+$comment).checked=true;
+			}
+		</script>	
 		<div class="formChapitre center">
 			<form method="post" action="index.php?_validComments"  >
 				<div class="collection">
@@ -22,10 +27,10 @@ class _AdminCommentsView extends View{
 				{
 					?>
 					
-					<div class="panel panel-default">
+					<div class="collection-item">
 						<div class="row ">
-							<div class="col-lg-6 panel-heading">
-								<div class=" panel-collapse collapse in">
+							<div class="col s6 panel-heading">
+								<div class=" panel">
 									<p id="name"><?= htmlspecialchars($datas[$i]->getName()) ?> </p>
 									<input name="<?= htmlspecialchars($datas[$i]->getIdcomments()) ?>" type="hidden" id="<?= $datas[$i]->getIdcomments() ?>"  />
 									
@@ -33,26 +38,29 @@ class _AdminCommentsView extends View{
 									<?php
 										if($datas[$i]->getSignaled() ){
 											?>
-											<span class="btn btn-warning ">
-												<p class = " glyphicon glyphicon-exclamation-sign"> Commentaire signalé</p>
-											</span>
+											<p class = "waves-light btn-large right orange darken-1">Commentaire signalé <i class="material-icons">info</i> </p>
 											<?php
 										} 
 									?>
 								</div>
 							</div>
-							<div class="col-lg-6">
-								<div class="form-control">
+							<div class="col s6">
+								<div>
 									<?php
-										foreach ($params['status'] as $key => $value){										
-											if($datas[$i]->getStatus_IdStatus()==$key){echo "<p>Statut du commentaire : <i>".$value."</i></p> ";} 
+										foreach ($params['status'] as $key => $value){		
+											?>
+											<input name="<?= "R".$datas[$i]->getIdcomments() ?>" type="radio" class="with-gap" id="<?= $datas[$i]->getIdcomments().$value ?>" 
+												<?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";}?> 
+												onClick='javascript:changeStatus("<?= $datas[$i]->getIdcomments() ?>","<?= $key ?>")'
+											/>
+											<label for="<?= $datas[$i]->getIdcomments().$value ?>"><?= $value ?></label>
+											<?php
 										}
 									?>
 								</div>
-								<div class=" form-control">
-									<label for="<?="action".$datas[$i]->getIdcomments() ?>">A modifier</label>
-									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
-								
+								<div >
+									<input type="hidden" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
+																	
 								</div>
 							</div>
 							
@@ -63,20 +71,8 @@ class _AdminCommentsView extends View{
 				
 				?>
 				</div>
-				<div class="row">
-					<select class="browser-default col-lg-5 " name="choix" >
-						<option value="" disabled selected class="form-control">Choisissez l'opération à réaliser</option>
-						<?php
-							foreach ($params['status'] as $key => $value){
-								?>
-								<option  id="<?="status".$key  ?>" value="<?= $key ?>" /> 
-								<label for="<?="status".$key ?>"  ><?= $value ?></label>
-								<?php
-							}
-						?>
-						<option value="D">Détruire</option>
-					</select>												
-					<span class=" col-offset-1 col-lg-5  ">
+				<div class="row">											
+					<span class=" center col s5  ">
 						<input type="submit" class="glyphicon glyphicon-ok-sign btn btn-success " value="Appliquer les changements"/>
 					</span> 				
 				</div>

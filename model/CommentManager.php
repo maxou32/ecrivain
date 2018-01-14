@@ -83,7 +83,7 @@ class CommentManager extends Manager{
 		$q->execute();
 	}
 	
-	public function updateStatus($action, $cible)  {
+	public function updateStatus( $cible,$action)  {
 		try {
 			//echo "cible : ".$cible;
 			$q = $this->dbConnect()->prepare("UPDATE comments SET status_idstatus  = :status_idstatus,signaled  = 0 WHERE idcomments IN ('" .  $cible.  "')");

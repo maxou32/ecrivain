@@ -2,6 +2,7 @@
 namespace web_max\ecrivain\View;
 use web_max\ecrivain\view\View;
 use web_max\ecrivain\lib\Config;
+use web_max\ecrivain\view\_ErrorView;
 
 class template extends view{
 	private $title;
@@ -99,6 +100,12 @@ class template extends view{
 					<div id="contenuDetail">
 						<?= $this->contentView ?>
 					</div>
+				<?php
+				$monErrorView=new _ErrorView();
+					if ($monErrorView->hasError()){
+						echo $monErrorView->show();
+					}
+				?>
 				</div>
 				<?= $this->footerView ?>
 

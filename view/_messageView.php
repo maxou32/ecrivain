@@ -34,10 +34,11 @@ class _messageView extends View
 		<?php
 		//$title="Voyage en Alaska"; 
 		//echo "message view avant erreur";
-		$monErrorView=new _ErrorView();
+		/*$monErrorView=new _ErrorView();
 		if ($monErrorView->hasError()){
 			echo $monErrorView->show();
 		}
+		*/
 		$messageView=ob_get_clean();
 		$contentView= $messageView;
 		$menuView=$this->renderTop();

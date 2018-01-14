@@ -46,7 +46,9 @@ class _AdminChaptersView extends View{
 									<?php
 										foreach ($params['status'] as $key => $value){
 											?>
-											<input name="<?= "R".$datas[$i]->getIdchapters() ?>" class="with-gap" type="radio" id="<?="valueChapters".$datas[$i]->getIdchapters().$key ?>" <?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> onClick='javascript:changeStatus("<?= $datas[$i]->getIdchapters() ?>","<?=$key ?>")' />
+											<input name="<?= "R".$datas[$i]->getIdchapters() ?>" class="with-gap" type="radio" id="<?="valueChapters".$datas[$i]->getIdchapters().$key ?>" 
+												<?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> 
+												onClick='javascript:changeStatus("<?= $datas[$i]->getIdchapters() ?>","<?=$key ?>")' />
 											<label for="<?="valueChapters".$datas[$i]->getIdchapters().$key ?>"  >
 											<?= $value ?></label><br />
 											<?php
