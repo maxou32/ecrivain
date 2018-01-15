@@ -54,19 +54,19 @@ public function __construct($myRoad, $action){
      * @return boolean resultat de la modification
      */
     public function validParamComments($params){	
-		echo"<PRE>CONTROLLER : validParamComments 1 ";print_r($params);echo"</PRE>";
+		//echo"<PRE>CONTROLLER : validParamComments 1 ";print_r($params);echo"</PRE>";
 		$resultat["result"]=false;		
 		$commentManager= new CommentManager();
 
 		foreach ($params['actionAFaire'] as $key => $value){	
 			if(($params[$value])==! Null){
-				echo"<PRE>CONTROLLER : validParamComments 2 ".$value." status ".$params[$value]."</PRE>";
+				//echo"<PRE>CONTROLLER : validParamComments 2 ".$value." status ".$params[$value]."</PRE>";
 				$resultat["result"]=$commentManager->updateStatus($value, $params[$value]);
 			}
 		}
 		if ($resultat["result"]){
 			$monError=new ErrorController();
-			$monError->setError(array("origine"=> "web_max\ecrivain\controler\commentController", "raison"=>"Mise à jour statut", "numberMessage"=>21));
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\commentController", "raison"=>"Mise à jour des commentaires", "numberMessage"=>23));
 		}		
 		return $resultat["result"];
 	}		

@@ -19,6 +19,7 @@ class _AdminChaptersView extends View{
 				<script language="javascript" type="text/javascript">
 					function changeStatus($chapter,$status) {
 						document.getElementById($chapter).value=$status;
+						document.getElementById("action"+$chapter).checked=true;
 					}
 				</script>	
 				<div >
@@ -30,7 +31,7 @@ class _AdminChaptersView extends View{
 						<div class="collection-item">
 							<DIV class="row">
 								<h5 class="center"><?= $datas[$i]->getTitle() ?></h5>
-								<div class="col s8 ">
+								<div class="col s6 ">
 									<?php 
 									if(strlen($datas[$i]->getContent())>$params['nbCaracters']){
 										$begin=substr($datas[$i]->getContent(),0,$params['nbCaracters']).'<a href="index.php?oneChapter/idchapter/'.$datas[$i]->getIdchapters().'">  (lire la suite...)</a>';
@@ -40,7 +41,7 @@ class _AdminChaptersView extends View{
 									?>
 									<p id="content"><?=$begin ?> </p>
 								</div>
-								<div class="col s4">
+								<div class="col s6">
 									<input name="<?=  $datas[$i]->getIdchapters()  ?>" type="hidden" id="<?= $datas[$i]->getIdchapters() ?>" value="<?=  $datas[$i]->getStatus_IdStatus()  ?>" />
 									<div>
 									<?php
@@ -50,7 +51,7 @@ class _AdminChaptersView extends View{
 												<?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> 
 												onClick='javascript:changeStatus("<?= $datas[$i]->getIdchapters() ?>","<?=$key ?>")' />
 											<label for="<?="valueChapters".$datas[$i]->getIdchapters().$key ?>"  >
-											<?= $value ?></label><br />
+											<?= $value ?></label>
 											<?php
 										}
 									?>
@@ -58,6 +59,11 @@ class _AdminChaptersView extends View{
 									<label for="<?= "number".$datas[$i]->getIdchapters() ?>">Numéro d'ordre du chapitre</label>
 									<input name="<?=  "number".$datas[$i]->getIdchapters()  ?>" class="center" type="text" id="<?= "number".$datas[$i]->getIdchapters() ?>" value="<?=  $datas[$i]->getNumber()  ?>" />
 								</div>
+								<div >
+									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdchapters() ?>" value="<?= $datas[$i]->getIdchapters() ?>" />	
+																	
+								</div>
+
 							</div>
 						</div>
 					</div>

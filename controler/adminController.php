@@ -58,24 +58,22 @@ class AdminController	extends mainController	{
 		//echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
 		
 		$chapterManager= new ChaptersManager();
-		foreach($params as $key=> $value){
-			if(is_numeric($value)){
-				$donnees=[];
-				if(is_numeric($key)){
-					$donnees=array('Idchapters'=>$key,'Status_IdStatus'=>$value);
-					//echo"Statuts <PRE>";print_r($donnees);echo"</PRE>";
-					$newChapter = new Chapter($donnees);
-					$return=$chapterManager->updateStatus($newChapter);
-				}else{
-					$donnees=array('Idchapters'=>preg_replace('#number#','',$key),'number'=>$value);
-					//echo"NUMBER <PRE>";print_r($donnees);echo"</PRE>";
-					$newChapter = new Chapter($donnees);
-					$return=$chapterManager->updateNumber($newChapter);
-				}
+		foreach ($params['actionAFaire'] as $key => $value){	
+			//echo"<PRE>CONTROLLER : validParamComments 2 ".$value." status ".$key."</PRE>";
+			if(is_null($params["number".$value])){
+				$params["number".$value]=999;
+			}
+			if(($params[$value])==! Null){
+				$donnees=array('Idchapters'=>$value,'Status_IdStatus'=>$params[$value],'number'=>$params["number".$value]);
+				$newChapter = new Chapter($donnees);
+				$resultat["result"]=$chapterManager->updateStatus($newChapter);		
 			}
 		}
-		$resultat["result"]=true;
-		return $resultat;
+		if ($resultat["result"]){
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Mise à jour des habilitations", "numberMessage"=>23));
+		}		
+		return $resultat["result"];
 	}
 
 	/**
@@ -88,27 +86,16 @@ class AdminController	extends mainController	{
 		//echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
 		
 		$userManager= new UserManager();
-		foreach($params as $key=> $value){
-			if(!is_numeric($key)){
-				$donnees=[];
-				//echo "clef ".$key." initiale ".substr($key,0,1);
-				if(substr($key,0,1)=="S"){
-					//echo "clef : ".$key." donne ".substr($key,1);
-					$donnees=array('Idusers'=>substr($key,1),'Status_IdStatus'=>$value);
-					//echo" <PRE>";print_r($donnees);echo"</PRE>";
-					$newUser = new User($donnees);
-					$return=$userManager->updateStatus($newUser);
-				}else{
-					//echo "clef : ".$key." donne ".substr($key,1);
-					$donnees=array('Idusers'=>substr($key,1),'Grade_IdGrade'=>$value);
-					//echo" <PRE>";print_r($donnees);echo"</PRE>";
-					$newUser = new User($donnees);
-					$return=$userManager->updateGrade($newUser);
-				}
-			}
+		foreach ($params['actionAFaire'] as $key => $value){	
+				$donnees=array('Idusers'=>$value,'Status_IdStatus'=>$params["S".$value], 'Grade_IdGrade'=>$params["G".$value]);
+				$newUser = new User($donnees);
+				$resultat["result"]=$userManager->updateUser($newUser);
 		}
-		$resultat["result"]=true;
-		return $resultat;
+		if ($resultat["result"]){
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Mise à jour des chapitres", "numberMessage"=>21));
+		}		
+		return $resultat["result"];		
 	}	
 		
 }

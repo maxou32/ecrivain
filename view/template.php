@@ -56,20 +56,17 @@ class template extends view{
 				
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<link href="public/css/style.css" rel="stylesheet" /> 
-				<script type="text/javascript"  src="public\js\jquery-3.2.1.min.js"></script>		
-				<script type="text/javascript" src="public\js\ajax.js"></script>
 				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 				<!-- Compiled and minified CSS -->
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+				<script  src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"></script>
 				<!--Import Google Icon Font-->
 				<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 				<!--Import materialize.css-->
 				<link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
 				
-				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
- 
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    
+				<link rel="stylesheet" href="materialize/css/materialize.min.css">
+				
 				
 				
 				<!-- Let browser know website is optimized for mobile -->
@@ -88,11 +85,11 @@ class template extends view{
 					
 					});
 				</script>
-				<!--<script src="public\bootstrap\js\jquery.js"></script>
-				<script src="public\bootstrap\js\bootstrap.min.js"></script> 
-				<script src="public\js\bootbox.min.js"></script>  -->
 			</head>
 			<body style="background-image: url('<?= $this->imageBackGround ?>');">	 
+				<script type="text/javascript"  src="public\js\jquery-3.2.1.min.js"></script>		
+				<script type="text/javascript" src="public\js\ajax.js"></script>
+				<script type="text/javascript" src="public\materialize\js\materialize.min.js"></script>
 				<title><?= $this->title ?></title>
 				<?= $this->menuView ?>
 				<div id="content" >

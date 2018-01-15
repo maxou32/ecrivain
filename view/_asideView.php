@@ -32,7 +32,7 @@ class _AsideView {
 					echo  "<bockquote>".$begin."</bockquote>"; 
 					
 					?>
-					<h5 class="right-align"><i><?= htmlspecialchars($this->aside["aside"]["value"][$i]["detail1"]) ;?></i></h5><br />
+					<h6 class="right-align"><i><?= htmlspecialchars($this->aside["aside"]["value"][$i]["detail1"]) ;?></i></h6><br />
 					<div class="divider"></div>
 					<?php
 				}

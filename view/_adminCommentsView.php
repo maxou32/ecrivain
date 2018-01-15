@@ -60,7 +60,6 @@ class _AdminCommentsView extends View{
 								</div>
 								<div >
 									<input type="hidden" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
-																	
 								</div>
 							</div>
 							
@@ -72,9 +71,9 @@ class _AdminCommentsView extends View{
 				?>
 				</div>
 				<div class="row">											
-					<span class=" center col s5  ">
-						<input type="submit" class="glyphicon glyphicon-ok-sign btn btn-success " value="Appliquer les changements"/>
-					</span> 				
+					<span  class=" waves-effect waves-light btn-large blue">
+						<input type="submit" name="sousAction" value="Mettre à jour"><i class="material-icons left">build</i>
+					</span>
 				</div>
 			</form>
 			

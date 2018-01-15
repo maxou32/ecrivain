@@ -85,8 +85,8 @@ class Controller{
         * déclanchement de la fonction a exécuter pour lire des données
         */	
 		foreach($this->myRoad["manager"] as $element){
-			//echo"<PRE> controller manager 2: data ";print_r($element);echo"</PRE>";
-			//echo"<PRE> controller manager 3: data ";print_r($element["nom"]);echo"</PRE>";
+			//echo"<PRE> controller manager 2: post ";print_r($post);echo"</PRE>";
+			//echo"<PRE> controller manager 3: params ";print_r($params);echo"</PRE>";
 			if(!empty($element["nom"])){
 				//echo " <br />déclenchement lecture manager";
 				$monManager= new $element["nom"];	
@@ -109,7 +109,6 @@ class Controller{
 								//echo"<PRE> controller manager 3,7: data =";print_r($paramManager);echo"</PRE>";
 							}elseif($element["utiliseResultatFunctionAvant"]!=="oui"){
 								$paramManager=$elementParam["nomParam"];
-								
 							}
 						}
 					}
@@ -129,7 +128,7 @@ class Controller{
 				}
 			}
 		}
-		//echo"<br />CONTROLLER<PRE> controller manager 5: data ";print_r($data);echo"</PRE>";
+		//echo"<br />CONTROLLER<PRE> controller manager 5: data ";print_r($this->data);echo"</PRE>";
 	}
 		
 	private function apresDonnees($params, $post){
@@ -217,7 +216,6 @@ class Controller{
 						}else{
 							$this->globalParams[$elementParam["nomParam"]]=$elementParam["value"];
 							//echo"<PRE> controle déclenchement vue 9.5: data ";print_r($this->globalParams);echo"</PRE>";
-				
 						}
 					}
 					$this->globalParams["updateDeleteAreAutorized"]=false;
@@ -245,7 +243,7 @@ class Controller{
 		//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"];
 		//echo"<PRE> controle déclenchement vue 12: data ";print_r($params);echo"</PRE>";
 		if($this->myRoad["wantHeaderLocation"]["action"]=="oui"){
-			if( $this->myRoad["wantHeaderLocation"]["action"]=="oui"){
+			if( $this->myRoad["wantHeaderLocation"]["param"]=="oui"){
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){
 					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$post[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}else{

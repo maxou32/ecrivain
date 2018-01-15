@@ -34,25 +34,25 @@ aside :
   content : getContent
   detail : getCommentDate
  _messageView :
-  title : Derniers articles
+  title : Derniers chapitres
   ref1 : getIdchapters
   ref2 : getTitle
   content : getContent
   detail : getDateFr
  oneChapter :
-  title : Derniers articles
+  title : Derniers chapitres
   ref1 : getIdchapters
   ref2 : getTitle
   content : getContent
   detail : getDateFr 
  validAccessReserved :
-  title : Derniers articles
+  title : Derniers chapitres
   ref1 : getIdchapters
   ref2 : getTitle
   content : getContent
   detail : getDateFr
  abortAccess :
-  title : Derniers articles
+  title : Derniers chapitres
   ref1 : getIdchapters
   ref2 : getTitle
   content : getContent
@@ -503,8 +503,8 @@ simpleRoads:
    action : oui
    param : non
    origine : Null										#post ou get
-   nom : idChapter
-   target : Location:index.php?action/_listChaptersView  	 
+   nom : Null
+   target : Location:index.php?_listChaptersView 	 
 #************************************** 	
 
  oneChapter:
@@ -835,9 +835,9 @@ simpleRoads:
   wantHeaderLocation :
    action : oui
    param : non
-   origine : post										#post ou get
+   origine : Null										#post ou get
    nom : Null
-   target : index.php?			   #.$params['idchapter']
+   target : index.php?adminChapter		   #.$params['idchapter']
 #************************************** 
 
  askCRUDMessage:

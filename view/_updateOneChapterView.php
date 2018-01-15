@@ -18,30 +18,38 @@ class _updateOneChapterView extends View
 			?>	
 			<form method="post" action="index.php?updateOneChapter" class="formChapitre">
 				<div class="row">
-					<div class="col-xs-9 col s9">
-						<label>Titre</label><input id="title" name="title" type="text"  class="form-control" value ="<?= htmlspecialchars($datas->getTitle()) ?>" required />
+					<h4 class="col s12">
+						<input id="title" name="title" type="text"  class="form-control" value ="<?= htmlspecialchars($datas->getTitle()) ?>" required />
+					</h4>
+					<div class="col s4">
+						<label for="number">Numéro </label>
+						<input class="center" id="number" name="number" type="text" value="<?= htmlspecialchars($datas->getNumber()) ?>" required />
 					</div>
-					<div class="col-xs-3 center col s3">
-						<label>Numéro</label><br />
-						<input class="center" id="number" name="number" class="form-control" type="text" value="<?= htmlspecialchars($datas->getNumber()) ?>" required />
-						<label>Date de création</label><br />
-						<input class="center" id="dateFr" name="dateFr" class="form-control" type="text" value="<?= htmlspecialchars($datas->getDateFr()) ?>" required />
-						<label>Status du chapitre</label>
-						<select class="input-field" name="Status_IdStatus" class="form-control"
-						value="<?= $datas->getStatus_IdStatus() ?>">
-							<option value ="01" /> Validé</option>
-							<option value ="02" />à validé</option>
-							<option value ="03" />Refusé</option>
-						</select>
-						<input class="center" id="idchapter" name="idchapter" type="hidden" value="<?= $datas->getIdchapters()?>" required />
+					<div class="col s4">
+						<label for="dateFr" >Créé le :</label><br />
+						<input class="center" id="dateFr" name="dateFr" type="text" value="<?= htmlspecialchars($datas->getDateFr()) ?>" required />
+					</div>
+					<div class="col s4">
+						
+						<div class="input-field">
+							<select >
+								<option value =1 /> Validé</option>
+								<option value =2 />à validé</option>
+								<option value =3 />Refusé</option>
+							</select>
+							<label>Status du chapitre</label>
+						</div>
+						<input id="idchapter" name="idchapter" type="hidden" value="<?= $datas->getIdchapters()?>" required />
 					</div>						
 				</div>
+				
 				<textarea id='content' name='content' rows="10" cols="50" class="texte"><?= $datas->getContent() ?> </textarea><br /> 
-							
-				<input type="submit" name="sousAction" value="Mettre à jour" class="btn btn-primary">
-				<input type="reset" name="sousAction" value="Annuler les modifications" class="btn btn-primary">
-			
-		</form>
+				<div class="center-align">
+					<span  class=" waves-effect waves-light btn-large blue">
+						<input type="submit" name="sousAction" value="Appliquer les modifications"><i class="material-icons left">send</i>
+					</span>	
+				</div>
+			</form>
 		<?php
 
 		$contentView=ob_get_clean(); 	

@@ -19,9 +19,11 @@ class _AdminUsersView extends View{
 				<script language="javascript" type="text/javascript">
 					function changeStatus($user,$status) {
 						document.getElementById($user).value=$status;
+						document.getElementById("action"+$user).checked=true;
 					}
 					function changeStatus($user,$grade) {
 						document.getElementById($user).value=$grade;
+						document.getElementById("action"+$user).checked=true;
 					}
 				</script>	
 				<div class="collection">
@@ -42,7 +44,7 @@ class _AdminUsersView extends View{
 									foreach ($params['grade'] as $key => $value){
 										?>
 										<input name="<?= "G".$datas[$i]->getIdusers() ?>"  type="radio" id="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getGrade_IdGrade()==$key){echo "checked";} ?> onClick='javascript:changeGrade("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value=" <?= $key ?>" />
-										<label for="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>"  ><?= $value ?></label>
+										<label for="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" class="blue"><?= $value ?></label>
 										<br/>
 										<?php
 									}
@@ -54,15 +56,16 @@ class _AdminUsersView extends View{
 									foreach ($params['status'] as $key => $value){
 										?>
 										<input name="<?= "S".$datas[$i]->getIdusers() ?>" type="radio" id="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> onClick='javascript:changeStatus("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value="<?= $key ?>" /> 
-										<label for="<?="statusUsers".$datas[$i]->getIdusers().$key ?>"  ><?= $value ?></label>
+										<label for="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" class="blue"  ><?= $value ?></label>
 										<br/>
 										<?php
-										
 									}
 								?>
-								
 							</div>
-						
+							<div >
+								<input type="hidden" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdusers() ?>" value="<?= $datas[$i]->getIdusers() ?>" />	
+							</div>
+
 						</div>
 					</div>
 					<?php 
@@ -70,9 +73,9 @@ class _AdminUsersView extends View{
 				?>
 				</div>
 
-					<button type="submit" class=" btn btn-success  glyphicon glyphicon-ok-sign">
-						 Mettre à jour
-					</button>
+				<span  class=" waves-effect waves-light btn-large blue">
+					<input type="submit" name="sousAction" value="Mettre à jour"><i class="material-icons left">build</i>
+				</span>
 				
 				
 			</form>

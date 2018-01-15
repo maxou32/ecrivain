@@ -20,10 +20,16 @@ class ChapterController	extends mainController	{
      * @return object chapitre
      */
     public function addOneChapter($post){
-		if( $post['sousAction']!=="fermer"){
-			$donnees=array('Title' => $post['title'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'number'=>$post['number']);
-			return $newChapter = new Chapter($donnees);
-		}
+		
+		$donnees=array('Title' => $post['title'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'number'=>$post['number']);
+		$result= $newChapter = new Chapter($donnees);
+		if ($result){
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Création de chapitre", "numberMessage"=>21));
+		}		
+		return $result;
+			
+		
 	}
 	
     /**
@@ -34,6 +40,10 @@ class ChapterController	extends mainController	{
     public function updateOneChapter($post){
 		//echo "<pre> Controler : update :";print_r($post);echo"</pre>";
 		$donnees=array('idchapters'=>$post['idchapter'], 'Title' => $post['title'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'Number'=> $post['number']);
+		if ($result){
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Modication de chapitre", "numberMessage"=>23));
+		}		
 		return $newChapter = new Chapter($donnees);
 	}
 	
