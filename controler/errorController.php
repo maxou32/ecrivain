@@ -15,7 +15,8 @@ public function __construct(){
      *      
      */
     
-    public	function setError($error) {   
+    public	function setError($error) {  
+		//echo "ERROR CONTROLLER : set error";
 		$_SESSION['error']=$error;
 	}
 	

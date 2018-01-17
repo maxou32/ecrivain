@@ -28,14 +28,14 @@ class _createOneChapterView extends View
 						<input id="dateFr" name="dateFr" type="date" class="center-align" value="" required />
 					</div>
 				</div>
-				<div class=" col s12">
+				<div class="col s12">
 					<label>Contenu du chapitre</label><br />
 					<textarea id='content' name='content' ></textarea><br /> 
 					<input id="number" name="number" type="hidden"  value ="999" required /><br />
 				</div>	
-				<div class=" col s12 center-align">
-					<span  class=" waves-effect waves-light btn-large blue">
-						<input type="submit" name="sousAction" value="Ajouter ce chapitre"><i class="material-icons left">build</i>
+				<div class="col s12 center-align">
+					<span  class=" waves-effect waves-light btn btn-large blue">
+						<input type="submit" name="sousAction" value="Ajouter ce chapitre"><i class="material-icons left">add</i>
 					</span>				
 				</div>	
 			</form>

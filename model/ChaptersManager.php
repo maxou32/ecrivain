@@ -101,8 +101,17 @@ class ChaptersManager extends Manager{
 			$number = (int) $number;
 			$q = $this->dbConnect()->query('SELECT idchapters, title,  content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, number FROM chapters WHERE number = '.$number);
 			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+			
+			$q1 = $this->dbConnect()->query('SELECT min(number) as valeur from chapters WHERE status_idstatus= 1');
+			$mini= $q1->fetch(\PDO::FETCH_ASSOC);
+			
+			$q2 = $this->dbConnect()->query('SELECT max(number) as valeur from chapters WHERE status_idstatus= 1');
+			$maxi= $q2->fetch(\PDO::FETCH_ASSOC);
 			if($donnees) {
-				return new Chapter($donnees);
+				$result['data']=new Chapter($donnees);
+				$result['mini']=$mini;
+				$result['maxi']=$maxi;
+				return $result;
 			}else{
 				return false;
 			}
@@ -157,5 +166,66 @@ class ChaptersManager extends Manager{
 		}catch (PDOException  $e){ 
 			return 'Erreur : '.$e->getMessage();
 		}	;	
+	}
+	
+	
+	public function getNbChapter()  {
+		try{
+			$chapters = [];
+			$q = $this->dbConnect()->query('SELECT  COUNT(*) as nbChapter FROM chapters WHERE status_idstatus=1 ');
+			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+			
+			return $donnees;
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;
+	}
+	
+	public function getNextChapter($number)  {
+		try{
+			$chapters = [];
+			$q = $this->dbConnect()->query('SELECT idchapters, title,  content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, status_idstatus, number FROM chapters WHERE status_idstatus= 1 and number > '.$number.' order by number ASC LIMIT 1');
+			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+			
+			$q1 = $this->dbConnect()->query('SELECT min(number) as valeur from chapters WHERE status_idstatus= 1');
+			$mini= $q1->fetch(\PDO::FETCH_ASSOC);
+			
+			$q2 = $this->dbConnect()->query('SELECT max(number) as valeur from chapters WHERE status_idstatus= 1');
+			$maxi= $q2->fetch(\PDO::FETCH_ASSOC);
+			if($donnees) {
+				$result['data']=new Chapter($donnees);
+				$result['mini']=$mini;
+				$result['maxi']=$maxi;
+				return $result;
+			}else{
+				return false;
+			}
+			
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;
+	}
+	
+	public function getPreviousChapter($number)  {
+		try{
+			$chapters = [];
+			$q = $this->dbConnect()->query('SELECT idchapters, title,  content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, status_idstatus, number FROM chapters WHERE status_idstatus= 1 and number < '.$number.' ORDER BY number DESC LIMIT 1');
+			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+			$q1 = $this->dbConnect()->query('SELECT min(number) as valeur from chapters WHERE status_idstatus= 1');
+			$mini= $q1->fetch(\PDO::FETCH_ASSOC);
+			
+			$q2 = $this->dbConnect()->query('SELECT max(number) as valeur from chapters WHERE status_idstatus= 1');
+			$maxi= $q2->fetch(\PDO::FETCH_ASSOC);
+			if($donnees) {
+				$result['data']=new Chapter($donnees);
+				$result['mini']=$mini;
+				$result['maxi']=$maxi;
+				return $result;
+			}else{
+				return false;
+			}
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;
 	}
 }

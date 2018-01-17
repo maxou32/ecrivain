@@ -10,77 +10,119 @@ class CommentManager extends Manager{
 	}
 
 	public function add(Comment $comment)  {
-		$q = $this->dbConnect()->prepare('INSERT INTO comments(name, content,comment_date,user_iduser, status_idstatus, chapter_idchapter, signaled) VALUES(:name, :content, NOW(),null, :status_idstatus, :chapter_idchapter, Null)');
+		try{
+			$q = $this->dbConnect()->prepare('INSERT INTO comments(name, content,comment_date,user_iduser, status_idstatus, chapter_idchapter, signaled) VALUES(:name, :content, NOW(),null, :status_idstatus, :chapter_idchapter, Null)');
 
-		$q->bindValue(':name', $comment->getName(), \PDO::PARAM_STR);
-		$q->bindValue(':status_idstatus', $comment->getStatus_IdStatus(), \PDO::PARAM_INT);
-		$q->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
-		$q->bindValue(':chapter_idchapter', $comment->getChapter_idchapter(), \PDO::PARAM_INT);
-		$q->execute();
+			$q->bindValue(':name', $comment->getName(), \PDO::PARAM_STR);
+			$q->bindValue(':status_idstatus', $comment->getStatus_IdStatus(), \PDO::PARAM_INT);
+			$q->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
+			$q->bindValue(':chapter_idchapter', $comment->getChapter_idchapter(), \PDO::PARAM_INT);
+			$q->execute();
+			return true;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function delete($idcomment)  {
-		$idcomment = (int) $idcomment;
-		$this->dbConnect()->exec('DELETE FROM comments WHERE idcomments = '.$idcomment);
+		try{
+			$idcomment = (int) $idcomment;
+			$this->dbConnect()->exec('DELETE FROM comments WHERE idcomments = '.$idcomment);
+			return true;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;
 	}
 
 	public function deleteComments($cible)  {
-		echo "cible : ".$cible;
+		try{
+		
 		$this->dbConnect()->exec("DELETE FROM comments WHERE idcomments IN ('" .  $cible.  "')");
+		return true;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function get($idcomment)  {
-		$idcomment = (int) $idcomment;
-		$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus, signaled FROM comments WHERE idcomments = '.$idcomment);
-		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
-		if($donnees) {
-			return new Comment($donnees);
-		}else{
-			return false;
-		}
+		try{
+			$idcomment = (int) $idcomment;
+			$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus, signaled FROM comments WHERE idcomments = '.$idcomment);
+			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+			if($donnees) {
+				return new Comment($donnees);
+			}					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function getListValid()  {
-		$comments = [];
-		$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus,signaled FROM comments WHERE status_idstatus=1 ORDER BY comment_date ASC ');
-		
-		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
-			$comments[] = new Comment($donnees);
-		}	
-		return $comments;
+		try{
+			$comments = [];
+			$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus,signaled FROM comments WHERE status_idstatus=1 ORDER BY comment_date ASC ');
+			
+			while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
+				$comments[] = new Comment($donnees);
+			}	
+			return $comments;
+						
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function getListNotValid()  {
-		$comments = [];
-		$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus,signaled FROM comments WHERE status_idstatus <>1 ORDER BY comment_date ASC ');
-		
-		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
-			$comments[] = new Comment($donnees);
-		}
-		return $comments;
+		try{
+			$comments = [];
+			$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus,signaled FROM comments WHERE status_idstatus <>1 ORDER BY comment_date ASC ');
+			
+			while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
+				$comments[] = new Comment($donnees);
+			}
+			return $comments;
+						
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function getListValidFromChapter($chap)  {
-		$comments = [];
-		$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus, signaled FROM comments WHERE status_idstatus = 1 and chapter_idchapter = "' . $chap . '" ORDER BY comment_date ASC ');
-		
-		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
-			$comments[] = new Comment($donnees);
-		}
-		return $comments;
+		try{
+			$comments = [];
+			$q = $this->dbConnect()->query('SELECT idcomments, name,  content, DATE_FORMAT( comment_date, \'%d/%m/%Y\') as comment_date,user_iduser, chapter_idchapter,status_idstatus, signaled FROM comments WHERE status_idstatus = 1 and chapter_idchapter = "' . $chap . '" ORDER BY comment_date ASC ');
+			
+			while ($donnees = $q->fetch(\PDO::FETCH_ASSOC)){
+				$comments[] = new Comment($donnees);
+			}
+			return $comments;
+									
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 	
 	
 		
 	public function update(Comment $comment)  {
-		$q = $this->dbConnect()->prepare('UPDATE comments SET name = :name, content = :content, signaled = :signaled WHERE idcomments = :idcomments');
+		try{
+			$q = $this->dbConnect()->prepare('UPDATE comments SET name = :name, content = :content, signaled = :signaled WHERE idcomments = :idcomments');
 
-		$q->bindValue(':idcomments', $comment->getIdcomments(), \PDO::PARAM_INT);
-		$q->bindValue(':name', $comment->getTitle(), \PDO::PARAM_STR);
-		$q->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
-		$q->bndValue(':signaled', $comment->getSignaled(), \PDO::PARAM_BOOL);
-		
-		$q->execute();
+			$q->bindValue(':idcomments', $comment->getIdcomments(), \PDO::PARAM_INT);
+			$q->bindValue(':name', $comment->getTitle(), \PDO::PARAM_STR);
+			$q->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
+			$q->bndValue(':signaled', $comment->getSignaled(), \PDO::PARAM_BOOL);
+			
+			$q->execute();
+			return true;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 	
 	public function updateStatus( $cible,$action)  {

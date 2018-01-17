@@ -18,6 +18,9 @@ class _AdminCommentsView extends View{
 				document.getElementById($comment).value=$status;
 				document.getElementById("action"+$comment).checked=true;
 			}
+			function detruit($comment) {
+				document.getElementById("action"+$comment).checked=true;
+			}
 		</script>	
 		<div class="formChapitre center">
 			<form method="post" action="index.php?_validComments"  >
@@ -59,7 +62,9 @@ class _AdminCommentsView extends View{
 									?>
 								</div>
 								<div >
-									<input type="hidden" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
+									<input name="<?= "D".$datas[$i]->getIdcomments() ?>" type="checkbox" id="<?="D".$datas[$i]->getIdcomments()?>" value="<?="D".$datas[$i]->getIdcomments() ?>" onClick='javascript:detruit("<?= $datas[$i]->getIdcomments() ?>")'/> 
+										<label for="<?="D".$datas[$i]->getIdcomments()?>"  >Supprimer ce commentaire</label>
+									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	
 								</div>
 							</div>
 							

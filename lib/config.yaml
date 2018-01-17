@@ -33,6 +33,18 @@ aside :
   ref2 : getName
   content : getContent
   detail : getCommentDate
+ _TheNextBookView :
+  title : Derniers commentaires
+  ref1 : getChapter_idchapter
+  ref2 : getName
+  content : getContent
+  detail : getCommentDate
+ _ThePreviousBookView :
+  title : Derniers commentaires
+  ref1 : getChapter_idchapter
+  ref2 : getName
+  content : getContent
+  detail : getCommentDate
  _messageView :
   title : Derniers chapitres
   ref1 : getIdchapters
@@ -337,7 +349,6 @@ simpleRoads:
    target : 	
   
 #**************************************  
-
  _TheBookView:
   seConnecte : param inutile
   security :
@@ -372,13 +383,13 @@ simpleRoads:
    className : Null
    nom : Null
    tableau : Null
-   avecParam : oui									#non
+   avecParam : non									#non
    nombreParam : 0
    lesParams:
-   nomParam : nom
-   origine : param inutile							#action ou dur
+   nomParam : Null
+   origine : Null							#action ou dur
   appelFonctionApresData :
-   nombrefonction : 2
+   nombrefonction : 3
    - fonction
      className : web_max\ecrivain\controler\AsideController
      nom : chargeAside
@@ -397,6 +408,161 @@ simpleRoads:
      lesParams:
       nomParam : Null
       origine : params						#post ou dur
+   - fonction
+     className : web_max\ecrivain\controler\ChapterController
+     nom : getChapterNumber
+     tableau : nbChapter
+     avecParam : non									#non
+     nombreParam : 0
+     lesParams:
+      nomParam : Null
+      origine : Null						#post ou dur
+  wantHeaderLocation :
+   action : non
+   target : Null	
+#**************************************  
+ _TheNextBookView:
+  seConnecte : param inutile
+  security :
+   niveauRequis : 0    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : web_max\ecrivain\view\_TheBookView
+      levelUpdate : 99
+      avecParam : oui									#non
+      nombreParam : 2
+      lesParams:
+        - nomParam : nbCaracters
+          origine : Null							#action ou dur
+        - nomParam : nbChapters
+          origine : Null								#action ou dur
+  manager : 
+   nombreManager : 1  
+   managers
+     nom : web_max\ecrivain\model\ChaptersManager
+     action : getNextChapter
+     utiliseResultatFunctionAvant : non				#non
+     excluResultatManager : non   ####
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams : 
+       - nomParam : chap
+         origine : get							#post ou dur
+  appelFonctionAvantData :
+   nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   tableau : Null
+   avecParam : non									#non
+   nombreParam : 0
+   lesParams:
+   nomParam : Null
+   origine : Null							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 3
+   - fonction
+     className : web_max\ecrivain\controler\AsideController
+     nom : chargeAside
+     tableau : aside
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : web_max\ecrivain\model\CommentManager
+      origine : getListValid							#action ou dur
+   - fonction
+     className : web_max\ecrivain\controler\CommentController
+     nom : chargeComment
+     tableau : comment
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : Null
+      origine : params						#post ou dur
+      operation : next
+   - fonction
+     className : web_max\ecrivain\controler\ChapterController
+     nom : getChapterNumber
+     tableau : nbChapter
+     avecParam : non									#non
+     nombreParam : 0
+     lesParams:
+      nomParam : Null
+      origine : Null						#post ou dur
+  wantHeaderLocation :
+   action : non
+   target : Null	
+#**************************************  
+ _ThePreviousBookView:
+  seConnecte : param inutile
+  security :
+   niveauRequis : 0    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : web_max\ecrivain\view\_TheBookView
+      levelUpdate : 99
+      avecParam : oui									#non
+      nombreParam : 2
+      lesParams:
+        - nomParam : nbCaracters
+          origine : Null							#action ou dur
+        - nomParam : nbChapters
+          origine : Null								#action ou dur
+  manager : 
+   nombreManager : 1  
+   managers
+     nom : web_max\ecrivain\model\ChaptersManager
+     action : getPreviousChapter
+     utiliseResultatFunctionAvant : non				#non
+     excluResultatManager : non   ####
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams : 
+       - nomParam : chap
+         origine : get							#post ou dur
+  appelFonctionAvantData :
+   nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   tableau : Null
+   avecParam : non									#non
+   nombreParam : 0
+   lesParams:
+   nomParam : Null
+   origine : Null							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 3
+   - fonction
+     className : web_max\ecrivain\controler\AsideController
+     nom : chargeAside
+     tableau : aside
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : web_max\ecrivain\model\CommentManager
+      origine : getListValid							#action ou dur
+   - fonction
+     className : web_max\ecrivain\controler\CommentController
+     nom : chargeComment
+     tableau : comment
+     avecParam : oui									#non
+     nombreParam : 1
+     lesParams:
+      nomParam : Null
+      origine : params						#post ou dur
+      operation : prev
+   - fonction
+     className : web_max\ecrivain\controler\ChapterController
+     nom : getChapterNumber
+     tableau : nbChapter
+     avecParam : non									#non
+     nombreParam : 0
+     lesParams:
+      nomParam : Null
+      origine : Null						#post ou dur
   wantHeaderLocation :
    action : non
    target : Null	
@@ -460,7 +626,7 @@ simpleRoads:
    className : web_max\ecrivain\controler\AccessControl
    nom : updateDeleteAreAutorized
   view:
-   - nom : web_max\ecrivain\view\_createOneChapterView
+   - nom : Null
       levelUpdate : 99
       avecParam : non			#non
       nombreParam : 0
@@ -501,10 +667,10 @@ simpleRoads:
        origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : oui
-   param : non
+   param : Null
    origine : Null										#post ou get
    nom : Null
-   target : Location:index.php?_listChaptersView 	 
+   target : Location:index.php?_listChaptersView	#askAddOneChapter 
 #************************************** 	
 
  oneChapter:
@@ -1563,16 +1729,16 @@ simpleRoads:
      nom : Null
      tableau : Null
      avecParam : oui									#non
-     nombreParam : 1
+     nombreParam : 0
      lesParams:
       nomParam : Null
       origine : Null							#action ou dur
   wantHeaderLocation :
    action : oui
-   param : Null
+   param : oui
    origine : params										#post ou get
    nom : chap
-   target :  index.php?_TheBookView/chap/		   
+   target :  index.php?_TheBookView/   
 
 #************************************** 
  structure:

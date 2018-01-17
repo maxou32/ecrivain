@@ -24,7 +24,7 @@ class template extends view{
 		<!DOCTYPE html>
 		<html>
 			<head>
-				<meta charset="utf8" />
+				<meta charset= "utf8" />
 				<!-- <meta charset="utf8_general_ci" />  -->
 				<!-- Ligne à ajouter si on veut un favicon		-->
 				<link rel="icon" type="image/jpeg" href="D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\public\media\icone.png">
@@ -56,16 +56,15 @@ class template extends view{
 				
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<link href="public/css/style.css" rel="stylesheet" /> 
-				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 				<!-- Compiled and minified CSS -->
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 				<script  src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"></script>
 				<!--Import Google Icon Font-->
 				<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 				<!--Import materialize.css-->
-				<link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
+				<link type="text/css" rel="stylesheet" href="public/materialize/css/materialize.css"  media="screen,projection"/>
 				
-				<link rel="stylesheet" href="materialize/css/materialize.min.css">
+				<link rel="stylesheet" href="public/materialize/css/materialize.min.css">
 				
 				
 				
@@ -87,6 +86,7 @@ class template extends view{
 				</script>
 			</head>
 			<body style="background-image: url('<?= $this->imageBackGround ?>');">	 
+				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 				<script type="text/javascript"  src="public\js\jquery-3.2.1.min.js"></script>		
 				<script type="text/javascript" src="public\js\ajax.js"></script>
 				<script type="text/javascript" src="public\materialize\js\materialize.min.js"></script>

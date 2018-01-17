@@ -28,14 +28,14 @@ class _MenuFreeView extends View
 					</a>	
 					<ul id="menuGeneral" class="right hide-on-med-and-down">
 						<li><a href="index.php" >Accueil</a></li>
-						<li><a href="index.php?_TheBookView/chap/1" >Mon livre</a></li>
+						<li><a href="index.php?_TheNextBookView/chap/0" >Mon livre</a></li>
 						<li><a href="index.php?askSendMail">Contact</a></li>
 						<li><a href="index.php?reservedAccess" >Accès réservé</a></li>
 						<li><a href="index.php?askRegistration"> Inscrivez-vous.</a></li>
 					</ul>
 					<ul id="menuMobile" class="side-nav" >
 						<li><a href="index.php" >Accueil</a></li>
-						<li><a href="index.php?_TheBookView/chap/1" >Mon livre</a></li>
+						<li><a href="index.php?_TheNextBookView/chap/0" >Mon livre</a></li>
 						<li><a href="index.php?askSendMail" >Contact</a></li>
 						<li><a href="index.php?reservedAccess">Accès réservé</a></li>
 						<li><a href="index.php?askRegistration"> Inscrivez-vous.</a></li>

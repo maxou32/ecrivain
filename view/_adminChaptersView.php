@@ -61,6 +61,7 @@ class _AdminChaptersView extends View{
 								</div>
 								<div >
 									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdchapters() ?>" value="<?= $datas[$i]->getIdchapters() ?>" />	
+									<label for="<?= "action".$datas[$i]->getIdchapters() ?>">Nverif maj</label>
 																	
 								</div>
 

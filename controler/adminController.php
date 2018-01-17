@@ -55,8 +55,8 @@ class AdminController	extends mainController	{
      * @return boolean resultat de la mofication
      */
     public function validStatusChapters($params){	
-		//echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
-		
+		echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
+		exit;
 		$chapterManager= new ChaptersManager();
 		foreach ($params['actionAFaire'] as $key => $value){	
 			//echo"<PRE>CONTROLLER : validParamComments 2 ".$value." status ".$key."</PRE>";
@@ -84,16 +84,20 @@ class AdminController	extends mainController	{
      */
     public function validParamUsers($params){	
 		//echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
-		
+
 		$userManager= new UserManager();
 		foreach ($params['actionAFaire'] as $key => $value){	
+			if (isset($params["D".$value])){
+				$resultat["result"]=$userManager->delete($value);
+			}else{
 				$donnees=array('Idusers'=>$value,'Status_IdStatus'=>$params["S".$value], 'Grade_IdGrade'=>$params["G".$value]);
 				$newUser = new User($donnees);
 				$resultat["result"]=$userManager->updateUser($newUser);
+			}
 		}
 		if ($resultat["result"]){
 			$monError=new ErrorController();
-			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Mise à jour des chapitres", "numberMessage"=>21));
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Mise à jour de la liste d'utilisateur", "numberMessage"=>23));
 		}		
 		return $resultat["result"];		
 	}	

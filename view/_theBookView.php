@@ -12,39 +12,59 @@ class _TheBookView extends View
 		$this->template =$template;
 	}
 	public function show($params,$datas){
-		ob_start();  			
-		//echo "<br /><pre>THE BOOK VIEW 1 = ";print_r($params["aside"]);echo"</pre>";
-		$chapitre=$datas->getNumber();
+		
+		ob_start();  
+					
+		//echo "<br /><pre>THE BOOK VIEW 1 = ";print_r($datas);echo"</pre>";
+		//echo "<br /><pre>THE BOOK VIEW 2 = ";print_r($datas);echo"</pre>";
+		
+		$chapitre=$datas['data']->getNumber();
 		?>
+		<script type="text/javascript">
+			window.onload =  function(e){
+				if (<?= $chapitre ?> === <?= $datas['mini']['valeur'] ?>){
+					$('#previous').css({visibility:'hidden'});
+				}else{
+					$('#previous').css({visibility:'visible'});
+				};
+				if (<?= $chapitre  ?> === <?= $datas['maxi']['valeur'] ?>){
+					$('#next').css({visibility:'hidden'});
+				}else{
+					$('#next').css({visibility:'visible'});
+				};
+			};
+		</script>
+		
+		
 		<div class ="row">
 			<div class="col s1"></div>
 			<div class="formBook col s7">
-				<div class="carousel-item " href="<?= htmlspecialchars( $datas->getNumber()) ?>">
-					<h3><?= $datas->getTitle() ?></h3>
+				<div class="carousel-item " href="<?= htmlspecialchars( $datas['data']->getNumber()) ?>">
+					<h3><?= $datas['data']->getTitle() ?></h3>
 
-					<em id="dateCreation" class="right-align">rédigé le : <?= htmlspecialchars($datas->getDateFr()) ?></em>
-					<p class="flow-text"><?= $datas->getContent() ?></p>
+					<em id="dateCreation" class="right-align">rédigé le : <?= htmlspecialchars($datas['data']->getDateFr()) ?></em>
+					<p><?= $datas['data']->getContent() ?></p>
 				</div>
-				
-				
-					<form method="post"  name="changePage" action="index.php?_TheBookView/chap/<?= htmlspecialchars($chapitre-1) ?>">
-						<span  class=" waves-effect waves-light btn blue">
-							<input type="submit" name="sousAction" value="Précédent"><i class="material-icons left">arrow-back</i>
-						</span>
-					</form>
-					<span class="col s3"></span>
-					<form method="post"  name="changePage" action="index.php?_TheBookView/chap/<?= htmlspecialchars($chapitre+1) ?>">
-						<span  class=" waves-effect waves-light btn blue">
-							<input type="submit" name="sousAction" value="Suivant"><i class="material-icons right">arrow-back</i>
-						</span>
-					</form>
-				
-
+				<div class="row">
+					<h2>
+						<form method="post" id="previous" class="col s1"  name="changePage" action="index.php?_ThePreviousBookView/chap/<?= htmlspecialchars($chapitre) ?>">
+							<span  class=" waves-effect waves-light  btn btn-large blue">
+								<input type="submit" name="sousAction" value="précédent"><i class="material-icons left">send</i>
+							</span>
+						</form>
+						<span class="col s1 offset-s7"></span>
+						<form method="post" id="next" class="col s1" name="changePage" action="index.php?_TheNextBookView/chap/<?= $chapitre ?>">
+							<span  class=" waves-effect waves-light btn btn-large blue">
+								<input type="submit" name="sousAction" value="Suivant" class="right-align"><i class="material-icons left">send</i>
+							</span>
+						</form>
+					</h2>
+				</div>
 				<div class="row jumbotron">
 					<h4>Ajoutez un commentaire :</h4>
 				</div>
-				<form method="post" name="addComment" action="index.php?addComment/chap/<?= htmlspecialchars($datas->getNumber()) ?>" >
-					<input type="hidden" name="chapter" id="chapter" value="<?= htmlspecialchars($datas->getIdchapters()) ?>"/>
+				<form method="post" name="addComment" action="index.php?addComment/chap/<?= htmlspecialchars($datas['data']->getNumber()) ?>" >
+					<input type="hidden" name="chapter" id="chapter" value="<?= htmlspecialchars($datas['data']->getIdchapters()) ?>"/>
 					
 					<div class="col s6">				
 						<label for="name" class="active">Votre nom</label>
@@ -56,10 +76,10 @@ class _TheBookView extends View
 						
 					</div>
 					<label for="content" class="active">Texte du message</label><textarea name="content" id="content" type="text" /></textarea>
-					<button type="submit" name="sousAction" value="Soumettre" class="btn btn-primary">
-						<span class="glyphicon glyphicon-ok-sign"></span>
-						soumettre
-					</button>
+					<span  class=" waves-effect waves-light btn btn-large blue">
+						<input type="submit" name="sousAction" value="Soumettre" class="right-align"><i class="material-icons left">send</i>
+					</span>
+
 				</form>
 				<?php
 					$monCommentView=new _CommentView($params);	

@@ -21,8 +21,11 @@ class _AdminUsersView extends View{
 						document.getElementById($user).value=$status;
 						document.getElementById("action"+$user).checked=true;
 					}
-					function changeStatus($user,$grade) {
+					function changeGrade($user,$grade) {
 						document.getElementById($user).value=$grade;
+						document.getElementById("action"+$user).checked=true;
+					}
+					function detruit($user) {
 						document.getElementById("action"+$user).checked=true;
 					}
 				</script>	
@@ -38,35 +41,37 @@ class _AdminUsersView extends View{
 								<input name="<?=$datas[$i]->getIdusers()  ?>" type="hidden" id="<?= $datas[$i]->getIdusers() ?>"  />
 								</p>
 							</div>
-							<div class="col s3">
+							<div class="col s3 left-align">
 								
 								<?php
 									foreach ($params['grade'] as $key => $value){
 										?>
-										<input name="<?= "G".$datas[$i]->getIdusers() ?>"  type="radio" id="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getGrade_IdGrade()==$key){echo "checked";} ?> onClick='javascript:changeGrade("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value=" <?= $key ?>" />
-										<label for="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" class="blue"><?= $value ?></label>
-										<br/>
+										<input name="<?= "G".$datas[$i]->getIdusers() ?>"  class="blue"type="radio" id="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getGrade_IdGrade()==$key){echo "checked";} ?> onClick='javascript:changeGrade("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value=" <?= $key ?>" />
+										<label for="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" ><?= $value ?></label>
 										<?php
 									}
 								?>
 								<br/>
 							</div>
-							<div class="col s3">
+							<div class="col s3 left-align">
 								<?php
 									foreach ($params['status'] as $key => $value){
 										?>
 										<input name="<?= "S".$datas[$i]->getIdusers() ?>" type="radio" id="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> onClick='javascript:changeStatus("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value="<?= $key ?>" /> 
-										<label for="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" class="blue"  ><?= $value ?></label>
-										<br/>
+										<label for="<?="statusUsers".$datas[$i]->getIdusers().$key ?>"  ><?= $value ?></label>
 										<?php
 									}
-								?>
+									?>
 							</div>
-							<div >
-								<input type="hidden" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdusers() ?>" value="<?= $datas[$i]->getIdusers() ?>" />	
-							</div>
-
+						</div>	
+						<div class="row" >
+							<input name="<?= "D".$datas[$i]->getIdusers() ?>" type="checkbox" id="<?="D".$datas[$i]->getIdusers()?>" value="<?="D".$datas[$i]->getIdusers() ?>" onClick='javascript:detruit("<?= $datas[$i]->getIdusers() ?>")'/> 
+								<label for="<?="D".$datas[$i]->getIdusers()?>"  >Supprimer cet utilisateur</label>
+							<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdusers() ?>" value="<?= $datas[$i]->getIdusers() ?>" />	
+							
 						</div>
+
+
 					</div>
 					<?php 
 				}

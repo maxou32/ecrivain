@@ -25,7 +25,7 @@ class _AsideView {
 					<h5  class="left-align"><?= htmlspecialchars($this->aside["aside"]["value"][$i]["ref2"]); ?></h5>
 					<?php
 					if(strlen($this->aside["aside"]["value"][$i]["content"])>$this->aside["nbCaracters"]/3){
-						$begin=substr($this->aside["aside"]["value"][$i]["content"],0,$this->aside["nbCaracters"]/3).'<a href="index.php?oneChapter/idchapter/'.$this->aside["aside"]["value"][$i]["ref1"].'">  (lire la suite...)</a>';
+						$begin=substr($this->aside["aside"]["value"][$i]["content"],0,$this->aside["nbCaracters"]/3).'</p><a href="index.php?oneChapter/idchapter/'.$this->aside["aside"]["value"][$i]["ref1"].'">  (lire la suite...)</a>';
 					}else{
 						$begin='<a href="index.php?oneChapter/idchapter/'.$this->aside["aside"]["value"][$i]["ref1"].'">'.$this->aside["aside"]["value"][$i]["content"].'</a>';
 					}

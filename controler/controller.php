@@ -34,7 +34,7 @@ class Controller{
         */
 		
 		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
-		//echo "<br /><pre>CONTROLLER 1.30 maxou: params = ";print_r($params);echo"</pre>";
+		echo "<br /><pre>CONTROLLER 1.30 maxou: params = ";print_r($params);echo"</pre>";
 		//echo "<br /><pre>CONTROLLER 1.30 maxou: post = ";print_r($post);echo"</pre>";
 		
 		if(!empty($this->myRoad["appelFonctionAvantData"]["className"])){
@@ -142,15 +142,22 @@ class Controller{
 			
 			if(isset($element["className"])){
 				$maClasse=new $element["className"]($this->myRoad, $this->myAction);
+				if(isset($element["lesParams"]["operation"])){
+					$operation=$element["lesParams"]["operation"];
+					//echo"<PRE><br />CONTROLLER 8.215: dat ";print_r($element);echo"</PRE>";
+				}else{
+					$operation=null;
+				}
 				if(isset($element["tableau"])){ 
 					if(isset($element["nom"])){ 
 						$function=$element["nom"];
+						
 						if($element["lesParams"]["origine"]=="post"){
 							//echo "<br /><pre>CONTROLLER 8.22: Return $this->globalParams = ";print_r($element["nom"]);echo"</pre>";
-							$this->globalParams [$element["tableau"]]=$maClasse->$function($post);
+							$this->globalParams [$element["tableau"]]=$maClasse->$function($post,$operation);
 						}else{
 							//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
-							$this->globalParams [$element["tableau"]]=$maClasse->$function($params);
+							$this->globalParams [$element["tableau"]]=$maClasse->$function($params,$operation);
 							//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($this->globalParams);echo"</pre>";
 						}
 					}
@@ -159,10 +166,10 @@ class Controller{
 						$function=$element["nom"];
 						if($element["lesParams"]["origine"]=="post"){
 							//echo "<br /><pre>CONTROLLER 8.23: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
-							$this->globalParams =$maClasse->$function($post);
+							$this->globalParams =$maClasse->$function($post,$operation);
 						}else{
 							//echo "<br /><pre>CONTROLLER 8.24: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
-							$this->globalParams =$maClasse->$function($params);
+							$this->globalParams =$maClasse->$function($params,$operation);
 						}
 					}
 				}
@@ -241,13 +248,13 @@ class Controller{
         * déclanchement de la fonction a exécuter pour recharger une vue
         */
 		//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"];
-		//echo"<PRE> controle déclenchement vue 12: data ";print_r($params);echo"</PRE>";
+		//echo"<PRE> controle déclenchement vue 12: globalparam ";print_r($params);echo"</PRE>";
 		if($this->myRoad["wantHeaderLocation"]["action"]=="oui"){
 			if( $this->myRoad["wantHeaderLocation"]["param"]=="oui"){
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){
 					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$post[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}else{
-					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$this->globalParams[$this->myRoad["wantHeaderLocation"]["nom"]];
+					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$params[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}
 			}else{
 				$critere="";

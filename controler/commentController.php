@@ -24,7 +24,11 @@ public function __construct($myRoad, $action){
 			$donnees=array('name' => $post['name'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>Null, 'Status_IdStatus'=>2,'Chapter_IdChapter'=>$post['chapter'], 'email'=>$post['email']);
 			$newComment = new Comment($donnees);
 			$monCommentManager= new CommentManager;
-			$monCommentManager->add($newComment);
+			$resultat=$monCommentManager->add($newComment);
+			if ($resultat){
+				$monError=new ErrorController();
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\commentController", "raison"=>"Proposition de commentaire", "numberMessage"=>21));
+			}		
 		}
 	}
 
@@ -32,14 +36,22 @@ public function __construct($myRoad, $action){
      * Enregistre un commentaire .
      * @param  params    contient les informations du recues de l'écran
      */
-	public function chargeComment($params){
+	public function chargeComment($params, $operation){
 		//echo"<PRE>CONTROLLER COMMENT  : chargeComment 1 ";print_r($params);echo"</PRE>";
+		
 		$commentManager= new CommentManager();
 		if(isset($params["chap"])){
+			if($operation=="next"){
+				//echo "+++++++++++<br />";
+				$params["chap"]++;	
+			}elseif($operation=="prev"){
+				//echo "-----------".$operation."----<br />";
+				$params["chap"]--;
+			}
 			$chapterManager= new ChaptersManager;
 			$monChapter= $chapterManager->getByNumber($params["chap"]);
 			//echo"<PRE>CONTROLLER COMMENT  CHAP 2 ";print_r($monChapter);echo"</PRE>";
-			$comment=$commentManager->getListValidFromChapter($monChapter->getIdchapters());
+			$comment=$commentManager->getListValidFromChapter($monChapter['data']->getIdchapters());
 		}else{
 			$comment=$commentManager->getListValidFromChapter($params["idchapter"]);
 			//echo"<PRE>CONTROLLER COMMENT  IDCHAPTER: Fin 3 ";print_r($params["idchapter"]);echo"</PRE>";
@@ -59,7 +71,9 @@ public function __construct($myRoad, $action){
 		$commentManager= new CommentManager();
 
 		foreach ($params['actionAFaire'] as $key => $value){	
-			if(($params[$value])==! Null){
+			if (isset($params["D".$value])){
+				$resultat["result"]=$commentManager->delete($value);
+			}elseif(($params[$value])==! Null){
 				//echo"<PRE>CONTROLLER : validParamComments 2 ".$value." status ".$params[$value]."</PRE>";
 				$resultat["result"]=$commentManager->updateStatus($value, $params[$value]);
 			}
