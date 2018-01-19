@@ -16,29 +16,34 @@ class _createOneChapterView extends View
 			
 		ob_start(); 
 		
-			?>	
-			<form method="post" action="index.php?addOneChapter" class="formChapitre">
-				<div class="row">
-					<div class ="col s8">
-						<label for ="title" >titre</label><br />
-						<input id="title" name="title" type="text"  value ="" required /><br />
-					</div>
-					<div class="center-align col s4">
-						<label for="dateFr">Date de création</label>
-						<input id="dateFr" name="dateFr" type="date" class="center-align" value="" required />
-					</div>
+			?>
+			<div class="row">	
+				<div class="card-panel col m8 offset-m2 s12">
+					<form method="post" action="index.php?addOneChapter" class="formChapitre">
+						
+						<div class ="col  m6 offset-m1 s12">
+							<label for ="title" >titre</label><br />
+							<input id="title" name="title" type="text"  value ="" required /><br />
+						</div>
+						<div class="center-align col m4 s12">
+							<label for="dateFr">Date de création</label>
+							<input id="dateFr" name="dateFr" type="date" class="center-align" value="" required />
+						</div>
+						
+						
+						<div class="col m12 s12">
+							<label>Contenu du chapitre</label><br />
+							<textarea id='content' name='content' class='texteChapitre'></textarea><br /> 
+							<input id="number" name="number" type="hidden"  value ="999" required /><br />
+						</div>	
+						<div class="col m4 ofsset-m4 s12 center-align">
+							<span  class=" waves-effect waves-light btn btn-large blue ">
+								<input type="submit" name="sousAction" value="Ajouter ce chapitre"><i class="material-icons left">add</i>
+							</span>				
+						</div>	
+					</form>
 				</div>
-				<div class="col s12">
-					<label>Contenu du chapitre</label><br />
-					<textarea id='content' name='content' ></textarea><br /> 
-					<input id="number" name="number" type="hidden"  value ="999" required /><br />
-				</div>	
-				<div class="col s12 center-align">
-					<span  class=" waves-effect waves-light btn btn-large blue">
-						<input type="submit" name="sousAction" value="Ajouter ce chapitre"><i class="material-icons left">add</i>
-					</span>				
-				</div>	
-			</form>
+			</div>
 		<?php
 
 		$contentView=ob_get_clean(); 	

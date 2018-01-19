@@ -31,9 +31,9 @@ class _AdminCommentsView extends View{
 					?>
 					
 					<div class="collection-item">
-						<div class="row ">
-							<div class="col s6 panel-heading">
-								<div class=" panel">
+						<div class="row card-panel orange lighten-5">
+							<div class="col s6 ">
+								<div >
 									<p id="name"><?= htmlspecialchars($datas[$i]->getName()) ?> </p>
 									<input name="<?= htmlspecialchars($datas[$i]->getIdcomments()) ?>" type="hidden" id="<?= $datas[$i]->getIdcomments() ?>"  />
 									
@@ -62,6 +62,7 @@ class _AdminCommentsView extends View{
 									?>
 								</div>
 								<div >
+									<br/>
 									<input name="<?= "D".$datas[$i]->getIdcomments() ?>" type="checkbox" id="<?="D".$datas[$i]->getIdcomments()?>" value="<?="D".$datas[$i]->getIdcomments() ?>" onClick='javascript:detruit("<?= $datas[$i]->getIdcomments() ?>")'/> 
 										<label for="<?="D".$datas[$i]->getIdcomments()?>"  >Supprimer ce commentaire</label>
 									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdcomments() ?>" value="<?= $datas[$i]->getIdcomments() ?>" />	

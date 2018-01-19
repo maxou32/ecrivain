@@ -21,27 +21,20 @@ class _readOneChapterView extends View
 		?>
 		
 		<div class="row">
-			<div class="col s1"></div>
-			<div class="formChapitre  col s7">
-				
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<div class="row">
-							<div  class="col s8">
-								<h4 class="panel-title"><?= htmlspecialchars($datas->getTitle()) ?></h4>
-							</div>
-							<div class="col s4 center-align">
-								<br /><label>Date de création</label><br />
-								<?= htmlspecialchars($datas->getDateFr()) ?><br />
-								
-								<label>Numéro d'ordre du chapitre</label><br />
-								<?= $datas->getNumber() ?><br />
-							</div>	
-						</div>
+			<div class="formChapitre col m8 s12">
+				<div class="row">
+					<div  class="col s8">
+						<h4 class="panel-title"><?= htmlspecialchars($datas->getTitle()) ?></h4>
 					</div>
-					<?= $datas->getContent() ?>
+					<div class="col s4 center-align">
+						<br /><label>Date de création</label><br />
+						<?= htmlspecialchars($datas->getDateFr()) ?><br />
 						
+						<label>Numéro d'ordre du chapitre</label><br />
+						<?= $datas->getNumber() ?><br />
+					</div>	
 				</div>
+				<?= $datas->getContent() ?>
 				<?php 
 				if(isset($params['updateDeleteAreAutorized'])){
 					if ($params['updateDeleteAreAutorized']){
@@ -62,8 +55,7 @@ class _readOneChapterView extends View
 				$CommentView=$monCommentView->show();	
 				?>
 			</div>
-			<div class="col s1"></div>
-			<div class="col s2">
+			<div class="col m4 hide-on-med-and-down">
 				<?php
 					$monAsideView=new _AsideView($params);	
 					$asideView=$monAsideView->show();	
@@ -79,8 +71,6 @@ class _readOneChapterView extends View
 		$captionMessage = $this->captionMessage;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	
-		//echo "fin chargement ";
-		//echo "<br / >content view ".$contentView;
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
 		$monTemplate->show(null,null);
 			

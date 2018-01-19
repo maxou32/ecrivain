@@ -56,22 +56,27 @@ class AdminController	extends mainController	{
      */
     public function validStatusChapters($params){	
 		echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
-		exit;
+
 		$chapterManager= new ChaptersManager();
 		foreach ($params['actionAFaire'] as $key => $value){	
 			//echo"<PRE>CONTROLLER : validParamComments 2 ".$value." status ".$key."</PRE>";
-			if(is_null($params["number".$value])){
-				$params["number".$value]=999;
-			}
-			if(($params[$value])==! Null){
-				$donnees=array('Idchapters'=>$value,'Status_IdStatus'=>$params[$value],'number'=>$params["number".$value]);
-				$newChapter = new Chapter($donnees);
-				$resultat["result"]=$chapterManager->updateStatus($newChapter);		
+
+			if (isset($params["D".$value])){
+				$resultat["result"]=$chapterManager->delete($value);
+			}else {
+				if(is_null($params["number".$value])){
+					$params["number".$value]=999;
+				}
+				if(($params[$value])==! Null){
+					$donnees=array('Idchapters'=>$value,'Status_IdStatus'=>$params[$value],'number'=>$params["number".$value]);
+					$newChapter = new Chapter($donnees);
+					$resultat["result"]=$chapterManager->updateStatus($newChapter);		
+				}
 			}
 		}
 		if ($resultat["result"]){
 			$monError=new ErrorController();
-			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Mise à jour des habilitations", "numberMessage"=>23));
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Mise à jour des chapitres", "numberMessage"=>23));
 		}		
 		return $resultat["result"];
 	}

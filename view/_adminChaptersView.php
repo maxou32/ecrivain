@@ -21,6 +21,9 @@ class _AdminChaptersView extends View{
 						document.getElementById($chapter).value=$status;
 						document.getElementById("action"+$chapter).checked=true;
 					}
+					function detruit($chapter) {
+						document.getElementById("action"+$chapter).checked=true;
+					}
 				</script>	
 				<div >
 				<?php
@@ -29,7 +32,7 @@ class _AdminChaptersView extends View{
 					?>
 					<div class="collection">
 						<div class="collection-item">
-							<DIV class="row">
+							<DIV class="row card-panel orange lighten-5">
 								<h5 class="center"><?= $datas[$i]->getTitle() ?></h5>
 								<div class="col s6 ">
 									<?php 
@@ -60,9 +63,9 @@ class _AdminChaptersView extends View{
 									<input name="<?=  "number".$datas[$i]->getIdchapters()  ?>" class="center" type="text" id="<?= "number".$datas[$i]->getIdchapters() ?>" value="<?=  $datas[$i]->getNumber()  ?>" />
 								</div>
 								<div >
+									<input name="<?= "D".$datas[$i]->getIdchapters() ?>" type="checkbox" id="<?="D".$datas[$i]->getIdchapters()?>" value="<?="D".$datas[$i]->getIdchapters() ?>" onClick='javascript:detruit(<?= $datas[$i]->getIdchapters() ?>)'/> 
+										<label for="<?="D".$datas[$i]->getIdchapters()?>" >  Supprimer ce chapitre</label>
 									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdchapters() ?>" value="<?= $datas[$i]->getIdchapters() ?>" />	
-									<label for="<?= "action".$datas[$i]->getIdchapters() ?>">Nverif maj</label>
-																	
 								</div>
 
 							</div>

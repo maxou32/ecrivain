@@ -24,8 +24,7 @@ class Controller{
 		$this->myRoad=$myRoad;
 		$this->myAction=$action;
 		$this->myConfig= new Config;
-		//echo"<br /><pre> CONTROLLER CONSTRUCT ";print_r($this->myAction);echo"</pre>";
-	}
+		}
 	
 	private function avantDonnees($params, $post){
 			
@@ -33,18 +32,12 @@ class Controller{
         * déclanchement de la fonction a exécuter avant lectures des données
         */
 		
-		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
-		echo "<br /><pre>CONTROLLER 1.30 maxou: params = ";print_r($params);echo"</pre>";
-		//echo "<br /><pre>CONTROLLER 1.30 maxou: post = ";print_r($post);echo"</pre>";
-		
 		if(!empty($this->myRoad["appelFonctionAvantData"]["className"])){
 			$maClasse=new $this->myRoad["appelFonctionAvantData"]["className"]($this->myRoad, $this->myAction);		
 			if($this->myRoad["appelFonctionAvantData"]["avecParam"]=="oui"){
 				if(isset($this->myRoad["appelFonctionAvantData"]["nom"])){
 					$function=$this->myRoad["appelFonctionAvantData"]["nom"];
 					if($this->myRoad["appelFonctionAvantData"]["origine"]=="params"){
-						//echo"<PRE><br />CONTROLLER 1.31: dat PARAm";print_r($params);echo"</PRE>";
-						//echo"<PRE><br />CONTROLLER 1.31: dat POST";print_r($post);echo"</PRE>";
 						$this->return=$maClasse->$function($params);
 					}else{
 						$this->return=$maClasse->$function($post);
@@ -56,17 +49,13 @@ class Controller{
 					$this->return= $maClasse->$fonction($post);
 				}
 			}
-			//echo "<br />CONTROLLER 1.5: Return valide access = ";print_r($return);echo"</pre>";
 		}else{
-			//echo "<br /><pre>CONTROLLER 1.32: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
 			if($this->myRoad["appelFonctionAvantData"]["avecParam"]=="oui"){
 				if(isset($this->myRoad["appelFonctionAvantData"]["nom"])) {
 					$fonction=$this->myRoad["appelFonctionAvantData"]["nom"];
 					if ($this->myRoad["appelFonctionAvantData"]["origine"]=="params"){
-						//echo "<br /><pre>CONTROLLER 1.41: element = ";print_r($this->myRoad["appelFonctionAvantData"]);echo"</pre>";
 						$this->return= $this->$fonction($params);
 					}else{
-						//echo "<br /><pre>CONTROLLER 1.42: element = ";print_r($post);echo"</pre>";
 						$this->return= $this->$fonction($post);
 					}
 				}
@@ -85,10 +74,7 @@ class Controller{
         * déclanchement de la fonction a exécuter pour lire des données
         */	
 		foreach($this->myRoad["manager"] as $element){
-			//echo"<PRE> controller manager 2: post ";print_r($post);echo"</PRE>";
-			//echo"<PRE> controller manager 3: params ";print_r($params);echo"</PRE>";
 			if(!empty($element["nom"])){
-				//echo " <br />déclenchement lecture manager";
 				$monManager= new $element["nom"];	
 				$action=$element["action"];
 				$paramManager="";
@@ -97,54 +83,41 @@ class Controller{
 					$paramManager=$this->return;
 				}else{
 					if($element["avecParam"]="oui"){
-						//echo"<PRE> controller manager 3.3: data ";print_r($element["lesParams"]);echo"</PRE>";
-						
 						foreach($element["lesParams"] as $elementParam){
-							//echo"<PRE> controller manager 3,5: data ";print_r($elementParam);echo"</PRE>";
 							if($elementParam["origine"]=="post"){
 								$paramManager=$post;
 							}elseif($elementParam["origine"]=="get"){
-								//echo"<PRE> controller manager 3,6: data ";print_r($params);echo"</PRE>";
-								$paramManager=$params[$elementParam["nomParam"]]; // pour thebook, oneChapter,delete
-								//echo"<PRE> controller manager 3,7: data =";print_r($paramManager);echo"</PRE>";
+								$paramManager=$params[$elementParam["nomParam"]]; 
 							}elseif($element["utiliseResultatFunctionAvant"]!=="oui"){
 								$paramManager=$elementParam["nomParam"];
 							}
 						}
 					}
 				}
-				//echo"<PRE> controller manager 3,9: data ".$action." param =";print_r($this->return);echo"</PRE>";
 				$this->data=$this->return;
 				if($element["excluResultatManager"]=="non"){
 					if(gettype($monManager->$action($paramManager))=="class"){
 						if(get_class($this->return)!=="Message"){
-							//echo"<PRE> controller manager 3,951: data ".$action." param =";print_r($paramManager);echo"</PRE>";
 							$this->data=$monManager->$action($paramManager);	
 						}
 					}else{
-						//echo"<PRE> controller manager 3,952: data ".$action." param =";print_r($paramManager);echo"</PRE>";
 						$this->data=$monManager->$action($paramManager);		
 					}
 				}
 			}
 		}
-		//echo"<br />CONTROLLER<PRE> controller manager 5: data ";print_r($this->data);echo"</PRE>";
 	}
 		
 	private function apresDonnees($params, $post){
 		 /** *****************************************************************
         * déclanchement de la fonction a exécuter après lectures des données
         */
-		//echo "<br />CONTROLLER post generique 8.2 <PRE>";print_r($post);echo "</PRE>";
-		//echo "<br />CONTROLLER params generique 8.2 <PRE>";print_r($params);echo "</PRE>";
 		foreach($this->myRoad["appelFonctionApresData"] as $element){
-			//echo"<PRE><br />CONTROLLER 8.21: dat ";print_r($element);echo"</PRE>";
 			
 			if(isset($element["className"])){
 				$maClasse=new $element["className"]($this->myRoad, $this->myAction);
 				if(isset($element["lesParams"]["operation"])){
 					$operation=$element["lesParams"]["operation"];
-					//echo"<PRE><br />CONTROLLER 8.215: dat ";print_r($element);echo"</PRE>";
 				}else{
 					$operation=null;
 				}
@@ -153,28 +126,22 @@ class Controller{
 						$function=$element["nom"];
 						
 						if($element["lesParams"]["origine"]=="post"){
-							//echo "<br /><pre>CONTROLLER 8.22: Return $this->globalParams = ";print_r($element["nom"]);echo"</pre>";
 							$this->globalParams [$element["tableau"]]=$maClasse->$function($post,$operation);
 						}else{
-							//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
 							$this->globalParams [$element["tableau"]]=$maClasse->$function($params,$operation);
-							//echo "<br /><pre>CONTROLLER 8.22: Return globalParams = ";print_r($this->globalParams);echo"</pre>";
 						}
 					}
 				}else{
 					if(isset($element["nom"])){ 
 						$function=$element["nom"];
 						if($element["lesParams"]["origine"]=="post"){
-							//echo "<br /><pre>CONTROLLER 8.23: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
 							$this->globalParams =$maClasse->$function($post,$operation);
 						}else{
-							//echo "<br /><pre>CONTROLLER 8.24: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
 							$this->globalParams =$maClasse->$function($params,$operation);
 						}
 					}
 				}
 			}else{
-				//echo"<PRE><br />CONTROLLER 8.3: dat sans classe";print_r($element["nom"]);echo"</PRE>";
 				if(isset($element["tableau"])){ 
 					if(isset($element["nom"])){ 
 						if($element["lesParams"]["origine"]=="post"){
@@ -182,24 +149,18 @@ class Controller{
 						}else{
 							$this->globalParams [$element["tableau"]]=$this->$element["nom"]($element);
 						}
-						//echo "<br /><pre>CONTROLLER 8.35: retour fonction apres data = ";print_r($this->globalParams);echo"</pre>";
 					}
 				}else{
 					if(isset($element["nom"])){ 
 						if($element["lesParams"]["origine"]=="post"){
-							//echo "<br /><pre>CONTROLLER 8.4: Return globalParams = ";print_r($element["nom"]);echo"</pre>";
 							$this->globalParams["init"] =$this->$element["nom"]($post);
-							//echo "<br /><pre>CONTROLLER 8.4: avec post = ";print_r($globalParams["init"]);echo"</pre>";
 						}else{
 							$this->globalParams["init"] =$this->$element["nom"]($element);
-							//echo "<br /><pre>CONTROLLER 8.4: sans post = ";print_r($globalParams["init"]);echo"</pre>";
 						}
 					}
 				}
-				//echo "<br /><pre>CONTROLLER 8.5: Return globalParams = ";print_r($globalParams);echo"</pre>";
 			}
 			$nomParam=$element["lesParams"]["nomParam"];
-			//echo "<br /><pre>CONTROLLER 8.6: Fin apres DATA = ";print_r($this->globalParams);echo"</pre>";
 		}
 	}
 	
@@ -209,20 +170,15 @@ class Controller{
         * déclanchement de la fonction a exécuter pour charger la vue
         */
 		foreach($this->myRoad["view"] as $element){
-			//echo " <br />déclenchement vue";
 			if($element["nom"]!==Null){
-				//echo"<PRE> controle déclenchement vue 9: data ";print_r( $element);echo"</PRE>";
 				if($element["nombreParam"]>0){
-					//echo "<br /><pre>CONTROLLER 9.3: Return globalParams = ";print_r($this->globalParams);echo"</pre>";
 					foreach ($element["lesParams"] as $elementParam){
 						
 						if($elementParam["origine"]!=="dur"){
 							$action="get".$elementParam["nomParam"];
 							$this->globalParams[$elementParam["nomParam"]]=$this->myConfig->$action();
-							//echo"<PRE> controle déclenchement vue 9.4: data ";print_r($this->globalParams);echo"</PRE>";
 						}else{
 							$this->globalParams[$elementParam["nomParam"]]=$elementParam["value"];
-							//echo"<PRE> controle déclenchement vue 9.5: data ";print_r($this->globalParams);echo"</PRE>";
 						}
 					}
 					$this->globalParams["updateDeleteAreAutorized"]=false;
@@ -232,9 +188,6 @@ class Controller{
 					}
 				}
 				$this->globalParams["params"]= $params;
-				//echo"<PRE> controle déclenchement vue 10: globalParams ";print_r($this->globalParams);echo"</PRE>";
-				//echo"<PRE> controle déclenchement vue 10: data ";print_r($this->data);echo"</PRE>";
-				//echo"<PRE> controle déclenchement vue 11: globalParams ";print_r($element["nom"]);echo"</PRE>";
 				$monMessageView = new $element["nom"]('template.php');  
 				$monMessageView->show($this->globalParams,$this->data);
 			}else{
@@ -247,8 +200,6 @@ class Controller{
 		/** *****************************************************************
         * déclanchement de la fonction a exécuter pour recharger une vue
         */
-		//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"];
-		//echo"<PRE> controle déclenchement vue 12: globalparam ";print_r($params);echo"</PRE>";
 		if($this->myRoad["wantHeaderLocation"]["action"]=="oui"){
 			if( $this->myRoad["wantHeaderLocation"]["param"]=="oui"){
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){
@@ -259,8 +210,6 @@ class Controller{
 			}else{
 				$critere="";
 			}
-			//echo"<PRE> controle déclenchement vue 13: data ";print_r($critere);echo"</PRE>";
-			//echo '<br />header = '.$this->myRoad["wantHeaderLocation"]["target"].$critere;
 			header('Location: '.$this->myRoad["wantHeaderLocation"]["target"].$critere);
 		}
 	}
@@ -278,16 +227,12 @@ class Controller{
 	 *       
      */
     public function prepareAction($params, $post){
-
-		
 		//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
 		//echo"<PRE><br>CONTROLLER 1.1: nbPram = ";print_r($params);echo"</PRE>"."<br />";
 		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad);echo"</pre>";
 		if($this->myRoad["appelFonctionAvantData"]["nombrefonction"]>0){
 			$this->avantDonnees($params, $post);
 		}
-		
-         //echo "<br /><pre>CONTROLLER 1.5: Return valide access = ";print_r($return);echo"</pre>";
 		
 		if(isset($this->myRoad["manager"])){
 			$this->lireDonnees($params, $post); 

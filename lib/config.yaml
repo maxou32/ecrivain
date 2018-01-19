@@ -1569,6 +1569,7 @@ simpleRoads:
    origine : params									#post ou get
    nom : chap
    target : index.php?_TheBookView/			   #.$params['idchapter']
+ 
 #**************************************
  askSendMail:
   seConnecte : non

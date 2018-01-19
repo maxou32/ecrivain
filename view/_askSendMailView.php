@@ -12,27 +12,23 @@ class _askSendMailView extends View{
 		ob_start(); 
 		?>
 		<div class="row">
-		<form  action="index.php?sendMail" method="POST" enctype="multipart/form-data" class="formUser well center ">
+		<form  action="index.php?sendMail" method="POST" enctype="multipart/form-data" class="formUser center hoverable orange lighten-5 col m6 offset-m3">
 			<input type="hidden" name="action" value="submit">
-			<div class="col-xs-6 col s6">
+			<div class="col m6 s12">
 				Votre nom:<br>
 				<input name="name" type="text" value="" size="30" class="form-control"/><br>
 			</div>
-			<div class="col-xs-6 col s6">
+			<div class="col m6 s12">
 				Votre email:<br>
 				<input name="email" class="form-control" type="email"  value="" size="30"/><br>
 			</div>
 			Votre message:<br>
 			<textarea name="message" rows="7" cols="30"></textarea><br>
-			
-			<span class="btn btn-primary btn-success glyphicon glyphicon-envelope">
-				<input type="submit" value="Transmettre" >
-			</span> 	
-			
-			<button type="submit" class=" btn btn-success  glyphicon glyphicon-envelope">  
-				 Transmettre
-			</button>
 
+			<span  class=" waves-effect waves-light btn btn-large blue center-align">
+				<input type="submit" name="sousAction" value="Transmettre" class="right-align"><i class="material-icons left">send</i>
+			</span>
+			
 		</form>
 
 		<?php

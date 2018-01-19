@@ -34,8 +34,8 @@ class _AdminUsersView extends View{
 				for($i=0;$i<count($datas);$i++)
 				{
 					?>
-					<div  class="collection-item">
-						<div class="row">
+					<div  class="collection-item ">
+						<div class="row card-panel orange lighten-5">
 							<div class="col s6">
 								<p id="content"><?=$datas[$i]->getName() ?> 
 								<input name="<?=$datas[$i]->getIdusers()  ?>" type="hidden" id="<?= $datas[$i]->getIdusers() ?>"  />
@@ -63,16 +63,13 @@ class _AdminUsersView extends View{
 									}
 									?>
 							</div>
-						</div>	
-						<div class="row" >
-							<input name="<?= "D".$datas[$i]->getIdusers() ?>" type="checkbox" id="<?="D".$datas[$i]->getIdusers()?>" value="<?="D".$datas[$i]->getIdusers() ?>" onClick='javascript:detruit("<?= $datas[$i]->getIdusers() ?>")'/> 
-								<label for="<?="D".$datas[$i]->getIdusers()?>"  >Supprimer cet utilisateur</label>
+						
+						
+							<input name="<?= "D".$datas[$i]->getIdusers() ?>" class="center-align " type="checkbox" id="<?="D".$datas[$i]->getIdusers()?>" value="<?="D".$datas[$i]->getIdusers() ?>" onClick='javascript:detruit("<?= $datas[$i]->getIdusers() ?>")'/> 
+								<label for="<?="D".$datas[$i]->getIdusers()?>" >    Supprimer cet utilisateur</label>
 							<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdusers() ?>" value="<?= $datas[$i]->getIdusers() ?>" />	
-							
 						</div>
-
-
-					</div>
+					</div>	
 					<?php 
 				}
 				?>

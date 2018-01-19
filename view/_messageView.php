@@ -16,15 +16,13 @@ class _messageView extends View
 		ob_start(); 
 		?>
 		<div class ="row">
-			<div class="col-xs-1 col s1"></div>
-			<article id="barreMessage" class="col-xs-7 col s7">
+			<article id="barreMessage" class="col s12 m7 offset-m1">
 				<div>
 					 <p><?= $datas->getTexte() ?></p>
-				</div>									<!-- fin "flottage" du menu -->
+				</div>									
 			</article>
 		
-			<div class="col-xs-1 col s1"></div>
-			<div class="col-xs-3 col s2">
+			<div class="col s12 m3  offset-m1">
 				<?php
 					$monAsideView=new _AsideView($params);	
 					$asideView=$monAsideView->show();	
@@ -32,13 +30,7 @@ class _messageView extends View
 			</div>
 		</div>	
 		<?php
-		//$title="Voyage en Alaska"; 
-		//echo "message view avant erreur";
-		/*$monErrorView=new _ErrorView();
-		if ($monErrorView->hasError()){
-			echo $monErrorView->show();
-		}
-		*/
+		
 		$messageView=ob_get_clean();
 		$contentView= $messageView;
 		$menuView=$this->renderTop();

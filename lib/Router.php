@@ -36,16 +36,12 @@ class Router{
 	 */
 	private function getAction($request,$cheminSeul){
         $element = explode('/', key($request));
-		//echo"<br />ROUTER : getAction <PRE>= ";print_r($element['0']);echo"</PRE>"."fin getaction de ROUTER";
-		
-		//echo"<PRE><br />ROUTER : get Params AVEC /  <br />";print_r( $element );echo"</PRE>"."<br />";
-		if($cheminSeul){
+			if($cheminSeul){
 			return $element['0'];
 		}else{
 			unset($element[0]);
 			for($i = 1; $i < count($element); $i++)
 			{
-				//echo "elt ".$element[$i]."<br />";
 				$this->myParam[$element[$i]] = $element[$i+1];
 				$i++;
 			}
@@ -61,7 +57,6 @@ class Router{
     private function getParams($request){
         $requestTested="";
 		$toTransform=false;
-		//echo"<PRE><br />ROUTER : debut getParam avec ou sans / <br />";print_r( $request);echo"</PRE>"."debut getParam";
 		if(count($request)<1){
 			foreach ($request as $key =>$value){
 				empty($value) ? $requestTested=$key : true  ;
@@ -69,24 +64,16 @@ class Router{
 			}
 		}
 		
-        //echo"<PRE><br />ROUTER : debut getParam 2 <br />";print_r( $requestTested);echo"</PRE>";
-		
 		
 		if($toTransform){
-	
-			//echo"<PRE><br />ROUTER : get Params SANS /   <br />";print_r( $request );echo"</PRE>";
-			
+				
 			foreach ($request as $key => $value)
 			{
-				//echo "<br /> Request : ".$key;
 				empty($value) ? null : $this->myParam[$key] = $value;
 			}	
 		}else{
 			$this->myParam=$request;
 		}
-		
-		//echo"<PRE><br />ROUTER :fin  elements param  <br />";print_r( $this->myParam );echo"</PRE>"."fin getParam";
-        
 		return $this->myParam;
 		// --------------------------------------------------------
 		
@@ -113,59 +100,38 @@ class Router{
 
 		$Idchapters;
 		try{   
-			//echo "ROUTER : _POST ? <pre> ";print_r($_POST);echo"</pre>";
-			//echo "ROUTER : _GET ? <pre> ";print_r($_GET);echo"</pre>";
-			
 			//on réceptionne  quelquechose
 			$myConfig= new Config; 	
-			//echo "retour config OK";
 			if(isset($_GET)){
-				//echo "<br />ROUTER :action demandée OK <br />";
-				
 				$varAction="";
 				$varAction=$this->getAction($_GET, true);
-				//echo"<PRE><br />ROUTER verif vAR ACTION 0 ";print_r($this->getParams($_GET));echo"<br /> fin construct </PRE>";
 				$varParam=$this->getAction($_GET, false);
 				$varPost=$this->getParams($_POST);
-				//echo"<PRE><br />ROUTER verif vAR ACTION 1 ";print_r($varPost);echo"<br /> fin construct </PRE>";
 				if (isset($this->getParams($_GET)["cible"])){
 					$varAction=$this->getParams($_GET)["cible"];
-					//$varParam=$this->getParams($_GET);
 				}
 				empty($varAction) ? $varAction="_messageView": false ;
-				//echo"<PRE><br />ROUTER verif POST et GET ";print_r($varAction);echo"<br /> fin construct </PRE>";
 				
 				$this->myRoad=$myConfig->getRoad($varAction);
-				//echo"<PRE><br />ROUTER retour route from config ";print_r($this->myRoad);echo"<br /> fin construct </PRE>";
 				
 				if (isset($this->myRoad)){
-					//echo"<PRE><br />ROUTER parametre avant appel PrepareAction ";print_r($this->myRoad);echo"<br /> fin construct </PRE>";
 					if( $this->autorizedAccess()){
-						//echo"<PRE><br />ROUTER parametre avant appel CONTROLLER param ";print_r($varParam);echo"<br /> </PRE>";
-						//echo"<PRE><br />ROUTER parametre avant appel CONTROLLER post ";print_r($varPost);echo"<br /> </PRE>";
-						//echo"<PRE><br />ROUTER parametre avant appel CONTROLLER action ";print_r($varAction);echo"<br /> </PRE>";
 						$monController=new Controller($this->myRoad,$varAction);
 						$monController->prepareAction($varParam, $varPost);
 					}else{
-						//echo" non habilité";
 						$monError=new ErrorController();
 						$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"utilisateur inconnu", "idMessage"=>12));
 					
 					}
-				}else{
-					//echo" erreur 404";
 				}
 				
 			}else{
-				//echo "<br /> Router : direction bienvenue...";
 				$varAction="_messageView"	;
 				$myRoad=$myConfig->getRoad("_messageView");	
-				//echo"<PRE>ma route est inconnue ";print_r($myRoad);echo"<br /> fin construct </PRE>";
 			}
 			
 		}
 		catch (Exception $e){
-			//echo 'erreur : '.$e->getmessage();
 			$monController->printError($e->getmessage());
 		}
 	}

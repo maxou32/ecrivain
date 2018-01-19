@@ -54,7 +54,6 @@ body
 }
 .formChapitre, .formUser
 {
-	width:60%;
 	margin:auto;
 	margin-top:10px;
 	background-color:white;
@@ -64,7 +63,6 @@ body
 }
 .formBook
 {
-	margin:auto;
 	margin-top:10px;
 	background-color:white;
 	opacity:0.9;
@@ -81,13 +79,11 @@ body
 {
 	margin-bottom:0PX !important;
 }
-
-#barreAside
+#sidenav-overlay
 {
-	position:absolute;
-	margin-right:10px;
-	
+	display:none;
 }
+
 #chapter h2
 {
 	width:80%;
@@ -99,13 +95,11 @@ body
 }
 #barreMessage
 {
-	
-	width:50%;	
-	margin:auto;
+	/*margin:auto;*/
 	margin-top:100px;
 	text-align:center;
 	background-color:yellow;
-	padding :15px;
+	/*padding :15px;*/
 	border-radius : 5px;
 }
 #infoMessage

@@ -9,9 +9,6 @@ class _AsideView {
 	}
 	public function show(){
 
-		//ob_start(); 
-		//echo"<br /><pre> charge ASIDE ";print_r($this->aside);echo"</pre>";
-
 		?>
 
 		<aside id="barreAside" class ="formBook ">
@@ -41,8 +38,5 @@ class _AsideView {
 		</aside>
 			
 		<?php
-
-		//$asideView=ob_get_clean();
-		//return $asideView;
 	}
 }

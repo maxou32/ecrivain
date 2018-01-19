@@ -89,13 +89,7 @@ class Config{
      */
     public function getAsideParam($view){
 		$param=$this->data["aside"][$view];
-		/*	array(
-			"ref1"= $this->_data["aside"][$view]["ref1"],
-			"ref2"= $this->_data["aside"][$view]["ref2"],
-			"content" = $this->_data["aside"][$view]["content"],
-			"detail" = $this->_data["aside"][$view]["detail"]
-		);
-		*/
+
 		return $param;
 	}
 	
@@ -112,7 +106,6 @@ class Config{
 				return $this->data["simpleRoads"]["index"];
 			}
 		}catch(Exception $e){
-			//echo "pb : ".$e ;
 			return false;
 		}
 	}

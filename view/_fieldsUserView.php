@@ -25,16 +25,13 @@ class _FieldsUserView extends View
 				<label>votre mot de passe</label>
 				<input id="userPwd" name="userPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required /><br />
 				<label>votre adresse mail</label>
-				<input id="mail" name="mail" type="text" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
+				<input id="mail" name="mail" type="email" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
 				
 				<br />
-					
-				<span class="btn btn-success glyphicon glyphicon-ok-sign">
-					<input type="submit"value="Soumettre votre demande" class="btn btn-success ">
-				</span> 
-				<button type="submit" class=" btn btn-success  glyphicon glyphicon-envelope">
-					Soumettre votre demande
-				</button>
+			 
+				<span  class=" waves-effect center-align waves-light  btn btn-large blue ">
+					<input type="submit" name="add" value="Soumettre votre demande" class="right-align"><i class="material-icons left">send</i>
+				</span>
 					
 			</form>
 
