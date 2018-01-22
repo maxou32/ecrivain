@@ -135,7 +135,6 @@ simpleRoads:
    action : non
    target : 
 #**************************************
-
  abortAccess:
   seConnecte : param inutile
   security :
@@ -226,16 +225,6 @@ simpleRoads:
    lesParams:
    nomParam : Null
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : Null
-   - fonction
-     className : Null
-     nom : Null
-     avecParam : non			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : nom
-      origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : non
    target : 
@@ -334,16 +323,6 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : 0
-   - fonction
-     className : Null
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : nom
-      origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : non
    target : 	
@@ -604,16 +583,6 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : 0
-   - fonction
-     className : Null
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : nom
-       origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : non
    target : 
@@ -655,16 +624,6 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : Null
-   - fonction
-     className : Null
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : nom
-       origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : oui
    param : Null
@@ -773,16 +732,6 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : Null
-   - fonction
-     className : Null
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : nom
-       origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : non
    target : 
@@ -825,16 +774,6 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : 0
-   - fonction
-     className : Null
-     nom : Null
-     avecParam : oui			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : nom
-       origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : oui	
    param : oui
@@ -879,16 +818,6 @@ simpleRoads:
      lesParams:
       nomParam : nom
        origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : Null
-   fonction
-   className : Null
-   nom : Null
-   avecParam : oui			#non
-   nombreParam : 0
-   lesParams:
-   nomParam : nom
-   origine : param inutile							#action ou dur
   wantHeaderLocation :
    action : oui
    param : non
@@ -1157,17 +1086,6 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : Null
-   - fonction
-     className : Null
-     nom : 0
-     tableau : Null
-     avecParam : parametre inutile			#non
-     nombreParam : parametre inutile
-     lesParams:
-      nomParam : status
-      origine : Null							#action ou dur
   wantHeaderLocation :
    action : non
    param : non
@@ -1608,17 +1526,6 @@ simpleRoads:
    lesParams:
    nomParam : nom
    origine : param inutile							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : Null
-   - fonction
-     className : Null
-     nom : Null
-     tableau : Null
-     avecParam : Null 			#non
-     nombreParam : 0
-     lesParams:
-      nomParam : status
-      origine : Null							#action ou dur
   wantHeaderLocation :
    action : non
    param : non
@@ -1723,42 +1630,73 @@ simpleRoads:
    lesParams:
    nomParam : params
    origine : post 							#action ou dur
-  appelFonctionApresData :
-   nombrefonction : 0
-   - fonction
-     className : Null
-     nom : Null
-     tableau : Null
-     avecParam : oui									#non
-     nombreParam : 0
-     lesParams:
-      nomParam : Null
-      origine : Null							#action ou dur
   wantHeaderLocation :
    action : oui
    param : oui
    origine : params										#post ou get
    nom : chap
    target :  index.php?_TheBookView/   
-
 #************************************** 
- structure:
+ askCRUDstatus:
   seConnecte : non
   security :
    niveauRequis : 99    			#1 ou 99
    className : web_max\ecrivain\controler\AccessControl
    nom : updateDeleteAreAutorized
   view:
-   - nom : web_max\ecrivain\view\chemin de la vue
-      levelUpdate : 0
-      avecParam : oui			#non
+   - nom : web_max\ecrivain\view\_adminParamsView
+      levelUpdate : 99
+      avecParam : non			#non
       nombreParam : 0
       lesParams:
-        - nomParam : Nll
+        - nomParam : Null
           origine : dur							#action ou dur
           value : Null
   manager : 
    nombreManager : 1  
+   managers
+     nom : web_max\ecrivain\controler\AdminController
+     action : prepareAdminStatus
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : non								#non
+     nombreParam : 0
+     lesParams : 
+       - nomParam : Null
+         origine : Null						#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 0
+   fonction
+   className : Null
+   nom : Null
+   avecParam : oui			#non
+   nombreParam : 1
+   lesParams:
+   nomParam : Null
+   origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : non
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php?	
+#************************************** 
+ CRUDStatus:
+  seConnecte : non
+  security :
+   niveauRequis : 99    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : Null
+      levelUpdate : 99
+      avecParam : oui			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : null
+          origine : menu							#action ou dur
+  manager : 
+   nombreManager : 0  
    managers
      nom : Null
      action : null
@@ -1770,30 +1708,83 @@ simpleRoads:
        - nomParam : Null
          origine : post							#post,get ou en dur
   appelFonctionAvantData :
-   nombrefonction : 0
+   nombrefonction : 1
    fonction
-   className : Null
-   nom : Null
+   className : web_max\ecrivain\controler\adminController
+   nom : CRUDStatus
    avecParam : oui			#non
-   nombreParam : 0
+   nombreParam : 1
    lesParams:
-   nomParam : nom
-   origine : param inutile							#action ou dur
+   nomParam : params
+   origine : post							#action ou dur
   appelFonctionApresData :
-   nombrefonction : Null
+   nombrefonction : 0
    - fonction
      className : Null
      nom : Null
      tableau : Null
-     avecParam : Null 			#non
+     avecParam : parametre inutile			#non
      nombreParam : parametre inutile
      lesParams:
       nomParam : status
       origine : Null							#action ou dur
   wantHeaderLocation :
-   action : non
+   action : oui
    param : non
    origine : post										#post ou get
    nom : Null
-   target : index.php?			   
-     	      	 
+   target : index.php?askCRUDstatus 
+#************************************** 
+ structure:
+  seConnecte : non
+  security :
+   niveauRequis : 99    			#1 ou 99
+   className : web_max\ecrivain\controler\AccessControl
+   nom : updateDeleteAreAutorized
+  view:
+   - nom : Null
+      levelUpdate : 99
+      avecParam : oui			#non
+      nombreParam : 0
+      lesParams:
+        - nomParam : null
+          origine : menu							#action ou dur
+  manager : 
+   nombreManager : 0  
+   managers
+     nom : Null
+     action : null
+     utiliseResultatFunctionAvant : non				#oui
+     excluResultatManager : non   ####
+     avecParam : oui								#non
+     nombreParam : 1
+     lesParams : 
+       - nomParam : Null
+         origine : post							#post,get ou en dur
+  appelFonctionAvantData :
+   nombrefonction : 1
+   fonction
+   className : web_max\ecrivain\controler\adminController
+   nom : CRUDStatus
+   avecParam : oui			#non
+   nombreParam : 1
+   lesParams:
+   nomParam : params
+   origine : post							#action ou dur
+  appelFonctionApresData :
+   nombrefonction : 0
+   - fonction
+     className : Null
+     nom : Null
+     tableau : Null
+     avecParam : parametre inutile			#non
+     nombreParam : parametre inutile
+     lesParams:
+      nomParam : status
+      origine : Null							#action ou dur
+  wantHeaderLocation :
+   action : oui
+   param : non
+   origine : post										#post ou get
+   nom : Null
+   target : index.php? 

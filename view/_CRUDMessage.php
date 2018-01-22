@@ -11,26 +11,19 @@ class _CRUDMessage extends View
 	}
 	public function show($params,$datas){
 		$message=$params['message'];
-		
-		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($datas);echo"</PRE>";
-		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
-		
-		
 		ob_start();  
 			
 		?>
-
-		
-		<div id="frame">
-			<div id="liste">
+		<div class="row">
+			<div class="formChapitre col m8 offset-m2 s12">
 				<form method="post" action="messageChoised" name="listeMessage">
 					<p>Liste des messages</p>
 					<?php
 					for($i=0;$i<count($datas);$i++)
 					{
 						?>
-						<div class="row">
-							<div class="col-xs-2">
+						<div class="row card-panel orange lighten-5">
+							<div class="col m1">
 								<input type="hidden" name="id" id="id" value="<?= $datas[$i]->getId() ?>"/>
 								<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>
 								<input type="hidden" name="number" value="<?= $datas[$i]->getNumber() ?>"/>
@@ -38,17 +31,15 @@ class _CRUDMessage extends View
 								<input type="hidden" name="idtypemessage" value="<?= $datas[$i]->getMessage_idtypemessage() ?>"/>
 								<input type="radio" name="message"  value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
 							</div >
-							<div class="col-xs-10">
+							<div class="col m11">
 								<label for="<?= htmlspecialchars($datas[$i]->getId()) ?>" id="messageLU" title="<?= htmlspecialchars($datas[$i]->getcontexte()) ?>"  >
 										<?= htmlspecialchars($datas[$i]->getTexte()) ?> <br /> 
 								</label>
-							
 							</div>
 						</div>
 						<?php 
 					}
 					?>
-					
 				</form>
 			</div>
 			<script language="javascript" type="text/javascript">
@@ -70,25 +61,39 @@ class _CRUDMessage extends View
 				}
 			</script>
 			
-			<div id="CRUD">
+			<div class="card-panel orange lighten-5  col m8 offset-m2 s12">
 				<form method="post" name="messageUpdated" action="index.php?CRUDMessage" >
-					<input type="hidden" name="id" id="Id"/>
-					<input type="hidden" name="idtypemessage" id="idtypemessage" />
-					<label for="number" class="active">Numéro du message</label>
-					<input type="text" name="number" class="form-control" id="number" required/>
-					<label for="texte" class="active">Texte du message</label>
-					<input name="texte" id="texte" type="text" class="form-control" onfocus='javascript:chargeTypeMessage()' required/>
-					<label for="contexte" class="active">Contexte d'emploi du message</label>
-					<input name="contexte" id="contexte" type="text" class="form-control" required/>
+					<div class="row">
+						<input type="hidden" name="id" id="Id"/>
+						<input type="hidden" name="idtypemessage" id="idtypemessage" />
+						<label for="number" class="active">Numéro du message</label>
+						<input type="text" name="number" class="form-control" id="number" required/>
+						<label for="texte" class="active">Texte du message</label>
+						<input name="texte" id="texte" type="text" class="form-control" onfocus='javascript:chargeTypeMessage()' required/>
+						<label for="contexte" class="active">Contexte d'emploi du message</label>
+						<input name="contexte" id="contexte" type="text" class="form-control" required/>
+					</div>
 					<!-- mettre balise PHP //$params["MessageTypeList"] ?> -->
-					<input type="submit" name="sousAction" value="Mettre à jour" class="button"/>
-					<input type="submit" name="sousAction" value="Supprimer" class="button"/>
-					<input type="submit" name="sousAction" value="Ajouter" class="button"/>
-					<input type="submit" name="sousAction" value="Fermer"  class="button"/>
+					<div class="row">
+						<span  class="col m2 s6 offset-m1 center-align  waves-effect waves-light btn blue">
+							<input type="submit" name="sousAction" value="Mettre à jour">
+						</span>
+						<span  class="col m2 s6 offset-m1 center-align  waves-effect waves-light btn blue">
+							<input type="submit" name="sousAction" value="Supprimer">
+						</span>
+						<span  class="col m2 s6 offset-m1 center-align  waves-effect waves-light btn blue">
+							<input type="submit" name="sousAction" value="Ajouter">
+						</span>
+						<span  class="col m2 s6 offset-m1 center-align  waves-effect waves-light btn blue">
+							<input type="submit" name="sousAction" value="Fermer">
+						</span>
+					</div>
 				</form>
 			</div>
+			<div  class="card-panel col m8 offset-m2 s12 yellow accent-2 center-align">
+				<?= $message ?>
+			</div>
 		</div>
-		<p  id="infoMessage"><?= $message ?></p>
 		<?php
 		$title="Voyage en Alaska"; 
 		$contentView=ob_get_clean(); 		

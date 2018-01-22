@@ -70,9 +70,7 @@ class template extends view{
 				
 				<!-- Let browser know website is optimized for mobile -->
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				<!-- <link href="public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-				  Custom styles for this template
-				<link href="public\bootstrap\css\starter-template.css" rel="stylesheet"> -->
+
 				<script src="public\js\tinymce\tinymce.min.js"></script>
 				<script>tinymce.init({
 					selector:'.texteChapitre',
@@ -90,7 +88,7 @@ class template extends view{
 				<script type="text/javascript"  src="public\js\jquery-3.2.1.min.js"></script>		
 				<script type="text/javascript" src="public\js\ajax.js"></script>
 				<script type="text/javascript" src="public\materialize\js\materialize.min.js"></script>
-				<title><?= $this->title ?></title>
+				<title>Voyage en Alaska</title>
 				<?= $this->menuView ?>
 				<div id="content" >
 					

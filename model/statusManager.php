@@ -12,56 +12,85 @@ class StatusManager extends Manager{
 	}
 
 	public function add(status $status)  {
-		$q = $this->dbConnect()->prepare('INSERT INTO status(libelle) VALUES(:libelle');
+		try{
+			$q = $this->dbConnect()->prepare('INSERT INTO status(libelle) VALUES(:libelle');
 
-		$q->bindValue(':libelle', $message->getLibelle(), \PDO::PARAM_STR);		
-		$q->execute();
+			$q->bindValue(':libelle', $message->getLibelle(), \PDO::PARAM_STR);		
+			$q->execute();
+			return true;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function delete($idstatus)  {
-		$idstatus = (int) $idstatus;
-		$this->dbConnect()->exec('DELETE FROM status WHERE idstatus = '.$idstatus);
+		try{
+			$idstatus = (int) $idstatus;
+			$this->dbConnect()->exec('DELETE FROM status WHERE idstatus = '.$idstatus);
+			return true;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function get($libelle)  {
-		$q = $this->dbConnect()->query('SELECT * FROM status WHERE libelle = "'.$libelle.'"');
-		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+		try{
+			$q = $this->dbConnect()->query('SELECT * FROM status WHERE libelle = "'.$libelle.'"');
+			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 		
-		if($donnees) {
-			return new Status($donnees);
-		}else{
-			return false;
-		}
+			if($donnees) {
+				return new Status($donnees);
+			}else{
+				return false;
+			}
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 	public function getFromId($status_idstatus)  {
-		$q = $this->dbConnect()->query('SELECT * FROM status WHERE idstatus = "'.$status_idstatus.'"');
-		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
-		
-		if($donnees) {
-			return new Status($donnees);
-		}else{
-			return false;
-		}
+		try{
+			$q = $this->dbConnect()->query('SELECT * FROM status WHERE idstatus = "'.$status_idstatus.'"');
+			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
+			
+			if($donnees) {
+				return new Status($donnees);
+			}else{
+				return false;
+			}
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 
 	public function getList()  {
-		$status = [];
-		$q = $this->dbConnect()->query('SELECT * FROM status ORDER BY idstatus ASC');
-		
-		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC))		{
-			$status[] = new Status($donnees);
-		}
-		//echo"manager <PRE>";print_r($status);echo"</PRE>";
-		return $status;
+		try{
+			$status = [];
+			$q = $this->dbConnect()->query('SELECT * FROM status ORDER BY idstatus ASC');
+			
+			while ($donnees = $q->fetch(\PDO::FETCH_ASSOC))		{
+				$status[] = new Status($donnees);
+			}
+			//echo"manager <PRE>";print_r($status);echo"</PRE>";
+			return $status;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 	
 	public function update(status $status)  {
-		
-		$q = $this->dbConnect()->prepare('UPDATE status SET libelle = :libelle WHERE idstatus = :idstatus');
-	
-		$q->bindValue(':idstatus', $message->getIdstatuse(), \PDO::PARAM_INT);
-		$q->bindValue(':libellet', $message->getLibelle(), \PDO::PARAM_STR);
+		try{
+			$q = $this->dbConnect()->prepare('UPDATE status SET libelle = :libelle WHERE idstatus = :idstatus');
+			$q->bindValue(':idstatus', $status->getIdstatus(), \PDO::PARAM_INT);
+			$q->bindValue(':libelle', $status->getLibelle(), \PDO::PARAM_STR);
 
-		$q->execute();
+			$q->execute();
+			return true;
+					
+		}catch (PDOException  $e){ 
+			return 'Erreur : '.$e->getMessage();
+		}	;	
 	}
 }

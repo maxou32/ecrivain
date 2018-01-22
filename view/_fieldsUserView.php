@@ -12,28 +12,36 @@ class _FieldsUserView extends View
 	public function show($params,$datas){
 		ob_start(); 
 		if ($params["action"]=="update"){
-			?><form method="post" action="index.php?registration" class="formUser">
-				<input id="sousActionUpdate" name="sousAction" type="hidden" value ="update" >
+			?>
+			<div class="row" >
+				<form method="post" action="index.php?registration"  >
+					<input id="sousActionUpdate" name="sousAction" type="hidden" value ="update" >
 			<?php	
 		}else{
-			?><form method="post" action="index.php?registration" class="formUser">
-				<input id="sousActionAdd" name="sousAction" type="hidden" value ="add" ><?php
+			?>
+			<div class="row" >
+				<form method="post" action="index.php?registration" >
+					<input id="sousActionAdd" name="sousAction" type="hidden" value ="add" ><?php
 		}
 		?>
-				<label>votre nom</label>
-				<input id="userName" name="userName" type="text"  class="form-control" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
-				<label>votre mot de passe</label>
-				<input id="userPwd" name="userPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required /><br />
-				<label>votre adresse mail</label>
-				<input id="mail" name="mail" type="email" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
-				
-				<br />
-			 
-				<span  class=" waves-effect center-align waves-light  btn btn-large blue ">
-					<input type="submit" name="add" value="Soumettre votre demande" class="right-align"><i class="material-icons left">send</i>
-				</span>
-					
-			</form>
+
+					<div class="col m8 offset-m2 s12 card-panel orange lighten-5" >
+						<label>votre nom</label>
+						<input id="userName" name="userName" type="text"  class="form-control" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
+						<label>votre mot de passe</label>
+						<input id="userPwd" name="userPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required /><br />
+						<label>votre adresse mail</label>
+						<input id="mail" name="mail" type="email" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
+						
+						<br />
+					 
+					<div class="row">	
+						<span  class="col m4 s12 offset-m4 center-align  waves-effect waves-light btn-large blue">
+							<input type="submit" name="add" value="Soumettre votre demande"><i class="material-icons left">send</i>
+						</span>					
+					</div>	
+				</form>
+			</div>
 
 	
 		<?php

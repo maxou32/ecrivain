@@ -83,7 +83,10 @@ body
 {
 	display:none;
 }
-
+.sidenav-pad
+{
+	padding-left: 32px !important;
+}
 #chapter h2
 {
 	width:80%;
@@ -158,32 +161,10 @@ footer
 {
 	color:white;	
 }
-#frame
-{
-	display:flex;
-	flex-direction: row;
-	align-items:center;
-	justify-content:center;
-	width:80%;
-	margin:auto;
-}
+
 #transfert
 {
 	padding:10px;
 	margin:20px;
 	border-radius : 5px;
-}
-#liste, #CRUD
-{
-	width:40%;
-	background-color:white;
-	padding:10px;
-	border-radius : 5px;
-	margin:20px;
-	height:400px;
-}
-#CRUD
-{
-	align-items:center;
-	text-align:center;
 }

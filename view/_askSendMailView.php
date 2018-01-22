@@ -24,11 +24,12 @@ class _askSendMailView extends View{
 			</div>
 			Votre message:<br>
 			<textarea name="message" rows="7" cols="30"></textarea><br>
-
-			<span  class=" waves-effect waves-light btn btn-large blue center-align">
-				<input type="submit" name="sousAction" value="Transmettre" class="right-align"><i class="material-icons left">send</i>
-			</span>
 			
+			<div class="row">	
+				<span  class=" waves-effect waves-light btn btn-large blue center-align">
+					<input type="submit" name="sousAction" value="Transmettre" class="right-align"><i class="material-icons left">send</i>
+				</span>
+			</div>
 		</form>
 
 		<?php

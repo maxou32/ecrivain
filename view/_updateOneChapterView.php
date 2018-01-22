@@ -61,12 +61,9 @@ class _updateOneChapterView extends View
 		
 		$menuView=$this->renderTop();
 		$asideView=Null;
- 
-				
-		$captionMessage = $this->captionMessage;
+		$captionMessage =null;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	
-		//echo "<br / >content view ".$contentView;
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
 		$monTemplate->show(null,null);
 			

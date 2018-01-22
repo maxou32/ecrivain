@@ -3,24 +3,22 @@ namespace web_max\ecrivain\controler;
 use web_max\ecrivain\lib\Config;
 
 use web_max\ecrivain\model\StatusManager;
+use web_max\ecrivain\model\Status;
 use web_max\ecrivain\model\GradeManager;
 use web_max\ecrivain\model\ChaptersManager;
 use web_max\ecrivain\model\Chapter;
 use web_max\ecrivain\model\UserManager;
 use web_max\ecrivain\model\User;
 
-class AdminController	extends mainController	{
+class AdminController extends mainController	{
 	    
-	public function __construct($myRoad, $action){
-		$this->myRoad=$myRoad;
-		$this->myAction=$action;
-		$this->myConfig= new Config;
-		//echo"<br /><pre> CONTROLLER CONSTRUCT ";print_r($this->myAction);echo"</pre>";
+	public function __construct(){
+	
 	}
 
-   /**
+	/**
      * recherche les différents status d'un chapitre ou d'un utilisateur
-     * @return array contenant les id et libelle des status
+     * @return array contenant les id et libelle des statuts
      */
     public function prepareAdminStatus(){
 		$statusManager = new StatusManager();
@@ -30,10 +28,10 @@ class AdminController	extends mainController	{
 			$id=$status[$key]->getIdstatus();
 			$datas[$id]=$value->getLibelle();	
 		}
-		//echo "<pre> Controler : prepareAdminStatus :";print_r($datas);echo"</pre>";
 		return $datas;
 	}
-   /**
+   
+    /**
      * recherche les différents grade  d'un utilisateur
      * @return array contenant les id et libelle des grades
      */
@@ -45,7 +43,6 @@ class AdminController	extends mainController	{
 			$id=$grade[$key]->getIdgrade();
 			$datas[$id]=$value->getLibelle();	
 		}
-		//echo "<pre> Controler : prepareAdminGrade :";print_r($datas);echo"</pre>";
 		return $datas;
 	}
     /**
@@ -55,7 +52,7 @@ class AdminController	extends mainController	{
      * @return boolean resultat de la mofication
      */
     public function validStatusChapters($params){	
-		echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
+		//echo"<PRE>CONTROLLER : validStatusChapters 1 ";print_r($params);echo"</PRE>";
 
 		$chapterManager= new ChaptersManager();
 		foreach ($params['actionAFaire'] as $key => $value){	
@@ -106,5 +103,25 @@ class AdminController	extends mainController	{
 		}		
 		return $resultat["result"];		
 	}	
+	
+	/**
+     * Crée, modifie et supprime els emssages en fonction du choix de l'utilsiateur.
+     * recharge la page
+     * @param  array    $params infos reçues
+     *        sousAction Mettre à jour, Supprimer ou Ajouter                 
+     * 
+     */
+    public	function CRUDStatus($params){
+		$monMessage= new StatusManager;
+		//echo "<br /> View CRUDStatus =<PRE>";print_r($params);echo "</PRE>";
+		$donnees=array('idstatus'=> $params['idstatus'], 'libelle' => $params['libelle']);
+		$newStatus = new Status($donnees);	
+		$statusManager= new StatusManager();
+		$result=$statusManager->update($newStatus);	
 		
+		if ($result){
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\adminController", "raison"=>"Mise à jour des statuts", "numberMessage"=>23));
+		}	
+	}
 }

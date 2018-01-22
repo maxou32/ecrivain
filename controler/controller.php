@@ -94,7 +94,7 @@ class Controller{
 						}
 					}
 				}
-				$this->data=$this->return;
+				//$this->data=$this->return;
 				if($element["excluResultatManager"]=="non"){
 					if(gettype($monManager->$action($paramManager))=="class"){
 						if(get_class($this->return)!=="Message"){
@@ -106,12 +106,16 @@ class Controller{
 				}
 			}
 		}
+		//echo"<PRE>CONTROLLER : lire data ";print_r($this->data);echo"</PRE>";
 	}
 		
 	private function apresDonnees($params, $post){
 		 /** *****************************************************************
         * déclanchement de la fonction a exécuter après lectures des données
         */
+		//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
+		//echo"<PRE><br>CONTROLLER 1.1: nbPram = ";print_r($params);echo"</PRE>"."<br />";
+		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad);echo"</pre>";
 		foreach($this->myRoad["appelFonctionApresData"] as $element){
 			
 			if(isset($element["className"])){
@@ -130,6 +134,7 @@ class Controller{
 						}else{
 							$this->globalParams [$element["tableau"]]=$maClasse->$function($params,$operation);
 						}
+						//echo"<PRE><br />CONTROLLER 2: dat ";print_r($this->globalParams );echo"</PRE>";
 					}
 				}else{
 					if(isset($element["nom"])){ 
@@ -161,6 +166,8 @@ class Controller{
 				}
 			}
 			$nomParam=$element["lesParams"]["nomParam"];
+			$nomParam=$this->globalParams;
+			//echo"<PRE>CONTROLLER : signal 1 ";print_r($nomParam);echo"</PRE>";
 		}
 	}
 	
@@ -205,11 +212,14 @@ class Controller{
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){
 					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$post[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}else{
-					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$params[$this->myRoad["wantHeaderLocation"]["nom"]];
+					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$this->globalParams[$this->myRoad["wantHeaderLocation"]["nom"]];
 				}
 			}else{
 				$critere="";
 			}
+			//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
+			//echo"<PRE><br>CONTROLLER 1.1: critere = ";print_r($critere);echo"</PRE>"."<br />";
+
 			header('Location: '.$this->myRoad["wantHeaderLocation"]["target"].$critere);
 		}
 	}
@@ -237,11 +247,11 @@ class Controller{
 		if(isset($this->myRoad["manager"])){
 			$this->lireDonnees($params, $post); 
 		}
-		
-        if(null!==($this->myRoad["appelFonctionApresData"]["nombrefonction"])){
-			$this->apresDonnees($params, $post);
-        }
-		
+		if (isset($this->myRoad["appelFonctionApresData"]["nombrefonction"])){
+			if(null!==($this->myRoad["appelFonctionApresData"]["nombrefonction"])){
+				$this->apresDonnees($params, $post);
+			}
+		}
 		if(isset($this->myRoad["view"])){
 			$this->chargeVue($params, $post);
 		}

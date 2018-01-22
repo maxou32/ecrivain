@@ -11,7 +11,6 @@ class messageController	extends mainController	{
 		$this->myRoad=$myRoad;
 		$this->myAction=$action;
 		$this->myConfig= new Config;
-		//echo"<br /><pre> CONTROLLER CONSTRUCT ";print_r($this->myAction);echo"</pre>";
 	}
 	
 	/**
@@ -21,12 +20,10 @@ class messageController	extends mainController	{
      * @return object Message
      */
     public function prepareMessage($params){
-		//echo"CONTROLLEUR : 0 prepareMessage<br /> <PRE>";print_r($params);echo"</PRE>";
 		$monTypeMessageManager= new TypeMessageManager;
 		$monTypemessage=$monTypeMessageManager->get($params['sousAction']);
 		$monMessageManager= new MessageManager;
 		$messages=$monMessageManager->getListByType($monTypemessage->getIdtypemessage());
-		//echo"CONTROLLEUR : 0.5 prepareMessage<br /> <PRE>";print_r($messages);echo"</PRE>";
 		return $messages;
 	}
 	

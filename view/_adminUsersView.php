@@ -11,77 +11,74 @@ class _AdminUsersView extends View{
 	public function show($params,$datas){		
 		ob_start(); 
 		
-		//echo"<PRE>";print_r($params);echo"</PRE>";
 		?>
-		
-		<div class="formChapitre center">
-			<form method="post" action="index.php?_validUsers"  >
-				<script language="javascript" type="text/javascript">
-					function changeStatus($user,$status) {
-						document.getElementById($user).value=$status;
-						document.getElementById("action"+$user).checked=true;
-					}
-					function changeGrade($user,$grade) {
-						document.getElementById($user).value=$grade;
-						document.getElementById("action"+$user).checked=true;
-					}
-					function detruit($user) {
-						document.getElementById("action"+$user).checked=true;
-					}
-				</script>	
-				<div class="collection">
-				<?php
-				for($i=0;$i<count($datas);$i++)
-				{
-					?>
-					<div  class="collection-item ">
-						<div class="row card-panel orange lighten-5">
-							<div class="col s6">
-								<p id="content"><?=$datas[$i]->getName() ?> 
-								<input name="<?=$datas[$i]->getIdusers()  ?>" type="hidden" id="<?= $datas[$i]->getIdusers() ?>"  />
-								</p>
-							</div>
-							<div class="col s3 left-align">
-								
-								<?php
-									foreach ($params['grade'] as $key => $value){
-										?>
-										<input name="<?= "G".$datas[$i]->getIdusers() ?>"  class="blue"type="radio" id="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getGrade_IdGrade()==$key){echo "checked";} ?> onClick='javascript:changeGrade("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value=" <?= $key ?>" />
-										<label for="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" ><?= $value ?></label>
-										<?php
-									}
-								?>
-								<br/>
-							</div>
-							<div class="col s3 left-align">
-								<?php
-									foreach ($params['status'] as $key => $value){
-										?>
-										<input name="<?= "S".$datas[$i]->getIdusers() ?>" type="radio" id="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> onClick='javascript:changeStatus("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value="<?= $key ?>" /> 
-										<label for="<?="statusUsers".$datas[$i]->getIdusers().$key ?>"  ><?= $value ?></label>
-										<?php
-									}
+		<script language="javascript" type="text/javascript">
+			function changeStatus($user,$status) {
+				document.getElementById($user).value=$status;
+				document.getElementById("action"+$user).checked=true;
+			}
+			function changeGrade($user,$grade) {
+				document.getElementById($user).value=$grade;
+				document.getElementById("action"+$user).checked=true;
+			}
+			function detruit($user) {
+				document.getElementById("action"+$user).checked=true;
+			}
+		</script>			
+		<div class="row">
+			<div class="card-panel col s12 m8 offset-m2">
+				<form method="post" action="index.php?_validUsers" class="formChapitre " >
+					<?php
+					for($i=0;$i<count($datas);$i++)
+					{
+						?>
+						<div  class="collection-item ">
+							<div class="row card-panel orange lighten-5">
+								<div class="col m4 s12 center-align">
+									<h4 id="content"><?=$datas[$i]->getName() ?> 
+									<input name="<?=$datas[$i]->getIdusers()  ?>" type="hidden" id="<?= $datas[$i]->getIdusers() ?>"  />
+									</h4>
+								</div>
+								<div class="col m3 offset-m1 s6 left-align">
+									<?php
+										foreach ($params['grade'] as $key => $value){
+											?>
+											<input name="<?= "G".$datas[$i]->getIdusers() ?>"  class="blue"type="radio" id="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getGrade_IdGrade()==$key){echo "checked";} ?> onClick='javascript:changeGrade("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value=" <?= $key ?>" />
+											<label for="<?="gradeUsers".$datas[$i]->getIdusers().$key ?>" ><?= $value ?></label>
+											<?php
+										}
 									?>
+									<br/>
+								</div>
+								<div class="col m2 offset-m1 s6 left-align">
+									<?php
+										foreach ($params['status'] as $key => $value){
+											?>
+											<input name="<?= "S".$datas[$i]->getIdusers() ?>" type="radio" id="<?="statusUsers".$datas[$i]->getIdusers().$key ?>" <?php if($datas[$i]->getStatus_IdStatus()==$key){echo "checked";} ?> onClick='javascript:changeStatus("<?= $datas[$i]->getIdusers() ?>","<?=$key ?>")' value="<?= $key ?>" /> 
+											<label for="<?="statusUsers".$datas[$i]->getIdusers().$key ?>"  ><?= $value ?></label>
+											<?php
+										}
+									?>
+								</div>
+							
+								<div class="row">
+									<input class="left-align" name="<?= "D".$datas[$i]->getIdusers() ?>" class="center-align " type="checkbox" id="<?="D".$datas[$i]->getIdusers()?>" value="<?="D".$datas[$i]->getIdusers() ?>" onClick='javascript:detruit("<?= $datas[$i]->getIdusers() ?>")'/> 
+										<label class="red-text" for="<?="D".$datas[$i]->getIdusers()?>" >    Supprimer cet utilisateur</label>
+									<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdusers() ?>" value="<?= $datas[$i]->getIdusers() ?>" />	
+								</div>
 							</div>
-						
-						
-							<input name="<?= "D".$datas[$i]->getIdusers() ?>" class="center-align " type="checkbox" id="<?="D".$datas[$i]->getIdusers()?>" value="<?="D".$datas[$i]->getIdusers() ?>" onClick='javascript:detruit("<?= $datas[$i]->getIdusers() ?>")'/> 
-								<label for="<?="D".$datas[$i]->getIdusers()?>" >    Supprimer cet utilisateur</label>
-							<input type="checkbox" name="actionAFaire[]" id="<?= "action".$datas[$i]->getIdusers() ?>" value="<?= $datas[$i]->getIdusers() ?>" />	
-						</div>
-					</div>	
-					<?php 
-				}
-				?>
-				</div>
+						</div>	
+						<?php 
+					}
+					?>
 
-				<span  class=" waves-effect waves-light btn-large blue">
-					<input type="submit" name="sousAction" value="Mettre à jour"><i class="material-icons left">build</i>
-				</span>
-				
-				
-			</form>
-			
+					<div class="row">											
+						<span  class="col m4 s12 offset-m4 center-align  waves-effect waves-light btn-large blue">
+							<input type="submit" name="sousAction" value="Mettre à jour"><i class="material-icons left">build</i>
+						</span>
+					</div>			
+				</form>
+			</div>			
 		</div>
 		<?php
 		//$title="Voyage en Alaska"; 

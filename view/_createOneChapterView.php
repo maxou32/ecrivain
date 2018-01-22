@@ -53,7 +53,6 @@ class _createOneChapterView extends View
 		$captionMessage = $this->captionMessage;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	
-		//echo "<br / >content view ".$contentView;
 		$monTemplate= new template($menuView,$asideView,$footerView,$contentView);
 		$monTemplate->show(null,null);
 			

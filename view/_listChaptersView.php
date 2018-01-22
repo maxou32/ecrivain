@@ -50,11 +50,10 @@ class _ListChaptersView extends View
 			</ul>
 		</div>
 		<?php
-		//$title="Voyage en Alaska"; 
 		$contentView=ob_get_clean(); 		
 		$menuView=$this->renderTop();
 		$asideView=Null;		
-		$captionMessage = $this->captionMessage;
+		$captionMessage = Null;
 		$message=$this->message;
 		$footerView=$this->renderBottom();	
 

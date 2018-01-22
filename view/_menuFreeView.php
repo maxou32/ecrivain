@@ -26,9 +26,9 @@ class _MenuFreeView extends View
 					</a>	
 					<ul id="menuGeneral" class="left hide-on-med-and-down">
 						<li><a href="index.php" >Accueil</a></li>
-						<li><a href="index.php?_TheNextBookView/chap/0" >Mon livre</a></li>
-						<li><a href="index.php?askSendMail">Contact</a></li>
-						<li><a href="index.php?reservedAccess" >Accès réservé</a></li>
+						<li><a href="index.php?_TheNextBookView/chap/0" >Lire mon livre</a></li>
+						<li><a href="index.php?askSendMail">Me contacter</a></li>
+						<li><a href="index.php?reservedAccess" >Préparation du livre</a></li>
 						<li><a href="index.php?askRegistration"> Inscrivez-vous.</a></li>
 					</ul>
 					<ul id="menuMobile" class="side-nav" >
