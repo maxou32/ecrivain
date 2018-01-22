@@ -1,61 +1,9 @@
-#*************************************
-#  Parametre aside
-#*************************************
-aside :
- _TheBookView :
-  title : Derniers commentaires
-  ref1 : getChapter_idchapter
-  ref2 : getName
-  content : getContent
-  detail : getCommentDate
- _TheNextBookView :
-  title : Derniers commentaires
-  ref1 : getChapter_idchapter
-  ref2 : getName
-  content : getContent
-  detail : getCommentDate
- _ThePreviousBookView :
-  title :  Derniers commentaires
-  ref1 : getChapter_idchapter
-  ref2 : getName
-  content : getContent
-  detail : getCommentDate
- _messageView :
-  title :  Résumé du roman
-  ref1 : getIdchapters
-  ref2 : getTitle
-  content : getContent
-  detail : getDateFr
- oneChapter :
-  title : Résumé du roman
-  ref1 : getIdchapters
-  ref2 : getTitle
-  content : getContent
-  detail : getDateFr 
- validAccessReserved :
-  title :  Résumé du roman
-  ref1 : getIdchapters
-  ref2 : getTitle
-  content : getContent
-  detail : getDateFr
- abortAccess :
-  title :  Résumé du roman
-  ref1 : getIdchapters
-  ref2 : getTitle
-  content : getContent
-  detail : getDateFr
-#**************************************
-# media 
-#**************************************
-media :
- background : public/media/alaska.jpg
 #**************************************
 #routes à suivre
 #**************************************
 # l'appel donne le nom de la fonction
 # puis les paramètres éventuels
 #**************************************
-
 simpleRoads:
  index:
   seConnecte : non
@@ -93,7 +41,7 @@ simpleRoads:
      nombreParam : 1
      lesParams:
       nomParam : web_max\ecrivain\model\chaptersManager
-      origine : getListValidDesc						#action ou dur
+      origine : getListValidAsc						#action ou dur
 #**************************************
  abortAccess:
   seConnecte : non
@@ -140,7 +88,7 @@ simpleRoads:
      nombreParam : 1
      lesParams:
       nomParam : web_max\ecrivain\model\chaptersManager
-      origine : getListValidDesc						#action ou dur
+      origine : getListValidAsc					#action ou dur
 #**************************************   
  reservedAccess:
   seConnecte : Null
@@ -201,7 +149,7 @@ simpleRoads:
      nombreParam : 1
      lesParams:
       nomParam : web_max\ecrivain\model\chaptersManager
-      origine : getListValidDesc						#action ou dur
+      origine : getListValidAsc						#action ou dur
 #**************************************  
  _listChaptersView:
   seConnecte : non
@@ -1152,8 +1100,8 @@ simpleRoads:
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
-   className : web_max\ecrivain\controler\adminController
-   nom : CRUDStatus
+   className : Null
+   nom : Null
    avecParam : oui			#non
    nombreParam : 1
    lesParams:
@@ -1165,13 +1113,13 @@ simpleRoads:
      className : Null
      nom : Null
      tableau : Null
-     avecParam : parametre inutile			#non
-     nombreParam : parametre inutile
+     avecParam : Null			#non
+     nombreParam : Null
      lesParams:
       nomParam : status
       origine : Null							#action ou dur
   wantHeaderLocation :
-   action : oui
+   action : nonS
    param : non
    origine : post										#post ou get
    nom : Null

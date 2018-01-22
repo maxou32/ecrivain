@@ -23,3 +23,7 @@ admin: 99
 contributor: 2
 nbChapters: 5
 nbCaracters: 600
+#**************************************
+# media 
+#*************************************
+background : public/media/alaska.jpg

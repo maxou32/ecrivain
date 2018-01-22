@@ -1,0 +1,45 @@
+#*************************************
+#  Parametre aside
+#*************************************
+_TheBookView :
+ title : Derniers commentaires
+ ref1 : getChapter_idchapter
+ ref2 : getName
+ content : getContent
+ detail : getCommentDate
+_TheNextBookView :
+ title : Derniers commentaires
+ ref1 : getChapter_idchapter
+ ref2 : getName
+ content : getContent
+ detail : getCommentDate
+_ThePreviousBookView :
+ title :  Derniers commentaires
+ ref1 : getChapter_idchapter
+ ref2 : getName
+ content : getContent
+ detail : getCommentDate
+_messageView :
+ title :  Résumé de mon roman
+ ref1 : getIdchapters
+ ref2 : getTitle
+ content : getContent
+ detail : getDateFr
+oneChapter :
+ title : Résumé de mon roman
+ ref1 : getIdchapters
+ ref2 : getTitle
+ content : getContent
+ detail : getDateFr 
+validAccessReserved :
+ title :  Résumé de mon roman
+ ref1 : getIdchapters
+ ref2 : getTitle
+ content : getContent
+ detail : getDateFr
+abortAccess :
+ title :  Résumé de mon roman
+ ref1 : getIdchapters
+ ref2 : getTitle
+ content : getContent
+ detail : getDateFr

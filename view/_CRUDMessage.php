@@ -23,7 +23,7 @@ class _CRUDMessage extends View
 					{
 						?>
 						<div class="row card-panel orange lighten-5">
-							<div class="col m1">
+							<div class="col m1 s1">
 								<input type="hidden" name="id" id="id" value="<?= $datas[$i]->getId() ?>"/>
 								<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>
 								<input type="hidden" name="number" value="<?= $datas[$i]->getNumber() ?>"/>
@@ -31,7 +31,7 @@ class _CRUDMessage extends View
 								<input type="hidden" name="idtypemessage" value="<?= $datas[$i]->getMessage_idtypemessage() ?>"/>
 								<input type="radio" name="message"  value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
 							</div >
-							<div class="col m11">
+							<div class="col s11 m11">
 								<label for="<?= htmlspecialchars($datas[$i]->getId()) ?>" id="messageLU" class="black-text" title="<?= htmlspecialchars($datas[$i]->getcontexte()) ?>"  >
 										<?= htmlspecialchars($datas[$i]->getTexte()) ?> <br /> 
 								</label>

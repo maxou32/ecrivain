@@ -83,6 +83,10 @@ body
 {
 	display:none;
 }
+#modal 
+{
+	display: none;
+}
 .sidenav-pad
 {
 	padding-left: 32px !important;

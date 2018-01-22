@@ -39,7 +39,6 @@ class UserManager extends Manager{
 	
 	public function get($userName)  {
 		try{
-			//echo " <br />User manager ".$userName."<br />";
 			$q = $this->dbConnect()->query('SELECT * FROM users WHERE name = "'.$userName.'"');
 			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 			//echo " <br /><PRE>User manager ".print_r($donnees)."<PRE><br />";

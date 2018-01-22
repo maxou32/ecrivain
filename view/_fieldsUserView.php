@@ -11,6 +11,28 @@ class _FieldsUserView extends View
 	}
 	public function show($params,$datas){
 		ob_start(); 
+		?>
+			<script language="javascript" type="text/javascript">
+				function verifPwd() {
+					if (document.getElementById('userPwd').value != document.getElementById('confPwd').value){
+						$('#modal').css({visibility: 'visible',display:'inline-block'});
+						setTimeout(function(){
+							$('#modal').css({visibility: 'hidden',display:'none'});;
+							}, 4000);
+					}
+				}
+			</script>
+			<div id="modal" class="modal card-panel hoverable">
+				<div class="modal-content ">
+					<h5><i class="material-icons">info</i>Vérification mot de passe</h5>
+					<div class="divider"></div>
+					<p>Les deux mots de passe ne sont pas identiques, merci de recommencer.	</p>
+				</div>
+				<div class="progress">
+					<div class="indeterminate"></div>
+				</div>
+			</div>
+		<?php
 		if ($params["action"]=="update"){
 			?>
 			<div class="row" >
@@ -19,6 +41,7 @@ class _FieldsUserView extends View
 			<?php	
 		}else{
 			?>
+			
 			<div class="row" >
 				<form method="post" action="index.php?registration" >
 					<input id="sousActionAdd" name="sousAction" type="hidden" value ="add" ><?php
@@ -30,11 +53,14 @@ class _FieldsUserView extends View
 						<input id="userName" name="userName" type="text"  class="form-control" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
 						<label>votre mot de passe</label>
 						<input id="userPwd" name="userPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required /><br />
+						<label>confirmez votre mot de passe</label>
+						<input id="confPwd" name="confPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required 
+							onChange='verifPwd()'/><br />
 						<label>votre adresse mail</label>
 						<input id="mail" name="mail" type="email" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
 						
 						<br />
-					 
+					</div>					 
 					<div class="row">	
 						<span  class="col m4 s12 offset-m4 center-align  waves-effect waves-light btn-large blue">
 							<input type="submit" name="add" value="Soumettre votre demande"><i class="material-icons left">send</i>

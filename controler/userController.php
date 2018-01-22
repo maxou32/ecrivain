@@ -26,13 +26,17 @@ public function __construct($myRoad, $action){
 		$monAccessControl= new AccessControl();
 		$userPassword=$monAccessControl->hashPassword( $params['userPwd']);	
 		if( $params['sousAction']=="add"){
-			$donnees=array('name' => $params['userName'],'password' => $userPassword, 'email'=> $params['mail'], 'Grade_IdGrade'=>2, 'Status_IdStatus'=>2	);
-			$newUser = new User($donnees);	
-					
-			$userManager= new UserManager();
-			$users=$userManager->add($newUser);	
-			
-		}else	{
+			$monUserManager= new UserManager();
+			if ($monUserManager->get($params['userName'])){
+				$monError=new ErrorController();
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\userControler", "raison"=>"Double inscription", "numberMessage"=>32));
+				
+			}else{
+				$donnees=array('name' => $params['userName'],'password' => $userPassword, 'email'=> $params['mail'], 'Grade_IdGrade'=>2, 'Status_IdStatus'=>2	);
+				$newUser = new User($donnees);	
+				$users=$monUserManager->add($newUser);	
+			}
+		}else{
 			$donnees=array('idusers'=> $_SESSION['userId'],'name' =>$params['userName'],'password' => $userPassword, 'email'=> $params['mail'],'grade_idgrade'=>$_SESSION['Grade_IdGrade'], 'status_idstatus'=>$_SESSION['Status_IdStatus']);
 			
 			$newUser = new User($donnees);			

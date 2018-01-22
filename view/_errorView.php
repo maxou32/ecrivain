@@ -40,24 +40,20 @@ class _ErrorView {
 			
 	
 		</script>
-		<!-- Modal Trigger
-		  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
- -->
-		  <!-- Modal Structure -->
-		  <div id="modal1" class="modal card-panel hoverable">
+
+		<div id="modal1" class="modal card-panel hoverable">
 			<div class="modal-content ">
-			  <h5><i class="material-icons">info</i>  <?php echo ($this->laRaison) ?></h5>
-			  <div class="divider"></div>
-			  <p><?php echo ($this->leMessage->getTexte()) ?></p>
+				<h5><i class="material-icons">info</i>  <?php echo ($this->laRaison) ?></h5>
+				<div class="divider"></div>
+				<p><?php echo ($this->leMessage->getTexte()) ?></p>
 			</div>
 			<div class="progress">
 				<div class="indeterminate"></div>
 			</div>
-		  </div>
+		</div>
 			
 
 		<?php
-		//echo"<br /><pre> charge le Message 2 ";print_r($this->leMessage);echo"</pre>";
 		$errorView=ob_get_clean();
 		return $errorView;
 	}

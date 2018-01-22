@@ -62,7 +62,6 @@ class AccessControl {
 			return false;			
 		}	
 	}
-
     
     /**
      * Vérification de l'incription de l'utilisateur
@@ -80,8 +79,6 @@ class AccessControl {
 			return array("result"=>false, "message"=>'Vous êtes déjà inscrit.');			
 		}
 	}
-	
-	
 		
     /**
      * Récupération du profil de l'utilisateur dans la session
@@ -96,7 +93,6 @@ class AccessControl {
 		return $array;
 	}
 	
- 
     /**
      * Vérification du mot de passe
      * @param  string $password mot de passe saisi
@@ -112,7 +108,6 @@ class AccessControl {
 			return array("result"=>false, "message"=>'Votre mot de passe contient des caractères interdits.');				
 		}	
 	}
-	
 	
     /**
      * Fonction de hashage

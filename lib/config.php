@@ -24,6 +24,7 @@ class Config{
 		require_once "Spyc.php";
 		$this->data = \Spyc::YAMLLoad('lib/config.yaml');
 		$this->data['secu'] = \Spyc::YAMLLoad('lib/secu.yaml');
+		$this->data['aside'] = \Spyc::YAMLLoad('lib/aside.yaml');
 		//echo"<br />Config <pre>";print_r($this->data);echo"<br /> fin chargement config</PRE>";
 	}
 	
@@ -73,7 +74,7 @@ class Config{
      * @return string chemin du fichier de fond d'écran
      */
     public function getBackground(){
-		return $this->data["media"]["background"];
+		return $this->data["secu"]["background"];
 	}
     
 	/**

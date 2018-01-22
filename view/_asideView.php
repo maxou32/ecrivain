@@ -12,8 +12,8 @@ class _AsideView {
 		?>
 
 		<aside id="barreAside" class ="formBook ">
-			<div>
-				<h4><?= htmlspecialchars($this->aside["aside"]["title"])?></h4>
+			<div >
+				<h4 class="card-panel  hoverable orange lighten-5 center-align"><?= htmlspecialchars($this->aside["aside"]["title"])?></h4>
 			<?php
 				for($i=0;$i<count($this->aside["aside"]["value"]);$i++)
 				{
