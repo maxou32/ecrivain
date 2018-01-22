@@ -32,7 +32,7 @@ class _CRUDMessage extends View
 								<input type="radio" name="message"  value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>
 							</div >
 							<div class="col m11">
-								<label for="<?= htmlspecialchars($datas[$i]->getId()) ?>" id="messageLU" title="<?= htmlspecialchars($datas[$i]->getcontexte()) ?>"  >
+								<label for="<?= htmlspecialchars($datas[$i]->getId()) ?>" id="messageLU" class="black-text" title="<?= htmlspecialchars($datas[$i]->getcontexte()) ?>"  >
 										<?= htmlspecialchars($datas[$i]->getTexte()) ?> <br /> 
 								</label>
 							</div>

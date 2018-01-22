@@ -21,7 +21,7 @@ class _MenuPrivateView extends View
 		</script>
 		<div class="navbar-fixed">
 			<ul id="menuMobile" class="side-nav active" >
-				<li ><a class="no-padding" href="index.php" >Accueil</a></li>
+				<li ><a class="no-padding" href="index.php" ><i class="material-icons left">home</i>Accueil</a></li>
 				<li ><a class="no-padding" href="index.php?_listChaptersView" >Les chapitres</a></li>
 				<li ><a class="no-padding" href="index.php?askAddOneChapter" >Nouveau chapitre</a></li>
 				<li >
@@ -80,7 +80,7 @@ class _MenuPrivateView extends View
 						<i class="material-icons">menu</i>
 					</a>	
 					<ul id="menuGeneral" class="right hide-on-med-and-down">
-						<li><a href="index.php" >Accueil</a></li>
+						<li><a href="index.php"><i class="material-icons left">home</i>Accueil</a></li>
 						<li><a href="index.php?_listChaptersView" >Les chapitres</a></li>
 						<li><a href="index.php?askAddOneChapter" >Nouveau chapitre</a></li>
 						<li><a data-activates="dropdown-1" class="dropdown-button" href="#">Mon site<i class="material-icons right">arrow_drop_down</i></a></li>

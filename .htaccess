@@ -1,0 +1,15 @@
+# RewriteEngine On
+# RewriteRule ^(.+)$ index.php?request=$1 [QSA,L]
+
+ErrorDocument 400 vlib/erreur.php?erreur=400
+ErrorDocument 401  lib/erreur.php?erreur=401
+ErrorDocument 402  lib/erreur.php?erreur=402
+ErrorDocument 403  lib/erreur.php?erreur=403
+ErrorDocument 404  lib/erreur.php?erreur=404
+ErrorDocument 405  lib/erreur.php?erreur=405
+ErrorDocument 500  lib/erreur.php?erreur=500
+ErrorDocument 501  lib/erreur.php?erreur=501
+ErrorDocument 502  lib/erreur.php?erreur=502
+ErrorDocument 503  lib/erreur.php?erreur=503
+ErrorDocument 504  lib/erreur.php?erreur=504
+ErrorDocument 505  lib/erreur.php?erreur=505

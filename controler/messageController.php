@@ -20,6 +20,7 @@ class messageController	extends mainController	{
      * @return object Message
      */
     public function prepareMessage($params){
+		
 		$monTypeMessageManager= new TypeMessageManager;
 		$monTypemessage=$monTypeMessageManager->get($params['sousAction']);
 		$monMessageManager= new MessageManager;
@@ -42,7 +43,7 @@ class messageController	extends mainController	{
 	}
 	
 	/**
-     * Crée, modifie et supprime els emssages en fonction du choix de l'utilsiateur.
+     * Crée, modifie et supprime les emssages en fonction du choix de l'utilsiateur.
      * recharge la page
      * @param  array    $params infos reçues
      *        sousAction Mettre à jour, Supprimer ou Ajouter                 
@@ -73,6 +74,6 @@ class messageController	extends mainController	{
 		$monTypeMessageManager= new TypeMessageManager;
 		$monTypemessage=$monTypeMessageManager->getFromId($params['idtypemessage']);
 		$libelle=$monTypemessage->getText();
-		header('Location: index.php?askCRUDMessage/sousAction/'.$libelle);
+		//header('Location: index.php?askCRUDMessage/sousAction/'.$libelle);
 	}
 }

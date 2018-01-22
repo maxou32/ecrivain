@@ -20,18 +20,16 @@ class ChapterController	extends mainController	{
      * @return object chapitre
      */
     public function addOneChapter($post){
-		//echo "<pre> Controler : add :";print_r($post);echo"</pre>";
-		
+
 		$donnees=array('Title' => $post['title'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'number'=>$post['number']);
-		$result= $newChapter = new Chapter($donnees);
+		$mesChapters= new ChaptersManager();
+		$result=$mesChapters->add( new Chapter($donnees));
 		if ($result){
 			$monError=new ErrorController();
-			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Création de chapitre", "numberMessage"=>21));
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Ajoût d'un nouveau chapitre", "numberMessage"=>21));
 		}		
-		//echo "<pre> Controler : add 2 :";print_r($result);echo"</pre>";
 		return $result;
-			
-		
+
 	}
 	
     /**
@@ -42,7 +40,8 @@ class ChapterController	extends mainController	{
     public function updateOneChapter($post){
 		//echo "<pre> Controler : update :";print_r($post);echo"</pre>";
 		$donnees=array('idchapters'=>$post['idchapter'], 'Title' => $post['title'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>$_SESSION['userId'], 'Status_IdStatus'=>1, 'Number'=> $post['number']);
-		$result= $newChapter = new Chapter($donnees);
+		$mesChapters= new ChaptersManager();
+		$result=$mesChapters->update( new Chapter($donnees));
 		if ($result){
 			$monError=new ErrorController();
 			$monError->setError(array("origine"=> "web_max\ecrivain\controler\chapterController", "raison"=>"Modication de chapitre", "numberMessage"=>23));

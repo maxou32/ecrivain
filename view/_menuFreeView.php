@@ -25,18 +25,21 @@ class _MenuFreeView extends View
 						<i class="material-icons">menu</i>
 					</a>	
 					<ul id="menuGeneral" class="left hide-on-med-and-down">
-						<li><a href="index.php" >Accueil</a></li>
-						<li><a href="index.php?_TheNextBookView/chap/0" >Lire mon livre</a></li>
-						<li><a href="index.php?askSendMail">Me contacter</a></li>
-						<li><a href="index.php?reservedAccess" >Préparation du livre</a></li>
+						<li><a href="index.php" ><i class="material-icons left">home</i>Accueil</a></li>
+						<li><a href="index.php?_TheNextBookView/chap/0" >Lisez mon livre</a></li>
+						<li><a href="index.php?askSendMail">Contactez moi</a></li>
 						<li><a href="index.php?askRegistration"> Inscrivez-vous.</a></li>
+						<li class="divider"></li>
+						<li><a href="index.php?reservedAccess" >Pour préparer le livre</a></li>
+					
 					</ul>
 					<ul id="menuMobile" class="side-nav" >
-						<li><a href="index.php" >Accueil</a></li>
-						<li><a href="index.php?_TheNextBookView/chap/0" >Mon livre</a></li>
-						<li><a href="index.php?askSendMail" >Contact</a></li>
-						<li><a href="index.php?reservedAccess">Accès réservé</a></li>
+						<li><a href="index.php" ><i class="material-icons left">home</i>Accueil</a></li>
+						<li><a href="index.php?_TheNextBookView/chap/0" >Lisez mon livre</a></li>
+						<li><a href="index.php?askSendMail" >Contactez moi</a></li>
 						<li><a href="index.php?askRegistration"> Inscrivez-vous.</a></li>
+						<li class="divider"></li>
+						<li><a href="index.php?reservedAccess">Pour préparer le livre</a></li>
 					</ul>
 					<a href="index.php" id= "logo" class="right  brand-logo">	
 						<img src="public/media/wm.png"	alt="web-max"  class="logo">		

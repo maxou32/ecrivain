@@ -23,6 +23,7 @@ class Config{
 	public function __construct()   {
 		require_once "Spyc.php";
 		$this->data = \Spyc::YAMLLoad('lib/config.yaml');
+		$this->data['secu'] = \Spyc::YAMLLoad('lib/secu.yaml');
 		//echo"<br />Config <pre>";print_r($this->data);echo"<br /> fin chargement config</PRE>";
 	}
 	
@@ -31,7 +32,7 @@ class Config{
 	 * @return integer nombre de chapitre
 	 */
 	public function getNbChapters(){
-		return $this->data["nbChapters"];
+		return $this->data['secu']["nbChapters"];
 	}
 	
     /**
@@ -39,7 +40,7 @@ class Config{
 	 * @return integer nombre de caractères
      */
     public function getNbCaracters(){
-		return $this->data["nbCaracters"];
+		return $this->data['secu']["nbCaracters"];
 	}
 	
     /**
@@ -47,7 +48,7 @@ class Config{
      * @return string nom de l'utilisateur
      */
     public function getLogin(){
-		return $this->data["login"];
+		return $this->data['secu']["login"];
 	}
 	
     /**
@@ -55,7 +56,7 @@ class Config{
      * @return string mot de passe
      */
     public function getPassword(){
-		return $this->data["password"];
+		return $this->data['secu']["password"];
 	}
 
     /**
@@ -63,7 +64,7 @@ class Config{
      * @return string connexion à la base de donnees
      */
     public function getConnect(){
-		$connect='mysql:host='. $this->data["serveur"].';dbname='. $this->data["nom"];
+		$connect='mysql:host='. $this->data['secu']["serveur"].';dbname='. $this->data['secu']["nom"];
 		return $connect;
 	}
 	
@@ -80,7 +81,7 @@ class Config{
      * @return string adresse mail
      */
     public function getMail(){
-		return $this->data["mail"];
+		return $this->data['secu']["mail"];
 	}
 	
 	/**
@@ -88,8 +89,11 @@ class Config{
      * @return array  donnat les champs à afficher
      */
     public function getAsideParam($view){
-		$param=$this->data["aside"][$view];
-
+		if(isset($this->data["aside"][$view])){
+			$param=$this->data["aside"][$view];
+		}else{
+			$param=$this->data["aside"]["_messageView"];
+		}
 		return $param;
 	}
 	

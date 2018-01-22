@@ -26,16 +26,12 @@ class AsideController extends mainController	{
 		//echo"<br /><pre> charge ASIDE ";print_r($post);echo"</pre>";
 		$asideParam=$this->myConfig->getAsideParam($this->myAction);
 
-		//echo"<br /><pre> charge ASIDE PARAM ";print_r($asideParam);echo"</pre>";
-
 		foreach($this->myRoad["appelFonctionApresData"] as $element){
 			if(is_array($element)){
 				if($element["nom"]=="chargeAside"){
 					$monAction= $element["lesParams"]["origine"];
 					$monManager = new $element["lesParams"]["nomParam"];
 					$donnees=$monManager->$monAction();
-					//echo"<br /><pre> charge les params ";print_r($asideParam);echo"</pre>";
-					//echo"<br /><pre> présente les données ";print_r($donnees);echo"</pre>";
 					$aside["title"]=$asideParam["title"];
 					for($i=0;$i<count($donnees);$i++){
 						$aside["value"][$i]["ref1"]=$donnees[$i]->$asideParam["ref1"]();     

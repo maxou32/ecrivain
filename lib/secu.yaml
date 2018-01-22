@@ -1,0 +1,25 @@
+#**************************************
+# chemins d'accès
+#**************************************
+url: http://127.0.0.1:8000/edsatest_php/TP_XX/ecrivain"
+dir_view: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\
+dir_controler: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\
+dir_model: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\
+dir_ecrivain: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain
+#***************************************
+#	parametrage du site de l'écrivain
+#**************************************
+# accès aux données
+serveur: localhost 
+login: root 
+password: 'maxou*32'
+nom: ecrivain
+# boite aux lettres
+mail: max.public32@gmail.com
+#**************************************
+# règles de gestion
+#**************************************
+admin: 99 
+contributor: 2
+nbChapters: 5
+nbCaracters: 600

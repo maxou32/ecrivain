@@ -3,6 +3,7 @@ namespace web_max\ecrivain\controler;
 use web_max\ecrivain\lib\Config;
 use web_max\ecrivain\model\ChaptersManager;
 use web_max\ecrivain\model\UserManager;
+use web_max\ecrivain\controler\ErrorController;
 use web_max\ecrivain\model\User;
 	
 class AccessControl {
@@ -32,25 +33,26 @@ class AccessControl {
 		//echo"<PRE> COntroller : debut validAccessReserved";print_r($params);echo"</PRE>";
 			
 		if(isset($params['userName']) && isset($params['userPwd'])) {
-			//echo "<br />COntroller : name : ".$params['userName']." pwd ".$params['userPwd'];
 			$monUserManager=new UserManager;
 			$user=$monUserManager->get($params['userName']);
 			if(!$user){
 				$monError=new ErrorController();
 				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"habilitation insuffisante", "numberMessage"=>12));
-				//echo "console.log('Nom inconnu')";
 				return false;
 				header ("Location:index.php?askRegistration");
 				exit;
 			}elseif(hash('sha256',$params['userPwd'])==$user->getPassword()){
-				//echo"<PRE> ACCESS CONTROL: data ";print_r($user);echo"</PRE>";
-				$this->updateSession($user);
-				//echo "success";
-				return true;
+				if($user->getStatus_IdStatus() >1){
+					$monError=new ErrorController();
+					$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"Inscription non validée", "numberMessage"=>31));
+					return false;
+				}else{
+					$this->updateSession($user);
+					return true;
+				}
 			}else{
 				$monError=new ErrorController();
 				$monError->setError(array("origine"=> "web_max\ecrivain\controler\accessControl", "raison"=>"mot de passe incorrect", "numberMessage"=>10));
-				//echo "Failed  <pre>";print_r($params);echo"</pre>";
 				return false;	
 			}
 		}else{
@@ -127,7 +129,8 @@ class AccessControl {
 	 * @param  integer $requiredLevel Niveau requis
 	 * @return boolean  indique si le niveau est suffiant ou pas
 	 */
-	public function verifAccessRight($requiredLevel){		
+	public function verifAccessRight($requiredLevel){
+
 		$requiredLevel=(INT) $requiredLevel;
 		if(!isset($_SESSION['autorizedAccess'])){
 			return false;

@@ -2,6 +2,7 @@
 namespace web_max\ecrivain\controler;
 use web_max\ecrivain\lib\Config;
 use web_max\ecrivain\model\ChaptersManager;
+use web_max\ecrivain\controler\ChapterController;
 use web_max\ecrivain\model\Chapter;
 use web_max\ecrivain\model\UserManager;
 use web_max\ecrivain\model\User;
@@ -80,7 +81,7 @@ class Controller{
 				$paramManager="";
 				
 				if($element["utiliseResultatFunctionAvant"]=="oui"){
-					$paramManager=$this->return;
+					$this->data=$this->return;
 				}else{
 					if($element["avecParam"]="oui"){
 						foreach($element["lesParams"] as $elementParam){
@@ -106,7 +107,7 @@ class Controller{
 				}
 			}
 		}
-		//echo"<PRE>CONTROLLER : lire data ";print_r($this->data);echo"</PRE>";
+		//echo"<PRE>CONTROLLER : lire data ";print_r($paramManager);echo"</PRE>";
 	}
 		
 	private function apresDonnees($params, $post){
@@ -190,7 +191,7 @@ class Controller{
 					}
 					$this->globalParams["updateDeleteAreAutorized"]=false;
 					if($element["levelUpdate"]>0){
-						$monAccessControl=new $this->myRoad["security"]["className"];
+						$monAccessControl=new \web_max\ecrivain\controler\AccessControl();
 						$this->globalParams["updateDeleteAreAutorized"]= $monAccessControl->verifAccessRight($element["levelUpdate"]);
 					}
 				}
@@ -217,7 +218,7 @@ class Controller{
 			}else{
 				$critere="";
 			}
-			//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
+			//echo"<PRE><br />CONTROLLER 1: dat ";print_r($this->myRoad["wantHeaderLocation"]["target"].$critere);echo"</PRE>";
 			//echo"<PRE><br>CONTROLLER 1.1: critere = ";print_r($critere);echo"</PRE>"."<br />";
 
 			header('Location: '.$this->myRoad["wantHeaderLocation"]["target"].$critere);
@@ -240,8 +241,11 @@ class Controller{
 		//echo"<PRE><br />CONTROLLER 1: dat ";print_r($post);echo"</PRE>";
 		//echo"<PRE><br>CONTROLLER 1.1: nbPram = ";print_r($params);echo"</PRE>"."<br />";
 		//echo "<br /><pre>CONTROLLER 1.30 maxou: element = ";print_r($this->myRoad);echo"</pre>";
-		if($this->myRoad["appelFonctionAvantData"]["nombrefonction"]>0){
-			$this->avantDonnees($params, $post);
+		
+		if (isset($this->myRoad["appelFonctionAvantData"])){
+			if($this->myRoad["appelFonctionAvantData"]["nombrefonction"]>0){
+				$this->avantDonnees($params, $post);
+			}
 		}
 		
 		if(isset($this->myRoad["manager"])){
@@ -256,7 +260,7 @@ class Controller{
 			$this->chargeVue($params, $post);
 		}
 		
-		if(isset($this->myRoad["wantHeaderLocation"]["action"])){ 
+		if (isset($this->myRoad["wantHeaderLocation"])){
 			$this->lanceRelocation($params, $post);
         }
 		

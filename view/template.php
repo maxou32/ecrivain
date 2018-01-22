@@ -27,7 +27,7 @@ class template extends view{
 				<meta charset= "utf8" />
 				<!-- <meta charset="utf8_general_ci" />  -->
 				<!-- Ligne à ajouter si on veut un favicon		-->
-				<link rel="icon" type="image/jpeg" href="D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\public\media\icone.png">
+				<link rel="icon" type="image/jpeg" href="public\media\WM.png">
 
 				<meta name="description" content="Le récit de mes dernières aventures en Alaska !" />	<!-- description pour les moteurs -->
 				<meta name="keywords" content="aventure, Alaska" />										<!-- description des mots clefs -->
@@ -52,7 +52,7 @@ class template extends view{
 				<meta name="twitter:description" content="Mon périple en Alaska au milieu du PHP entouré de MVC menaçants.">
 				<meta name="twitter:creator" content="@moi_meme">
 				<!-- Twitter Summary card images must be at least 120x120px -->
-				<meta name="twitter:image" content="D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\public\media\icone.png">
+				<meta name="twitter:image" content="public\media\icone.png">
 				
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<link href="public/css/style.css" rel="stylesheet" /> 
@@ -72,7 +72,8 @@ class template extends view{
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 				<script src="public\js\tinymce\tinymce.min.js"></script>
-				<script>tinymce.init({
+				<script>
+				tinymce.init({
 					selector:'.texteChapitre',
 					language:"fr_FR",	
 					theme: "modern",

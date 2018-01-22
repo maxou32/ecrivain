@@ -54,10 +54,10 @@ class _TheBookView extends View
 					</form>
 					
 				</div>
-				<div class="row jumbotron card-panel hoverable orange lighten-5">
+				<div class="row jumbotron card-panel hoverable orange lighten-4">
 					<h4>Ajoutez un commentaire :</h4>
 				
-				<form method="post" name="addComment" action="index.php?addComment/chap/<?= htmlspecialchars($datas['data']->getNumber()) ?>" >
+					<form method="post" name="addComment" action="index.php?addComment/chap/<?= htmlspecialchars($datas['data']->getNumber()) ?>" >
 						<input type="hidden" name="chapter" id="chapter" value="<?= htmlspecialchars($datas['data']->getIdchapters()) ?>"/>
 						
 						<div class="col s6">				
@@ -69,11 +69,16 @@ class _TheBookView extends View
 							<input type="text" name="email" id="email" class="form-control" />
 							
 						</div>
-						<label for="content" class="active">Texte du message</label><textarea name="content" id="content" type="text" /></textarea>
-						<span  class=" waves-effect waves-light btn btn-large blue center-align">
-							<input type="submit" name="sousAction" value="Soumettre" class="right-align"><i class="material-icons left">send</i>
-						</span>
-
+						<div class="col s12">
+							<label for="content" class="active">Texte du message</label>
+							<textarea name="content" id="content" type="text" /></textarea>
+							<br />
+						</div>
+						<div class="row">
+							<span class="col s4 offset-s4 waves-effect waves-light btn btn-large blue">
+								<input type="submit" name="sousAction" value="Soumettre" class="right-align"><i class="material-icons left">send</i>
+							</span>
+						</div>
 					</form>
 				</div>
 				<?php

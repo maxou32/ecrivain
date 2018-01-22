@@ -1,6 +1,7 @@
 <?php
 namespace web_max\ecrivain\lib;
 use web_max\ecrivain\controler\Controller;
+use web_max\ecrivain\controler\ErrorController;
 use web_max\ecrivain\controler\AccesControl;
 use web_max\ecrivain\lib\Config;
 
@@ -15,7 +16,6 @@ class Router{
 	 * @param [[Type]] $request [paramètres reçus du navigateur]
 	 */
 	public function __construct($request){
-
 		$this->request = $request;
 		$Loader = new \SplClassLoader('web_max\ecrivain\controler', 'controler');
 		$Loader->register();
@@ -83,13 +83,19 @@ class Router{
 	 * Vérifie que l'utilisateur est autorisé à accéder à la vue demandée
 	 * @return boolean Vrai si autorisé ou non
 	 */
-	private function autorizedAccess(){
-		if($this->myRoad["security"]["niveauRequis"]>0){
-			$monAccessControl=new $this->myRoad["security"]["className"];
-			return $monAccessControl->verifAccessRight($this->myRoad["security"]["niveauRequis"]);
-			
+	private function autorizedAccess($varPost){
+
+		$monAccessControl = new  \web_max\ecrivain\controler\AccessControl();
+		//echo "<pre> Autorized Access";print_r($varPost);echo"</pre>";
+
+		if($this->myRoad["seConnecte"]=== "oui"){
+			return $monAccessControl->validAccessReserved($varPost);
 		}else{
-			return true;
+			if($this->myRoad["security"]["niveauRequis"]>0){
+				return $monAccessControl->verifAccessRight($this->myRoad["security"]["niveauRequis"]);
+			}else{
+				return true;
+			}
 		}
 	}
     /**
@@ -115,24 +121,29 @@ class Router{
 				$this->myRoad=$myConfig->getRoad($varAction);
 				
 				if (isset($this->myRoad)){
-					if( $this->autorizedAccess()){
+					if( $this->autorizedAccess($varPost)){
 						$monController=new Controller($this->myRoad,$varAction);
 						$monController->prepareAction($varParam, $varPost);
 					}else{
-						$monError=new ErrorController();
-						$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"utilisateur inconnu", "idMessage"=>12));
-					
+						//$monError=new ErrorController();
+						//$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Droits d'accès insuffisants", "numberMessage"=>9));	
+						$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
+						$monController->prepareAction($varParam, $varPost);
 					}
+				}else{
+					$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
+					$monController->prepareAction($varParam, $varPost);
 				}
 				
 			}else{
-				$varAction="_messageView"	;
-				$myRoad=$myConfig->getRoad("_messageView");	
+				$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
+				$monController->prepareAction($varParam, $varPost);
 			}
 			
 		}
 		catch (Exception $e){
-			$monController->printError($e->getmessage());
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Erreur inconnue", "numberMessage"=>30));	
 		}
 	}
 }

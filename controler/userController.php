@@ -26,7 +26,7 @@ public function __construct($myRoad, $action){
 		$monAccessControl= new AccessControl();
 		$userPassword=$monAccessControl->hashPassword( $params['userPwd']);	
 		if( $params['sousAction']=="add"){
-			$donnees=array('name' => $params['userName'],'password' => $userPassword, 'email'=> $params['mail'], 'Grade_IdGrade'=>2, 'Status_IdStatus'=>1);
+			$donnees=array('name' => $params['userName'],'password' => $userPassword, 'email'=> $params['mail'], 'Grade_IdGrade'=>2, 'Status_IdStatus'=>2	);
 			$newUser = new User($donnees);	
 					
 			$userManager= new UserManager();

@@ -18,10 +18,10 @@ class _createOneChapterView extends View
 		
 			?>
 			<div class="row">	
-				<div class="card-panel col m8 offset-m2 s12">
-					<form method="post" action="index.php?addOneChapter" class="formChapitre">
+				<div class="card-panel col m8 offset-m2 s12 formChapitre">
+					<form method="post" action="index.php?addOneChapter" class="orange lighten-5">
 						
-						<div class ="col  m6 offset-m1 s12">
+						<div class ="col  m6 offset-m1 s12 ">
 							<label for ="title" >titre</label><br />
 							<input id="title" name="title" type="text"  value ="" required /><br />
 						</div>
@@ -36,10 +36,10 @@ class _createOneChapterView extends View
 							<textarea id='content' name='content' class='texteChapitre'></textarea><br /> 
 							<input id="number" name="number" type="hidden"  value ="999" required /><br />
 						</div>	
-						<div class="col m4 ofsset-m4 s12 center-align">
-							<span  class=" waves-effect waves-light btn btn-large blue ">
-								<input type="submit" name="sousAction" value="Ajouter ce chapitre"><i class="material-icons left">add</i>
-							</span>				
+						<div class="row">
+							<span  class="col m4 s12 offset-m4 center-align  waves-effect waves-light btn-large blue">
+								<input type="submit" name="sousAction" value="Ajouter ce chapitre"><i class="material-icons left">build</i>
+							</span>
 						</div>	
 					</form>
 				</div>
