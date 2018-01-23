@@ -7,13 +7,21 @@ use web_max\ecrivain\lib\Config;
 
 
 class Manager{
+	protected $maConfig;
+	protected $prefix;
+
+public function __construct(){
+	
+
+}	
 	
     protected function dbConnect()
     {
 		try
 		{
-			$maConfig = new Config();
-			$db = new \PDO($maConfig->getConnect(), $maConfig->getLogin(), $maConfig->getPassword());
+			$this->maConfig = new Config();
+			$this->prefix	= $this->maConfig->getPrefixe();
+			$db = new \PDO($this->maConfig->getConnect(), $this->maConfig->getLogin(), $this->maConfig->getPassword());
 			$db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			return $db;
 		}
@@ -22,5 +30,4 @@ class Manager{
 			die('Une erreur interne est survenue');
 		}
     }
-	
 }

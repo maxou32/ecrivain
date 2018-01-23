@@ -13,7 +13,7 @@ class StatusManager extends Manager{
 
 	public function add(status $status)  {
 		try{
-			$q = $this->dbConnect()->prepare('INSERT INTO status(libelle) VALUES(:libelle');
+			$q = $this->dbConnect()->prepare('INSERT INTO '.$this->prefix.'status(libelle) VALUES(:libelle');
 
 			$q->bindValue(':libelle', $message->getLibelle(), \PDO::PARAM_STR);		
 			$q->execute();
@@ -27,7 +27,7 @@ class StatusManager extends Manager{
 	public function delete($idstatus)  {
 		try{
 			$idstatus = (int) $idstatus;
-			$this->dbConnect()->exec('DELETE FROM status WHERE idstatus = '.$idstatus);
+			$this->dbConnect()->exec('DELETE FROM '.$this->prefix.'status WHERE idstatus = '.$idstatus);
 			return true;
 					
 		}catch (PDOException  $e){ 
@@ -37,7 +37,7 @@ class StatusManager extends Manager{
 
 	public function get($libelle)  {
 		try{
-			$q = $this->dbConnect()->query('SELECT * FROM status WHERE libelle = "'.$libelle.'"');
+			$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'status WHERE libelle = "'.$libelle.'"');
 			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 		
 			if($donnees) {
@@ -51,7 +51,7 @@ class StatusManager extends Manager{
 	}
 	public function getFromId($status_idstatus)  {
 		try{
-			$q = $this->dbConnect()->query('SELECT * FROM status WHERE idstatus = "'.$status_idstatus.'"');
+			$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'status WHERE idstatus = "'.$status_idstatus.'"');
 			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 			
 			if($donnees) {
@@ -67,7 +67,7 @@ class StatusManager extends Manager{
 	public function getList()  {
 		try{
 			$status = [];
-			$q = $this->dbConnect()->query('SELECT * FROM status ORDER BY idstatus ASC');
+			$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'status ORDER BY idstatus ASC');
 			
 			while ($donnees = $q->fetch(\PDO::FETCH_ASSOC))		{
 				$status[] = new Status($donnees);
@@ -82,7 +82,7 @@ class StatusManager extends Manager{
 	
 	public function update(status $status)  {
 		try{
-			$q = $this->dbConnect()->prepare('UPDATE status SET libelle = :libelle WHERE idstatus = :idstatus');
+			$q = $this->dbConnect()->prepare('UPDATE '.$this->prefix.'status SET libelle = :libelle WHERE idstatus = :idstatus');
 			$q->bindValue(':idstatus', $status->getIdstatus(), \PDO::PARAM_INT);
 			$q->bindValue(':libelle', $status->getLibelle(), \PDO::PARAM_STR);
 

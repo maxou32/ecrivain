@@ -61,6 +61,18 @@ class Config{
 	}
 
     /**
+     * donne le mot de passe d'accès à la base de données
+     * @return string mot de passe
+     */
+    public function getPrefixe(){
+		if($this->data['secu']["avecPrefixe"]){
+			return $this->data['secu']["prefixe"];
+		}else{
+			return Null;
+		}
+	}
+
+    /**
      * donne la chaîne de connexion
      * @return string connexion à la base de donnees
      */

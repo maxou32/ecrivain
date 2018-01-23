@@ -12,7 +12,7 @@ class GradeManager extends Manager{
 	}
 
 	public function add(grade $grade)  {
-		$q = $this->dbConnect()->prepare('INSERT INTO grade(libelle) VALUES(:libelle');
+		$q = $this->dbConnect()->prepare('INSERT INTO '.$this->prefix.'grade(libelle) VALUES(:libelle');
 
 		$q->bindValue(':libelle', $message->getLibelle(), \PDO::PARAM_STR);		
 		$q->execute();
@@ -20,11 +20,11 @@ class GradeManager extends Manager{
 
 	public function delete($idgrade)  {
 		$idgrade = (int) $idgrade;
-		$this->dbConnect()->exec('DELETE FROM grade WHERE idgrade = '.$idgrade);
+		$this->dbConnect()->exec('DELETE FROM '.$this->prefix.'grade WHERE idgrade = '.$idgrade);
 	}
 
 	public function get($libelle)  {
-		$q = $this->dbConnect()->query('SELECT * FROM grade WHERE libelle = "'.$libelle.'"');
+		$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'grade WHERE libelle = "'.$libelle.'"');
 		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 		
 		if($donnees) {
@@ -34,7 +34,7 @@ class GradeManager extends Manager{
 		}
 	}
 	public function getFromId($grade_idgrade)  {
-		$q = $this->dbConnect()->query('SELECT * FROM grade WHERE idgrade = "'.$grade_idgrade.'"');
+		$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'grade WHERE idgrade = "'.$grade_idgrade.'"');
 		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 		
 		if($donnees) {
@@ -46,18 +46,17 @@ class GradeManager extends Manager{
 
 	public function getList()  {
 		$grade = [];
-		$q = $this->dbConnect()->query('SELECT * FROM grade ORDER BY idgrade ASC');
+		$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'grade ORDER BY idgrade ASC');
 		
 		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC))		{
 			$grade[] = new Grade($donnees);
 		}
-		//echo"manager <PRE>";print_r($grade);echo"</PRE>";
 		return $grade;
 	}
 	
 	public function update(grade $grade)  {
 		
-		$q = $this->dbConnect()->prepare('UPDATE grade SET libelle = :libelle WHERE idgrade = :idgrade');
+		$q = $this->dbConnect()->prepare('UPDATE '.$this->prefix.'grade SET libelle = :libelle WHERE idgrade = :idgrade');
 	
 		$q->bindValue(':idgrade', $message->getIdgradee(), \PDO::PARAM_INT);
 		$q->bindValue(':libellet', $message->getLibelle(), \PDO::PARAM_STR);

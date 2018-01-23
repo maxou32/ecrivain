@@ -11,7 +11,7 @@ class TypeMessageManager extends Manager{
 	}
 
 	public function add(typemessage $typemessage)  {
-		$q = $this->dbConnect()->prepare('INSERT INTO typemessage(text) VALUES(:text');
+		$q = $this->dbConnect()->prepare('INSERT INTO '.$this->prefix.'typemessage(text) VALUES(:text');
 
 		$q->bindValue(':text', $message->getTexte(), \PDO::PARAM_STR);		
 		$q->execute();
@@ -19,14 +19,12 @@ class TypeMessageManager extends Manager{
 
 	public function delete($idtypemessage)  {
 		$idtypemessage = (int) $idtypemessage;
-		$this->dbConnect()->exec('DELETE FROM typemessage WHERE idtypemessage = '.$idtypemessage);
+		$this->dbConnect()->exec('DELETE FROM '.$this->prefix.'typemessage WHERE idtypemessage = '.$idtypemessage);
 	}
 
 	public function get($text)  {
-		//echo " <br />Type message manager ".$texte."<br />";
-		$q = $this->dbConnect()->query('SELECT * FROM typemessage WHERE text = "'.$text.'"');
+		$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'typemessage WHERE text = "'.$text.'"');
 		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
-		//echo " <br /><PRE>Type message manager ".print_r($donnees)."<PRE><br />";
 		
 		if($donnees) {
 			return new TypeMessage($donnees);
@@ -35,10 +33,8 @@ class TypeMessageManager extends Manager{
 		}
 	}
 	public function getFromId($message_idtypemessage)  {
-		//echo " <br />message manager ".$texte."<br />";
-		$q = $this->dbConnect()->query('SELECT * FROM typemessage WHERE idtypemessage = "'.$message_idtypemessage.'"');
+		$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'typemessage WHERE idtypemessage = "'.$message_idtypemessage.'"');
 		$donnees = $q->fetch(\PDO::FETCH_ASSOC);
-		//echo " <br /><PRE>message manager ".print_r($donnees)."<PRE><br />";
 		
 		if($donnees) {
 			return new TypeMessage($donnees);
@@ -49,7 +45,7 @@ class TypeMessageManager extends Manager{
 
 	public function getList()  {
 		$typemessage = [];
-		$q = $this->dbConnect()->query('SELECT * FROM typemessage ORDER BY text ASC');
+		$q = $this->dbConnect()->query('SELECT * FROM '.$this->prefix.'typemessage ORDER BY text ASC');
 		
 		while ($donnees = $q->fetch(\PDO::FETCH_ASSOC))
 		{
@@ -60,12 +56,11 @@ class TypeMessageManager extends Manager{
 	
 	public function update(typemessage $typemessage)  {
 		
-		$q = $this->dbConnect()->prepare('UPDATE typemessage SET text = :text WHERE idtypemessage = :idtypemessage');
+		$q = $this->dbConnect()->prepare('UPDATE '.$this->prefix.'typemessage SET text = :text WHERE idtypemessage = :idtypemessage');
 	
 		$q->bindValue(':idtypemessage', $message->getIdtypemessage(), \PDO::PARAM_INT);
 		$q->bindValue(':text', $message->getTexte(), \PDO::PARAM_STR);
 		
-		//echo"<PRE>";print_r($message);
 		$q->execute();
 	}
 }

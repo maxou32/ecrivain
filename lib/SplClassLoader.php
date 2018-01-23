@@ -52,7 +52,8 @@ class SplClassLoader
    */
   public function __construct($ns = null, $includePath = null)
   {
-    $this->_namespace = $ns;
+    echo "quiqui";
+	$this->_namespace = $ns;
     $this->_includePath = $includePath;
   }
 
