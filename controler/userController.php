@@ -4,13 +4,12 @@ use web_max\ecrivain\lib\Config;
 use web_max\ecrivain\model\UserManager;
 use web_max\ecrivain\model\User;
 
-class UserController	extends mainController	{
+class UserController	extends MainController	{
 
 public function __construct($myRoad, $action){
 		$this->myRoad=$myRoad;
 		$this->myAction=$action;
 		$this->myConfig= new Config;
-		//echo"<br /><pre> CONTROLLER CONSTRUCT ";print_r($this->myAction);echo"</pre>";
 	}
  
 	
@@ -22,7 +21,7 @@ public function __construct($myRoad, $action){
      */
     
     public	function registration($params) {   
-		//echo 'action : '. $action;
+		//echo 'action : '. $params;
 		$monAccessControl= new AccessControl();
 		$userPassword=$monAccessControl->hashPassword( $params['userPwd']);	
 		if( $params['sousAction']=="add"){
@@ -41,8 +40,14 @@ public function __construct($myRoad, $action){
 			
 			$newUser = new User($donnees);			
 			$userManager= new UserManager();
-			$users=$userManager->update($newUser);	
+			$updateOK=$userManager->update($newUser);	
 			$monAccessControl->updateSession($newUser);
+			$monError=new ErrorController();
+			if($updateOK){
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\userControler", "raison"=>"Modification de votre profil", "numberMessage"=>23));
+			}else{
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\userControler", "raison"=>"Modification de votre profil", "numberMessage"=>43));
+			}
 		}
 	}
 	

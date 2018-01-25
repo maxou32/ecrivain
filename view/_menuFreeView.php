@@ -28,18 +28,18 @@ class _MenuFreeView extends View
 						<li><a href="index.php" ><i class="material-icons left">home</i>Accueil</a></li>
 						<li><a href="index.php?_TheNextBookView/chap/0" >Lisez mon livre</a></li>
 						<li><a href="index.php?askSendMail">Contactez moi</a></li>
-						<li><a href="index.php?askRegistration"> Inscrivez-vous.</a></li>
+						<li><a href="index.php?askRegistration"> Inscrivez-vous</a></li>
 						<li class="divider"></li>
-						<li><a href="index.php?reservedAccess" >Pour préparer le livre</a></li>
+						<li><a href="index.php?reservedAccess" >Les coulisses</a></li>
 					
 					</ul>
 					<ul id="menuMobile" class="side-nav" >
 						<li><a href="index.php" ><i class="material-icons left">home</i>Accueil</a></li>
 						<li><a href="index.php?_TheNextBookView/chap/0" >Lisez mon livre</a></li>
 						<li><a href="index.php?askSendMail" >Contactez moi</a></li>
-						<li><a href="index.php?askRegistration"> Inscrivez-vous.</a></li>
+						<li><a href="index.php?askRegistration"> Inscrivez-vous</a></li>
 						<li class="divider"></li>
-						<li><a href="index.php?reservedAccess">Pour préparer le livre</a></li>
+						<li><a href="index.php?reservedAccess">Les coulisses</a></li>
 					</ul>
 					<a href="index.php" id= "logo" class="right  brand-logo">	
 						<img src="public/media/wm.png"	alt="web-max"  class="logo">		

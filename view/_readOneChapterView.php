@@ -21,12 +21,12 @@ class _readOneChapterView extends View
 		?>
 		
 		<div class="row">
-			<div class="formChapitre col m8 s12">
+			<div class="formChapitre col m6 offset-m1 s12">
 				<div class="row">
-					<div  class="col s8">
+					<div  class="col m8 s12">
 						<h4 class="panel-title"><?= htmlspecialchars($datas->getTitle()) ?></h4>
 					</div>
-					<div class="col s4 center-align">
+					<div class="col m4 center-align">
 						<br /><label>Date de création</label><br />
 						<?= htmlspecialchars($datas->getDateFr()) ?><br />
 						
@@ -55,7 +55,7 @@ class _readOneChapterView extends View
 				$CommentView=$monCommentView->show();	
 				?>
 			</div>
-			<div class="col m4 hide-on-med-and-down">
+			<div class="col m4 offset-m1 hide-on-med-and-down">
 				<?php
 					$monAsideView=new _AsideView($params);	
 					$asideView=$monAsideView->show();	

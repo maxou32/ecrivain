@@ -62,11 +62,11 @@ class _TheBookView extends View
 						
 						<div class="col s6">				
 							<label for="name" class="active">Votre nom</label>
-							<input type="text" name="name" id="name"  class="form-control"/>						
+							<input type="text" name="name" id="name"  class="form-control validate" pattern='[a-zA-Zéèêïë ]*' title="Seules les lettres sont admises"/>						
 						</div>
 						<div class="col s6">
 							<label for="email" class="active">Votre email</label>
-							<input type="text" name="email" id="email" class="form-control" />
+							<input type="email" name="email" id="email" class="form-control validate"  />
 							
 						</div>
 						<div class="col s12">

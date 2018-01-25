@@ -1,6 +1,5 @@
 <?php 
 namespace web_max\ecrivain\view;
-use web_max\ecrivain\View\MaskErrorView;
 use web_max\ecrivain\controler\ErrorController;
 use web_max\ecrivain\model\MessageManager;
 use web_max\ecrivain\model\Message;
@@ -28,7 +27,6 @@ class _ErrorView {
 	public function show(){
 
 		ob_start(); 
-		//echo"<br /><pre> charge le Message 1";print_r($this->leMessage);echo"</pre>";
 		?>
 		<script type="text/javascript">
 			$(document).ready(function(e){

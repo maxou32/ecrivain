@@ -22,7 +22,7 @@ class _CRUDMessage extends View
 					for($i=0;$i<count($datas);$i++)
 					{
 						?>
-						<div class="row card-panel orange lighten-5">
+						<div class="row card-panel hoverable orange lighten-5">
 							<div class="col m1 s1">
 								<input type="hidden" name="id" id="id" value="<?= $datas[$i]->getId() ?>"/>
 								<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>

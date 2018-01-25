@@ -1,4 +1,4 @@
-#*************************************
+﻿#*************************************
 #  Parametre aside
 #*************************************
 _TheBookView :
@@ -14,13 +14,13 @@ _TheNextBookView :
  content : getContent
  detail : getCommentDate
 _ThePreviousBookView :
- title :  Derniers commentaires
+ title : Derniers commentaires
  ref1 : getChapter_idchapter
  ref2 : getName
  content : getContent
  detail : getCommentDate
 _messageView :
- title :  Résumé de mon roman
+ title : Résumé de mon roman
  ref1 : getIdchapters
  ref2 : getTitle
  content : getContent
@@ -32,7 +32,7 @@ oneChapter :
  content : getContent
  detail : getDateFr 
 validAccessReserved :
- title :  Résumé de mon roman
+ title : Résumé de mon roman
  ref1 : getIdchapters
  ref2 : getTitle
  content : getContent

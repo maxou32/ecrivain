@@ -4,7 +4,7 @@ use web_max\ecrivain\lib\Config;
 use web_max\ecrivain\model\ChaptersManager;
 use web_max\ecrivain\model\Chapter;
 
-class ChapterController	extends mainController	{
+class ChapterController	extends MainController	{
 	
 	public function __construct($myRoad, $action){
 		$this->myRoad=$myRoad;

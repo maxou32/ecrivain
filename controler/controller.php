@@ -208,6 +208,7 @@ class Controller{
 		/** *****************************************************************
         * déclanchement de la fonction a exécuter pour recharger une vue
         */
+		echo"<PRE><br />CONTROLLER 1: dat ";print_r($this->globalParams);echo"</PRE>";
 		if($this->myRoad["wantHeaderLocation"]["action"]=="oui"){
 			if( $this->myRoad["wantHeaderLocation"]["param"]=="oui"){
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){

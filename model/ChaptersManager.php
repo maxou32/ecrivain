@@ -102,10 +102,10 @@ class ChaptersManager extends Manager{
 			$q = $this->dbConnect()->query('SELECT idchapters, title,  content, DATE_FORMAT( chapter_date, \'%d/%m/%Y\') as date_fr,users_idusers, number FROM '.$this->prefix.'chapters WHERE number = '.$number);
 			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 			
-			$q1 = $this->dbConnect()->query('SELECT min(number) as valeur from chapters WHERE status_idstatus= 1');
+			$q1 = $this->dbConnect()->query('SELECT min(number) as valeur from '.$this->prefix.'chapters WHERE status_idstatus= 1');
 			$mini= $q1->fetch(\PDO::FETCH_ASSOC);
 			
-			$q2 = $this->dbConnect()->query('SELECT max(number) as valeur from chapters WHERE status_idstatus= 1');
+			$q2 = $this->dbConnect()->query('SELECT max(number) as valeur from '.$this->prefix.'chapters WHERE status_idstatus= 1');
 			$maxi= $q2->fetch(\PDO::FETCH_ASSOC);
 			if($donnees) {
 				$result['data']=new Chapter($donnees);
@@ -139,7 +139,7 @@ class ChaptersManager extends Manager{
 	
 	public function updateStatus(Chapter $chapter)  {
 		try {
-			$q = $this->dbConnect()->prepare("UPDATE '.$this->prefix.'chapters SET status_idstatus  = :status_idstatus, number  = :number WHERE idchapters = :idchapters");
+			$q = $this->dbConnect()->prepare('UPDATE '.$this->prefix.'chapters SET status_idstatus  = :status_idstatus, number  = :number WHERE idchapters = :idchapters');
 			$q->bindValue(':idchapters', $chapter->getIdchapters(), \PDO::PARAM_INT);
 			$q->bindValue(':number', $chapter->getNumber(), \PDO::PARAM_INT);
 			$q->bindValue(':status_idstatus', $chapter->getStatus_IdStatus(), \PDO::PARAM_INT);
@@ -154,7 +154,7 @@ class ChaptersManager extends Manager{
 	
 	public function updateNumber(Chapter $chapter)  {
 		try {
-			$q = $this->dbConnect()->prepare("UPDATE '.$this->prefix.'chapters SET number  = :number WHERE idchapters = :idchapters");
+			$q = $this->dbConnect()->prepare('UPDATE '.$this->prefix.'chapters SET number  = :number WHERE idchapters = :idchapters');
 			$q->bindValue(':idchapters', $chapter->getIdchapters(), \PDO::PARAM_INT);
 			echo  "chapite  ".$chapter->getIdchapters();
 			echo  "number   ".$chapter->getNumber();

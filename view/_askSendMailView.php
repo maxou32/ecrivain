@@ -1,9 +1,9 @@
 <?php
-namespace web_max\ecrivain\view;
+namespace web_max\ecrivain\View;
 use web_max\ecrivain\view\View;
 use web_max\ecrivain\view\Template;
 	
-class _askSendMailView extends View{	
+class _AskSendMailView extends View{	
 	public function __construct($template){
 		$this->template =$template;
 	}
@@ -16,12 +16,14 @@ class _askSendMailView extends View{
 			<input type="hidden" name="action" value="submit">
 			<div class="col m6 s12">
 				Votre nom:<br>
-				<input name="name" type="text" value="" size="30" class="form-control"/><br>
+				<input name="name" type="text" value="" size="30" title="Seules les lettres sont admises" pattern="[a-zA-Zéèêïë ]*" class="form-control validate"/><br>
 			</div>
 			<div class="col m6 s12">
 				Votre email:<br>
-				<input name="email" class="form-control" type="email"  value="" size="30"/><br>
+				<input name="email" class="email form-control validate" type="email"  value="" size="30"/><br>
 			</div>
+			L'objet de votre message:<br />
+			<input name="subject" class="form-control validate" type="text" title="Seules les lettres sont admises" pattern="[a-zA-Zéèêïë ]*" value="" size="30"/><br>
 			Votre message:<br>
 			<textarea name="message" rows="7" cols="30"></textarea><br>
 			

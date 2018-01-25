@@ -1,22 +1,21 @@
-#**************************************
+﻿#**************************************
 # chemins d'accès
 #**************************************
-url: http://127.0.0.1:8000/edsatest_php/TP_XX/ecrivain"
-dir_view: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\view\
-dir_controler: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\controler\
-dir_model: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain\model\
-dir_ecrivain: D:\perso\maxou\oPENCLASSROOM\04_Php_MySQL\TP_XX\ecrivain
+url: http://web-max.fr/ecrivain
+dir_view: home/webmaxfrvn/www/ecrivain/view/
+dir_controler: home/webmaxfrvn/www/ecrivain/controler/
+dir_model: home/webmaxfrvn/www/ecrivain/model/
+dir_ecrivain: home/webmaxfrvn/www/ecrivain/
 #***************************************
 #	parametrage du site de l'écrivain
 #**************************************
 # accès aux données
-serveur: localhost 
-login: root 
-password: 'maxou*32'
-nom: ecrivain
+serveur: webmaxfrvnwebmax.mysql.db
+login: webmaxfrvnwebmax
+password: rau54zAnWe1
+nom: webmaxfrvnwebmax
 avecPrefixe: 1
-serveur:'webmaxfrvnwebmax.mysql.db'
-prefixe: TP04_
+prefixe: tp04_
 # boite aux lettres
 mail: max.public32@gmail.com
 #**************************************

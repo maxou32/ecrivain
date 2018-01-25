@@ -6,7 +6,7 @@ use web_max\ecrivain\model\Chapter;
 use web_max\ecrivain\model\Comment;
 use web_max\ecrivain\model\CommentManager;
 
-class CommentController	extends mainController	{
+class CommentController	extends MainController	{
 	    
 public function __construct($myRoad, $action){
 		$this->myRoad=$myRoad;
@@ -20,15 +20,24 @@ public function __construct($myRoad, $action){
      * @param  params    contient les informations du recues de l'écran
      */
 	public function addComment($post){
+		echo"<PRE>CONTROLLER COMMENT  : chargeComment 1 ";print_r($post);echo"</PRE>";
 		if( $post['sousAction']!=="fermer"){
 			$donnees=array('name' => $post['name'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>Null, 'Status_IdStatus'=>2,'Chapter_IdChapter'=>$post['chapter'], 'email'=>$post['email']);
 			$newComment = new Comment($donnees);
 			$monCommentManager= new CommentManager;
 			$resultat=$monCommentManager->add($newComment);
+			
+					
+			$monChapter= new ChaptersManager();
+			$leChapitre=$monChapter->get($newComment->getChapter_IdChapter());
+			
+			
+			
 			if ($resultat){
 				$monError=new ErrorController();
 				$monError->setError(array("origine"=> "web_max\ecrivain\controler\commentController", "raison"=>"Proposition de commentaire", "numberMessage"=>21));
-			}		
+			}
+			return $chapitre['chap']=$leChapitre->getNumber();
 		}
 	}
 
@@ -37,7 +46,7 @@ public function __construct($myRoad, $action){
      * @param  params    contient les informations du recues de l'écran
      */
 	public function chargeComment($params, $operation){
-		//echo"<PRE>CONTROLLER COMMENT  : chargeComment 1 ";print_r($params);echo"</PRE>";
+		//echo"<PRE>CONTROLLER COMMENT  : chargeComment 1 ";print_r($operation);echo"</PRE>";
 		
 		$commentManager= new CommentManager();
 		if(isset($params["chap"])){
@@ -93,13 +102,18 @@ public function __construct($myRoad, $action){
      */
 	 public function signal($params){	
 		//echo"<PRE>CONTROLLER : signal 1 ";print_r($params);echo"</PRE>";
-		$resultat["result"]=false;		
+		$resultat=false;		
 		$commentManager= new CommentManager();
-		$commentManager->updateSignaled($params["comment"],true);
+		$resultat=$commentManager->updateSignaled($params["comment"],true);
 		$monComment=$commentManager->get($params["comment"]);
 		
 		$monChapter= new ChaptersManager();
 		$leChapitre=$monChapter->get($monComment->getChapter_IdChapter());
+		
+		if ($resultat){
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\controler\commentController", "raison"=>"Signalement de commentaire", "numberMessage"=>45));
+		}
 
 		return $chapitre['chap']=$leChapitre->getNumber();
 	}		

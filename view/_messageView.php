@@ -16,13 +16,13 @@ class _messageView extends View
 		ob_start(); 
 		?>
 		<div class ="row">
-			<article id="barreMessage" class="col s12 m7 offset-m1">
-				<div>
+			<div  class="col s12 m6 offset-m1">
+				<div id="barreMessage" class="card-panel formBook hoverable col s12">
 					 <p><?= $datas->getTexte() ?></p>
 				</div>									
-			</article>
+			</div>
 		
-			<div class="col s12 m3  offset-m1">
+			<div class="col s12 m4  offset-m1">
 				<?php
 					$monAsideView=new _AsideView($params);	
 					$asideView=$monAsideView->show();	

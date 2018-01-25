@@ -1,7 +1,7 @@
 <?php
 namespace web_max\ecrivain\controler;
 
-class ErrorController extends mainController	{
+class ErrorController extends MainController	{
 
 	
 public function __construct(){

@@ -50,14 +50,14 @@ class _FieldsUserView extends View
 
 					<div class="col m8 offset-m2 s12 card-panel orange lighten-5" >
 						<label>votre nom</label>
-						<input id="userName" name="userName" type="text"  class="form-control" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
+						<input id="userName" name="userName" type="text"  class="form-control validate" title="Seules les lettres sont admises" pattern="[a-zA-Zéèêïë ]*" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
 						<label>votre mot de passe</label>
-						<input id="userPwd" name="userPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required /><br />
+						<input id="userPwd" name="userPwd" type="password" class="form-control validate" pattern=".{5,}"    title="5 caractères minimum" required /><br />
 						<label>confirmez votre mot de passe</label>
-						<input id="confPwd" name="confPwd" type="password" class="form-control" pattern=".{5,}" title="5 caractères minimum" required 
+						<input id="confPwd" name="confPwd" type="password" class="form-control validate" pattern=".{5,}" title="5 caractères minimum" required 
 							onChange='verifPwd()'/><br />
 						<label>votre adresse mail</label>
-						<input id="mail" name="mail" type="email" class="form-control" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
+						<input id="mail" name="mail" type="email" class="form-control validate" value ="<?= htmlspecialchars($params["email"])?>" required /><br />
 						
 						<br />
 					</div>					 

@@ -16,6 +16,7 @@ class Router{
 	 * @param [[Type]] $request [paramètres reçus du navigateur]
 	 */
 	public function __construct($request){
+		//echo "ROUTER CONSTRUCT <br/>".$request;
 		$this->request = $request;
 		$Loader = new \SplClassLoader('web_max\ecrivain\controler', 'controler');
 		$Loader->register();
@@ -23,7 +24,7 @@ class Router{
 		$Loader1->register();	
 		$Loader2 = new \SplClassLoader('web_max\ecrivain\model', 'model');
 		$Loader2->register();
-		$Loader3 = new \SplClassLoader('web_max\ecrivain\lib', 'lib');
+		$Loader3 = new \SplClassLoader('web_max/ecrivain/lib', 'lib');
 		$Loader3->register();
 
 	}
@@ -103,12 +104,15 @@ class Router{
      * la route est cherchée parmi toutes les routes contenues dans la classe Config
      */
     public function Router(){
-
+		//echo "ROUTER router<br/>";
 		$Idchapters;
 		try{   
 			//on réceptionne  quelquechose
-			$myConfig= new Config; 	
+			//echo "ROUTER router -1<br/>";
+			$myConfig= new Config(); 
+			//echo "ROUTER router 0<br/>";
 			if(isset($_GET)){
+				//echo "ROUTER router 1<br/>";
 				$varAction="";
 				$varAction=$this->getAction($_GET, true);
 				$varParam=$this->getAction($_GET, false);
@@ -116,26 +120,32 @@ class Router{
 				if (isset($this->getParams($_GET)["cible"])){
 					$varAction=$this->getParams($_GET)["cible"];
 				}
+				//echo "ROUTER router 2<br/>";
 				empty($varAction) ? $varAction="_messageView": false ;
 				
 				$this->myRoad=$myConfig->getRoad($varAction);
 				
 				if (isset($this->myRoad)){
+					//echo "ROUTER router 3<br/>";
 					if( $this->autorizedAccess($varPost)){
+						//echo "ROUTER router 4<br/>";
 						$monController=new Controller($this->myRoad,$varAction);
 						$monController->prepareAction($varParam, $varPost);
 					}else{
+						//echo "ROUTER router 5<br/>";
 						//$monError=new ErrorController();
 						//$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Droits d'accès insuffisants", "numberMessage"=>9));	
 						$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
 						$monController->prepareAction($varParam, $varPost);
 					}
 				}else{
+					//echo "ROUTER router 6<br/>";
 					$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
 					$monController->prepareAction($varParam, $varPost);
 				}
 				
 			}else{
+				//echo "ROUTER router 10<br/>";
 				$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
 				$monController->prepareAction($varParam, $varPost);
 			}

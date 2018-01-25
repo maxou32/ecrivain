@@ -2,10 +2,12 @@
 
 namespace web_max\ecrivain\lib;
 use web_max\ecrivain\lib\router;
-use web_max\ecrivain\controler\accesControl;
+use web_max\ecrivain\controler\AccesControl;
  
 // show errors if not in php.ini
-ini_set('display_errors','on');
+//ini_set('display_errors','on');
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
 
 /**
@@ -21,10 +23,12 @@ class Config{
 	 * @private
 	 */
 	public function __construct()   {
+		//echo "CONFIG construct<br/>";
 		require_once "Spyc.php";
 		$this->data = \Spyc::YAMLLoad('lib/config.yaml');
 		$this->data['secu'] = \Spyc::YAMLLoad('lib/secu.yaml');
 		$this->data['aside'] = \Spyc::YAMLLoad('lib/aside.yaml');
+		
 		//echo"<br />Config <pre>";print_r($this->data);echo"<br /> fin chargement config</PRE>";
 	}
 	
@@ -50,6 +54,14 @@ class Config{
      */
     public function getLogin(){
 		return $this->data['secu']["login"];
+	}
+	
+	   /**
+     * Donne le login d'accès à la base de données
+     * @return string nom de l'utilisateur
+     */
+    public function getHost(){
+		return $this->data['secu']["serveur"];
 	}
 	
     /**

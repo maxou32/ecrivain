@@ -1,4 +1,5 @@
 <?php
+
 //namespace web_max\ecrivain;
 //use web_max\ecrivain\lib;
 /*
@@ -18,7 +19,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
- 
+
 /**
  * SplClassLoader implementation that implements the technical interoperability
  * standards for PHP 5.3 namespaces and class names.
@@ -42,7 +43,7 @@ class SplClassLoader
   private $_fileExtension = '.php';
   private $_namespace;
   private $_includePath;
-  private $_namespaceSeparator = '\\';
+  private $_namespaceSeparator = '\\';			
 
   /**
    * Creates a new <tt>SplClassLoader</tt> that loads classes of the
@@ -52,8 +53,8 @@ class SplClassLoader
    */
   public function __construct($ns = null, $includePath = null)
   {
-    echo "quiqui";
-	$this->_namespace = $ns;
+	//echo "SplClassLoader construct  <br/>";
+    $this->_namespace = $ns;
     $this->_includePath = $includePath;
   }
 
@@ -117,12 +118,14 @@ class SplClassLoader
     return $this->_fileExtension;
   }
 
-  /**
+
+ /**
    * Installs this class loader on the SPL autoload stack.
    */
   public function register()
   {
-    spl_autoload_register(array($this, 'loadClass'));
+   //echo "SplClassLoader register  <pre>";print_r($this);echo"</pre>";
+   spl_autoload_register(array($this, 'loadClass'));
   }
 
   /**
@@ -141,8 +144,7 @@ class SplClassLoader
    */
 	public function loadClass($className)
 	{
-		//echo "class name ".$className."<br />";
-		
+		//echo "SplClassLoader load class 1 ".$className. "<br/>";
 		if (null === $this->_namespace || $this->_namespace.$this->_namespaceSeparator === substr($className, 0, strlen($this->_namespace.$this->_namespaceSeparator))) {
 			$fileName = '';
 			$namespace = '';
@@ -151,8 +153,9 @@ class SplClassLoader
 				$className = substr($className, $lastNsPos + 1);
 				}
 			$fileName .= str_replace('?', DIRECTORY_SEPARATOR, $className) . $this->_fileExtension;
-
+			//echo "SplClaaLoader load class 2 : ".$this->_includePath . "directory =".DIRECTORY_SEPARATOR . $fileName."<br/>";
 			require ($this->_includePath !== null ? $this->_includePath . DIRECTORY_SEPARATOR : '') . $fileName;
 		}
  	}
 }
+

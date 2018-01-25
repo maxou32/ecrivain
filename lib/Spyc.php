@@ -10,6 +10,7 @@
    * @package Spyc
    */
 
+
 if (!function_exists('spyc_load')) {
   /**
    * Parses YAML to array.
@@ -149,6 +150,7 @@ class Spyc {
      * @param string $input Path of YAML file or string containing YAML
      */
   public static function YAMLLoad($input) {
+	//echo "ouvre spyc".$input."<br />";
     $Spyc = new Spyc;
     return $Spyc->_load($input);
   }
