@@ -27,6 +27,9 @@ class _CRUDMessage extends View
 								<input type="hidden" name="id" id="id" value="<?= $datas[$i]->getId() ?>"/>
 								<input type="hidden" name="contexte" value="<?= $datas[$i]->getContexte() ?>"/>
 								<input type="hidden" name="number" value="<?= $datas[$i]->getNumber() ?>"/>
+								<label for="number" class="black-text" title="numéro du message"  >
+										<?= $datas[$i]->getNumber() ?> 
+								</label>
 								<input type="hidden" name="texte" value="<?= $datas[$i]->getTexte() ?>"/>
 								<input type="hidden" name="idtypemessage" value="<?= $datas[$i]->getMessage_idtypemessage() ?>"/>
 								<input type="radio" name="message"  value="<?= $datas[$i]->getId() ?>" id="<?= $datas[$i]->getId() ?>" onclick='javascript:change()'/>

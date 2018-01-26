@@ -13,7 +13,7 @@ class Controller{
 	private	$data= [];
 	private	$globalParams=[];
 	private	$return=[];
-	
+	private $afficheAccueil;
 	
 	
 	/**
@@ -25,6 +25,7 @@ class Controller{
 		$this->myRoad=$myRoad;
 		$this->myAction=$action;
 		$this->myConfig= new Config;
+		$this->afficheAccueil=false;
 		}
 	
 	private function avantDonnees($params, $post){
@@ -80,14 +81,14 @@ class Controller{
 				$action=$element["action"];
 				$paramManager="";
 				
-				if($element["utiliseResultatFunctionAvant"]=="oui"){
+				if($element["utiliseResultatFunctionAvant"]==="oui"){
 					$this->data=$this->return;
 				}else{
-					if($element["avecParam"]="oui"){
+					if($element["avecParam"]==="oui"){
 						foreach($element["lesParams"] as $elementParam){
-							if($elementParam["origine"]=="post"){
+							if($elementParam["origine"]==="post"){
 								$paramManager=$post;
-							}elseif($elementParam["origine"]=="get"){
+							}elseif($elementParam["origine"]==="get"){
 								$paramManager=$params[$elementParam["nomParam"]]; 
 							}elseif($element["utiliseResultatFunctionAvant"]!=="oui"){
 								$paramManager=$elementParam["nomParam"];
@@ -172,7 +173,6 @@ class Controller{
 		}
 	}
 	
-	
 	private function chargeVue($params, $post){
 		/** *****************************************************************
         * déclanchement de la fonction a exécuter pour charger la vue
@@ -208,8 +208,11 @@ class Controller{
 		/** *****************************************************************
         * déclanchement de la fonction a exécuter pour recharger une vue
         */
-		echo"<PRE><br />CONTROLLER 1: dat ";print_r($this->globalParams);echo"</PRE>";
-		if($this->myRoad["wantHeaderLocation"]["action"]=="oui"){
+		//echo"<PRE><br />CONTROLLER 1: dat ";print_r($this->globalParams);echo"</PRE>";
+		if($this->afficheAccueil){
+			header('Location: index.php?');			
+			
+		}else if($this->myRoad["wantHeaderLocation"]["action"]=="oui"){
 			if( $this->myRoad["wantHeaderLocation"]["param"]=="oui"){
 				if($this->myRoad["wantHeaderLocation"]["origine"]=="post"){
 					$critere=$this->myRoad["wantHeaderLocation"]["nom"].'/'.$post[$this->myRoad["wantHeaderLocation"]["nom"]];
@@ -223,6 +226,8 @@ class Controller{
 			//echo"<PRE><br>CONTROLLER 1.1: critere = ";print_r($critere);echo"</PRE>"."<br />";
 
 			header('Location: '.$this->myRoad["wantHeaderLocation"]["target"].$critere);
+		
+
 		}
 	}
 	
@@ -250,18 +255,46 @@ class Controller{
 		}
 		
 		if(isset($this->myRoad["manager"])){
-			$this->lireDonnees($params, $post); 
+			//echo "<br />parame ".$params[$this->myRoad["manager"][0]["lesParams"][0]["nomParam"]]."|";
+			
+			if ($this->myRoad["manager"][0]["avecParam"]==="oui") {			
+				if(iconv_strlen($params[$this->myRoad["manager"][0]["lesParams"][0]["nomParam"]])===0 && ($this->myRoad["manager"][0]["lesParams"][0]["origine"]==="get")){
+					//echo "erreur manque parametre<pre>";
+					//echo "<br />parame ".$params[$this->myRoad["manager"][0]["lesParams"][0]["nomParam"]];
+					$monError=new ErrorController();
+					$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Paramètre manquant", "numberMessage"=>400));	
+					$this->afficheAccueil=true;				
+				}else{
+					$this->lireDonnees($params, $post); 
+				}
+			}else{
+				$this->lireDonnees($params, $post); 
+			}
+			
+			//echo "<br />autorise rien : ".$this->myRoad["manager"][0]["autoriseRetourVide"];
+			//echo "<br />nb data : ". count($this->data);
+			//echo "<br />data : <pre>";print_r($this->data);echo"</pre> <br />fin data";
+			if($this->myRoad["manager"][0]["autoriseRetourVide"] !=="oui" && $this->data===false){
+				//echo "<br /> erreur trouvée";
+				$monError=new ErrorController();
+				$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Chapitre inconnu", "numberMessage"=>60));	
+				$this->afficheAccueil=true;
+			}
 		}
-		if (isset($this->myRoad["appelFonctionApresData"]["nombrefonction"])){
+		
+		//echo "<br />erreur : ". $this->afficheAccueil;
+		if (isset($this->myRoad["appelFonctionApresData"]["nombrefonction"]) && !$this->afficheAccueil){
+			//echo "<br />charge après";
 			if(null!==($this->myRoad["appelFonctionApresData"]["nombrefonction"])){
 				$this->apresDonnees($params, $post);
 			}
 		}
-		if(isset($this->myRoad["view"])){
+		if(isset($this->myRoad["view"]) && !$this->afficheAccueil){
+			//echo "<br />charge vue";
 			$this->chargeVue($params, $post);
 		}
 		
-		if (isset($this->myRoad["wantHeaderLocation"])){
+		if (isset($this->myRoad["wantHeaderLocation"]) || $this->afficheAccueil){
 			$this->lanceRelocation($params, $post);
         }
 		
@@ -271,7 +304,7 @@ class Controller{
      * affichage des erreurs
      * @param [[Type]] $error [[Description]]
      */
-    function printError($error){
+    function ADetruireprintError($error){
 		if (!isset($error)) {
 			$message ="error undefined";	
 		}else{

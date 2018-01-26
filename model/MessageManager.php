@@ -39,7 +39,7 @@ class MessageManager extends Manager{
 	public function get($contexte)  {
 		try{
 			//echo " <br />message manager ".$contexte."<br />";
-			$q = $this->dbConnect()->query('SELECT * FROM  '.$this->prefix.'message WHERE contexte = "'.$contexte.'"');
+			$q = $this->dbConnect()->query('SELECT * FROM  '.$this->prefix.'message WHERE contexte = "'.$contexte.'" ORDER BY number ASC');
 			$donnees = $q->fetch(\PDO::FETCH_ASSOC);
 			
 			if($donnees) {
@@ -72,7 +72,7 @@ class MessageManager extends Manager{
 	public function getList()  {
 		try{
 			$donnees = [];
-			$q = $this->dbConnect()->query('SELECT * FROM  '.$this->prefix.'message ORDER BY contexte ASC');
+			$q = $this->dbConnect()->query('SELECT * FROM  '.$this->prefix.'message ORDER BY number ASC');
 			while ($donnees = $q->fetch(\PDO::FETCH_ASSOC))
 			{
 				$message[] = new Message($donnees);
@@ -89,7 +89,7 @@ class MessageManager extends Manager{
 			$messages=[];
 			//echo "getListByType : Mon type message retour : ".$message_idtypemessage."<br />";
 			
-			$q = $this->dbConnect()->prepare('SELECT * FROM  '.$this->prefix.'message WHERE message_idtypemessage = :message_idtypemessage ORDER BY texte ASC');	
+			$q = $this->dbConnect()->prepare('SELECT * FROM  '.$this->prefix.'message WHERE message_idtypemessage = :message_idtypemessage ORDER BY number ASC');	
 			$q->bindValue(':message_idtypemessage', $message_idtypemessage, \PDO::PARAM_INT);
 			$q->execute();
 			

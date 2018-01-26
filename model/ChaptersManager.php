@@ -202,7 +202,8 @@ class ChaptersManager extends Manager{
 			}
 			
 		}catch (PDOException  $e){ 
-			return 'Erreur : '.$e->getMessage();
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Accès aux données", "numberMessage"=>60));		
 		}	;
 	}
 	
@@ -225,7 +226,8 @@ class ChaptersManager extends Manager{
 				return false;
 			}
 		}catch (PDOException  $e){ 
-			return 'Erreur : '.$e->getMessage();
-		}	;
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Accès aux données", "numberMessage"=>60));			
+		};
 	}
 }

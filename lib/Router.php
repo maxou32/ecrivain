@@ -105,51 +105,44 @@ class Router{
      */
     public function Router(){
 		//echo "ROUTER router<br/>";
-		$Idchapters;
 		try{   
 			//on réceptionne  quelquechose
 			//echo "ROUTER router -1<br/>";
+			//echo "ROUTER router 0 = <pre>";print_r($_GET);echo "</pre><br />";
 			$myConfig= new Config(); 
-			//echo "ROUTER router 0<br/>";
-			if(isset($_GET)){
-				//echo "ROUTER router 1<br/>";
-				$varAction="";
-				$varAction=$this->getAction($_GET, true);
-				$varParam=$this->getAction($_GET, false);
-				$varPost=$this->getParams($_POST);
-				if (isset($this->getParams($_GET)["cible"])){
-					$varAction=$this->getParams($_GET)["cible"];
-				}
-				//echo "ROUTER router 2<br/>";
-				empty($varAction) ? $varAction="_messageView": false ;
-				
-				$this->myRoad=$myConfig->getRoad($varAction);
-				
-				if (isset($this->myRoad)){
-					//echo "ROUTER router 3<br/>";
-					if( $this->autorizedAccess($varPost)){
-						//echo "ROUTER router 4<br/>";
-						$monController=new Controller($this->myRoad,$varAction);
-						$monController->prepareAction($varParam, $varPost);
-					}else{
-						//echo "ROUTER router 5<br/>";
-						//$monError=new ErrorController();
-						//$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Droits d'accès insuffisants", "numberMessage"=>9));	
-						$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
-						$monController->prepareAction($varParam, $varPost);
-					}
-				}else{
-					//echo "ROUTER router 6<br/>";
-					$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
-					$monController->prepareAction($varParam, $varPost);
-				}
-				
-			}else{
-				//echo "ROUTER router 10<br/>";
-				$monController=new Controller($myConfig->getRoad("_messageView"),"_messageView");
-				$monController->prepareAction($varParam, $varPost);
-			}
 			
+			//echo "ROUTER router 1<br/>";
+			$varAction="";
+			$varAction=$this->getAction($_GET, true);
+			$varParam=$this->getAction($_GET, false);
+			$varPost=$this->getParams($_POST);
+			if (isset($this->getParams($_GET)["cible"])){
+				$varAction=$this->getParams($_GET)["cible"];
+			}
+			//echo "ROUTER router 2<br/>";
+			empty($varAction) ? $varAction="index": false ;
+			//echo "ROUTER router 2.5 = <pre>";print_r($varAction);echo "</pre><br />";
+			$this->myRoad=$myConfig->getRoad($varAction);
+			
+			if (isset($this->myRoad)){
+				//echo "ROUTER router 3<br/>";
+				if( $this->autorizedAccess($varPost)){
+					//echo "ROUTER router 4<br/>";
+					$monController=new Controller($this->myRoad,$varAction);
+					$monController->prepareAction($varParam, $varPost);
+				}else{
+					//echo "ROUTER router 5<br/>";
+					$monController=new Controller($myConfig->getRoad("index"),"_messageView");
+					$monController->prepareAction(null, null);
+				}
+			}else{
+				//echo "ROUTER router 6<br/>";
+				$monError=new ErrorController();
+				$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"URL inconnue", "numberMessage"=>404));	
+				$monController=new Controller($myConfig->getRoad("index"),"_messageView");
+				$monController->prepareAction(null, null);
+			}
+		
 		}
 		catch (Exception $e){
 			$monError=new ErrorController();

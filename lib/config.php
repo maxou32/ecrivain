@@ -131,8 +131,6 @@ class Config{
 		try{
 			if(isset($this->data["simpleRoads"][$theRoad])){
 				return $this->data["simpleRoads"][$theRoad];
-			}else {
-				return $this->data["simpleRoads"]["index"];
 			}
 		}catch(Exception $e){
 			return false;

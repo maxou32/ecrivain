@@ -1,7 +1,7 @@
 # RewriteEngine On
 # RewriteRule ^(.+)$ index.php?request=$1 [QSA,L]
 
-ErrorDocument 400 vlib/erreur.php?erreur=400
+ErrorDocument 400  lib/erreur.php?erreur=400
 ErrorDocument 401  lib/erreur.php?erreur=401
 ErrorDocument 402  lib/erreur.php?erreur=402
 ErrorDocument 403  lib/erreur.php?erreur=403

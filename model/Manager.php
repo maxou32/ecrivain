@@ -27,7 +27,10 @@ public function __construct(){
 		}
 		catch (PDOException $e)
 		{
-			die('Une erreur interne est survenue');
+			$monError=new ErrorController();
+			$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Accès aux données", "numberMessage"=>60));		
+			header('Location: index.php?');	
+			exit;
 		}
     }
 }

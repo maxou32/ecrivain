@@ -8,11 +8,10 @@ use web_max\ecrivain\model\CommentManager;
 
 class CommentController	extends MainController	{
 	    
-public function __construct($myRoad, $action){
+	public function __construct($myRoad, $action){
 		$this->myRoad=$myRoad;
 		$this->myAction=$action;
 		$this->myConfig= new Config;
-		//echo"<br /><pre> CONTROLLER CONSTRUCT ";print_r($this->myAction);echo"</pre>";
 	}
 
     /**
@@ -20,22 +19,18 @@ public function __construct($myRoad, $action){
      * @param  params    contient les informations du recues de l'écran
      */
 	public function addComment($post){
-		echo"<PRE>CONTROLLER COMMENT  : chargeComment 1 ";print_r($post);echo"</PRE>";
+		//echo"<PRE>CONTROLLER COMMENT  : chargeComment 1 ";print_r($post);echo"</PRE>";
 		if( $post['sousAction']!=="fermer"){
 			$donnees=array('name' => $post['name'], 'Content'=> $post['content'], 'date_fr'=>'', 'Users_IdUsers'=>Null, 'Status_IdStatus'=>2,'Chapter_IdChapter'=>$post['chapter'], 'email'=>$post['email']);
 			$newComment = new Comment($donnees);
 			$monCommentManager= new CommentManager;
 			$resultat=$monCommentManager->add($newComment);
-			
-					
 			$monChapter= new ChaptersManager();
 			$leChapitre=$monChapter->get($newComment->getChapter_IdChapter());
 			
-			
-			
 			if ($resultat){
 				$monError=new ErrorController();
-				$monError->setError(array("origine"=> "web_max\ecrivain\controler\commentController", "raison"=>"Proposition de commentaire", "numberMessage"=>21));
+				$monError->setError(array("origine"=> "web_max\ecrivain\controler\commentController", "raison"=>"Proposition de commentaire", "numberMessage"=>46));
 			}
 			return $chapitre['chap']=$leChapitre->getNumber();
 		}
@@ -51,19 +46,20 @@ public function __construct($myRoad, $action){
 		$commentManager= new CommentManager();
 		if(isset($params["chap"])){
 			if($operation=="next"){
-				//echo "+++++++++++<br />";
 				$params["chap"]++;	
 			}elseif($operation=="prev"){
-				//echo "-----------".$operation."----<br />";
 				$params["chap"]--;
 			}
 			$chapterManager= new ChaptersManager;
 			$monChapter= $chapterManager->getByNumber($params["chap"]);
-			//echo"<PRE>CONTROLLER COMMENT  CHAP 2 ";print_r($monChapter);echo"</PRE>";
-			$comment=$commentManager->getListValidFromChapter($monChapter['data']->getIdchapters());
+			if (isset($monChapter['data'])){
+				$comment=$commentManager->getListValidFromChapter($monChapter['data']->getIdchapters());	
+			}else{
+				$monError=new ErrorController();
+				$monError->setError(array("origine"=> "web_max\ecrivain\lib\router\router", "raison"=>"Lecture chapitre", "numberMessage"=>60));
+			}
 		}else{
 			$comment=$commentManager->getListValidFromChapter($params["idchapter"]);
-			//echo"<PRE>CONTROLLER COMMENT  IDCHAPTER: Fin 3 ";print_r($params["idchapter"]);echo"</PRE>";
 		}
 		return $comment;
 	}
@@ -83,7 +79,6 @@ public function __construct($myRoad, $action){
 			if (isset($params["D".$value])){
 				$resultat["result"]=$commentManager->delete($value);
 			}elseif(($params[$value])==! Null){
-				//echo"<PRE>CONTROLLER : validParamComments 2 ".$value." status ".$params[$value]."</PRE>";
 				$resultat["result"]=$commentManager->updateStatus($value, $params[$value]);
 			}
 		}

@@ -26,10 +26,11 @@ simpleRoads:
      action : get
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   
+     autoriseRetourVide: oui
      avecParam : oui								#non
      nombreParam : 1
      lesParams : 
-       - nomParam : _MessageView
+       - nomParam : _messageView
          origine : dur							#post,get ou dur
   appelFonctionApresData :
    nombrefonction : 1
@@ -64,6 +65,7 @@ simpleRoads:
      action : get
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : oui			#non
      nombreParam : 1
      lesParams : 
@@ -124,6 +126,7 @@ simpleRoads:
      action : get
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : oui			#non
      nombreParam : 1
      lesParams : 
@@ -172,6 +175,7 @@ simpleRoads:
      action : getListValid
      utiliseResultatFunctionAvant : non				#non
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : non			#non
      nombreParam : 0
      lesParams : 
@@ -199,6 +203,7 @@ simpleRoads:
      action : getByNumber
      utiliseResultatFunctionAvant : non				#non
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : oui									#non
      nombreParam : 1
      lesParams : 
@@ -234,7 +239,7 @@ simpleRoads:
       nomParam : Null
       origine : Null						#post ou dur
 #**************************************  
- _TheNextBookView:
+ _TheNextBookView :
   seConnecte : non
   security :
    niveauRequis : 0    			#1 ou 99
@@ -255,6 +260,7 @@ simpleRoads:
      action : getNextChapter
      utiliseResultatFunctionAvant : non				#non
      excluResultatManager : non   ####
+     autoriseRetourVide: non
      avecParam : oui									#non
      nombreParam : 1
      lesParams : 
@@ -312,6 +318,7 @@ simpleRoads:
      action : getPreviousChapter
      utiliseResultatFunctionAvant : non				#non
      excluResultatManager : non   ####
+     autoriseRetourVide: non
      avecParam : oui									#non
      nombreParam : 1
      lesParams : 
@@ -414,6 +421,7 @@ simpleRoads:
      action : get
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: non
      avecParam : oui								#non
      nombreParam : 1
      lesParams : 
@@ -460,6 +468,7 @@ simpleRoads:
      action : get
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : oui								#non
      nombreParam : 1
      lesParams : 
@@ -498,6 +507,7 @@ simpleRoads:
      action : delete
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : oui								#non
      nombreParam : 1
      lesParams : 
@@ -529,6 +539,7 @@ simpleRoads:
      action : getListALL
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : non								#non
      nombreParam : 0
      lesParams : 
@@ -557,6 +568,7 @@ simpleRoads:
      action : Null
      utiliseResultatFunctionAvant : oui				#oui
      excluResultatManager : oui   ####
+     autoriseRetourVide: oui
      avecParam : non								#non
      nombreParam : 0
      lesParams : 
@@ -608,6 +620,7 @@ simpleRoads:
      action : Null
      utiliseResultatFunctionAvant : oui				#oui
      excluResultatManager : oui   ####
+     autoriseRetourVide: oui
      avecParam : non								#non
      nombreParam : 1
      lesParams : 
@@ -644,6 +657,7 @@ simpleRoads:
    fonction
    className : web_max\ecrivain\controler\MessageController
    nom : CRUDMessage
+   autoriseRetourVide: oui
    avecParam : oui			#non
    nombreParam : 1
    lesParams:
@@ -714,18 +728,6 @@ simpleRoads:
         - nomParam : Null
           origine : dur							#action ou dur
           value : Null
-  manager : 
-   nombreManager : 1  
-   managers
-     nom : null
-     action : null
-     utiliseResultatFunctionAvant : non				#oui
-     excluResultatManager : oui   ####
-     avecParam : oui								#non
-     nombreParam : 1
-     lesParams : 
-       - nomParam : Null
-         origine : post							#post,get ou en dur
   appelFonctionApresData :
    nombrefonction : 1
    - fonction
@@ -757,6 +759,7 @@ simpleRoads:
      action : getListALL
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : non								#non
      nombreParam : 0
      lesParams : 
@@ -787,18 +790,6 @@ simpleRoads:
   seConnecte : non
   security :
    niveauRequis : 99    			#1 ou 99
-  manager : 
-   nombreManager : 1  
-   managers
-     nom : Null
-     action : Null
-     utiliseResultatFunctionAvant : oui				#oui
-     excluResultatManager : oui   ####
-     avecParam : non								#non
-     nombreParam : 0
-     lesParams : 
-       - nomParam : Null
-         origine : post							#post,get ou en dur
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
@@ -845,6 +836,7 @@ simpleRoads:
      action : getListNotValid
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : non								#non
      nombreParam : 0
      lesParams : 
@@ -875,18 +867,6 @@ simpleRoads:
   seConnecte : non
   security :
    niveauRequis : 99    			#1 ou 99
-  manager : 
-   nombreManager : 1  
-   managers
-     nom : Null
-     action : Null
-     utiliseResultatFunctionAvant : oui				#oui
-     excluResultatManager : oui   ####
-     avecParam : non								#non
-     nombreParam : 0
-     lesParams : 
-       - nomParam : Null
-         origine : post							#post,get ou en dur
   appelFonctionAvantData :
    nombrefonction : 1
    fonction
@@ -988,6 +968,7 @@ simpleRoads:
      action : getByNumber
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   
+     autoriseRetourVide: oui
      avecParam : oui								#non
      nombreParam : 1
      lesParams : 
@@ -1031,6 +1012,7 @@ simpleRoads:
      action : prepareAdminStatus
      utiliseResultatFunctionAvant : non				#oui
      excluResultatManager : non   ####
+     autoriseRetourVide: oui
      avecParam : non								#non
      nombreParam : 0
      lesParams : 
@@ -1086,11 +1068,12 @@ simpleRoads:
    fonction
    className : Null
    nom : Null
+   autoriseRetourVide: oui
    avecParam : oui			#non
    nombreParam : 1
    lesParams:
-   nomParam : params
-   origine : post							#action ou dur
+    nomParam : params
+    origine : post							#action ou dur
   appelFonctionApresData :
    nombrefonction : 0
    - fonction
