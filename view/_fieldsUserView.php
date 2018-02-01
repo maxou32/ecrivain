@@ -36,21 +36,21 @@ class _FieldsUserView extends View
 		if ($params["action"]=="update"){
 			?>
 			<div class="row" >
-				<form method="post" action="index.php?registration"  >
+				<form class="col m8 offset-m2 s12 card-panel orange lighten-5" method="post" action="index.php?registration"  >
 					<input id="sousActionUpdate" name="sousAction" type="hidden" value ="update" >
 			<?php	
 		}else{
 			?>
 			
 			<div class="row" >
-				<form method="post" action="index.php?registration" >
+				<form class="col m8 offset-m2 s12 card-panel orange lighten-5"  method="post" action="index.php?registration" >
 					<input id="sousActionAdd" name="sousAction" type="hidden" value ="add" ><?php
 		}
 		?>
 
-					<div class="col m8 offset-m2 s12 card-panel orange lighten-5" >
+					<div  >
 						<label>votre nom</label>
-						<input id="userName" name="userName" type="text"  class="form-control validate" title="Seules les lettres sont admises" pattern="[a-zA-Zéèêïë ]*" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
+						<input id="userName" name="userName" type="text"  class="form-control validate" pattern="[a-zA-Z0-9éèêïë ]*" value ="<?= htmlspecialchars($params["userName"]) ?>" required /><br />
 						<label>votre mot de passe</label>
 						<input id="userPwd" name="userPwd" type="password" class="form-control validate" pattern=".{5,}"    title="5 caractères minimum" required /><br />
 						<label>confirmez votre mot de passe</label>

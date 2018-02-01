@@ -1074,6 +1074,17 @@ simpleRoads:
    lesParams:
     nomParam : params
     origine : post							#action ou dur
+  managers
+   nom : Null
+   action : Null
+   utiliseResultatFunctionAvant : non				#oui
+   excluResultatManager : non   
+   autoriseRetourVide: oui
+   avecParam : non								#oui
+   nombreParam : 0
+   lesParams : 
+    - nomParam : chap
+       origine : get							#post,get ou en dur
   appelFonctionApresData :
    nombrefonction : 0
    - fonction
