@@ -282,6 +282,7 @@ class Controller{
 			}
 		}
 		
+		//echo "<br />erreur : ". $this->afficheAccueil;
 		if (isset($this->myRoad["appelFonctionApresData"]["nombrefonction"]) && !$this->afficheAccueil){
 			//echo "<br />charge après";
 			if(null!==($this->myRoad["appelFonctionApresData"]["nombrefonction"])){
@@ -296,6 +297,26 @@ class Controller{
 		if (isset($this->myRoad["wantHeaderLocation"]) || $this->afficheAccueil){
 			$this->lanceRelocation($params, $post);
         }
+		
+	}
+	
+    /**
+     * affichage des erreurs
+     * @param [[Type]] $error [[Description]]
+     */
+    function ADetruireprintError($error){
+		if (!isset($error)) {
+			$message ="error undefined";	
+		}else{
+			$message ="message d'erreur	: ". $error;
+		}
+		
+		$monFooter= new _footerView(NULL);
+		$monFooter->getMessage($message);
+		$footerView=$monFooter->show(NULL, NULL);
+		
+		$monTemplate= new template("",NULL,$footerView,NULL);
+		$monTemplate->show(NULL, NULL);
 		
 	}
 	
